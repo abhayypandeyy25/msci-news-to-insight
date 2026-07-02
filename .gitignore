@@ -1,0 +1,17 @@
+# private correspondence — never commit
+*.pdf
+
+# secrets
+pipeline/.env
+.env
+
+# bulky per-call API caches (raw jsonl is the canonical artifact)
+data/raw/cache/
+
+# local tooling state
+.gstack/
+.claude/
+.DS_Store
+nohup.out
+__pycache__/
+*.pyc

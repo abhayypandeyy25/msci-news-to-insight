@@ -1,0 +1,20 @@
+{
+  "window": { "start": "20260101000000", "end": "20260630235959" },
+  "entities": [
+    { "id": "hdfcbank",   "name": "HDFC Bank",             "ticker": "HDFCBANK",   "segment": "Private bank",    "aliases": ["HDFC Bank"] },
+    { "id": "icicibank",  "name": "ICICI Bank",            "ticker": "ICICIBANK",  "segment": "Private bank",    "aliases": ["ICICI Bank"] },
+    { "id": "bajfinance", "name": "Bajaj Finance",         "ticker": "BAJFINANCE", "segment": "NBFC",            "aliases": ["Bajaj Finance"] },
+    { "id": "sbi",        "name": "State Bank of India",   "ticker": "SBIN",       "segment": "PSU bank",        "aliases": ["State Bank of India", "SBI"] },
+    { "id": "kotak",      "name": "Kotak Mahindra Bank",   "ticker": "KOTAKBANK",  "segment": "Private bank",    "aliases": ["Kotak Mahindra Bank", "Kotak Mahindra"] },
+    { "id": "axis",       "name": "Axis Bank",             "ticker": "AXISBANK",   "segment": "Private bank",    "aliases": ["Axis Bank"] },
+    { "id": "shriram",    "name": "Shriram Finance",       "ticker": "SHRIRAMFIN", "segment": "NBFC",            "aliases": ["Shriram Finance"] },
+    { "id": "ltfinance",  "name": "L&T Finance",           "ticker": "LTF",        "segment": "NBFC",            "aliases": ["L&T Finance", "L and T Finance"] },
+    { "id": "smfg",       "name": "SMFG India Credit",     "ticker": "SMFG",       "segment": "NBFC",            "aliases": ["SMFG India Credit", "Fullerton India"] },
+    { "id": "piramal",    "name": "Piramal Finance",       "ticker": "PEL",        "segment": "NBFC",            "aliases": ["Piramal Enterprises", "Piramal Finance", "Piramal Capital"] },
+    { "id": "poonawalla", "name": "Poonawalla Fincorp",    "ticker": "POONAWALLA", "segment": "NBFC",            "aliases": ["Poonawalla Fincorp"] },
+    { "id": "iifl",       "name": "IIFL Finance",          "ticker": "IIFL",       "segment": "NBFC",            "aliases": ["IIFL Finance"] },
+    { "id": "manappuram", "name": "Manappuram Finance",    "ticker": "MANAPPURAM", "segment": "Gold-loan NBFC",  "aliases": ["Manappuram Finance", "Manappuram"] },
+    { "id": "pnbhousing", "name": "PNB Housing Finance",   "ticker": "PNBHOUSING", "segment": "Housing finance", "aliases": ["PNB Housing Finance", "PNB Housing"] },
+    { "id": "abcapital",  "name": "Aditya Birla Capital",  "ticker": "ABCAPITAL",  "segment": "NBFC",            "aliases": ["Aditya Birla Capital", "Aditya Birla Finance"] }
+  ]
+}

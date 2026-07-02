@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Financial Intelligence OS — News-to-Insight Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Hanken+Grotesk:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Hanken Grotesk',system-ui,sans-serif;background:#16140F;color:#16140F;-webkit-font-smoothing:antialiased}
+  ::selection{background:#5A4A8C22}
+  .fi-scroll::-webkit-scrollbar{width:11px;height:11px}
+  .fi-scroll::-webkit-scrollbar-thumb{background:#D8CFBB;border-radius:8px;border:3px solid transparent;background-clip:content-box}
+  .fi-scroll::-webkit-scrollbar-thumb:hover{background:#c4b89e;background-clip:content-box}
+  .fi-scroll::-webkit-scrollbar-track{background:transparent}
+  .navsc::-webkit-scrollbar{width:0}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;background:#DED7C5;border-radius:2px;outline:none;margin:0}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;height:17px;border-radius:50%;background:#A8331F;cursor:pointer;border:2px solid #FBF8F1;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+  input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#A8331F;cursor:pointer;border:2px solid #FBF8F1}
+  @keyframes fiDrawer{from{transform:translateX(30px)}to{transform:none}}
+  @keyframes fiBackdrop{from{opacity:0}to{opacity:1}}
+  @keyframes fiPulse{0%{box-shadow:0 0 0 0 rgba(47,107,79,.4)}70%{box-shadow:0 0 0 7px rgba(47,107,79,0)}100%{box-shadow:0 0 0 0 rgba(47,107,79,0)}}
+  /* hover states (inline styles need !important to be overridden) */
+  .nav-btn:hover{background:rgba(245,241,232,.06)!important}
+  .chip:hover{border-color:#B9AF98!important}
+  .idx-card:hover{box-shadow:0 5px 16px rgba(20,18,12,.09)!important}
+  .feed-card:hover{box-shadow:0 6px 18px rgba(20,18,12,.08)!important;transform:translateY(-1px)!important}
+  .icon-btn:hover{background:#EFEADD!important}
+  .dark-btn:hover{background:rgba(245,241,232,.12)!important}
+  .promote-btn:hover{background:#D3E7D9!important}
+  .q-title:hover{color:#5A4A8C!important}
+  .btn-confirm:hover{background:#D3E7D9!important}
+  .btn-quar:hover{background:#F0E1C2!important}
+  .btn-over:hover{background:#DED8EE!important}
+  .fi-search:focus{border-color:#A8331F!important;background:#fff!important}
+  .drawer-anim{animation:fiDrawer .3s cubic-bezier(.22,1,.36,1) both}
+  .backdrop-anim{animation:fiBackdrop .25s ease both}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script src="data.js"></script>
+<script>
+(function(){
+'use strict';
+
+/* ============================ STATE ============================ */
+var state = {
+  view:'workbench', entity:'lumora', drawer:null, review:{}, userAudit:{}, indexTab:'controversy',
+  calc:{sev:0.9,cred:1,corr:1.3,vel:1.3,stg:1.2,dec:0.95,k:3}, promoted:{}, feedFilter:'all'
+};
+var lastDrawer = null; // to only animate drawer on open, not on internal re-renders
+
+/* ============================ TOKENS ============================ */
+var C = { ink:'#16140F', inkSoft:'#4A463C', mute:'#8A8474', risk:'#A8331F', riskBg:'#F6E5DF',
+  opp:'#2F6B4F', oppBg:'#E2EFE6', gate:'#B5791A', gateBg:'#F6EBD6', signal:'#2C5C73', signalBg:'#E0EBF0',
+  comp:'#5A4A8C', compBg:'#E9E5F3' };
+
+/* ============================ ICONS ============================ */
+var PATHS = {
+  'layout-dashboard':'<rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/>',
+  'layers':'<path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/>',
+  'shield':'<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>',
+  'shield-check':'<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>',
+  'shield-alert':'<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="M12 8v4"/><path d="M12 16h.01"/>',
+  'gauge':'<path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/>',
+  'git-branch':'<line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/>',
+  'share':'<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/>',
+  'database':'<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/>',
+  'activity':'<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>',
+  'alert-triangle':'<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/>',
+  'leaf':'<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>',
+  'trending-up':'<polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>',
+  'trending-down':'<polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/>',
+  'zap':'<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
+  'message':'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+  'search':'<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+  'bell':'<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>',
+  'settings':'<path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>',
+  'chevron-right':'<path d="m9 18 6-6-6-6"/>',
+  'arrow-right':'<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+  'arrow-up-right':'<path d="M7 7h10v10"/><path d="M7 17 17 7"/>',
+  'arrow-down-right':'<path d="m7 7 10 10"/><path d="M17 7v10H7"/>',
+  'check':'<path d="M20 6 9 17l-5-5"/>',
+  'x':'<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
+  'clock':'<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+  'square-check':'<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>',
+  'scroll-text':'<path d="M15 12h-5"/><path d="M15 8h-5"/><path d="M19 17V5a2 2 0 0 0-2-2H4"/><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"/>',
+  'user':'<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+  'flag':'<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/>',
+  'landmark':'<line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/>',
+  'factory':'<path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/>',
+  'pill':'<path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/>',
+  'cart':'<circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>',
+  'file-text':'<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/>',
+  'newspaper':'<path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/>',
+  'radio':'<path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/><path d="M19.1 4.9C23 8.8 23 15.1 19.1 19"/>',
+  'filter':'<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>',
+  'lock':'<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  'plug':'<path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/>',
+  'sliders':'<line x1="4" x2="4" y1="21" y2="14"/><line x1="4" x2="4" y1="10" y2="3"/><line x1="12" x2="12" y1="21" y2="12"/><line x1="12" x2="12" y1="8" y2="3"/><line x1="20" x2="20" y1="21" y2="16"/><line x1="20" x2="20" y1="12" y2="3"/><line x1="2" x2="6" y1="14" y2="14"/><line x1="10" x2="14" y1="8" y2="8"/><line x1="18" x2="22" y1="16" y2="16"/>',
+  'inbox':'<polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>',
+  'home':'<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
+  'briefcase':'<rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>',
+  'coins':'<circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/>'
+};
+function icon(name,size,sw,color){
+  size=size||18; sw=sw||1.75;
+  return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 24 24" fill="none" stroke="'+(color||'currentColor')+'" stroke-width="'+sw+'" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;display:block">'+(PATHS[name]||'')+'</svg>';
+}
+
+/* ============================ HELPERS ============================ */
+function rgba(hex,a){ var n=parseInt(hex.slice(1),16); return 'rgba('+((n>>16)&255)+','+((n>>8)&255)+','+(n&255)+','+a+')'; }
+function seed(i,s){ var x=Math.sin((i+1)*(s+1)*12.9898)*43758.5453; return x-Math.floor(x); }
+function genSeries(end,delta,n,s){
+  var start=end-delta, a=[];
+  for(var i=0;i<n;i++){ var t=i/(n-1); var v=start+(end-start)*t;
+    if(i>0&&i<n-1) v+=(seed(i,s)-0.5)*Math.max(5,Math.abs(delta));
+    a.push(Math.max(3,Math.min(100,Math.round(v)))); }
+  a[n-1]=Math.max(3,Math.min(100,end)); return a;
+}
+function sparkSvg(vals,color,h,fillId){
+  var n=vals.length, mn=Math.min.apply(null,vals), mx=Math.max.apply(null,vals), rng=(mx-mn)||1, w=100;
+  function X(i){ return (i/(n-1))*w; } function Y(v){ return h-((v-mn)/rng)*(h-3)-1.5; }
+  var ln=''; vals.forEach(function(v,i){ ln+=(i?'L':'M')+X(i).toFixed(1)+' '+Y(v).toFixed(1)+' '; });
+  var ar=ln+'L'+w+' '+h+' L0 '+h+' Z';
+  return '<svg width="100%" height="'+h+'" viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none" style="display:block">'
+    +'<defs><linearGradient id="'+fillId+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+color+'" stop-opacity="0.22"/><stop offset="1" stop-color="'+color+'" stop-opacity="0"/></linearGradient></defs>'
+    +'<path d="'+ar+'" fill="url(#'+fillId+')"/>'
+    +'<path d="'+ln+'" fill="none" stroke="'+color+'" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>'
+    +'<circle cx="'+X(n-1)+'" cy="'+Y(vals[n-1])+'" r="2.2" fill="'+color+'"/></svg>';
+}
+
+/* ============================ DATA ============================ */
+var indices = {
+  controversy:{name:'Controversy',side:'Risk',color:C.risk,icon:'alert-triangle',weight:0.22,flagship:true},
+  risk:{name:'Risk',side:'Risk',color:C.risk,icon:'shield-alert',weight:0.20,flagship:false},
+  esg:{name:'ESG',side:'Risk',color:C.risk,icon:'leaf',weight:0.14,flagship:false},
+  momentum:{name:'Momentum',side:'Opp',color:C.opp,icon:'trending-up',weight:0.20,flagship:true},
+  catalyst:{name:'Catalyst',side:'Opp',color:C.opp,icon:'zap',weight:0.14,flagship:false},
+  sentiment:{name:'Sentiment',side:'Opp',color:C.opp,icon:'message',weight:0.10,flagship:false}
+};
+var indexOrder = ['controversy','risk','esg','momentum','catalyst','sentiment'];
+var sectors = { 'BFSI':{icon:'landmark'}, 'Auto & mfg':{icon:'factory'}, 'Pharma':{icon:'pill'}, 'Energy':{icon:'zap'}, 'Consumer':{icon:'cart'} };
+
+var matrixSources = ['Regulator filings','Agency wires','Banking newsletter','Trade press (mfg)','Analyst note (int.)','Social stream'];
+var matrixSectors = ['BFSI','Auto & mfg','Pharma','Energy','Consumer'];
+var matrixW = {
+  'Regulator filings':[0.95,0.92,0.95,0.93,0.90],
+  'Agency wires':[0.85,0.82,0.80,0.83,0.84],
+  'Banking newsletter':[0.82,0.40,0.35,0.42,0.45],
+  'Trade press (mfg)':[0.44,0.86,0.55,0.62,0.58],
+  'Analyst note (int.)':[0.70,0.72,0.68,0.66,0.64],
+  'Social stream':[0.32,0.34,0.30,0.31,0.36]
+};
+function cellVal(src,sector){ var i=matrixSectors.indexOf(sector); var r=matrixW[src]; return r?r[i]:0.5; }
+function cellMeta(v){
+  if(v>=0.8) return {bg:C.oppBg,fg:C.opp,tier:'High · trusted'};
+  if(v>=0.5) return {bg:C.gateBg,fg:'#8A5A0E',tier:'Medium'};
+  return {bg:C.riskBg,fg:C.risk,tier:'Low · quarantine'};
+}
+
+var entities = {
+  lumora:{name:'Lumora Energy',ticker:'LMRA',sector:'Energy',meta:'$18.4B · regulated utility',
+    scores:{controversy:71,risk:64,esg:58,momentum:34,catalyst:41,sentiment:38}, trend:-6, quarantined:2,
+    narrative:'Health deteriorated 6 points on a corroborated regulatory probe into transmission-safety filings, partly offset by a stable order book. Controversy is the dominant driver; sentiment remains soft.',
+    events:[
+      {id:'l1',index:'controversy',pillar:'Legal & compliance',title:'FERC opens formal grid-safety inquiry',desc:'Regulator confirms a formal inquiry into 2023–24 transmission-safety disclosures.',source:'Regulator filings',sourceSector:'Energy',direction:'Subject — defendant',dir:'neg',time:'2h ago',sev:0.9,corr:1.3,vel:1.3,stg:1.2,dec:0.95,stage:'probe',quarantined:false,
+        corroboration:[{name:'FERC docket',cred:'Verified'},{name:'Agency wire',cred:'High'},{name:'Trade press',cred:'Medium'}],
+        provenance:['Captured from regulator filing feed','Resolved entity → Lumora Energy','Classified: Legal & compliance · probe','Corroborated across 3 sources','Scored through event engine'],
+        audit:[{time:'2h ago',actor:'Signal layer',action:'Event extracted & classified',id:'EV-LMRA-4471'},{time:'2h ago',actor:'Trust tollgate',action:'Credibility resolved (Energy)',id:'TG-2210'}]},
+      {id:'l2',index:'risk',pillar:'Financial',title:'Undisclosed $240M contingent liability',desc:'Q3 10-Q notes reveal a contingency absent from prior guidance.',source:'Regulator filings',sourceSector:'Energy',direction:'Subject',dir:'neg',time:'5h ago',sev:0.8,corr:1.15,vel:1.0,stg:1.0,dec:0.92,stage:null,quarantined:false,
+        corroboration:[{name:'SEC filing',cred:'Verified'},{name:'Prior 8-K (delta)',cred:'High'}],
+        provenance:['Ingested 10-Q from filing feed','Parsed Note 14 → Contingency','Compared vs prior guidance','Delta flagged: new $240M item','Scored (Risk · Financial)'],
+        audit:[{time:'5h ago',actor:'Signal layer',action:'Structured extraction',id:'EV-LMRA-4460'}]},
+      {id:'l3',index:'controversy',pillar:'PR & reputational',title:'Viral backlash over outage response',desc:'Social clusters criticize storm-outage handling; low base trust pending corroboration.',source:'Social stream',sourceSector:'Energy',direction:'Subject',dir:'neg',time:'8h ago',sev:0.55,corr:1.0,vel:1.25,stg:1.1,dec:0.9,stage:'allegation',quarantined:true,
+        corroboration:[{name:'Social cluster',cred:'Low'}],
+        provenance:['Detected social mention cluster','Resolved entity → Lumora Energy','Source-sector weight 0.31 → below 0.5','Routed to quarantine (watch state)','Awaiting independent confirmation'],
+        audit:[{time:'8h ago',actor:'Trust tollgate',action:'Quarantined (low trust)',id:'TG-2218'}]},
+      {id:'l4',index:'momentum',pillar:'Commercial',title:'20-year grid modernization contract signed',desc:'State authority awards a long-dated modernization mandate.',source:'Agency wires',sourceSector:'Energy',direction:'Beneficiary',dir:'pos',time:'1d ago',sev:0.75,corr:1.2,vel:1.0,stg:1.0,dec:0.97,stage:null,quarantined:false,
+        corroboration:[{name:'Agency wire',cred:'High'},{name:'Exchange disclosure',cred:'Verified'}],
+        provenance:['Captured from agency wire','Resolved entity → Lumora Energy','Classified: Momentum · Commercial','Corroborated (2 sources)','Scored positive'],
+        audit:[{time:'1d ago',actor:'Signal layer',action:'Positive event scored',id:'EV-LMRA-4402'}]}
+    ]},
+  castelar:{name:'Castelar Pharma',ticker:'CSTP',sector:'Pharma',meta:'$9.1B · clinical-stage oncology',
+    scores:{controversy:22,risk:38,esg:26,momentum:78,catalyst:66,sentiment:71}, trend:9, quarantined:0,
+    narrative:'Health strengthened 9 points on a positive Phase III readout and an FDA label-expansion acceptance. Momentum and catalyst dominate; risk-side is contained aside from a 2027 patent cliff.',
+    events:[
+      {id:'c1',index:'momentum',pillar:'Financial',title:'Phase III readout beats primary endpoint',desc:'Lead oncology asset meets its primary endpoint with statistical significance.',source:'Agency wires',sourceSector:'Pharma',direction:'Beneficiary',dir:'pos',time:'3h ago',sev:0.9,corr:1.3,vel:1.35,stg:1.0,dec:0.98,stage:null,quarantined:false,
+        corroboration:[{name:'Company release',cred:'Verified'},{name:'Agency wire',cred:'High'},{name:'Analyst note',cred:'Medium'}],
+        provenance:['Captured from agency wire','Resolved entity → Castelar Pharma','Classified: Momentum · Financial','Corroborated (3 sources)','Scored positive'],
+        audit:[{time:'3h ago',actor:'Signal layer',action:'Positive event scored',id:'EV-CSTP-8801'}]},
+      {id:'c2',index:'catalyst',pillar:'Corporate',title:'FDA accepts label-expansion filing',desc:'Supplemental application accepted; PDUFA date set next quarter.',source:'Regulator filings',sourceSector:'Pharma',direction:'Beneficiary',dir:'pos',time:'1d ago',sev:0.8,corr:1.25,vel:1.1,stg:1.0,dec:0.97,stage:null,quarantined:false,
+        corroboration:[{name:'FDA docket',cred:'Verified'},{name:'Agency wire',cred:'High'}],
+        provenance:['Captured from regulator feed','Resolved entity → Castelar Pharma','Classified: Catalyst · Corporate','Corroborated (2 sources)','Scored positive'],
+        audit:[{time:'1d ago',actor:'Signal layer',action:'Catalyst logged with date',id:'EV-CSTP-8790'}]},
+      {id:'c3',index:'risk',pillar:'Financial',title:'Patent cliff quantified for lead asset (2027)',desc:'10-K risk factors quantify exposure as key patents expire in 2027.',source:'Regulator filings',sourceSector:'Pharma',direction:'Subject',dir:'neg',time:'2d ago',sev:0.7,corr:1.1,vel:0.9,stg:1.0,dec:0.9,stage:null,quarantined:false,
+        corroboration:[{name:'SEC filing',cred:'Verified'}],
+        provenance:['Ingested 10-K','Extracted risk factor','Classified: Risk · Financial','Scored (structural, long half-life)'],
+        audit:[{time:'2d ago',actor:'Signal layer',action:'Structural risk scored',id:'EV-CSTP-8770'}]}
+    ]},
+  northwind:{name:'Northwind Bank',ticker:'NWB',sector:'BFSI',meta:'$12.2B · regional bank',
+    scores:{controversy:44,risk:61,esg:31,momentum:48,catalyst:40,sentiment:45}, trend:-2, quarantined:1,
+    narrative:'Health flat-to-soft. A quarantined deposit-outflow rumor has not been corroborated and is not moving the index; structural risk stays elevated on funding-cost pressure.',
+    events:[
+      {id:'n1',index:'controversy',pillar:'Key-person risk',title:'Deposit-outflow chatter (uncorroborated)',desc:'Forum posts reference deposit movement; no primary confirmation located.',source:'Social stream',sourceSector:'BFSI',direction:'Subject',dir:'neg',time:'8h ago',sev:0.6,corr:1.0,vel:1.2,stg:1.0,dec:0.9,stage:'allegation',quarantined:true,
+        corroboration:[{name:'Social cluster',cred:'Low'}],
+        provenance:['Detected mention cluster','Resolved entity → Northwind Bank','Source-sector weight 0.32 → below 0.5','Routed to quarantine','No primary source located'],
+        audit:[{time:'8h ago',actor:'Trust tollgate',action:'Quarantined (low trust)',id:'TG-3301'}]},
+      {id:'n2',index:'risk',pillar:'Financial',title:'Funding-cost pressure flagged in filing',desc:'Pillar 3 disclosure signals rising funding costs and NIM compression.',source:'Regulator filings',sourceSector:'BFSI',direction:'Subject',dir:'neg',time:'1d ago',sev:0.65,corr:1.1,vel:0.95,stg:1.0,dec:0.9,stage:null,quarantined:false,
+        corroboration:[{name:'Regulatory filing',cred:'Verified'},{name:'Rating action',cred:'High'}],
+        provenance:['Ingested Pillar 3 disclosure','Extracted funding metrics','Classified: Risk · Financial','Corroborated (2 sources)','Scored'],
+        audit:[{time:'1d ago',actor:'Signal layer',action:'Risk event scored',id:'EV-NWB-5510'}]}
+    ]},
+  veraxis:{name:'Veraxis Motors',ticker:'VRXM',sector:'Auto & mfg',meta:'$6.7B · components & assembly',
+    scores:{controversy:33,risk:57,esg:42,momentum:62,catalyst:58,sentiment:52}, trend:3, quarantined:0,
+    narrative:'Health improving on an anchor EV-platform order, tempered by rising input-cost and supply-concentration risk. Catalyst and momentum lead the opportunity side.',
+    events:[
+      {id:'v1',index:'catalyst',pillar:'Bookings',title:'Anchor EV-platform supply contract won',desc:'Multi-year components supply deal with a major OEM.',source:'Trade press (mfg)',sourceSector:'Auto & mfg',direction:'Beneficiary',dir:'pos',time:'4h ago',sev:0.8,corr:1.2,vel:1.15,stg:1.0,dec:0.97,stage:null,quarantined:false,
+        corroboration:[{name:'Trade press',cred:'High'},{name:'Exchange disclosure',cred:'Verified'}],
+        provenance:['Captured from trade press feed','Source-sector weight 0.86 (strong in autos)','Classified: Catalyst · Bookings','Corroborated (2 sources)','Scored positive'],
+        audit:[{time:'4h ago',actor:'Signal layer',action:'Catalyst logged',id:'EV-VRXM-6601'}]},
+      {id:'v2',index:'risk',pillar:'Operational',title:'Supply concentration on single tier-1',desc:'Filing highlights dependence on one tier-1 supplier for key modules.',source:'Trade press (mfg)',sourceSector:'Auto & mfg',direction:'Subject',dir:'neg',time:'1d ago',sev:0.6,corr:1.05,vel:0.9,stg:1.0,dec:0.9,stage:null,quarantined:false,
+        corroboration:[{name:'Trade press',cred:'High'}],
+        provenance:['Captured from trade press','Classified: Risk · Operational','Concentration factor applied','Scored'],
+        audit:[{time:'1d ago',actor:'Signal layer',action:'Risk event scored',id:'EV-VRXM-6580'}]}
+    ]},
+  soliva:{name:'Soliva Foods',ticker:'SLV',sector:'Consumer',meta:'$4.3B · packaged foods',
+    scores:{controversy:19,risk:31,esg:24,momentum:55,catalyst:44,sentiment:58}, trend:2, quarantined:0,
+    narrative:'Health steady and healthy. Sentiment tailwind from category outlook; low controversy and contained ESG exposure. No material risk-side events this cycle.',
+    events:[
+      {id:'s1',index:'sentiment',pillar:'Sectoral',title:'Packaged-foods category outlook raised',desc:'Sector coverage turns constructive on input-cost normalization.',source:'Analyst note (int.)',sourceSector:'Consumer',direction:'Beneficiary',dir:'pos',time:'1d ago',sev:0.55,corr:1.1,vel:1.0,stg:1.0,dec:0.95,stage:null,quarantined:false,
+        corroboration:[{name:'Analyst note',cred:'Medium'},{name:'Sector coverage',cred:'Medium'}],
+        provenance:['Ingested analyst note','Source-sector weight 0.64','Classified: Sentiment · Sectoral','Trust-weighted (noisy signal)','Scored — lowest composite weight'],
+        audit:[{time:'1d ago',actor:'Signal layer',action:'Sentiment scored',id:'EV-SLV-7701'}]}
+    ]}
+};
+
+var indexDetail = {
+  controversy:{tag:'Risk-side · flagship',lede:'Intensity, credibility, and persistence of adverse developments — a live reputational and integrity gauge, not a count of bad headlines.',
+    pillars:[{t:'Financial integrity',w:'1.0',d:'Restatements, auditor exit, default'},{t:'Legal & compliance',w:'0.9',d:'Penalties, litigation, sanctions'},{t:'Operational risk',w:'0.8',d:'Recalls, breaches, accidents'},{t:'Key-person risk',w:'0.7',d:'Abrupt exits, misconduct'},{t:'PR & reputational',w:'0.5',d:'Boycotts, viral backlash'}],
+    comps:[{c:'Stage modifier',d:'Allegation → probe → charge → resolution; settlement releases score. The mechanic that keeps this a live gauge, not a blocklist.'},{c:'Decay half-life',d:'Pillar-specific — PR fades in weeks, financial integrity over quarters.'},{c:'Directionality',d:'Being sued ≠ winning a suit; the role tag flips the contribution.'}],
+    feeds:['News & wire','Regulatory actions','Litigation dockets','Social (corroborated)']},
+  risk:{tag:'Risk-side',lede:'Structural, slower-moving financial and operational fragility — the standing condition of the business, distinct from controversy spikes.',
+    comps:[{c:'Financial',d:'Leverage, liquidity strain, covenant pressure, refinancing walls.'},{c:'Operational',d:'Supply concentration, capacity utilization, execution slippage.'},{c:'Concentration',d:'Customer, geographic, and product dependence amplifying any shock.'},{c:'Decay half-life',d:'Long — structural risk doesn’t fade in a news cycle.'}],
+    feeds:['Financial results','Filings & disclosures','Rating actions','Operational events']},
+  esg:{tag:'Risk-side',lede:'Thematic, standards-anchored scoring — mapped to disclosure frameworks so it is sellable as a standalone compliance and mandate-screening feed.',
+    comps:[{c:'Environment',d:'Emissions, resource use, pollution events, sustainability commitments.'},{c:'Social',d:'Labor practices, community impact, safety, supply-chain conduct.'},{c:'Governance',d:'Board independence, audit quality, disclosure rigor.'},{c:'Framework anchor',d:'BRSR / SASB-style mappings — movements trace to standards, not tone.'},{c:'Why separate',d:'ESG buyers carry mandates; controversy buyers carry risk books — licensed apart.'}],
+    feeds:['Disclosure filings','Regulatory actions','NGO & watchdog reports','Framework mappings']},
+  momentum:{tag:'Opportunity-side · flagship',lede:'The broad positive-trajectory score — the clean counterweight to controversy and risk, capturing accumulating evidence of an improving path.',
+    pillars:[{t:'Commercial',w:'1.0',d:'Order wins, renewals, share gains'},{t:'Financial',w:'0.9',d:'Earnings beats, guidance raises, upgrades'},{t:'Strategic',w:'0.7',d:'Partnerships, launches, execution'}],
+    comps:[{c:'Direction',d:'Same engine, positive events — severity is the magnitude of the good news.'},{c:'Decay half-life',d:'Reflects current trajectory; a stale win from a year ago fades out.'},{c:'Netting',d:'Offsets the risk-side indices inside the entity health score.'}],
+    feeds:['Order announcements','Earnings & guidance','Analyst upgrades','Strategic news']},
+  catalyst:{tag:'Opportunity-side',lede:'Isolates discrete, datable key events from the broad momentum trend — built for event-driven strategies that need exactly what happened and when.',
+    comps:[{c:'Bookings',d:'A named large order, multi-year contract, anchor client win.'},{c:'Capacity',d:'New plant, line expansion, capex commitment with a timeline.'},{c:'Corporate',d:'M&A, fundraising, listing events, capital allocation.'},{c:'vs Momentum',d:'Momentum is a trend; catalyst is a timestamp — each event kept discrete.'}],
+    feeds:['Order filings','Exchange disclosures','Capex announcements','Deal news']},
+  sentiment:{tag:'Opportunity-side',lede:'The forward-looking tone layer — sectoral outlook and narrative mood, capturing how the market talks about an entity before it shows up in hard events.',
+    comps:[{c:'Sectoral',d:'Outlook shifts across a sector — tailwinds or headwinds lifting all names.'},{c:'Entity tone',d:'Aggregate narrative polarity from credible coverage, trust-weighted.'},{c:'Forward signal',d:'Analyst and outlook language pointing ahead of reported results.'},{c:'Conviction',d:'Noisiest signal — heaviest tollgate weighting, lowest composite weight.'}],
+    feeds:['Sector coverage','Analyst notes','Credible media tone','Outlook language']}
+};
+
+var pipeline = [
+  {tag:'01 · Sources',name:'Ingest',color:C.mute,nodes:[{t:'Live public APIs',s:'News · filings · social · regulatory'},{t:'Proprietary files',s:'Reports · results · analyst notes'}]},
+  {tag:'02 · Ingestion',name:'Normalize',color:C.mute,nodes:[{t:'Entity tagging · dedup · language',s:'Heterogeneous input → one event schema'}]},
+  {tag:'03 · Trust tollgate',name:'Rank credibility',color:C.gate,nodes:[{t:'Source × sector scoring',s:'No single global trust score'},{t:'Corroboration check',s:'Independent confirmation'},{t:'Low-trust quarantine',s:'Held, not discarded'}]},
+  {tag:'04 · Signal layer',name:'Extract',color:C.signal,nodes:[{t:'Event extraction',s:'Classify · role · directionality'},{t:'Entity & index mapping',s:'Company · sector · person'}]},
+  {tag:'05 · Scoring layer',name:'Score',color:C.comp,nodes:[{t:'Six indices → one composite',s:'Risk-side netted against opportunity-side'}]},
+  {tag:'06 · Insight layer',name:'Deliver',color:C.opp,nodes:[{t:'API feeds',s:'Scores · alerts'},{t:'Dashboard',s:'Drill-down · trends'},{t:'Narratives',s:'Analyst briefs'}]}
+];
+
+var promoLogic = [
+  {t:'Threshold',d:'A source-sector weight below 0.50 routes the event to quarantine rather than straight to scoring.'},
+  {t:'Watch state',d:'Quarantined events are retained and monitored — never discarded.'},
+  {t:'Corroboration release',d:'Two independent low-trust sources confirming the same event promote it out of quarantine.'},
+  {t:'Weight = credibility',d:'The surviving cell value passes through as the credibility term in the event-score formula.'},
+  {t:'Feedback recalibration',d:'Realized outcomes adjust each cell over time — sources that prove reliable in a sector rise.'}
+];
+
+var apiEndpoints = [
+  {m:'GET',path:'/v1/entity/{id}/composite',d:'Entity health score, history, and change deltas'},
+  {m:'GET',path:'/v1/entity/{id}/indices',d:'All six sub-index values, weighted'},
+  {m:'GET',path:'/v1/index/{name}/entities',d:'Ranked entities for a single licensed index'},
+  {m:'POST',path:'/v1/alerts/subscribe',d:'Threshold & velocity triggers pushed as events fire'}
+];
+
+/* ============================ REAL DATA (data.js) ============================ */
+// When the pipeline has generated data.js, window.FI_DATA replaces the demo
+// dataset wholesale; without it the app runs on the fictional demo entities.
+var FI = window.FI_DATA || null;
+if (FI) {
+  entities = FI.entities;
+  matrixSources = FI.matrixSources;
+  matrixSectors = FI.matrixSectors;
+  matrixW = FI.matrixW;
+  sectors = {
+    'Private bank':{icon:'landmark'}, 'PSU bank':{icon:'landmark'}, 'NBFC':{icon:'briefcase'},
+    'Housing finance':{icon:'home'}, 'Gold-loan NBFC':{icon:'coins'}
+  };
+  if (FI.defaultEntity && entities[FI.defaultEntity]) state.entity = FI.defaultEntity;
+}
+
+var titleMap = {workbench:'Analyst Workbench',indices:'Index Suite',tollgate:'Trust Tollgate',scoring:'Scoring Model',pipeline:'Pipeline Architecture',distribution:'Distribution'};
+var kickerMap = {workbench:'Entity analysis',indices:'Six indices · one composite',tollgate:'Source × sector credibility',scoring:'Shared event engine',pipeline:'News → insight flow',distribution:'API · licensing · narratives'};
+
+/* ============================ MODEL ============================ */
+function eventScore(e){ var cred=cellVal(e.source,e.sourceSector); return e.sev*cred*e.corr*e.vel*e.stg*e.dec; }
+function allEvents(){
+  var out=[]; Object.keys(entities).forEach(function(k){
+    entities[k].events.forEach(function(e){ var c=Object.assign({},e); c._owner=k; c._ent=entities[k]; out.push(c); });
+  }); return out;
+}
+function findEvent(id){
+  var keys=Object.keys(entities);
+  for(var i=0;i<keys.length;i++){ var e=entities[keys[i]].events.find(function(x){return x.id===id;}); if(e) return {ev:e,owner:keys[i]}; }
+  return null;
+}
+function compositeHealth(sc){
+  var opp=sc.momentum*indices.momentum.weight+sc.catalyst*indices.catalyst.weight+sc.sentiment*indices.sentiment.weight;
+  var risk=sc.controversy*indices.controversy.weight+sc.risk*indices.risk.weight+sc.esg*indices.esg.weight;
+  var oppW=indices.momentum.weight+indices.catalyst.weight+indices.sentiment.weight;
+  var riskW=indices.controversy.weight+indices.risk.weight+indices.esg.weight;
+  var oppN=opp/oppW, riskN=risk/riskW;
+  var health=Math.round(50+(oppN-riskN)*0.72);
+  return {health:Math.max(0,Math.min(100,health)),oppN:Math.round(oppN),riskN:Math.round(riskN)};
+}
+function healthMeta(h){
+  if(h>=65) return {c:C.opp,bg:C.oppBg,border:'#BCD6C4',label:'Healthy'};
+  if(h>=50) return {c:C.gate,bg:C.gateBg,border:'#E4C98A',label:'Watch'};
+  return {c:C.risk,bg:C.riskBg,border:'#E4B3A6',label:'Stressed'};
+}
+function credLabelColor(c){ return (c==='High'||c==='Verified')?C.opp:(c==='Medium'?C.gate:C.mute); }
+function totalQuarantined(){
+  return allEvents().filter(function(e){
+    return e.quarantined && !(state.review[e.id]==='confirmed'||state.review[e.id]==='overridden') && !state.promoted[e.id];
+  }).length;
+}
+
+/* ============================ VIEW BUILDERS ============================ */
+function renderSidebar(){
+  var groups=[
+    {label:'Analysis',items:[['workbench','Workbench','layout-dashboard'],['indices','Index Suite','layers']]},
+    {label:'Trust & Scoring',items:[['tollgate','Trust Tollgate','shield-check'],['scoring','Scoring Model','gauge']]},
+    {label:'Platform',items:[['pipeline','Pipeline','git-branch'],['distribution','Distribution','share']]}
+  ];
+  var totalQ=totalQuarantined();
+  var nav=groups.map(function(g){
+    var items=g.items.map(function(it){
+      var id=it[0], label=it[1], ic=it[2], active=state.view===id;
+      var count=(id==='tollgate'&&totalQ)?String(totalQ):'';
+      return '<button data-act="view" data-v="'+id+'" class="nav-btn" style="display:flex;align-items:center;gap:11px;width:100%;border:none;cursor:pointer;border-radius:9px;padding:9px 10px;margin-bottom:2px;font:600 13px \'Hanken Grotesk\';color:'+(active?'#F5F1E8':'#B0A891')+';background:'+(active?'rgba(245,241,232,.1)':'transparent')+';text-align:left">'
+        +'<span style="display:flex;align-items:center;justify-content:center;color:'+(active?'#F5F1E8':'#8A8474')+'">'+icon(ic,17,1.9)+'</span>'
+        +'<span style="flex:1;text-align:left">'+label+'</span>'
+        +(count?'<span style="font:600 10px \'IBM Plex Mono\';background:'+rgba(C.gate,0.25)+';color:#E8C88A;padding:2px 6px;border-radius:5px">'+count+'</span>':'')
+        +'</button>';
+    }).join('');
+    return '<div style="margin-bottom:16px"><div style="font:700 9.5px/1 \'Hanken Grotesk\';letter-spacing:.16em;text-transform:uppercase;color:#6E6858;padding:6px 10px 9px 10px">'+g.label+'</div>'+items+'</div>';
+  }).join('');
+  return '<aside style="width:256px;flex:0 0 256px;height:100%;background:#16140F;display:flex;flex-direction:column">'
+    +'<div style="padding:22px 20px 18px 20px;border-bottom:1px solid rgba(245,241,232,.1)">'
+    +'<div style="display:flex;align-items:center;gap:12px">'
+    +'<div style="width:38px;height:38px;border-radius:10px;background:#F5F1E8;display:flex;align-items:center;justify-content:center;color:#16140F">'+icon('radio',20,2,C.ink)+'</div>'
+    +'<div style="min-width:0"><div style="font:600 15px/1.05 \'Newsreader\',serif;color:#F5F1E8;letter-spacing:.01em">News-to-Insight</div>'
+    +'<div style="font:500 10px/1.4 \'IBM Plex Mono\';color:#8A8474;letter-spacing:.08em;margin-top:2px;text-transform:uppercase">Intelligence Platform</div></div>'
+    +'</div></div>'
+    +'<nav class="navsc" style="flex:1;overflow-y:auto;padding:16px 12px">'+nav+'</nav>'
+    +'<div style="padding:14px 16px;border-top:1px solid rgba(245,241,232,.1)">'
+    +'<div style="display:flex;align-items:center;gap:10px">'
+    +'<div style="width:32px;height:32px;border-radius:8px;background:#5A4A8C;display:flex;align-items:center;justify-content:center;color:#F5F1E8;font:700 12px \'Hanken Grotesk\'">AR</div>'
+    +'<div style="flex:1;min-width:0"><div style="font:600 12.5px/1.2 \'Hanken Grotesk\';color:#E8E2D4">A. Renner</div>'
+    +'<div style="font:500 10.5px/1.3 \'IBM Plex Mono\';color:#8A8474">Research · Buy-side</div></div>'
+    +'<span style="color:#6E6858">'+icon('settings',16)+'</span>'
+    +'</div></div></aside>';
+}
+
+function renderHeader(){
+  return '<header style="height:62px;flex:0 0 62px;background:#FBF8F1;border-bottom:1.5px solid #16140F;display:flex;align-items:center;gap:18px;padding:0 26px;z-index:5">'
+    +'<div style="min-width:0"><div style="font:600 10px \'IBM Plex Mono\';color:#8A8474;letter-spacing:.14em;text-transform:uppercase">'+kickerMap[state.view]+'</div>'
+    +'<h1 style="font:600 18px/1.05 \'Newsreader\',serif;color:#16140F;margin:1px 0 0 0;letter-spacing:-.01em">'+titleMap[state.view]+'</h1></div>'
+    +'<div style="flex:1;max-width:440px;margin:0 auto;position:relative">'
+    +'<span style="position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#A79F8C;display:flex">'+icon('search',16,2)+'</span>'
+    +'<input class="fi-search" placeholder="Search entities, events, sources…" style="width:100%;height:38px;border:1px solid #DED7C5;background:#F5F1E8;border-radius:9px;padding:0 14px 0 38px;font:500 13px \'Hanken Grotesk\';color:#16140F;outline:none" /></div>'
+    +'<div style="display:flex;align-items:center;gap:8px">'
+    +'<div style="display:flex;align-items:center;gap:7px;height:32px;padding:0 11px;border:1px solid #DED7C5;border-radius:8px;background:#F5F1E8">'
+    +'<span style="width:7px;height:7px;border-radius:50%;background:#2F6B4F;animation:fiPulse 2.2s infinite"></span>'
+    +'<span style="font:600 10.5px \'IBM Plex Mono\';color:#4A463C;letter-spacing:.05em">'+(FI?FI.window.toUpperCase()+' BACKFILL':'STREAMING')+'</span></div>'
+    +'<button class="icon-btn" style="width:36px;height:36px;border-radius:8px;border:1px solid #DED7C5;background:#F5F1E8;display:flex;align-items:center;justify-content:center;color:#4A463C;cursor:pointer;position:relative">'+icon('bell',17)
+    +'<span style="position:absolute;top:8px;right:9px;width:6px;height:6px;border-radius:50%;background:#A8331F;border:1.5px solid #F5F1E8"></span></button>'
+    +'</div></header>';
+}
+
+/* ------------ WORKBENCH ------------ */
+function renderWorkbench(){
+  var ent=entities[state.entity], ch=compositeHealth(ent.scores), hm=healthMeta(ch.health);
+  var eSeed=Object.keys(entities).indexOf(state.entity);
+
+  // entity strip
+  var strip=Object.keys(entities).map(function(id){
+    var e=entities[id], c=compositeHealth(e.scores), m=healthMeta(c.health), active=state.entity===id;
+    return '<button data-act="entity" data-id="'+id+'" class="chip" style="display:flex;align-items:center;gap:8px;cursor:pointer;border-radius:9px;padding:6px 11px;border:1px solid '+(active?C.ink:'#DED7C5')+';background:'+(active?'#FBF8F1':'transparent')+'">'
+      +'<span style="display:flex;color:'+(active?C.ink:C.mute)+'">'+icon(sectors[e.sector].icon,13,2)+'</span>'
+      +'<span style="font:600 12.5px \'Hanken Grotesk\'">'+e.ticker+'</span>'
+      +'<span style="font:700 12px \'IBM Plex Mono\';color:'+m.c+'">'+c.health+'</span></button>';
+  }).join('');
+
+  // netting
+  var oppPct=(ch.oppN+ch.riskN)?Math.round(ch.oppN/(ch.oppN+ch.riskN)*100):50;
+  var trend=(ent.trend>0?'+':'')+ent.trend;
+  var trendColor=ent.trend>0?C.opp:(ent.trend<0?C.risk:C.mute);
+  var trendIcon=icon(ent.trend>0?'trending-up':'trending-down',15,2.2,ent.trend>0?C.opp:C.risk);
+  var history=sparkSvg(ent.history&&ent.history.length?ent.history:genSeries(ch.health,ent.trend,12,eSeed+20),hm.c,54,'comphist');
+
+  // index cards
+  var ff=state.feedFilter||'all';
+  var cards=indexOrder.map(function(k,ki){
+    var ix=indices[k], sc=ent.scores[k];
+    var riskSide=ix.side==='Risk';
+    var dv, series;
+    if(ent.indexHistory&&ent.indexHistory[k]){
+      series=ent.indexHistory[k];
+      dv=series[series.length-1]-series[Math.max(0,series.length-5)];
+    } else {
+      dv=Math.round((seed(ki,eSeed+1)-0.5)*8);
+      series=genSeries(sc,dv,8,eSeed*7+ki+1);
+    }
+    var good=riskSide?dv<0:dv>0;
+    var dcolor=dv===0?C.mute:(good?C.opp:C.risk);
+    var active=ff===k;
+    var spark=sparkSvg(series,ix.color,22,'spk-'+k);
+    return '<button data-act="filter" data-f="'+k+'" class="idx-card" style="text-align:left;cursor:pointer;background:'+(active?'#FBF8F1':'#fff')+';border:1px solid '+(active?ix.color:'#E9E3D5')+';border-top:3px solid '+ix.color+';border-radius:10px;padding:12px 13px;box-shadow:'+(active?'0 0 0 2px '+rgba(ix.color,0.16):'none')+'">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between"><span style="color:'+ix.color+';display:flex">'+icon(ix.icon,16,2,ix.color)+'</span>'
+      +'<span style="font:600 9px \'Hanken Grotesk\';letter-spacing:.06em;text-transform:uppercase;color:'+ix.color+'">'+(riskSide?'Risk':'Opp')+'</span></div>'
+      +'<div style="font:600 12.5px/1.15 \'Hanken Grotesk\';color:#16140F;margin-top:9px;min-height:29px">'+ix.name+'</div>'
+      +'<div style="display:flex;align-items:baseline;gap:5px;margin-top:6px"><span style="font:700 24px/1 \'IBM Plex Mono\';color:'+ix.color+'">'+sc+'</span>'
+      +'<span style="font:600 10px \'IBM Plex Mono\';color:'+dcolor+'">'+(dv>0?'+':'')+dv+'</span></div>'
+      +'<div style="margin-top:8px;height:22px">'+spark+'</div></button>';
+  }).join('');
+
+  // weights
+  var weights=indexOrder.map(function(k){
+    var ix=indices[k];
+    return '<div><div style="display:flex;justify-content:space-between;font:500 12px \'Hanken Grotesk\';color:#4A463C;margin-bottom:4px">'
+      +'<span style="display:inline-flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:2px;background:'+ix.color+'"></span>'+ix.name+'</span>'
+      +'<span style="font:600 11px \'IBM Plex Mono\';color:#6E6858">'+Math.round(ix.weight*100)+'%</span></div>'
+      +'<div style="height:5px;border-radius:3px;background:#EFEADD;overflow:hidden"><div style="height:100%;width:'+(ix.weight/0.22*100)+'%;background:'+ix.color+';border-radius:3px"></div></div></div>';
+  }).join('');
+
+  // feed
+  var sideMap={risk:['controversy','risk','esg'],opp:['momentum','catalyst','sentiment']};
+  var rawFeed=ent.events.slice().sort(function(a,b){ return eventScore(b)-eventScore(a); });
+  if(ff==='risk') rawFeed=rawFeed.filter(function(e){ return sideMap.risk.indexOf(e.index)>=0; });
+  else if(ff==='opp') rawFeed=rawFeed.filter(function(e){ return sideMap.opp.indexOf(e.index)>=0; });
+  else if(indexOrder.indexOf(ff)>=0) rawFeed=rawFeed.filter(function(e){ return e.index===ff; });
+
+  var feedCards=rawFeed.map(function(e){
+    var ix=indices[e.index], dirPos=e.dir==='pos';
+    var q=e.quarantined&&!(state.review[e.id]==='confirmed'||state.review[e.id]==='overridden')&&!state.promoted[e.id];
+    return '<button data-act="drawer" data-id="'+e.id+'" class="feed-card" style="text-align:left;width:100%;cursor:pointer;background:#FBF8F1;border:1px solid #E9E3D5;border-left:3px solid '+ix.color+';border-radius:11px;padding:15px 17px;transition:box-shadow .14s,transform .14s">'
+      +'<div style="display:flex;align-items:center;gap:9px;margin-bottom:7px;flex-wrap:wrap">'
+      +'<span style="display:inline-flex;align-items:center;gap:6px;font:700 10.5px \'Hanken Grotesk\';letter-spacing:.03em;color:'+ix.color+';text-transform:uppercase">'+icon(ix.icon,13,2,ix.color)+ix.name+'</span>'
+      +'<span style="font:500 11px \'Hanken Grotesk\';color:#A79F8C">· '+e.pillar+'</span>'
+      +'<span style="margin-left:auto;font:500 11px \'Hanken Grotesk\';color:#A79F8C">'+e.time+'</span></div>'
+      +'<div style="font:600 15px/1.35 \'Hanken Grotesk\';color:#16140F">'+e.title+'</div>'
+      +'<div style="font:400 13px/1.5 \'Hanken Grotesk\';color:#4A463C;margin-top:4px">'+e.desc+'</div>'
+      +'<div style="display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap">'
+      +'<span style="display:inline-flex;align-items:center;gap:5px;font:500 11px \'IBM Plex Mono\';color:#6E6858;background:#F0EBDE;padding:3px 8px;border-radius:6px">'+e.source+'</span>'
+      +'<span style="display:inline-flex;align-items:center;gap:5px;font:600 11px \'Hanken Grotesk\';color:'+(dirPos?C.opp:C.risk)+';background:'+(dirPos?C.oppBg:C.riskBg)+';padding:3px 9px;border-radius:6px">'+icon(dirPos?'arrow-up-right':'arrow-down-right',11,2.4,dirPos?C.opp:C.risk)+e.direction+'</span>'
+      +(q?'<span style="display:inline-flex;align-items:center;gap:5px;font:600 11px \'Hanken Grotesk\';color:#B5791A;background:#F6EBD6;border:1px solid #E4C98A;padding:3px 9px;border-radius:6px">'+icon('lock',11,2.2,C.gate)+'Quarantined</span>':'')
+      +'<span style="margin-left:auto;display:inline-flex;align-items:center;gap:7px">'
+      +'<span style="font:500 10px \'Hanken Grotesk\';color:#A79F8C;text-transform:uppercase;letter-spacing:.05em">Event score</span>'
+      +'<span style="font:700 13px \'IBM Plex Mono\';color:'+ix.color+'">'+eventScore(e).toFixed(2)+'</span>'
+      +'<span style="color:#5A4A8C;display:flex">'+icon('arrow-right',13,2.2,C.comp)+'</span></span>'
+      +'</div></button>';
+  }).join('');
+
+  var filters=[['all','All'],['risk','Risk-side'],['opp','Opp-side']].map(function(f){
+    var active=ff===f[0];
+    return '<button data-act="filter" data-f="'+f[0]+'" style="border:none;cursor:pointer;border-radius:7px;padding:6px 13px;font:600 12px \'Hanken Grotesk\';color:'+(active?C.ink:'#8A8474')+';background:'+(active?'#fff':'transparent')+';box-shadow:'+(active?'0 1px 2px rgba(20,18,12,.1)':'none')+'">'+f[1]+'</button>';
+  }).join('');
+
+  var idxSel=indexOrder.indexOf(ff)>=0;
+  var clearBtn='';
+  if(idxSel){
+    var fx=indices[ff];
+    clearBtn='<button data-act="filter" data-f="all" style="display:inline-flex;align-items:center;gap:6px;font:600 11.5px \'Hanken Grotesk\';color:'+fx.color+';background:'+rgba(fx.color,0.1)+';border:1px solid '+fx.color+';border-radius:7px;padding:4px 9px;cursor:pointer">'+icon(fx.icon,12,2,fx.color)+fx.name+' only '+icon('x',12,2.4)+'</button>';
+  }
+  var emptyMsg='';
+  if(rawFeed.length===0){
+    emptyMsg='<div style="background:#FBF8F1;border:1px dashed #DED7C5;border-radius:12px;padding:28px;text-align:center;font:500 13px \'Hanken Grotesk\';color:#A79F8C">No '+(idxSel?indices[ff].name+' only':'')+' events for '+ent.name+' this cycle.</div>';
+  }
+
+  return '<div style="padding:24px 30px 44px 30px;max-width:1320px;margin:0 auto">'
+    // entity strip
+    +'<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:20px">'
+    +'<span style="font:700 9.5px \'Hanken Grotesk\';letter-spacing:.14em;text-transform:uppercase;color:#8A8474;margin-right:4px">Coverage</span>'+strip+'</div>'
+    // hero
+    +'<div style="background:#FBF8F1;border:1px solid #DED7C5;border-radius:16px;overflow:hidden">'
+    +'<div style="display:grid;grid-template-columns:minmax(0,1fr) 380px">'
+    +'<div style="padding:24px 26px;border-right:1px solid #E9E3D5">'
+    +'<div style="display:flex;align-items:flex-start;gap:16px">'
+    +'<div style="width:52px;height:52px;border-radius:13px;background:'+C.compBg+';color:'+C.comp+';display:flex;align-items:center;justify-content:center;flex:0 0 auto">'+icon(sectors[ent.sector].icon,24,1.7)+'</div>'
+    +'<div style="flex:1;min-width:0"><h2 style="font:600 25px/1.05 \'Newsreader\',serif;color:#16140F;margin:0;letter-spacing:-.01em">'+ent.name+'</h2>'
+    +'<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:7px">'
+    +'<span style="font:600 11.5px \'IBM Plex Mono\';color:#4A463C;background:#F0EBDE;border:1px solid #E0D9C8;padding:2px 8px;border-radius:6px">'+ent.ticker+'</span>'
+    +'<span style="font:500 13px \'Hanken Grotesk\';color:#6E6858">'+ent.sector+' · '+ent.meta+'</span></div></div></div>'
+    // netting bar
+    +'<div style="margin-top:24px">'
+    +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:9px">'
+    +'<span style="font:700 10px \'Hanken Grotesk\';letter-spacing:.12em;text-transform:uppercase;color:#8A8474">Risk ⇄ Opportunity netting</span>'
+    +'<span style="font:500 11px \'Hanken Grotesk\';color:#A79F8C">opportunity offsets risk</span></div>'
+    +'<div style="display:flex;height:34px;border-radius:9px;overflow:hidden;border:1px solid #E0D9C8">'
+    +'<div style="width:'+oppPct+'%;background:linear-gradient(90deg,#2F6B4F,#3C825F);display:flex;align-items:center;padding-left:12px;font:700 12px \'IBM Plex Mono\';color:#EAF3EC">▲ '+ch.oppN+'</div>'
+    +'<div style="width:'+(100-oppPct)+'%;background:linear-gradient(90deg,#B23A24,#A8331F);display:flex;align-items:center;justify-content:flex-end;padding-right:12px;font:700 12px \'IBM Plex Mono\';color:#F7E7E2">'+ch.riskN+' ▼</div></div>'
+    +'<div style="display:flex;justify-content:space-between;margin-top:7px">'
+    +'<span style="font:500 11px \'Hanken Grotesk\';color:#2F6B4F">Opportunity-side composite</span>'
+    +'<span style="font:500 11px \'Hanken Grotesk\';color:#A8331F">Risk-side composite</span></div></div>'
+    // stat cards
+    +'<div style="display:flex;gap:8px;margin-top:22px;flex-wrap:wrap">'
+    +'<div style="flex:1;min-width:120px;background:#fff;border:1px solid #E9E3D5;border-radius:9px;padding:11px 13px">'
+    +'<div style="font:500 10px \'Hanken Grotesk\';color:#8A8474;text-transform:uppercase;letter-spacing:.06em">Trend · 30d</div>'
+    +'<div style="display:flex;align-items:baseline;gap:6px;margin-top:4px"><span style="color:'+trendColor+';display:flex">'+trendIcon+'</span><span style="font:700 16px \'IBM Plex Mono\';color:'+trendColor+'">'+trend+'</span></div></div>'
+    +'<div style="flex:1;min-width:120px;background:#fff;border:1px solid #E9E3D5;border-radius:9px;padding:11px 13px">'
+    +'<div style="font:500 10px \'Hanken Grotesk\';color:#8A8474;text-transform:uppercase;letter-spacing:.06em">Live events</div>'
+    +'<div style="font:700 16px \'IBM Plex Mono\';color:#16140F;margin-top:4px">'+ent.events.length+'</div></div>'
+    +'<div style="flex:1;min-width:120px;background:#fff;border:1px solid #E9E3D5;border-radius:9px;padding:11px 13px">'
+    +'<div style="font:500 10px \'Hanken Grotesk\';color:#8A8474;text-transform:uppercase;letter-spacing:.06em">Quarantined</div>'
+    +'<div style="display:flex;align-items:baseline;gap:6px;margin-top:4px"><span style="font:700 16px \'IBM Plex Mono\';color:#B5791A">'+ent.quarantined+'</span><span style="font:500 11px \'Hanken Grotesk\';color:#A79F8C">held</span></div></div>'
+    +'</div></div>'
+    // right: health
+    +'<div style="padding:24px 26px;background:linear-gradient(160deg,#EDE9F3,#FBF8F1 75%);display:flex;flex-direction:column;justify-content:center">'
+    +'<div style="font:700 10px \'Hanken Grotesk\';letter-spacing:.13em;text-transform:uppercase;color:#5A4A8C">Entity Health Score</div>'
+    +'<div style="display:flex;align-items:baseline;gap:10px;margin-top:6px">'
+    +'<span style="font:600 62px/0.9 \'Newsreader\',serif;color:#16140F">'+ch.health+'</span>'
+    +'<span style="font:500 15px \'Hanken Grotesk\';color:#6E6858">/ 100</span></div>'
+    +'<div style="display:inline-flex;align-items:center;gap:7px;margin-top:12px;align-self:flex-start;background:'+hm.bg+';border:1px solid '+hm.border+';border-radius:8px;padding:5px 11px">'
+    +'<span style="width:8px;height:8px;border-radius:50%;background:'+hm.c+'"></span>'
+    +'<span style="font:600 12px \'Hanken Grotesk\';color:'+hm.c+'">'+hm.label+'</span></div>'
+    +'<p style="font:400 12.5px/1.5 \'Hanken Grotesk\';color:#6E6858;margin:14px 0 0 0">Weighted blend of six sub-indices, opportunity netted against risk. Every point drills to dated, sourced events.</p>'
+    +'<div style="margin-top:16px">'
+    +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px"><span style="font:700 9.5px \'Hanken Grotesk\';letter-spacing:.1em;text-transform:uppercase;color:#8A8474">12-week history</span>'
+    +'<span style="display:inline-flex;align-items:center;gap:5px;font:600 10px \'IBM Plex Mono\';color:'+trendColor+'">'+trendIcon+trend+' · 30d</span></div>'
+    +'<div style="height:54px">'+history+'</div></div></div>'
+    +'</div>'
+    // six index rail
+    +'<div style="border-top:1px solid #E9E3D5;padding:18px 26px 20px 26px">'
+    +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">'
+    +'<span style="display:inline-flex;align-items:baseline;gap:9px;flex-wrap:wrap"><span style="font:700 10px \'Hanken Grotesk\';letter-spacing:.12em;text-transform:uppercase;color:#8A8474">Six-index breakdown</span><span style="font:500 11px \'Hanken Grotesk\';color:#B0A891">click to filter events</span></span>'
+    +'<button data-act="view" data-v="indices" style="font:600 12px \'Hanken Grotesk\';color:#5A4A8C;background:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:5px">Index methodology '+icon('arrow-right',13,2.2,C.comp)+'</button></div>'
+    +'<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px">'+cards+'</div></div>'
+    +'</div>'
+    // feed + right rail
+    +'<div style="display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:22px;margin-top:24px;align-items:start">'
+    +'<div style="min-width:0">'
+    +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px">'
+    +'<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">'
+    +'<h3 style="font:600 17px \'Newsreader\',serif;color:#16140F;margin:0">Live event stream</h3>'+clearBtn+'</div>'
+    +'<div style="display:flex;gap:5px;background:#EFEADD;padding:4px;border-radius:9px">'+filters+'</div></div>'
+    +'<div style="display:flex;flex-direction:column;gap:11px">'+feedCards+emptyMsg+'</div></div>'
+    // right rail
+    +'<div style="display:flex;flex-direction:column;gap:16px;min-width:0">'
+    +'<div style="background:#FBF8F1;border:1px solid #DED7C5;border-radius:13px;padding:17px 18px">'
+    +'<div style="font:700 11px \'Hanken Grotesk\';letter-spacing:.1em;text-transform:uppercase;color:#8A8474;margin-bottom:13px">Composite weighting</div>'
+    +'<div style="display:flex;flex-direction:column;gap:10px">'+weights+'</div>'
+    +'<p style="font:400 11px/1.5 \'Hanken Grotesk\';color:#A79F8C;margin:13px 0 0 0">Hard-event indices weighted above sentiment. Weights are sector-calibrated defaults.</p></div>'
+    +'<div style="background:#16140F;border-radius:13px;padding:18px 20px">'
+    +'<div style="font:700 10px \'Hanken Grotesk\';letter-spacing:.12em;text-transform:uppercase;color:#9DB9C9;margin-bottom:11px">Per-event score</div>'
+    +'<div style="font:500 12.5px/1.7 \'IBM Plex Mono\';color:#E8E2D4">Severity × Credibility ×<br>Corroboration × Velocity ×<br>Stage × Decay</div>'
+    +'<div style="height:1px;background:rgba(245,241,232,.12);margin:14px 0"></div>'
+    +'<div style="font:400 11.5px/1.55 \'Hanken Grotesk\';color:#C9C2B2">Aggregated through a saturating roll-up with sector-calibrated <span style="color:#E8A87C;font-weight:600">k</span> — no single event runs the score to 100.</div>'
+    +'<button data-act="view" data-v="scoring" class="dark-btn" style="margin-top:14px;width:100%;height:34px;border-radius:8px;border:1px solid rgba(245,241,232,.2);background:rgba(245,241,232,.06);color:#F5F1E8;font:600 12px \'Hanken Grotesk\';cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px">Open scoring model '+icon('arrow-right',13,2.2,'#F5F1E8')+'</button></div>'
+    +'<div style="background:#FBF8F1;border:1px solid #DED7C5;border-radius:13px;padding:17px 18px">'
+    +'<div style="font:700 11px \'Hanken Grotesk\';letter-spacing:.1em;text-transform:uppercase;color:#8A8474;margin-bottom:12px">Generated narrative</div>'
+    +'<p style="font:400 13px/1.6 \'Newsreader\',serif;color:#2A2820;margin:0">'+ent.narrative+'</p>'
+    +'<div style="font:500 10.5px \'IBM Plex Mono\';color:#A79F8C;margin-top:10px">Source-grounded · '+ent.events.length+' corroborated events</div></div>'
+    +'</div></div></div>';
+}
+
+/* ------------ INDEX SUITE ------------ */
+function renderIndices(){
+  var tabs=indexOrder.map(function(k){
+    var ix=indices[k], active=state.indexTab===k;
+    return '<button data-act="tab" data-k="'+k+'" style="display:inline-flex;align-items:center;gap:8px;font:600 13.5px \'Hanken Grotesk\';padding:10px 15px;border:none;background:'+(active?'#FBF8F1':'transparent')+';cursor:pointer;color:'+(active?C.ink:'#8A8474')+';border-radius:9px 9px 0 0;border-bottom:2.5px solid '+(active?ix.color:'transparent')+'">'
+      +'<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:'+ix.color+'"></span>'+ix.name+'</button>';
+  }).join('');
+
+  var dix=indices[state.indexTab], dd=indexDetail[state.indexTab];
+  var pillars='';
+  if(dd.pillars){
+    pillars='<h4 style="font:700 12px \'Hanken Grotesk\';letter-spacing:.11em;text-transform:uppercase;color:#8A8474;margin:26px 0 12px 0">Pillars &amp; base weights</h4>'
+      +'<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px">'
+      +dd.pillars.map(function(p){
+        return '<div style="background:#FBF8F1;border:1px solid #E9E3D5;border-top:3px solid '+dix.color+';border-radius:9px;padding:13px 15px">'
+          +'<div style="font:600 15px \'Hanken Grotesk\';color:#16140F">'+p.t+'</div>'
+          +'<div style="font:600 12px \'IBM Plex Mono\';color:'+dix.color+';margin-top:3px">base '+p.w+'</div>'
+          +'<div style="font:400 12px/1.45 \'Hanken Grotesk\';color:#8A8474;margin-top:6px">'+p.d+'</div></div>';
+      }).join('')+'</div>';
+  }
+  var comps=dd.comps.map(function(c){
+    return '<div style="display:grid;grid-template-columns:190px 1fr;gap:16px;padding:13px 18px;border-bottom:1px solid #EDE7D9">'
+      +'<span style="font:600 13.5px \'Hanken Grotesk\';color:#16140F">'+c.c+'</span>'
+      +'<span style="font:400 13.5px/1.5 \'Hanken Grotesk\';color:#4A463C">'+c.d+'</span></div>';
+  }).join('');
+  var feeds=dd.feeds.map(function(fd){
+    return '<span style="font:500 12.5px \'Hanken Grotesk\';background:#FBF8F1;border:1px solid #DED7C5;border-radius:20px;padding:6px 14px;color:#4A463C">'+fd+'</span>';
+  }).join('');
+
+  return '<div style="padding:24px 30px 44px 30px;max-width:1120px;margin:0 auto">'
+    +'<div style="background:#16140F;border-radius:14px;padding:22px 24px;margin-bottom:22px">'
+    +'<div style="display:flex;align-items:center;gap:8px;font:600 10.5px \'IBM Plex Mono\';color:#9DB9C9;letter-spacing:.1em;text-transform:uppercase;margin-bottom:11px">Shared scoring model</div>'
+    +'<div style="font:500 15px/1.7 \'IBM Plex Mono\';color:#E8E2D4">EventScore = <span style="color:#E8A87C">Severity</span> × <span style="color:#E8A87C">Credibility</span> × <span style="color:#E8A87C">Corroboration</span> × <span style="color:#E8A87C">Velocity</span> × <span style="color:#E8A87C">Stage</span> × <span style="color:#E8A87C">Decay</span></div>'
+    +'<p style="font:400 12.5px/1.6 \'Hanken Grotesk\';color:#C9C2B2;margin:14px 0 0 0;max-width:72ch">Every index runs the same six-factor engine and the same saturating roll-up. What differs per index is the pillar set, base weights, and decay half-lives — shown below.</p></div>'
+    +'<div style="display:flex;gap:4px;flex-wrap:wrap;border-bottom:1.5px solid #16140F">'+tabs+'</div>'
+    +'<div style="padding-top:26px">'
+    +'<div style="display:flex;align-items:flex-start;gap:16px">'
+    +'<div style="width:52px;height:52px;border-radius:13px;background:'+rgba(dix.color,0.12)+';display:flex;align-items:center;justify-content:center;flex:0 0 auto">'+icon(dix.icon,26,1.7,dix.color)+'</div>'
+    +'<div style="flex:1;min-width:0">'
+    +'<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">'
+    +'<span style="font:700 10px \'Hanken Grotesk\';letter-spacing:.1em;text-transform:uppercase;color:'+dix.color+';background:'+rgba(dix.color,0.12)+';padding:4px 10px;border-radius:20px">'+dd.tag+'</span>'
+    +'<span style="font:600 11px \'IBM Plex Mono\';color:#8A8474">'+Math.round(dix.weight*100)+'% of composite</span></div>'
+    +'<h2 style="font:600 27px/1.05 \'Newsreader\',serif;color:#16140F;margin:9px 0 0 0;letter-spacing:-.01em">'+dix.name+' index</h2>'
+    +'<p style="font:400 16px/1.55 \'Hanken Grotesk\';color:#4A463C;margin:8px 0 0 0;max-width:64ch">'+dd.lede+'</p></div></div>'
+    +pillars
+    +'<h4 style="font:700 12px \'Hanken Grotesk\';letter-spacing:.11em;text-transform:uppercase;color:#8A8474;margin:26px 0 10px 0">Distinct components</h4>'
+    +'<div style="background:#FBF8F1;border:1px solid #E9E3D5;border-radius:11px;overflow:hidden">'+comps+'</div>'
+    +'<h4 style="font:700 12px \'Hanken Grotesk\';letter-spacing:.11em;text-transform:uppercase;color:#8A8474;margin:24px 0 11px 0">Source feeds</h4>'
+    +'<div style="display:flex;gap:8px;flex-wrap:wrap">'+feeds+'</div>'
+    +'</div></div>';
+}
+
+/* ------------ TRUST TOLLGATE ------------ */
+function renderTollgate(){
+  var headRow=matrixSectors.map(function(h){
+    return '<th style="font:600 11px \'Hanken Grotesk\';color:#4A463C;padding:4px;text-align:center;vertical-align:bottom">'+h+'</th>';
+  }).join('');
+  var rows=matrixSources.map(function(src){
+    var cells=matrixSectors.map(function(sec){
+      var v=cellVal(src,sec), m=cellMeta(v);
+      return '<td style="padding:0"><div style="height:44px;border-radius:7px;background:'+m.bg+';color:'+m.fg+';display:flex;flex-direction:column;align-items:center;justify-content:center;font:600 14px \'IBM Plex Mono\'">'+v.toFixed(2)
+        +'<span style="font:600 8.5px \'Hanken Grotesk\';letter-spacing:.06em;text-transform:uppercase;opacity:.85;margin-top:1px">'+m.tier.split(' ')[0]+'</span></div></td>';
+    }).join('');
+    return '<tr><th style="text-align:left;font:600 12.5px \'Hanken Grotesk\';color:#16140F;white-space:nowrap;padding-right:12px">'+src+'</th>'+cells+'</tr>';
+  }).join('');
+
+  var legend=[{c:C.opp,l:'High · trusted (≥0.80)'},{c:C.gate,l:'Medium (0.50–0.79)'},{c:C.risk,l:'Low · quarantine (<0.50)'}].map(function(lg){
+    return '<span style="display:inline-flex;align-items:center;gap:7px;font:500 12px \'Hanken Grotesk\';color:#4A463C"><span style="width:15px;height:15px;border-radius:4px;background:'+lg.c+'"></span>'+lg.l+'</span>';
+  }).join('');
+
+  var logic=promoLogic.map(function(p){
+    return '<div style="padding:12px 16px;border-bottom:1px solid #EDE7D9">'
+      +'<div style="font:600 13px \'Hanken Grotesk\';color:#16140F">'+p.t+'</div>'
+      +'<div style="font:400 12.5px/1.5 \'Hanken Grotesk\';color:#4A463C;margin-top:2px">'+p.d+'</div></div>';
+  }).join('');
+
+  var qEvents=allEvents().filter(function(e){ return e.quarantined; });
+  var queue=qEvents.map(function(e){
+    var ix=indices[e.index], cred=cellVal(e.source,e.sourceSector);
+    var promoted=state.promoted[e.id], confirmations=e.corroboration.length;
+    var canPromote=confirmations>=2&&!promoted;
+    return '<div style="background:#FBF8F1;border:1px solid #E9E3D5;border-radius:12px;padding:14px 17px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">'
+      +'<div style="flex:1;min-width:180px">'
+      +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:3px"><span style="font:700 10px \'Hanken Grotesk\';letter-spacing:.03em;text-transform:uppercase;color:'+ix.color+'">'+ix.name+'</span><span style="font:500 11px \'Hanken Grotesk\';color:#A79F8C">· '+e._ent.name+'</span></div>'
+      +'<button data-act="drawer" data-id="'+e.id+'" class="q-title" style="text-align:left;background:none;border:none;padding:0;cursor:pointer;font:600 14.5px \'Hanken Grotesk\';color:#16140F">'+e.title+'</button></div>'
+      +'<div style="text-align:center"><div style="font:500 10px \'Hanken Grotesk\';color:#A79F8C;text-transform:uppercase;letter-spacing:.05em">Trust cell</div><div style="font:700 14px \'IBM Plex Mono\';color:#A8331F;margin-top:2px">'+cred.toFixed(2)+'</div></div>'
+      +'<div style="text-align:center"><div style="font:500 10px \'Hanken Grotesk\';color:#A79F8C;text-transform:uppercase;letter-spacing:.05em">Corrob.</div><div style="font:700 14px \'IBM Plex Mono\';color:#4A463C;margin-top:2px">'+confirmations+'/2</div></div>'
+      +'<span style="font:600 11px \'Hanken Grotesk\';color:'+(promoted?C.opp:C.gate)+';background:'+(promoted?C.oppBg:C.gateBg)+';padding:5px 11px;border-radius:7px">'+(promoted?'Promoted':'Watch')+'</span>'
+      +(canPromote?'<button data-act="promote" data-id="'+e.id+'" class="promote-btn" style="font:600 12px \'Hanken Grotesk\';color:#2F6B4F;background:#E2EFE6;border:1px solid #BCD6C4;border-radius:8px;padding:7px 13px;cursor:pointer">Promote →</button>':'')
+      +'</div>';
+  }).join('');
+
+  return '<div style="padding:24px 30px 44px 30px;max-width:1180px;margin:0 auto">'
+    +'<div style="display:flex;align-items:flex-start;gap:15px;margin-bottom:8px">'
+    +'<div style="width:48px;height:48px;border-radius:12px;background:#F6EBD6;display:flex;align-items:center;justify-content:center;flex:0 0 auto">'+icon('shield-check',24,1.7,C.gate)+'</div>'
+    +'<div><h2 style="font:600 24px/1.05 \'Newsreader\',serif;color:#16140F;margin:0">Source × sector trust matrix</h2>'
+    +'<p style="font:400 14px/1.5 \'Hanken Grotesk\';color:#4A463C;margin:7px 0 0 0;max-width:76ch">No single global trust score per source. Each source carries a distinct weight per sector — the same outlet can be a strong signal in one sector and quarantined in another. These weights become the credibility factor in every event score.</p></div></div>'
+    +'<div style="display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:26px;align-items:start;margin-top:20px">'
+    +'<div><div style="background:#FBF8F1;border:1px solid #DED7C5;border-radius:13px;padding:18px 20px;overflow-x:auto">'
+    +'<table style="border-collapse:separate;border-spacing:5px;width:100%"><thead><tr>'
+    +'<th style="text-align:left;font:700 9.5px \'Hanken Grotesk\';letter-spacing:.1em;text-transform:uppercase;color:#8A8474;padding-right:12px;vertical-align:bottom">Source ↓ / Sector →</th>'+headRow+'</tr></thead>'
+    +'<tbody>'+rows+'</tbody></table></div>'
+    +'<div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:14px">'+legend+'</div></div>'
+    +'<div><h4 style="font:700 12px \'Hanken Grotesk\';letter-spacing:.11em;text-transform:uppercase;color:#8A8474;margin:0 0 12px 0">Quarantine &amp; promotion logic</h4>'
+    +'<div style="background:#FBF8F1;border:1px solid #E9E3D5;border-left:3px solid #B5791A;border-radius:11px;overflow:hidden">'+logic+'</div></div></div>'
+    +'<div style="display:flex;align-items:center;gap:9px;margin:28px 0 13px 0">'
+    +'<span style="color:#B5791A;display:flex">'+icon('inbox',15,2,C.gate)+'</span>'
+    +'<h3 style="font:600 17px \'Newsreader\',serif;color:#16140F;margin:0">Quarantine queue</h3>'
+    +'<span style="font:500 11px \'Hanken Grotesk\';color:#8A8474">held in watch state · never discarded</span></div>'
+    +(qEvents.length?'<div style="display:flex;flex-direction:column;gap:11px">'+queue+'</div>':'')
+    +'</div>';
+}
+
+/* ------------ SCORING MODEL ------------ */
+var scoringOther=[{n:'Viral labor backlash',m:'PR · allegation',v:0.53},{n:'Environmental fine',m:'settled · 5mo old',v:0.06}];
+function calcScores(){
+  var c=state.calc;
+  var ev1=c.sev*c.cred*c.corr*c.vel*c.stg*c.dec;
+  var raw=ev1+scoringOther[0].v+scoringOther[1].v;
+  return {ev1:ev1, entityScore:Math.round(100*raw/(raw+c.k))};
+}
+function renderScoring(){
+  var c=state.calc, r=calcScores();
+  var sliders=[
+    {k:'sev',label:'Severity',min:0.1,max:1,step:0.05,val:c.sev,disp:c.sev.toFixed(2)},
+    {k:'cred',label:'Credibility',min:0.1,max:1,step:0.05,val:c.cred,disp:c.cred.toFixed(2)},
+    {k:'corr',label:'Corroboration',min:1,max:1.5,step:0.05,val:c.corr,disp:c.corr.toFixed(2)},
+    {k:'vel',label:'Velocity',min:0.8,max:1.5,step:0.05,val:c.vel,disp:c.vel.toFixed(2)},
+    {k:'stg',label:'Stage modifier',min:0.3,max:1.4,step:0.1,val:c.stg,disp:c.stg.toFixed(2)},
+    {k:'dec',label:'Decay',min:0.1,max:1,step:0.05,val:c.dec,disp:c.dec.toFixed(2)},
+    {k:'k',label:'Sector k',min:1,max:6,step:0.5,val:c.k,disp:c.k.toFixed(1)}
+  ];
+  var rows=sliders.map(function(s){
+    return '<label style="font:500 13px \'Hanken Grotesk\';color:#4A463C">'+s.label+'</label>'
+      +'<input type="range" data-k="'+s.k+'" min="'+s.min+'" max="'+s.max+'" step="'+s.step+'" value="'+s.val+'" />'
+      +'<output id="disp-'+s.k+'" style="text-align:right;font:600 13px \'IBM Plex Mono\';color:#16140F">'+s.disp+'</output>';
+  }).join('');
+  var others=scoringOther.map(function(o){
+    return '<div style="display:flex;justify-content:space-between;padding:4px 0;font:500 13px \'Hanken Grotesk\';color:#4A463C"><span>'+o.n+' <span style="color:#A79F8C">· '+o.m+'</span></span><span style="font:600 13px \'IBM Plex Mono\'">'+o.v+'</span></div>';
+  }).join('');
+
+  return '<div style="padding:24px 30px 44px 30px;max-width:940px;margin:0 auto">'
+    +'<div style="display:flex;align-items:flex-start;gap:15px;margin-bottom:20px">'
+    +'<div style="width:48px;height:48px;border-radius:12px;background:#E9E5F3;display:flex;align-items:center;justify-content:center;flex:0 0 auto">'+icon('gauge',24,1.7,C.comp)+'</div>'
+    +'<div><h2 style="font:600 24px/1.05 \'Newsreader\',serif;color:#16140F;margin:0">The event engine</h2>'
+    +'<p style="font:400 14px/1.5 \'Hanken Grotesk\';color:#4A463C;margin:7px 0 0 0;max-width:74ch">One six-factor score per event, aggregated into an entity 0–100 through a saturating curve. Pull the sliders to see how a single event moves an entity score.</p></div></div>'
+    +'<div style="background:#16140F;border-radius:14px;padding:24px 26px;margin-bottom:20px">'
+    +'<div style="font:600 10.5px \'IBM Plex Mono\';color:#9DB9C9;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px">Per-event score</div>'
+    +'<div style="font:500 15px/1.7 \'IBM Plex Mono\';color:#E8E2D4">EventScore = <span style="color:#E8A87C">Severity</span> × <span style="color:#E8A87C">Credibility</span> × <span style="color:#E8A87C">Corroboration</span> × <span style="color:#E8A87C">Velocity</span> × <span style="color:#E8A87C">Stage</span> × <span style="color:#E8A87C">Decay</span></div>'
+    +'<div style="font:600 10.5px \'IBM Plex Mono\';color:#9DB9C9;letter-spacing:.1em;text-transform:uppercase;margin:20px 0 12px 0">Aggregation to entity 0–100</div>'
+    +'<div style="font:500 14.5px/1.7 \'IBM Plex Mono\';color:#E8E2D4">Raw = Σ EventScores <span style="color:#9DB9C9">(decay-weighted, capped)</span><br>EntityScore = 100 × Raw / (Raw + <span style="color:#E8A87C">k</span>) <span style="color:#9DB9C9">// sector-calibrated k</span></div></div>'
+    +'<div style="background:#FBF8F1;border:1px solid #DED7C5;border-radius:14px;padding:22px 24px">'
+    +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:18px"><span style="color:#5A4A8C;display:flex">'+icon('gauge',16,2)+'</span><span style="font:700 13px \'Hanken Grotesk\';color:#16140F">Live calculator — Event 1</span></div>'
+    +'<div style="display:grid;grid-template-columns:150px 1fr 54px;gap:13px 16px;align-items:center">'+rows+'</div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px">'
+    +'<div style="background:#fff;border:1px solid #E9E3D5;border-radius:10px;padding:15px 17px">'
+    +'<div style="font:500 12px \'Hanken Grotesk\';color:#8A8474">Event 1 score</div>'
+    +'<div id="calc-ev1" style="font:700 27px \'IBM Plex Mono\';color:#16140F;margin-top:3px">'+r.ev1.toFixed(2)+'</div></div>'
+    +'<div style="background:#F6E5DF;border-radius:10px;padding:15px 17px">'
+    +'<div style="font:500 12px \'Hanken Grotesk\';color:#A8331F">Entity controversy score</div>'
+    +'<div id="calc-entity" style="font:700 27px \'IBM Plex Mono\';color:#A8331F;margin-top:3px">'+r.entityScore+'</div></div></div>'
+    +'<div style="margin-top:16px;border-top:1px solid #E9E3D5;padding-top:14px">'+others+'</div>'
+    +'<p style="font:400 12px/1.6 \'Hanken Grotesk\';color:#8A8474;margin:14px 0 0 0">Pull <b style="font-weight:600">Stage modifier</b> to 0.3 (settlement) and watch Event 1 collapse — the saturating roll-up keeps any single event from running the score to 100.</p>'
+    +'</div></div>';
+}
+
+/* ------------ PIPELINE ------------ */
+function renderPipeline(){
+  var stages=pipeline.map(function(st,i){
+    var nodes=st.nodes.map(function(n){
+      return '<div style="flex:1;min-width:180px;background:#fff;border:1px solid #E9E3D5;border-radius:9px;padding:11px 14px">'
+        +'<div style="font:600 14px \'Hanken Grotesk\';color:#16140F">'+n.t+'</div>'
+        +'<div style="font:400 12px \'Hanken Grotesk\';color:#8A8474;margin-top:2px">'+n.s+'</div></div>';
+    }).join('');
+    var arrow=(i<pipeline.length-1)?'<div style="display:flex;justify-content:center;padding:5px 0;color:#C9C2B2;transform:rotate(90deg)">'+icon('arrow-right',15,2,'#C9C2B2')+'</div>':'';
+    return '<div><div style="background:#FBF8F1;border:1px solid #E9E3D5;border-left:3px solid '+st.color+';border-radius:12px;padding:16px 20px">'
+      +'<div style="display:flex;align-items:baseline;gap:11px;margin-bottom:12px">'
+      +'<span style="font:700 10px \'IBM Plex Mono\';letter-spacing:.08em;text-transform:uppercase;color:'+st.color+'">'+st.tag+'</span>'
+      +'<span style="font:600 16px \'Hanken Grotesk\';color:#16140F">'+st.name+'</span></div>'
+      +'<div style="display:flex;gap:10px;flex-wrap:wrap">'+nodes+'</div></div>'+arrow+'</div>';
+  }).join('');
+
+  return '<div style="padding:24px 30px 44px 30px;max-width:900px;margin:0 auto">'
+    +'<div style="display:flex;align-items:flex-start;gap:15px;margin-bottom:24px">'
+    +'<div style="width:48px;height:48px;border-radius:12px;background:#E0EBF0;display:flex;align-items:center;justify-content:center;flex:0 0 auto">'+icon('git-branch',24,1.7,C.signal)+'</div>'
+    +'<div><h2 style="font:600 24px/1.05 \'Newsreader\',serif;color:#16140F;margin:0">From raw news flow to scored signal</h2>'
+    +'<p style="font:400 14px/1.5 \'Hanken Grotesk\';color:#4A463C;margin:7px 0 0 0;max-width:70ch">A real-time engine that ingests public and proprietary sources, weighs every one through the trust tollgate, and resolves the flow into six indices and one composite.</p></div></div>'
+    +'<div style="display:flex;flex-direction:column;gap:0">'+stages+'</div></div>';
+}
+
+/* ------------ DISTRIBUTION ------------ */
+function renderDistribution(){
+  var cards=indexOrder.map(function(k){
+    var ix=indices[k];
+    var buyer=ix.side==='Risk'?(k==='esg'?'Mandate & compliance desks':'Risk & credit books'):(k==='sentiment'?'Systematic & quant':'Event-driven & long-only');
+    return '<div style="background:#FBF8F1;border:1px solid #E9E3D5;border-top:3px solid '+ix.color+';border-radius:11px;padding:15px 17px">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:11px">'
+      +'<div style="width:34px;height:34px;border-radius:9px;background:'+rgba(ix.color,0.12)+';display:flex;align-items:center;justify-content:center">'+icon(ix.icon,18,2,ix.color)+'</div>'
+      +'<span style="color:#B5791A;display:flex">'+icon('lock',13,2,C.gate)+'</span></div>'
+      +'<div style="font:600 15px \'Hanken Grotesk\';color:#16140F">'+ix.name+' index</div>'
+      +'<div style="font:500 11px \'Hanken Grotesk\';color:'+ix.color+';margin-top:2px">'+(ix.side==='Risk'?'Risk-side':'Opportunity-side')+'</div>'
+      +'<div style="font:400 12px/1.45 \'Hanken Grotesk\';color:#8A8474;margin-top:9px;padding-top:9px;border-top:1px solid #EDE7D9">Primary buyer · '+buyer+'</div></div>';
+  }).join('');
+
+  var api=apiEndpoints.map(function(e){
+    return '<div style="display:flex;align-items:center;gap:12px;padding:13px 17px;border-bottom:1px solid rgba(245,241,232,.08)">'
+      +'<span style="font:700 10px \'IBM Plex Mono\';color:#7FB49B;background:rgba(47,107,79,.25);padding:3px 7px;border-radius:5px;flex:0 0 auto">'+e.m+'</span>'
+      +'<div style="flex:1;min-width:0"><div style="font:500 12.5px \'IBM Plex Mono\';color:#E8E2D4">'+e.path+'</div>'
+      +'<div style="font:400 11.5px \'Hanken Grotesk\';color:#9B9481;margin-top:2px">'+e.d+'</div></div></div>';
+  }).join('');
+
+  return '<div style="padding:24px 30px 44px 30px;max-width:1120px;margin:0 auto">'
+    +'<div style="display:flex;align-items:flex-start;gap:15px;margin-bottom:22px">'
+    +'<div style="width:48px;height:48px;border-radius:12px;background:#E2EFE6;display:flex;align-items:center;justify-content:center;flex:0 0 auto">'+icon('share',24,1.7,C.opp)+'</div>'
+    +'<div><h2 style="font:600 24px/1.05 \'Newsreader\',serif;color:#16140F;margin:0">Insight layer &amp; distribution</h2>'
+    +'<p style="font:400 14px/1.5 \'Hanken Grotesk\';color:#4A463C;margin:7px 0 0 0;max-width:72ch">Scores, alerts, and narratives delivered to machines and analysts. Each index can be licensed independently by a different buyer.</p></div></div>'
+    +'<h4 style="font:700 12px \'Hanken Grotesk\';letter-spacing:.11em;text-transform:uppercase;color:#8A8474;margin:0 0 12px 0">Per-index licensing</h4>'
+    +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px">'+cards+'</div>'
+    +'<div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:20px;margin-top:24px;align-items:start">'
+    +'<div><h4 style="font:700 12px \'Hanken Grotesk\';letter-spacing:.11em;text-transform:uppercase;color:#8A8474;margin:0 0 12px 0">API feeds</h4>'
+    +'<div style="background:#16140F;border-radius:12px;overflow:hidden">'+api+'</div></div>'
+    +'<div><h4 style="font:700 12px \'Hanken Grotesk\';letter-spacing:.11em;text-transform:uppercase;color:#8A8474;margin:0 0 12px 0">Generated narratives</h4>'
+    +'<div style="background:#FBF8F1;border:1px solid #DED7C5;border-radius:12px;padding:17px 19px">'
+    +'<div style="display:flex;align-items:center;gap:7px;margin-bottom:10px"><span style="color:#5A4A8C;display:flex">'+icon('scroll-text',16,2)+'</span><span style="font:600 12px \'Hanken Grotesk\';color:#16140F">Analyst brief</span></div>'
+    +'<p style="font:400 14px/1.65 \'Newsreader\',serif;color:#2A2820;margin:0">'+(FI?entities[state.entity].narrative:'Lumora Energy’s health fell 6 points this week as a corroborated FERC inquiry drove the controversy index to 71. The move is partly offset by a 20-year modernization contract lifting momentum. A deposit-outflow-style rumor remains quarantined pending confirmation.')+'</p>'
+    +'<div style="font:500 10.5px \'IBM Plex Mono\';color:#A79F8C;margin-top:12px;padding-top:12px;border-top:1px solid #EDE7D9">Source-grounded · each claim cites corroborated events · delivered on material score change</div></div></div>'
+    +'</div></div>';
+}
+
+/* ------------ EVIDENCE DRAWER ------------ */
+function renderDrawer(){
+  if(!state.drawer) return '';
+  var f=findEvent(state.drawer); if(!f) return '';
+  var e=f.ev, ix=indices[e.index], es=eventScore(e);
+  var cred=cellVal(e.source,e.sourceSector), cm=cellMeta(cred);
+  var dirPos=e.dir==='pos';
+
+  function factorRow(label,val,max,note,color){
+    var pct=Math.min(100,(val/max)*100);
+    return '<div><div style="display:flex;justify-content:space-between;align-items:baseline;font:500 12px \'Hanken Grotesk\';color:#4A463C;margin-bottom:4px"><span>'+label+'</span><span style="font:600 11.5px \'IBM Plex Mono\';color:'+color+'">'+val.toFixed(2)+'×</span></div>'
+      +'<div style="height:5px;border-radius:3px;background:#EFEADD;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:'+color+';border-radius:3px"></div></div>'
+      +'<div style="font:400 10.5px \'Hanken Grotesk\';color:#A79F8C;margin-top:3px">'+note+'</div></div>';
+  }
+  var factors=[
+    factorRow('Severity',e.sev,1,'Magnitude of the event',ix.color),
+    factorRow('Credibility',cred,1,e.source+' in '+e.sourceSector+' (tollgate)',C.gate),
+    factorRow('Corroboration',e.corr,1.5,e.corroboration.length+' independent source(s)',ix.color),
+    factorRow('Velocity',e.vel,1.5,'Rate of development',ix.color),
+    factorRow('Stage',e.stg,1.4,e.stage?('Currently: '+e.stage):'Not stage-gated',ix.color),
+    factorRow('Decay',e.dec,1,'Freshness weighting',ix.color)
+  ].join('');
+
+  // stage timeline
+  var stagesHtml='';
+  if(e.stage){
+    var defs=[['Allegation',0.6],['Probe',1.2],['Charge',1.4],['Resolution',0.3]];
+    var cur=e.stage.toLowerCase();
+    var curIdx=defs.findIndex(function(d){ return d[0].toLowerCase()===cur; });
+    var chain=defs.map(function(d,i){
+      var label=d[0], mult=d[1], active=label.toLowerCase()===cur, passed=curIdx>=i;
+      var bg=active?C.gate:(passed?C.gateBg:'#fff');
+      var fg=active?'#fff':(passed?'#8A5A0E':C.mute);
+      var border=active?C.gate:'#E0D9C8';
+      var labelColor=active?C.ink:C.mute;
+      return '<div style="display:flex;align-items:center;flex:0 0 auto">'
+        +'<div style="display:flex;flex-direction:column;align-items:center;gap:6px">'
+        +'<span style="width:26px;height:26px;border-radius:50%;background:'+bg+';color:'+fg+';border:2px solid '+border+';display:flex;align-items:center;justify-content:center;font:700 10px \'IBM Plex Mono\'">'+mult.toFixed(1)+'</span>'
+        +'<span style="font:600 10px \'Hanken Grotesk\';color:'+labelColor+';text-align:center;max-width:56px">'+label+'</span></div>'
+        +(i<defs.length-1?'<span style="width:20px;height:2px;background:#E0D9C8;margin:0 2px 18px 2px"></span>':'')
+        +'</div>';
+    }).join('');
+    stagesHtml='<div style="background:#FBF8F1;border:1px solid #DED7C5;border-radius:13px;padding:16px 18px">'
+      +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:15px"><span style="color:#B5791A;display:flex">'+icon('clock',16)+'</span><span style="font:700 12.5px \'Hanken Grotesk\';color:#16140F">Stage modifier</span></div>'
+      +'<div style="display:flex;align-items:center">'+chain+'</div>'
+      +'<div style="font:400 11.5px/1.5 \'Hanken Grotesk\';color:#6E6858;margin-top:13px">Settlement releases the score — a resolved matter collapses toward 0.3×, making this a live gauge, not a permanent blocklist.</div></div>';
+  }
+
+  var status=state.review[state.drawer]||(e.quarantined?'quarantined':'pending');
+  var stMeta={
+    pending:{label:'Pending analyst review',c:C.gate,bg:C.gateBg,border:'#E4C98A',icon:'clock'},
+    confirmed:{label:'Confirmed by you',c:C.opp,bg:C.oppBg,border:'#BCD6C4',icon:'check'},
+    quarantined:{label:'Quarantined — awaiting corroboration',c:C.gate,bg:C.gateBg,border:'#E4C98A',icon:'lock'},
+    overridden:{label:'Overridden by you',c:C.comp,bg:C.compBg,border:'#D2CBE6',icon:'user'}
+  }[status];
+  var showQuar=e.quarantined&&status!=='confirmed'&&status!=='overridden';
+
+  var corrob=e.corroboration.map(function(c2){
+    var col=credLabelColor(c2.cred);
+    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 11px;background:#fff;border:1px solid #E9E3D5;border-radius:9px">'
+      +'<span style="font:500 12.5px \'Hanken Grotesk\';color:#2A2820">'+c2.name+'</span>'
+      +'<span style="display:inline-flex;align-items:center;gap:6px;font:600 11px \'Hanken Grotesk\';color:'+col+'"><span style="width:7px;height:7px;border-radius:50%;background:'+col+'"></span>'+c2.cred+'</span></div>';
+  }).join('');
+
+  var prov=e.provenance.map(function(p,i){
+    return '<div style="display:flex;gap:12px">'
+      +'<div style="display:flex;flex-direction:column;align-items:center;flex:0 0 auto">'
+      +'<span style="width:21px;height:21px;border-radius:50%;background:#E9E3D5;color:#4A463C;display:flex;align-items:center;justify-content:center;font:700 10px \'IBM Plex Mono\'">'+(i+1)+'</span>'
+      +(i<e.provenance.length-1?'<span style="width:2px;flex:1;background:#E0D9C8;min-height:13px"></span>':'')
+      +'</div><div style="padding-bottom:13px"><div style="font:500 12.5px/1.4 \'Hanken Grotesk\';color:#2A2820">'+p+'</div></div></div>';
+  }).join('');
+
+  var auditRows=e.audit.map(function(a){ return {time:a.time,actor:a.actor,action:a.action,id:a.id,dot:'#C9C2B2'}; })
+    .concat(state.userAudit[state.drawer]||[]);
+  var audit=auditRows.map(function(au){
+    return '<div style="display:flex;gap:11px">'
+      +'<span style="width:8px;height:8px;border-radius:50%;background:'+au.dot+';margin-top:5px;flex:0 0 auto"></span>'
+      +'<div style="flex:1;min-width:0">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><span style="font:600 12.5px \'Hanken Grotesk\';color:#2A2820">'+au.action+'</span><span style="font:500 10px \'Hanken Grotesk\';color:#B0A891;white-space:nowrap">'+au.time+'</span></div>'
+      +'<div style="display:flex;align-items:center;gap:8px;margin-top:2px"><span style="font:500 11px \'Hanken Grotesk\';color:#8A8474">'+au.actor+'</span><span style="font:500 10px \'IBM Plex Mono\';color:#B0A891;background:#F0EBDE;padding:1px 6px;border-radius:5px">'+au.id+'</span></div>'
+      +'</div></div>';
+  }).join('');
+
+  var anim=(lastDrawer!==state.drawer);
+  return '<div style="position:fixed;inset:0;z-index:40;display:flex;justify-content:flex-end">'
+    +'<div data-act="close-drawer" class="'+(anim?'backdrop-anim':'')+'" style="position:absolute;inset:0;background:rgba(22,20,15,.44)"></div>'
+    +'<div id="drawer-scroll" class="fi-scroll '+(anim?'drawer-anim':'')+'" style="position:relative;width:486px;max-width:93vw;height:100%;background:#F5F1E8;box-shadow:-22px 0 55px rgba(22,20,15,.25);overflow-y:auto">'
+    // sticky header
+    +'<div style="position:sticky;top:0;z-index:2;background:#FBF8F1;border-bottom:1px solid #DED7C5;padding:18px 22px">'
+    +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:13px">'
+    +'<span style="display:inline-flex;align-items:center;gap:8px;font:700 10.5px \'Hanken Grotesk\';letter-spacing:.1em;text-transform:uppercase;color:'+ix.color+'">'+icon(ix.icon,14,2,ix.color)+ix.name.toUpperCase()+' · '+e.pillar+'</span>'
+    +'<button data-act="close-drawer" class="icon-btn" style="width:31px;height:31px;border-radius:8px;border:1px solid #DED7C5;background:#F5F1E8;display:flex;align-items:center;justify-content:center;color:#4A463C;cursor:pointer">'+icon('x',16,2.2)+'</button></div>'
+    +'<div style="font:600 18px/1.3 \'Newsreader\',serif;color:#16140F">'+e.title+'</div>'
+    +'<div style="display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap">'
+    +'<span style="display:inline-flex;align-items:center;gap:6px;font:600 12px \'IBM Plex Mono\';color:'+ix.color+';background:'+rgba(ix.color,0.1)+';padding:5px 11px;border-radius:8px">Event score '+es.toFixed(2)+'</span>'
+    +'<span style="display:inline-flex;align-items:center;gap:6px;font:600 11px \'Hanken Grotesk\';color:'+(dirPos?C.opp:C.risk)+';background:'+(dirPos?C.oppBg:C.riskBg)+';padding:5px 10px;border-radius:8px">'+icon(dirPos?'arrow-up-right':'arrow-down-right',12,2.2,dirPos?C.opp:C.risk)+e.direction+'</span>'
+    +(showQuar?'<span style="display:inline-flex;align-items:center;gap:5px;font:600 11px \'Hanken Grotesk\';color:#B5791A;background:#F6EBD6;border:1px solid #E4C98A;padding:5px 10px;border-radius:8px">'+icon('lock',11,2.2,C.gate)+'Quarantined</span>':'')
+    +(e.url?'<a href="'+e.url+'" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;font:600 11px \'Hanken Grotesk\';color:#2C5C73;background:#E0EBF0;padding:5px 10px;border-radius:8px;text-decoration:none">'+icon('arrow-up-right',12,2.2,C.signal)+'Source article</a>':'')
+    +'</div></div>'
+    // body
+    +'<div style="padding:18px 22px 30px 22px;display:flex;flex-direction:column;gap:16px">'
+    // factors
+    +'<div style="background:#FBF8F1;border:1px solid #DED7C5;border-radius:13px;padding:16px 18px">'
+    +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:14px"><span style="color:#5A4A8C;display:flex">'+icon('gauge',16,2)+'</span><span style="font:700 12.5px \'Hanken Grotesk\';color:#16140F">Event-score factors</span></div>'
+    +'<div style="display:flex;flex-direction:column;gap:11px">'+factors+'</div>'
+    +'<div style="display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:13px;border-top:1px solid #E9E3D5">'
+    +'<span style="font:600 12px \'Hanken Grotesk\';color:#4A463C">Product = event score</span>'
+    +'<span style="font:700 18px \'IBM Plex Mono\';color:'+ix.color+'">'+es.toFixed(2)+'</span></div></div>'
+    +stagesHtml
+    // trust cell
+    +'<div style="background:#FBF8F1;border:1px solid #DED7C5;border-radius:13px;padding:16px 18px">'
+    +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:13px"><span style="color:#B5791A;display:flex">'+icon('shield',16)+'</span><span style="font:700 12.5px \'Hanken Grotesk\';color:#16140F">Trust tollgate — source × sector</span></div>'
+    +'<div style="display:flex;align-items:center;gap:13px">'
+    +'<div style="flex:1;min-width:0"><div style="font:600 13px \'Hanken Grotesk\';color:#16140F">'+e.source+'</div>'
+    +'<div style="font:500 11.5px \'Hanken Grotesk\';color:#8A8474;margin-top:2px">in '+e.sourceSector+'</div></div>'
+    +'<div style="text-align:center;background:'+cm.bg+';border-radius:9px;padding:9px 15px">'
+    +'<div style="font:700 20px/1 \'IBM Plex Mono\';color:'+cm.fg+'">'+cred.toFixed(2)+'</div>'
+    +'<div style="font:600 9px \'Hanken Grotesk\';letter-spacing:.08em;text-transform:uppercase;color:'+cm.fg+';margin-top:3px">'+cm.tier+'</div></div></div>'
+    +'<div style="font:400 11px/1.5 \'Hanken Grotesk\';color:#A79F8C;margin-top:11px">This source-sector weight is the credibility factor above. '+(cred<0.5?'Below the 0.5 threshold — event routed to quarantine until independently confirmed.':'At or above threshold — event flows straight to scoring.')+'</div></div>'
+    // corroboration
+    +'<div style="background:#FBF8F1;border:1px solid #DED7C5;border-radius:13px;padding:16px 18px">'
+    +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px"><div style="display:flex;align-items:center;gap:8px"><span style="color:#2C5C73;display:flex">'+icon('square-check',16)+'</span><span style="font:700 12.5px \'Hanken Grotesk\';color:#16140F">Corroboration</span></div>'
+    +'<span style="font:600 11px \'IBM Plex Mono\';color:#6E6858;background:#F0EBDE;padding:2px 8px;border-radius:6px">'+e.corroboration.length+' independent</span></div>'
+    +'<div style="display:flex;flex-direction:column;gap:8px">'+corrob+'</div></div>'
+    // provenance
+    +'<div style="background:#FBF8F1;border:1px solid #DED7C5;border-radius:13px;padding:16px 18px">'
+    +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:14px"><span style="color:#2F6B4F;display:flex">'+icon('git-branch',16)+'</span><span style="font:700 12.5px \'Hanken Grotesk\';color:#16140F">Provenance chain</span></div>'
+    +'<div style="display:flex;flex-direction:column">'+prov+'</div></div>'
+    // audit
+    +'<div style="background:#FBF8F1;border:1px solid #DED7C5;border-radius:13px;padding:16px 18px">'
+    +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:14px"><span style="color:#4A463C;display:flex">'+icon('scroll-text',16)+'</span><span style="font:700 12.5px \'Hanken Grotesk\';color:#16140F">Audit trail</span></div>'
+    +'<div style="display:flex;flex-direction:column;gap:12px">'+audit+'</div></div>'
+    // analyst review
+    +'<div style="background:#EDE9F3;border:1px solid #D2CBE6;border-radius:13px;padding:16px 18px">'
+    +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:11px"><span style="color:#5A4A8C;display:flex">'+icon('user',16)+'</span><span style="font:700 12.5px \'Hanken Grotesk\';color:#16140F">Analyst review</span></div>'
+    +'<div style="display:flex;align-items:center;gap:9px;padding:10px 12px;border-radius:9px;background:'+stMeta.bg+';border:1px solid '+stMeta.border+';margin-bottom:13px">'
+    +'<span style="color:'+stMeta.c+';display:flex">'+icon(stMeta.icon,15,2.2,stMeta.c)+'</span>'
+    +'<span style="font:600 12.5px \'Hanken Grotesk\';color:'+stMeta.c+'">'+stMeta.label+'</span></div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">'
+    +'<button data-act="review" data-id="'+e.id+'" data-status="confirmed" data-label="Confirmed event" class="btn-confirm" style="display:flex;align-items:center;justify-content:center;gap:6px;height:37px;border-radius:9px;border:1px solid #BCD6C4;background:#E2EFE6;color:#2F6B4F;font:600 12px \'Hanken Grotesk\';cursor:pointer">'+icon('check',13,2.6,C.opp)+'Confirm</button>'
+    +'<button data-act="review" data-id="'+e.id+'" data-status="quarantined" data-label="Sent to quarantine" class="btn-quar" style="display:flex;align-items:center;justify-content:center;gap:6px;height:37px;border-radius:9px;border:1px solid #E4C98A;background:#F6EBD6;color:#B5791A;font:600 12px \'Hanken Grotesk\';cursor:pointer">'+icon('lock',12,2.2,C.gate)+'Quarantine</button>'
+    +'<button data-act="review" data-id="'+e.id+'" data-status="overridden" data-label="Overrode disposition" class="btn-over" style="display:flex;align-items:center;justify-content:center;gap:6px;height:37px;border-radius:9px;border:1px solid #D2CBE6;background:#E9E5F3;color:#5A4A8C;font:600 12px \'Hanken Grotesk\';cursor:pointer">'+icon('user',12,2,C.comp)+'Override</button>'
+    +'</div></div>'
+    +'</div></div></div>';
+}
+
+/* ============================ RENDER ============================ */
+var viewRenderers={workbench:renderWorkbench,indices:renderIndices,tollgate:renderTollgate,scoring:renderScoring,pipeline:renderPipeline,distribution:renderDistribution};
+
+function render(){
+  var app=document.getElementById('app');
+  var mainEl=document.getElementById('main');
+  var mainScroll=mainEl?mainEl.scrollTop:0;
+  var drawerEl=document.getElementById('drawer-scroll');
+  var drawerScroll=(drawerEl&&lastDrawer===state.drawer)?drawerEl.scrollTop:0;
+
+  app.innerHTML='<div style="display:flex;height:100vh;width:100%;overflow:hidden;background:#F5F1E8;font-family:\'Hanken Grotesk\',sans-serif">'
+    +renderSidebar()
+    +'<div style="flex:1;min-width:0;height:100%;display:flex;flex-direction:column">'
+    +renderHeader()
+    +'<main id="main" class="fi-scroll" style="flex:1;overflow-y:auto;background:#F5F1E8">'
+    +viewRenderers[state.view]()
+    +'</main></div>'
+    +renderDrawer()
+    +'</div>';
+
+  var m=document.getElementById('main'); if(m) m.scrollTop=mainScroll;
+  var d=document.getElementById('drawer-scroll'); if(d&&drawerScroll) d.scrollTop=drawerScroll;
+  lastDrawer=state.drawer;
+}
+
+/* ============================ EVENTS ============================ */
+document.getElementById('app').addEventListener('click',function(ev){
+  var t=ev.target.closest('[data-act]');
+  if(!t) return;
+  var act=t.getAttribute('data-act');
+  if(act==='view'){ state.view=t.getAttribute('data-v'); state.drawer=null; render(); }
+  else if(act==='entity'){ state.entity=t.getAttribute('data-id'); state.drawer=null; render(); }
+  else if(act==='drawer'){ state.drawer=t.getAttribute('data-id'); render(); }
+  else if(act==='close-drawer'){ state.drawer=null; render(); }
+  else if(act==='tab'){ state.indexTab=t.getAttribute('data-k'); render(); }
+  else if(act==='filter'){ state.feedFilter=t.getAttribute('data-f'); render(); }
+  else if(act==='promote'){ state.promoted[t.getAttribute('data-id')]=true; render(); }
+  else if(act==='review'){
+    var id=t.getAttribute('data-id');
+    var arr=(state.userAudit[id]||[]).slice();
+    arr.push({time:'just now',actor:'You · A. Renner',action:t.getAttribute('data-label'),id:'ACT-'+String(Date.now()).slice(-6),dot:C.comp});
+    state.userAudit[id]=arr;
+    state.review[id]=t.getAttribute('data-status');
+    render();
+  }
+});
+
+// slider: update in place, no full re-render (would interrupt the drag)
+document.getElementById('app').addEventListener('input',function(ev){
+  var t=ev.target;
+  if(!(t.matches&&t.matches('input[type=range][data-k]'))) return;
+  var k=t.getAttribute('data-k');
+  state.calc[k]=parseFloat(t.value);
+  var r=calcScores();
+  var disp=document.getElementById('disp-'+k);
+  if(disp) disp.textContent=k==='k'?state.calc.k.toFixed(1):state.calc[k].toFixed(2);
+  var e1=document.getElementById('calc-ev1'); if(e1) e1.textContent=r.ev1.toFixed(2);
+  var es=document.getElementById('calc-entity'); if(es) es.textContent=r.entityScore;
+});
+
+// esc closes drawer
+document.addEventListener('keydown',function(ev){
+  if(ev.key==='Escape'&&state.drawer){ state.drawer=null; render(); }
+});
+
+render();
+})();
+</script>
+</body>
+</html>
