@@ -825,118 +825,723 @@ window.FI_DATA = {
    "sector": "Private bank",
    "meta": "Indian BFSI · Jan–Jun 2026",
    "scores": {
-    "controversy": 0,
-    "risk": 0,
-    "esg": 0,
-    "momentum": 0,
-    "catalyst": 0,
-    "sentiment": 0
+    "controversy": 20,
+    "risk": 3,
+    "esg": 11,
+    "momentum": 36,
+    "catalyst": 17,
+    "sentiment": 9
    },
-   "trend": 0,
-   "quarantined": 0,
-   "narrative": "ICICI Bank: no material corroborated events this window.",
+   "trend": 1,
+   "quarantined": 6,
+   "narrative": "ICICI Bank: ICICI Bank received a GST demand notice of about Rs 769 crore including penalty — driving the controversy index. ICICI Bank shares gained after Q4 profit beat street estimates, with brokerages citing strong growth and low credit costs — lifting the opportunity side. 6 low-trust item(s) remain quarantined pending corroboration.",
    "history": [
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50
+    52,
+    56,
+    57,
+    56,
+    55,
+    56,
+    57,
+    58,
+    58,
+    59,
+    58,
+    59
    ],
    "indexHistory": {
     "controversy": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     28,
+     27,
+     26,
+     26,
+     25,
+     24,
+     23,
+     23,
+     22,
+     21,
+     21,
+     20
     ],
     "risk": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     5,
+     5,
+     5,
+     5,
+     5,
+     4,
+     4,
+     4,
+     4,
+     4,
+     4,
+     3
     ],
     "esg": [
      0,
      0,
      0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     10,
+     10,
+     9,
+     9,
+     9,
+     8,
+     8,
+     12,
+     11
     ],
     "momentum": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     21,
+     32,
+     31,
+     30,
+     29,
+     31,
+     32,
+     34,
+     33,
+     35,
+     34,
+     36
     ],
     "catalyst": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     14,
+     14,
+     14,
+     19,
+     18,
+     18,
+     17,
+     22,
+     21,
+     20,
+     18,
+     17
     ],
     "sentiment": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     9,
+     9,
+     12,
+     11,
+     10,
+     10,
+     9,
+     9,
+     8,
+     11,
+     10,
+     9
     ]
    },
-   "articleCount": 0,
-   "events": []
+   "articleCount": 53,
+   "events": [
+    {
+     "id": "icicibank-0",
+     "index": "controversy",
+     "pillar": "Legal & compliance",
+     "title": "ICICI Bank gets Rs 769 cr GST demand notice",
+     "desc": "ICICI Bank received a GST demand notice of about Rs 769 crore including penalty.",
+     "url": "https://economictimes.indiatimes.com/industry/banking/finance/banking/icici-bank-gets-rs-769-cr-gst-demand-notice/articleshow/129683261.cms",
+     "source": "Business press",
+     "sourceSector": "Private bank",
+     "direction": "Subject — defendant",
+     "dir": "neg",
+     "time": "3mo ago",
+     "sev": 0.7,
+     "corr": 1.3,
+     "vel": 1.0,
+     "stg": 1.4,
+     "dec": 0.56,
+     "stage": "charge",
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "General & regional press",
+       "cred": "Medium"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (3 article(s))",
+      "Resolved entity → ICICI Bank",
+      "Classified: Controversy · Legal & compliance · charge",
+      "Corroborated across 3 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "3mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-ICICIBANK-1000"
+      },
+      {
+       "time": "3mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Private bank)",
+       "id": "TG-2000"
+      }
+     ]
+    },
+    {
+     "id": "icicibank-1",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "ICICI Bank stock gains after Q4 profit beats Street , brokerages bullish on strong growth and low credit costs",
+     "desc": "ICICI Bank shares gained after Q4 profit beat street estimates, with brokerages citing strong growth and low credit costs.",
+     "url": "https://www.moneycontrol.com/news/business/stocks/icici-bank-stock-gains-after-q4-profit-beats-street-brokerages-bullish-on-strong-growth-and-low-credit-costs-13893712.html",
+     "source": "Business press",
+     "sourceSector": "Private bank",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "2mo ago",
+     "sev": 0.55,
+     "corr": 1.15,
+     "vel": 1.3,
+     "stg": 1.0,
+     "dec": 0.67,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "General & regional press",
+       "cred": "Medium"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (6 article(s))",
+      "Resolved entity → ICICI Bank",
+      "Classified: Momentum · Financial",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "2mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-ICICIBANK-1001"
+      },
+      {
+       "time": "2mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Private bank)",
+       "id": "TG-2001"
+      }
+     ]
+    },
+    {
+     "id": "icicibank-2",
+     "index": "catalyst",
+     "pillar": "Corporate",
+     "title": "RBI approves extension of ICICI Bank CEO Sandeep Bakhshi tenure until 2028",
+     "desc": "RBI approved the extension of Sandeep Bakhshi's tenure as ICICI Bank CEO until 2028.",
+     "url": "https://www.thehindubusinessline.com/money-and-banking/rbi-approves-icici-bank-ceo-sandeep-bakhshi-reappointment-for-two-more-years/article71012385.ece",
+     "source": "Business press",
+     "sourceSector": "Private bank",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "1mo ago",
+     "sev": 0.6,
+     "corr": 1.15,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.65,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (4 article(s))",
+      "Resolved entity → ICICI Bank",
+      "Classified: Catalyst · Corporate",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "5mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-ICICIBANK-1002"
+      },
+      {
+       "time": "1mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Private bank)",
+       "id": "TG-2002"
+      }
+     ]
+    },
+    {
+     "id": "icicibank-3",
+     "index": "esg",
+     "pillar": "Governance",
+     "title": "Prashant Bhushan urges RBI to intervene in the proposed re - appointment of Bakhshi as ICICI Bank MD and CEO",
+     "desc": "Advocate Prashant Bhushan urged the RBI to intervene in the proposed re-appointment of Sandeep Bakhshi as ICICI Bank MD and CEO.",
+     "url": "https://www.thehindubusinessline.com/money-and-banking/prashant-bhushan-urges-rbi-to-intervene-in-the-proposed-re-appointment-of-bakhshi-as-icici-banks-md-and-ceo/article70921239.ece",
+     "source": "Business press",
+     "sourceSector": "Private bank",
+     "direction": "Subject",
+     "dir": "neg",
+     "time": "2mo ago",
+     "sev": 0.5,
+     "corr": 1.0,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.7,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (1 article(s))",
+      "Resolved entity → ICICI Bank",
+      "Classified: Esg · Governance",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "2mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-ICICIBANK-1003"
+      },
+      {
+       "time": "2mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Private bank)",
+       "id": "TG-2003"
+      }
+     ]
+    },
+    {
+     "id": "icicibank-4",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "Six of top - 10 most valued firms gain ₹88 , 678 cr in market value last week ; ICICI Bank biggest winner",
+     "desc": "ICICI Bank was the biggest winner as six of the top-10 most valued firms gained Rs 88,678 crore in market value last week.",
+     "url": "https://www.thehindubusinessline.com/markets/six-of-top-10-most-valued-firms-gain-88678-cr-in-market-value-last-week-icici-bank-biggest-winner/article71157263.ece",
+     "source": "Business press",
+     "sourceSector": "Private bank",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "1d ago",
+     "sev": 0.3,
+     "corr": 1.0,
+     "vel": 1.0,
+     "stg": 1.0,
+     "dec": 0.99,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (3 article(s))",
+      "Resolved entity → ICICI Bank",
+      "Classified: Momentum · Financial",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "1d ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-ICICIBANK-1004"
+      },
+      {
+       "time": "1d ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Private bank)",
+       "id": "TG-2004"
+      }
+     ]
+    },
+    {
+     "id": "icicibank-5",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "Mcap of eight of top - 10 most valued firms surges by ₹1 . 90 lakh crore ; ICICI Bank shines",
+     "desc": "ICICI Bank was the biggest gainer as eight of the top-10 firms added Rs 1.90 lakh crore in market value during the week.",
+     "url": "https://www.thehindubusinessline.com/markets/mcap-of-eight-of-top-10-most-valued-firms-surges-by-190-lakh-crore-icici-bank-shines/article71100489.ece",
+     "source": "Business press",
+     "sourceSector": "Private bank",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "2w ago",
+     "sev": 0.3,
+     "corr": 1.15,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.92,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "General & regional press",
+       "cred": "Medium"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (2 article(s))",
+      "Resolved entity → ICICI Bank",
+      "Classified: Momentum · Financial",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "2w ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-ICICIBANK-1005"
+      },
+      {
+       "time": "2w ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Private bank)",
+       "id": "TG-2005"
+      }
+     ]
+    },
+    {
+     "id": "icicibank-6",
+     "index": "catalyst",
+     "pillar": "Corporate",
+     "title": "ICICI Bank appoints former SEBI whole - time member Ashwani Bhatia as independent director",
+     "desc": "ICICI Bank appointed former SEBI whole-time member Ashwani Bhatia as an independent director.",
+     "url": "https://www.moneycontrol.com/news/business/markets/icici-bank-appoints-former-sebi-whole-time-member-ashwani-bhatia-as-independent-director-13937771.html",
+     "source": "Business press",
+     "sourceSector": "Private bank",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "4w ago",
+     "sev": 0.4,
+     "corr": 1.0,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.72,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (1 article(s))",
+      "Resolved entity → ICICI Bank",
+      "Classified: Catalyst · Corporate",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "4w ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-ICICIBANK-1006"
+      },
+      {
+       "time": "4w ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Private bank)",
+       "id": "TG-2006"
+      }
+     ]
+    },
+    {
+     "id": "icicibank-7",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "HDFC vs ICICI : Who really won in Q3 ?",
+     "desc": "A Q3 FY26 results comparison weighed HDFC Bank's quarterly performance against ICICI Bank's.",
+     "url": "https://www.livemint.com/market/mark-to-market/hdfc-bank-q3-earnings-icici-q3-results-hdfc-vs-icici-labour-code-11768808054564.html",
+     "source": "Business press",
+     "sourceSector": "Private bank",
+     "direction": "Subject",
+     "dir": "neg",
+     "time": "5mo ago",
+     "sev": 0.5,
+     "corr": 1.3,
+     "vel": 1.0,
+     "stg": 1.0,
+     "dec": 0.39,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "General & regional press",
+       "cred": "Medium"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (3 article(s))",
+      "Resolved entity → ICICI Bank",
+      "Classified: Momentum · Financial",
+      "Corroborated across 3 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "5mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-ICICIBANK-1007"
+      },
+      {
+       "time": "5mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Private bank)",
+       "id": "TG-2007"
+      }
+     ]
+    },
+    {
+     "id": "icicibank-8",
+     "index": "controversy",
+     "pillar": "Legal & compliance",
+     "title": "ICICI Bank Faces ₹50 . 38 Crore GST Demand With Penalty & Interest , Plans Further Legal Appeal Against Mahara",
+     "desc": "ICICI Bank faced a Rs 50.38 crore GST demand with penalty and interest under a Maharashtra order and plans a further legal appeal.",
+     "url": "https://www.freepressjournal.in/business/icici-bank-receives-5038-crore-gst-demand-from-maharashtra-department-lender-to-challenge-order-through-further-appeal",
+     "source": "General & regional press",
+     "sourceSector": "Private bank",
+     "direction": "Subject — defendant",
+     "dir": "neg",
+     "time": "4mo ago",
+     "sev": 0.5,
+     "corr": 1.15,
+     "vel": 0.9,
+     "stg": 1.4,
+     "dec": 0.48,
+     "stage": "charge",
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "General & regional press",
+       "cred": "Medium"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (2 article(s))",
+      "Resolved entity → ICICI Bank",
+      "Classified: Controversy · Legal & compliance · charge",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "5mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-ICICIBANK-1008"
+      },
+      {
+       "time": "4mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Private bank)",
+       "id": "TG-2008"
+      }
+     ]
+    },
+    {
+     "id": "icicibank-9",
+     "index": "sentiment",
+     "pillar": "Entity tone",
+     "title": "Nomura upgrades Kotak Mahindra Bank , calls ICICI Bank preferred compounder . Here why",
+     "desc": "Nomura called ICICI Bank its preferred compounder among Indian banks while upgrading Kotak Mahindra Bank.",
+     "url": "https://economictimes.indiatimes.com/markets/stocks/news/nomura-upgrades-kotak-mahindra-bank-calls-icici-bank-preferred-compounder-heres-why/articleshow/129767146.cms",
+     "source": "Business press",
+     "sourceSector": "Private bank",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "4d ago",
+     "sev": 0.25,
+     "corr": 1.15,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.88,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (6 article(s))",
+      "Resolved entity → ICICI Bank",
+      "Classified: Sentiment · Entity tone",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "5mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-ICICIBANK-1009"
+      },
+      {
+       "time": "4d ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Private bank)",
+       "id": "TG-2009"
+      }
+     ]
+    },
+    {
+     "id": "icicibank-10",
+     "index": "controversy",
+     "pillar": "Financial integrity",
+     "title": "ICICI Bank Gold Loan Scam ; नागपुरातील ICICI बँकेतील गोल्ड लोन घोटाळा उघडकीस ; बनावट दागिने ठेवून तब्बल 23 कोट",
+     "desc": "A gold loan fraud of about Rs 23 crore involving fake jewellery pledged as collateral was uncovered at an ICICI Bank branch in Nagpur.",
+     "url": "https://maharashtratimes.com/business/business-news/nagpur-icici-bank-rupees-23-crore-fake-gold-loan-scam-exposed/articleshow/129950469.cms",
+     "source": "Aggregators & other",
+     "sourceSector": "Private bank",
+     "direction": "Subject — victim",
+     "dir": "neg",
+     "time": "2mo ago",
+     "sev": 0.6,
+     "corr": 1.0,
+     "vel": 0.9,
+     "stg": 1.2,
+     "dec": 0.66,
+     "stage": "probe",
+     "quarantined": true,
+     "corroboration": [
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (1 article(s))",
+      "Resolved entity → ICICI Bank",
+      "Classified: Controversy · Financial integrity · probe",
+      "Corroborated across 1 source class(es)",
+      "Quarantined (trust cell below 0.5)"
+     ],
+     "audit": [
+      {
+       "time": "2mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-ICICIBANK-1010"
+      },
+      {
+       "time": "2mo ago",
+       "actor": "Trust tollgate",
+       "action": "Quarantined (low trust)",
+       "id": "TG-2010"
+      }
+     ]
+    },
+    {
+     "id": "icicibank-11",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "SBI के बाद अब ICICI बैंक ने भी TCS को छोड़ा पीछे , बनी देश की 5वीं सबसे बड़ी मार्केट वैल्यू वाली कंपनी",
+     "desc": "ICICI Bank overtook TCS to become India's fifth most valuable listed company by market capitalisation.",
+     "url": "https://hindi.moneycontrol.com/news/markets/after-sbi-now-icici-bank-surpasses-tcs-to-become-india-5th-most-valuable-company-in-stock-market-2368451.html",
+     "source": "Business press",
+     "sourceSector": "Private bank",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "4mo ago",
+     "sev": 0.4,
+     "corr": 1.15,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.45,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (2 article(s))",
+      "Resolved entity → ICICI Bank",
+      "Classified: Momentum · Financial",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "4mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-ICICIBANK-1011"
+      },
+      {
+       "time": "4mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Private bank)",
+       "id": "TG-2011"
+      }
+     ]
+    }
+   ]
   },
   "bajfinance": {
    "name": "Bajaj Finance",
