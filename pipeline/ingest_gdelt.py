@@ -60,7 +60,9 @@ def build_query(aliases):
 
 def fetch(url):
     last_err = None
-    for attempt in range(MAX_RETRIES):
+    attempt = -1
+    while True:
+        attempt += 1
         try:
             req = urllib.request.Request(url, headers={"User-Agent": "algo8-news-to-insight/0.1"})
             with urllib.request.urlopen(req, timeout=60) as r:
@@ -71,10 +73,20 @@ def fetch(url):
             return json.loads(body) if body.strip() else {}
         except urllib.error.HTTPError as e:
             last_err = e
-            # GDELT 429s aggressively; back off long and progressively
-            time.sleep(60 * (attempt + 1) if e.code == 429 else 2 ** attempt * 2)
+            if e.code == 429:
+                # GDELT cooldowns can run tens of minutes — wait forever, in
+                # 10-minute beats after the first few short tries, and stay loud.
+                wait = min(600, 60 * (attempt + 1))
+                print(f"    429 cooldown, waiting {wait}s (attempt {attempt + 1})", flush=True)
+                time.sleep(wait)
+                continue
+            if attempt >= MAX_RETRIES:
+                break
+            time.sleep(2 ** attempt * 2)
         except Exception as e:  # noqa: BLE001 - retry any transport/parse error
             last_err = e
+            if attempt >= MAX_RETRIES:
+                break
             time.sleep(2 ** attempt * 2)
     raise RuntimeError(f"GDELT fetch failed after {MAX_RETRIES} tries: {last_err}\n{url}")
 

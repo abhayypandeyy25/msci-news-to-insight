@@ -1551,27 +1551,27 @@ window.FI_DATA = {
    "scores": {
     "controversy": 0,
     "risk": 0,
-    "esg": 0,
-    "momentum": 0,
-    "catalyst": 0,
-    "sentiment": 0
+    "esg": 6,
+    "momentum": 8,
+    "catalyst": 20,
+    "sentiment": 4
    },
-   "trend": 0,
-   "quarantined": 0,
-   "narrative": "Bajaj Finance: no material corroborated events this window.",
+   "trend": 5,
+   "quarantined": 1,
+   "narrative": "Bajaj Finance: The board approved a plan to raise Rs 10,000 crore, putting the stock in focus ahead of the June 29 session — lifting the opportunity side. A report said two internal candidates are in the running for the CEO role, with a shortlist expected to go to the RBI by August — lifting the opportunity side. 1 low-trust item(s) remain quarantined pending corroboration.",
    "history": [
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50
+    54,
+    53,
+    53,
+    53,
+    52,
+    53,
+    52,
+    52,
+    52,
+    52,
+    52,
+    57
    ],
    "indexHistory": {
     "controversy": [
@@ -1603,32 +1603,32 @@ window.FI_DATA = {
      0
     ],
     "esg": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     9,
+     8,
+     8,
+     8,
+     8,
+     7,
+     7,
+     7,
+     6,
+     6,
+     6,
+     6
     ],
     "momentum": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     14,
+     13,
+     12,
+     12,
+     11,
+     11,
+     10,
+     10,
+     9,
+     9,
+     8,
+     8
     ],
     "catalyst": [
      0,
@@ -1642,25 +1642,449 @@ window.FI_DATA = {
      0,
      0,
      0,
-     0
+     20
     ],
     "sentiment": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     5,
+     4,
+     3,
+     3,
+     2,
+     2,
+     2,
+     1,
+     1,
+     1,
+     5,
+     4
     ]
    },
-   "articleCount": 0,
-   "events": []
+   "articleCount": 13,
+   "events": [
+    {
+     "id": "bajfinance-0",
+     "index": "catalyst",
+     "pillar": "Corporate",
+     "title": "Stock in Focus : ₹10000 करोड़ जुटाने की योजना , बोर्ड ने भी दी खास मंजूरी , 3 वजहों से 29 जून को फोकस में रहेग",
+     "desc": "The board approved a plan to raise Rs 10,000 crore, putting the stock in focus ahead of the June 29 session.",
+     "url": "https://hindi.moneycontrol.com/news/markets/stock-in-focus-iifl-finance-share-price-may-move-fast-as-it-plans-rupees-10000-crore-fund-raise-board-also-ups-borrowing-limits-2415186.html",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "1d ago",
+     "sev": 0.6,
+     "corr": 1.0,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.99,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (1 article(s))",
+      "Resolved entity → Bajaj Finance",
+      "Classified: Catalyst · Corporate",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "1d ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-BAJFINANCE-1000"
+      },
+      {
+       "time": "1d ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2000"
+      }
+     ]
+    },
+    {
+     "id": "bajfinance-1",
+     "index": "catalyst",
+     "pillar": "Corporate",
+     "title": "MC Exclusive | Two insiders could be in the running to fill CEO role ; list could go to RBI by August",
+     "desc": "A report said two internal candidates are in the running for the CEO role, with a shortlist expected to go to the RBI by August.",
+     "url": "https://www.moneycontrol.com/banking/mc-exclusive-kotak-bank-two-insiders-likely-in-the-running-to-fill-ceo-s-role-list-could-go-to-rbi-by-august-article-13960117.html",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "2d ago",
+     "sev": 0.55,
+     "corr": 1.0,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.98,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (1 article(s))",
+      "Resolved entity → Bajaj Finance",
+      "Classified: Catalyst · Corporate",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "2d ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-BAJFINANCE-1001"
+      },
+      {
+       "time": "2d ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2001"
+      }
+     ]
+    },
+    {
+     "id": "bajfinance-2",
+     "index": "esg",
+     "pillar": "Governance",
+     "title": "Like banks , leadership rotation rule may apply to large NBFCs",
+     "desc": "A report said the RBI may extend bank-style leadership rotation rules to large NBFCs, raising succession questions for Bajaj Finance's long-serving management.",
+     "url": "https://economictimes.indiatimes.com/industry/banking/finance/like-banks-leadership-rotation-rule-may-apply-to-large-nbfcs/articleshow/129353555.cms",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Subject",
+     "dir": "neg",
+     "time": "3mo ago",
+     "sev": 0.5,
+     "corr": 1.0,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.55,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (3 article(s))",
+      "Resolved entity → Bajaj Finance",
+      "Classified: Esg · Governance",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "3mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-BAJFINANCE-1002"
+      },
+      {
+       "time": "3mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2002"
+      }
+     ]
+    },
+    {
+     "id": "bajfinance-3",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "Bajaj Finance shares : Why stock fell 20 % in a month ; valuation not compelling , says MOFSL",
+     "desc": "Motilal Oswal said Bajaj Finance's valuation is not compelling after the stock fell 20% in a month.",
+     "url": "https://www.businesstoday.in/markets/stocks/story/bajaj-finance-shares-why-stock-fell-20-in-a-month-valuation-not-compelling-says-mofsl-521969-2026-03-24",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Subject",
+     "dir": "neg",
+     "time": "3mo ago",
+     "sev": 0.45,
+     "corr": 1.0,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.57,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (1 article(s))",
+      "Resolved entity → Bajaj Finance",
+      "Classified: Momentum · Financial",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "3mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-BAJFINANCE-1003"
+      },
+      {
+       "time": "3mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2003"
+      }
+     ]
+    },
+    {
+     "id": "bajfinance-4",
+     "index": "sentiment",
+     "pillar": "Sectoral",
+     "title": "For Tata Capital , narrowing profitability gap with Bajaj Finance is a tough task",
+     "desc": "An analysis said Tata Capital faces a tough task narrowing its profitability gap with Bajaj Finance, underscoring Bajaj Finance's sector-leading returns.",
+     "url": "https://www.livemint.com/market/mark-to-market/tata-capital-stock-bajaj-finance-nbfc-stocks-11782113415410.html",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Benchmark",
+     "dir": "pos",
+     "time": "1w ago",
+     "sev": 0.2,
+     "corr": 1.0,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.85,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (1 article(s))",
+      "Resolved entity → Bajaj Finance",
+      "Classified: Sentiment · Sectoral",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "1w ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-BAJFINANCE-1004"
+      },
+      {
+       "time": "1w ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2004"
+      }
+     ]
+    },
+    {
+     "id": "bajfinance-5",
+     "index": "momentum",
+     "pillar": "Strategic",
+     "title": "MC Exclusive | Want Bajaj Finance to be known as a tech company in finance biz , say Rajeev Jain , VC & MD",
+     "desc": "Rajeev Jain, VC & MD, said Bajaj Finance wants to be known as a technology company in the finance business.",
+     "url": "https://www.moneycontrol.com/banking/want-bajaj-finance-to-be-known-as-a-tech-leader-in-finance-biz-say-rajeev-jain-article-13867798.html",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "3mo ago",
+     "sev": 0.4,
+     "corr": 1.0,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.32,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (2 article(s))",
+      "Resolved entity → Bajaj Finance",
+      "Classified: Momentum · Strategic",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "3mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-BAJFINANCE-1005"
+      },
+      {
+       "time": "3mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2005"
+      }
+     ]
+    },
+    {
+     "id": "bajfinance-6",
+     "index": "sentiment",
+     "pillar": "Forward signal",
+     "title": "बजाज फाइनेंस में 2 साल का निवेश कितना सही ? विशेषज्ञ ने बताया कब करें एंट्री और कब लें मुनाफा",
+     "desc": "A market expert discussed entry and profit-booking levels for a two-year investment in Bajaj Finance.",
+     "url": "https://www.sharemanthan.in/technical-tips/462-advice/79572-how-sound-is-a-two-year-investment-in-bajaj-finance",
+     "source": "Aggregators & other",
+     "sourceSector": "NBFC",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "today",
+     "sev": 0.15,
+     "corr": 1.0,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 1.0,
+     "stage": null,
+     "quarantined": true,
+     "corroboration": [
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (1 article(s))",
+      "Resolved entity → Bajaj Finance",
+      "Classified: Sentiment · Forward signal",
+      "Corroborated across 1 source class(es)",
+      "Quarantined (trust cell below 0.5)"
+     ],
+     "audit": [
+      {
+       "time": "today",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-BAJFINANCE-1006"
+      },
+      {
+       "time": "today",
+       "actor": "Trust tollgate",
+       "action": "Quarantined (low trust)",
+       "id": "TG-2006"
+      }
+     ]
+    },
+    {
+     "id": "bajfinance-7",
+     "index": "sentiment",
+     "pillar": "Forward signal",
+     "title": "HDFC Bank , ICICI Bank , SBI , Bajaj Finance , Kotak Bank shares offer up to 41 % upside ; fresh target prices",
+     "desc": "Brokerages issued fresh target prices implying up to 41% upside for large financials including Bajaj Finance.",
+     "url": "https://www.businesstoday.in/markets/stocks/story/hdfc-bank-icici-bank-sbi-bajaj-finance-kotak-bank-shares-offer-up-to-41-upside-fresh-target-prices-522027-2026-03-24",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "3mo ago",
+     "sev": 0.2,
+     "corr": 1.0,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.11,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (1 article(s))",
+      "Resolved entity → Bajaj Finance",
+      "Classified: Sentiment · Forward signal",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "3mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-BAJFINANCE-1007"
+      },
+      {
+       "time": "3mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2007"
+      }
+     ]
+    },
+    {
+     "id": "bajfinance-8",
+     "index": "sentiment",
+     "pillar": "Entity tone",
+     "title": "Rs 1 lakh crore wiped off ! Bajaj Finance shares tumble 18 % in March so far amid raging Iran - US war",
+     "desc": "Bajaj Finance shares fell about 18% in March, erasing roughly Rs 1 lakh crore of market value amid the Iran-US war driven selloff.",
+     "url": "https://economictimes.indiatimes.com/markets/stocks/news/rs-1-lakh-crore-wiped-off-bajaj-finance-shares-tumble-18-in-march-so-far-amid-raging-iran-us-war/articleshow/129694027.cms",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Subject",
+     "dir": "neg",
+     "time": "3mo ago",
+     "sev": 0.25,
+     "corr": 1.0,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.05,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (2 article(s))",
+      "Resolved entity → Bajaj Finance",
+      "Classified: Sentiment · Entity tone",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "3mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-BAJFINANCE-1008"
+      },
+      {
+       "time": "3mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2008"
+      }
+     ]
+    }
+   ]
   },
   "sbi": {
    "name": "State Bank of India",
