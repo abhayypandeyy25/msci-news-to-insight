@@ -1,6 +1,6 @@
 window.FI_DATA = {
  "generatedAt": "2026-06-30",
- "defaultEntity": "hdfcbank",
+ "defaultEntity": "kotak",
  "window": "Jan–Jun 2026",
  "sectorLabel": "Indian BFSI",
  "matrixSources": [
@@ -2092,118 +2092,747 @@ window.FI_DATA = {
    "sector": "PSU bank",
    "meta": "Indian BFSI · Jan–Jun 2026",
    "scores": {
-    "controversy": 0,
-    "risk": 0,
-    "esg": 0,
-    "momentum": 0,
-    "catalyst": 0,
-    "sentiment": 0
+    "controversy": 68,
+    "risk": 38,
+    "esg": 30,
+    "momentum": 43,
+    "catalyst": 45,
+    "sentiment": 7
    },
-   "trend": 0,
-   "quarantined": 0,
-   "narrative": "State Bank of India: no material corroborated events this window.",
+   "trend": 1,
+   "quarantined": 7,
+   "narrative": "State Bank of India: SBI and the Telangana government contested ownership of a five-acre Raidurg land parcel in court, straining the bank's relationship with the state government — driving the controversy index. The Income Tax Department raised a ₹6,338 crore tax demand on State Bank of India for AY 2023-24, which the bank is disputing in appeal — driving the controversy index. 7 low-trust item(s) remain quarantined pending corroboration.",
    "history": [
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50
+    43,
+    42,
+    39,
+    36,
+    36,
+    37,
+    38,
+    40,
+    39,
+    40,
+    40,
+    41
    ],
    "indexHistory": {
     "controversy": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     54,
+     54,
+     64,
+     64,
+     63,
+     64,
+     63,
+     65,
+     65,
+     64,
+     67,
+     68
     ],
     "risk": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     29,
+     29,
+     28,
+     34,
+     40,
+     40,
+     39,
+     38,
+     37,
+     36,
+     39,
+     38
     ],
     "esg": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     29,
+     29,
+     31,
+     34,
+     33,
+     32,
+     31,
+     31,
+     30,
+     29,
+     31,
+     30
     ],
     "momentum": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     40,
+     39,
+     38,
+     36,
+     40,
+     39,
+     37,
+     44,
+     42,
+     41,
+     44,
+     43
     ],
     "catalyst": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     31,
+     30,
+     29,
+     32,
+     30,
+     33,
+     36,
+     35,
+     33,
+     38,
+     41,
+     45
     ],
     "sentiment": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     4,
+     3,
+     3,
+     2,
+     2,
+     2,
+     7,
+     6,
+     5,
+     5,
+     4,
+     7
     ]
    },
-   "articleCount": 0,
-   "events": []
+   "articleCount": 209,
+   "events": [
+    {
+     "id": "sbi-0",
+     "index": "controversy",
+     "pillar": "Legal & compliance",
+     "title": "SBI-Telangana face-off Over 5-acre land in Hyd raises stakes for both sides",
+     "desc": "SBI and the Telangana government contested ownership of a five-acre Raidurg land parcel in court, straining the bank's relationship with the state government.",
+     "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxOQXM1MnNnb091S0tFMVd5Uy1pTmZXeXo2U0pYbFo1aHBtOTRld1lNTVVnUEVYLXBidV9LZ1RPOWdvU3VmVFA4SVFfdG51cGlYT3hSVTVCSEVLT3dTeGloMnZqSDB5ekdLVFBZVEtkLVoxQ2kyWGljbVlXZWNYZ1dFeEp1TVBpak9CNVdiMEQ5OUMyby1JMHJxZzdLWWlEN0lRUERrMEpJZ2JQY19KWGdrY241c2VNYnJabnFMMWg2RmdiZ2N1U2M0UkZISGk2WnRxckpRTFZmMldwemxiLXdmZFI4aGXSAesBQVVfeXFMT0JlR0dtOFVHbHpWNTlYVXlwRmRkMWtsWWZYdmx5M2FnRmRBSkpjVGllNkZieDBIRGtqN1I0cS1fTm5HcElxcm5DaUFkMnhPbE9FY2FWSzFPa3ExYldlT3hLcElSOEJuaGJPSmp4RW1KVlFHZ2tTdjZQTG15c0E5bzJ3R0UybXRKcU5KclJpY2hqeGR2SXZIU2hRT3Zoekg1a2hlUWw5bGFaNXZtSzB4Rkw4THdTSTg4MVVLMkZ1VjdDdXVKSHE1STdLRF9KNFFCcnhrSUlQMGQ3enBET3h4QUNDOVpUOGswTG42aw?oc=5",
+     "source": "Business press",
+     "sourceSector": "PSU bank",
+     "direction": "Subject",
+     "dir": "neg",
+     "time": "1d ago",
+     "sev": 0.6,
+     "corr": 1.15,
+     "vel": 1.1,
+     "stg": 1.4,
+     "dec": 0.99,
+     "stage": "charge",
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "General & regional press",
+       "cred": "Medium"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (6 article(s))",
+      "Resolved entity → State Bank of India",
+      "Classified: Controversy · Legal & compliance · charge",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "1w ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-SBIN-1000"
+      },
+      {
+       "time": "1d ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (PSU bank)",
+       "id": "TG-2000"
+      }
+     ]
+    },
+    {
+     "id": "sbi-1",
+     "index": "controversy",
+     "pillar": "Legal & compliance",
+     "title": "State Bank of India faces ₹6,338 crore tax demand",
+     "desc": "The Income Tax Department raised a ₹6,338 crore tax demand on State Bank of India for AY 2023-24, which the bank is disputing in appeal.",
+     "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOR2RrWkZvREJpd3ktcUtjWjNHblVna1FfNXJPVnhLVlFuWDh5OGhGRkpBNkhkbk9iVnRtVGhiZ2wtNzRiM0JmWjRkekU1cTRZVDU0QTFFM1pyZnk0S1UzbUkydC1qaVYzSHVQTkZJTHNjNnN1MUtYODg2V2tKVWpCTElPdDJiUzhYTER1RVBVNlBIMlVJcjNISGZfSTJXVEpxWXdLd1l6Nm5zejlUSmcwZUtsZl9KYm1IemVwMmwyY9IBxgFBVV95cUxPaC1ES1lfcnR6S1JMc1NUemNfRW1odC1VUmFpU1pJWTNhN1E4UGY4TFNlV0tFMnZiMFhkNnZoSEIwdkJJb0p6SDFrV0Y1WFlUOHM0VGpDdjdFa3N3VHpzWWQ4aWRfdmRRYmdKdnBOellxQ0VtS3FaTDFDTEtrZllxMXJiNjNoVzhkNmw2c0F2b2trMGs3V2ExUGh2dDNuZDd6dFpHQ3VRa2NvcTB6UHBSVTZFeDh0TjhibEJsWGpNaERXZnA3Nnc?oc=5",
+     "source": "Business press",
+     "sourceSector": "PSU bank",
+     "direction": "Subject — defendant",
+     "dir": "neg",
+     "time": "3mo ago",
+     "sev": 0.7,
+     "corr": 1.15,
+     "vel": 1.3,
+     "stg": 1.4,
+     "dec": 0.56,
+     "stage": "charge",
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "General & regional press",
+       "cred": "Medium"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (6 article(s))",
+      "Resolved entity → State Bank of India",
+      "Classified: Controversy · Legal & compliance · charge",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "3mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-SBIN-1001"
+      },
+      {
+       "time": "3mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (PSU bank)",
+       "id": "TG-2001"
+      }
+     ]
+    },
+    {
+     "id": "sbi-2",
+     "index": "controversy",
+     "pillar": "Financial integrity",
+     "title": "ED attaches additional assets of Anil Ambani Group worth Rs 3,034 crore in RCom case",
+     "desc": "The ED attached additional Anil Ambani Group assets worth ₹3,034 crore in the RCom loan fraud case, supporting SBI's recovery prospects.",
+     "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxOQk5DUmxMektONkJyYkpkU2dxckN4LU5weEtDSEpOZlJEc3FZcXJ4YWE0OVR3akFiOVhWbmFyUHRvRXd0QWVhSmFyb055SFVNNl9DMWNYc09TbTdjSXZDd2ZHdWlNa2kzSGluaEV2aDNuOE1QSFhlTERWdlF4UjlvNjlUd0I5Wmg4TmhtVWJLcXJQQ1lMSjdTREZMeENvTy1DVGFmV2tHdGV4X2YxNTJqMFBtVlJ0VnNOekMyS2c1ekJnWFhRd2ttSEpYcTRlSXJwZmZlQjdxZ09nVS1mTWh3eTBuaWdGNzTSAewBQVVfeXFMTUxINkQ2VWREaG9tak9YMS1hN0tlbEFzZHVyVHhGaVo3S0hkbVFoWTlDOThtSVlIQzJ3ZXp6U3FEUHRiMWRjQkU4RDVZVFB6WDUzajlSQ0JNSlRMY1h0d0xuczZ6bHdtZGptV19oWE9MX3RoWW5GWU4wSE0xMGZXLUszc0pBSEJWZFBRejdfNFVLclJKY2FUM1NZbFRRcUtDQ0plRUFQZzJlc1k1SWRrRHloV3BqcUlaSTA3SDRiOU1BTWZ6R2wxaU5uMFlQaVFyQlNBY2dyZlpuZTF4TjhfUnQwQlBPeHJGYmFlN28?oc=5",
+     "source": "Business press",
+     "sourceSector": "PSU bank",
+     "direction": "Beneficiary",
+     "dir": "pos",
+     "time": "3d ago",
+     "sev": 0.55,
+     "corr": 1.3,
+     "vel": 0.9,
+     "stg": 1.2,
+     "dec": 0.99,
+     "stage": "probe",
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "General & regional press",
+       "cred": "Medium"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (6 article(s))",
+      "Resolved entity → State Bank of India",
+      "Classified: Controversy · Financial integrity · probe",
+      "Corroborated across 3 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "5mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-SBIN-1002"
+      },
+      {
+       "time": "3d ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (PSU bank)",
+       "id": "TG-2002"
+      }
+     ]
+    },
+    {
+     "id": "sbi-3",
+     "index": "controversy",
+     "pillar": "PR & reputational",
+     "title": "Ram Temple donation scam probe reaches SBI: Did bank suspect something 3 months ago?",
+     "desc": "Reports said SBI had sought removal of staff at the Ram Temple donation counting centre three months before an alleged donation theft came under probe.",
+     "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxNUWJMN1hod3VFTWJYWVV3Q0NxME5NelVnbW81R3JscThGZVMzM2hjRmNsV253S1IxelU2NE9aOU5QdU1qLVZibHpmV1pyU1hTZ1RUc2RvaXlyd2pzaTFXSkptaHUzTmF0aDNqczJsa2E4R1dlRThxUEhIanBnZEdXRUtVUmZRLTdvNlVYODBqWWh4X3F3Y05uc0MwWTJHYXpvNF9VbUI0R0JRWUtZNGluTEYzTG9EN1FHd2NpanVaM3o2Q3N5RWlpTnotdGZKcnlFVXfSAdcBQVVfeXFMTXRyWTFhaEo2ajZkSGtZZ0VRX3RkOHJhZHFRVThKblpJUHN5S3l3WlRtbWdGVWZQRjNtdF95TDZ0SEVHeHFlbWhPckZEcXZ4M1Vadlk3SWR4MGF3VTNJRURDUlBhUTQ4RDFySGZPTklxS0hOSjFsOVV2ZDdTT2dHZXhOYXBCWDFQV3VMT3FFOU1KS2k1Y0w5cmVuTEhDRlc0QnZmY2R0N2NnV1dnWkhyeExmeW95aEo0RzdTMzc4MXpuNnc5M1h0djN4SVBxOWY2ODh0X3lpa28?oc=5",
+     "source": "Business press",
+     "sourceSector": "PSU bank",
+     "direction": "Subject",
+     "dir": "neg",
+     "time": "today",
+     "sev": 0.5,
+     "corr": 1.15,
+     "vel": 1.1,
+     "stg": 1.2,
+     "dec": 1.0,
+     "stage": "probe",
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "General & regional press",
+       "cred": "Medium"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (4 article(s))",
+      "Resolved entity → State Bank of India",
+      "Classified: Controversy · PR & reputational · probe",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "today",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-SBIN-1003"
+      },
+      {
+       "time": "today",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (PSU bank)",
+       "id": "TG-2003"
+      }
+     ]
+    },
+    {
+     "id": "sbi-4",
+     "index": "controversy",
+     "pillar": "Legal & compliance",
+     "title": "SBI moves Supreme Court to revisit verdict barring spectrum from insolvency",
+     "desc": "SBI moved the Supreme Court to review the ruling excluding telecom spectrum from insolvency assets, warning of risks to bank recoveries under the IBC.",
+     "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxNVV82ZEprLXctd3BpMmhOaXNIZzkzS1hwZDFsd0o4SmVuTkN6Y3dRTS1FUlg3MGpoSXpSbXB5Qm1iQ2ZLWENfMFQxcm1GOHdHSjREanFEZTZYRGFXN2lNaFhyYTdlVmJNbVZwLUZCOVBXN1lmczhGOVAtLWVZZmdqRjVzRTdtSG9HbGtsR2FyWnEza21xX1c2MTBQN3Bid2VacldtNHZDZkdmODBycFp4dFFrdWtsdExDa0ZFMlIzRnpCOW5ITDBEQnBIZTFDdFhjajl0aUFacGM3NEpsSmlrVDdPeXDSAesBQVVfeXFMUEFwU05ZdlVFUlR1SVZnWjBJS3JXcTNucUhXTUVaZUtINFVtVmlmbWI1VkhEX2RDejVmNVdxMW1ZYTlwZ2VLY3BGdjd4NUt2OFZUVkNmdG5Kd3hLLUdqTDBsdWVGM3UtMmJPal80eUhMMlBreEUzamlqZmVuMTVUS0lRQjZieDhid0VWUGsxS0dWWjJMMXpwaldVSHhpdWZVUFFrbl9DSHF3eG41ZEtGcGNRLWRGLWV1X3BYODZCOXphQXRjU1hncUI3VkZJV0hyRWpNRGZYWDJXd0VibVJHa2dkeFVNWEdiSWxoNA?oc=5",
+     "source": "Business press",
+     "sourceSector": "PSU bank",
+     "direction": "Subject",
+     "dir": "neg",
+     "time": "2mo ago",
+     "sev": 0.5,
+     "corr": 1.15,
+     "vel": 1.3,
+     "stg": 1.4,
+     "dec": 0.68,
+     "stage": "charge",
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (6 article(s))",
+      "Resolved entity → State Bank of India",
+      "Classified: Controversy · Legal & compliance · charge",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "2mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-SBIN-1004"
+      },
+      {
+       "time": "2mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (PSU bank)",
+       "id": "TG-2004"
+      }
+     ]
+    },
+    {
+     "id": "sbi-5",
+     "index": "controversy",
+     "pillar": "Financial integrity",
+     "title": "Odisha Police arrest SBI staffer in Rs 5.21 crore gold loan fraud",
+     "desc": "SBI staff in Odisha were arrested for a ₹5.21 crore fraud involving loans sanctioned against fake gold.",
+     "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOXzkxUVY5M3NFcW9IQVUxaU83eTl6eXJTZzJpUmVUeGNWNjNWLWJGaEVMVmtEWWY3REc5M3J6WTM2emhWTlV1Z3Y1b1NzNEJQUERNUDdEMnk3YjI2S0doV3ZhM1JHakhUUmVPbVV5bTJMbUp0bS1rZTJHd1ZpU2lRcGxYYkdVY0lTR0g2eGtFQ3VjTUZvbDFqX1JTOXM3M0pTR1VXRVRtYlR4VXBMYnJhQ0c2M1RwY0hDSTN3bkt4M2VvYlBkZmIzONIBzgFBVV95cUxPMXljdy1oVHFWMXhkU2UxUzdSUkxsbFRoeEk1NW13b3dOQklmR2FJUm9VdGFyUThuMllIbDlaY0ZGZUZuQkNOb0VHS0lpRU1YR0RYZ1Exa2ZuQWd2a0I0Y0tYemtRekNZS2pjSVBnZHR5T09MX2ZoZHpsWUZqQjJ0Vjd4cDNVS1FqaTF0R1p0cTNFWkU5b3U1X2ZkME1OcW15NTFRLTdkak9qRVpDUkV0WGhuanJUY2tJbEQ4VUM2ZEd1V2tZV0NjdlU0Z0I5Zw?oc=5",
+     "source": "Business press",
+     "sourceSector": "PSU bank",
+     "direction": "Subject",
+     "dir": "neg",
+     "time": "1mo ago",
+     "sev": 0.45,
+     "corr": 1.15,
+     "vel": 0.9,
+     "stg": 1.4,
+     "dec": 0.86,
+     "stage": "charge",
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "General & regional press",
+       "cred": "Medium"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (3 article(s))",
+      "Resolved entity → State Bank of India",
+      "Classified: Controversy · Financial integrity · charge",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "2mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-SBIN-1005"
+      },
+      {
+       "time": "1mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (PSU bank)",
+       "id": "TG-2005"
+      }
+     ]
+    },
+    {
+     "id": "sbi-6",
+     "index": "risk",
+     "pillar": "Financial",
+     "title": "SBI shares plunge 10% in two days after Q4. Do Morgan Stanley, Citi & Bernstein see a rebound soon?",
+     "desc": "SBI shares fell about 10% over successive sessions as brokerages cut estimates on margin compression following the Q4 FY26 earnings miss.",
+     "url": "https://news.google.com/rss/articles/CBMiiwJBVV95cUxPZWVxeTZpeFhVWmZQNzFvNkNZVmdzVDNhQS1SWW4wMWQxdFFXYk9IUmIxZFhoVU9GUHd5am9ub2lSTjVHNEpuVEZ0a0VsVUt4emV6ZmVIclhNNEVBU25wbmZyWHNQT0NnaDFMUEdYeW1GRHlERExhLWRCOWdVcFdPWGp4YzNkLXR6Njg1TnBGbWYyRF9pTDFUTkItWGFERXhXRE1MNFdtR210QnRkWE03Q2FxU1RJVi1McUduMk5ia0hPWjVhemJrNWxpQUNXeTVMRVhKUDQ1WktYeVA5U1lkdlJJRWRiZmxVbzhWdlZ2ZWwyYmt3NVJqYjlnczRQS3lrWjUxbTB2TTcxMnPSAZACQVVfeXFMTzgyMFdMMlNnc21RRTBhR1NCYVRsSlVxbXgyb1h3aXRZSG1KZFdIUjB2aTVpN0JyYjBhZl94elNMNHowT0JrNVJSWnNLa0xpTDY4N1ltbFF1T1RFTzFZUGM2aHctSUZCM2lZYTNob0ZvYURBVExDZjhrZzVabEFKZFBBQXNGS0IyemVRalREbWRiSHRSVGNoNlhNODVzamlyYlluTUNqRWg3RWZtT0NfNzdzZ3MtaFFlWXdIRG9sbEhUcC1sRU1wb1RGOUFKV0VET0pQZjVoT1dGRFk2LXhLdWNHZmJ5MHlobVpYMzAyUTNUN0NEV3VGOHgxRGpQRHEyTVJsbWlkZVVGSVVZamZlN1k?oc=5",
+     "source": "Business press",
+     "sourceSector": "PSU bank",
+     "direction": "Subject",
+     "dir": "neg",
+     "time": "1mo ago",
+     "sev": 0.55,
+     "corr": 1.15,
+     "vel": 1.1,
+     "stg": 1.0,
+     "dec": 0.76,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (4 article(s))",
+      "Resolved entity → State Bank of India",
+      "Classified: Risk · Financial",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "1mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-SBIN-1006"
+      },
+      {
+       "time": "1mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (PSU bank)",
+       "id": "TG-2006"
+      }
+     ]
+    },
+    {
+     "id": "sbi-7",
+     "index": "catalyst",
+     "pillar": "Corporate",
+     "title": "SBI board to discuss fundraising plans on June 18",
+     "desc": "SBI's board approved raising up to ₹60,000 crore via debt instruments during FY27.",
+     "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOR0VBNk43anVlOEFDZGJwcnJRSXQ1aVdRbkZLTENReUlsVGNPS3BscnVodWcxSm1Ld3A1b05rblNFUEhBVTF4anFSU1psQVpDamZfS2Q3VEI2R3BHNjViaWRiRlEyUnREZlJUWDRIWFoyVVlWakRqTnNXMlM2TXJQeTN1QU84WnhrMWZvNFVITE9aYlhMdWZhcURyVTlsWXdseHlqZXhFNDR1bHk3ZHpyOXdSdUPSAboBQVVfeXFMT1Z5aTBYUFd6aGF3MDFheE15WjNiVGRYcm1nNTdmMGMtcHQxQW0wb0dETHZEdU94N2tvNDg4cGl4SDUwV1ZIOG5EZW4zbFZySHdfaVdSUi01bGVNSDlLMTY2ckRWLUQxMHJSRlBLWjc1ejdDRTdGMzdJS2JUOWh6eUZQSXNlTjhsYmhoTHdkVEdlUnMzRm93T1JHSU9BbGw0UF9LNVZURkRRNEg0akU3MElrd2Q0ZHpWR0xB?oc=5",
+     "source": "Business press",
+     "sourceSector": "PSU bank",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "1w ago",
+     "sev": 0.45,
+     "corr": 1.3,
+     "vel": 1.0,
+     "stg": 1.0,
+     "dec": 0.89,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "General & regional press",
+       "cred": "Medium"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (5 article(s))",
+      "Resolved entity → State Bank of India",
+      "Classified: Catalyst · Corporate",
+      "Corroborated across 3 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "2w ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-SBIN-1007"
+      },
+      {
+       "time": "1w ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (PSU bank)",
+       "id": "TG-2007"
+      }
+     ]
+    },
+    {
+     "id": "sbi-8",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "India’s Top Bank Beats Profit Forecast on Strong Credit Demand",
+     "desc": "SBI's Q3 FY26 net profit rose 24.5% year-on-year to a record ₹21,028 crore on strong loan growth and improving asset quality.",
+     "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPUnkwTXFqdGdiRU53dy1RbmVnamVuMHJ5MVBkWDNZcE5oNEtOWkhuTGpENG81ZTJGazdwOUlIRGRaUEVoSGdzTVd0NHhzdm9WZkZHX0F6OThCNmJIb0ZEYzczR0dreFBDQ1A0VWJIR3hwbVdYUk5uLUZiRmFUZHE3RDFUc0N0SnFkVjB0TW9JR0VmT1p3UnpCNmlOWWRoNVYzbUNkM1NTTWlOUU55M0pONkdSVQ?oc=5",
+     "source": "Agency wires",
+     "sourceSector": "PSU bank",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "4mo ago",
+     "sev": 0.55,
+     "corr": 1.45,
+     "vel": 1.3,
+     "stg": 1.0,
+     "dec": 0.44,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Agency wires",
+       "cred": "High"
+      },
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "General & regional press",
+       "cred": "Medium"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (6 article(s))",
+      "Resolved entity → State Bank of India",
+      "Classified: Momentum · Financial",
+      "Corroborated across 4 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "4mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-SBIN-1008"
+      },
+      {
+       "time": "4mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (PSU bank)",
+       "id": "TG-2008"
+      }
+     ]
+    },
+    {
+     "id": "sbi-9",
+     "index": "controversy",
+     "pillar": "Legal & compliance",
+     "title": "Banks are lenient with big borrowers, harsh with common people: Supreme Court slams SBI while refusing re",
+     "desc": "The Supreme Court criticised SBI for leniency toward large defaulters relative to small borrowers and sought responses in loan write-off fraud pleas.",
+     "url": "https://news.google.com/rss/articles/CBMiqgJBVV95cUxOQlcyaUdaQ1JKc1JlMlVzMllUcmtzelVMSW91UXR5R3lZZnRYWGE5QlFvc3Bjd01nTWxjRnJlMUVRc2tYeDdXN3JsRU1wb0hEa3ppSUUzT1lFR0sxa0ZNS0ZFQU9rM1lBME1VMEVLaEg4c1pxNkdYMHVSdF9XN0NyTENmTHFXc2hMVDF6Z3dtYU9NMENEWUJmeldOMjRHVTdMZW9PQWFNb2J2S0ZDb1pPaE0wREtENGgyby0xRmNJVGFwOTV1Y1M2U2dFX2ZOVjhIUVptOEpSVUdSVDBvWXdDblJrZTRTcGk4anA0ZHZ1VDg1VzBfUFNmeF9QWlpnYW5PdFZUVUJNN1JNT29yLUcycUo5b0hHcVEzYUdwN2ZxLXpOSmQ4ekNkUkJ30gGvAkFVX3lxTE9tQW8td29kVXpFSzZSdGhOZ1pCVlFZSTgzdFpVNHVpYlQydGwzS3F4TGc1TVlpWDRpYjRrWTB5N3ptRzBnWEd0RDBwTDdvcmJycVZ0RktudDVqV1FpYzFXUWhlaHN1S2JiR1JFTmlLVjNuNVFfSUozTnRiZVQtVWRPdzNkX3VtRXZDZHRiYkQ2MXZ2NkZuSXZodURtV3JzVGFfWjB2R0RlVW0yN3FveXJDWGdnVEtxVGppWmh4SVBvRVlXYmtvTHFMXzdiSlhTUldUVFhUa1liSmoxWFhNZGo3bjVaRng3dnIwRllKZTlXU3RJaHp1b1NCeGtDWml3VkFzRHNFM2Y2NlJVd3VLbHdiWHBOM2htQXpYY0dBZnllaTJkR08tdlY5NU1UM056aw?oc=5",
+     "source": "General & regional press",
+     "sourceSector": "PSU bank",
+     "direction": "Subject — defendant",
+     "dir": "neg",
+     "time": "2d ago",
+     "sev": 0.55,
+     "corr": 1.15,
+     "vel": 0.9,
+     "stg": 1.2,
+     "dec": 0.99,
+     "stage": "probe",
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "General & regional press",
+       "cred": "Medium"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (3 article(s))",
+      "Resolved entity → State Bank of India",
+      "Classified: Controversy · Legal & compliance · probe",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "1mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-SBIN-1009"
+      },
+      {
+       "time": "2d ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (PSU bank)",
+       "id": "TG-2009"
+      }
+     ]
+    },
+    {
+     "id": "sbi-10",
+     "index": "catalyst",
+     "pillar": "Corporate",
+     "title": "SBI, Amundi to offload 10% in SBI Funds IPO, no fresh shares to be issued",
+     "desc": "SBI moved to monetise its asset management arm, with SBI and Amundi set to sell about 10% in the SEBI-approved SBI Funds Management IPO.",
+     "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxOdFktTVExazNMQ21XZS1iRjk3RTg4NkpZTXlNbU9EM1hOQU16UnNTeTJSck5obFhla2ZPZThTT2hfTlVCZXAzamo2SjU2RXVBZTVtdmpmSGQ1VmsyWjVOdWxMMERsMURKZmlidU5YbmtSUXY4Q1MwLVhoVmo2MVBPV0k4UVZMZUxna2ExWFROS0lpNDltVnBzSWJwZDNoTzE4RjZjNFJIbUdkTVZ0QUloRGowb3pYbWFRQmkybTRXYmhpS1RaTzZrVFJFbFVIOE92alHSAdcBQVVfeXFMUFVPckRrVU5BVXd4YXZsUkFDTkYwMFJHVkFmbmtBTGd1S3h0QS1YM3U3ZnJ4dElCS0xWQzZHOVd6YklQenZ1SWltTjhMWG11SVFiMEJIVWM4anhPWFlRM1pPeGEteU93a0NrNGVROExnMUh2R0U1RXFYcXp0REJCMWh5ZFJjYTJWY2dudTdFM3REZ2t3M3I1TFFHY1h3UFkzVkFkTXRjWm5iUzdYY0UyLVJxYWM1NDdBVmJ5ZHJDamtyQ3p3Wms0RnhxZUtWbnZ2QWE1bEs1bUk?oc=5",
+     "source": "Business press",
+     "sourceSector": "PSU bank",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "1w ago",
+     "sev": 0.5,
+     "corr": 1.15,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.89,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "General & regional press",
+       "cred": "Medium"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (3 article(s))",
+      "Resolved entity → State Bank of India",
+      "Classified: Catalyst · Corporate",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "3mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-SBIN-1010"
+      },
+      {
+       "time": "1w ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (PSU bank)",
+       "id": "TG-2010"
+      }
+     ]
+    },
+    {
+     "id": "sbi-11",
+     "index": "catalyst",
+     "pillar": "Corporate",
+     "title": "SBI concludes issuance of 3-year $300 m floating rate notes to attract foreign currency deposits",
+     "desc": "SBI raised $300 million via three-year floating rate notes priced at SOFR plus 100 basis points to attract foreign currency deposits.",
+     "url": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxNcno4OF9SbWFDeGprV015V2dGbVB0UGFFOVd5WjdWNS1kZmFTTDJhRzJRREk4QjdxRWlPZmVUQ3FQalRsVnVUdjFxT1dZU0lUMmRDT1A2b3dYQWN3NHk4Mm5hN0xhZG5pZkhfQ0g0X2NLVW5SQTNKb3JvM3lJeW5qeTFJeDNIcXJnd1FfSExiemttRFA2ZndiTW9RWUFpa0pxV1pBTWpJR0QtZHRTQmZPNllFLXZOaE1jeU9FR2ZTRU1RZlZyN1l1a3dUOTIxT3hDaTc4d2N6dGhvMkhxTlpFOGVsQjF1X21aQ21KbkZyamczdXAwR1ZXTlZkLU9vdmvSAYYCQVVfeXFMTjREaGpPR043aWpXbXF5LUp6Z3JpZ2hVdWp0bEE2R21DdU0wT2c2cTJXa2hGQ2FyckF5ZUpFVzlwaTRneF9hR1I1NnpTWHNYSFF4M2QweFdTb1laVmQ3QTE4WEdwX1NDSFBTMjUxSjZZNE5mOWNKemJkeXQ3akx1NC1FOEQ3Rk5DNEZzUU1xdFVvUGtQdjVuQ09xMU9CNFdhYXc4aXdMRFRMVDlEWmJQakxlU0lnSU01RlpNZmY0OGlhQXI4Z0lVcnM1ZUJka3NFUnZyYy0yQ05lS1NLM2VMTjRiZXpqTDgwYTVsNU5kbnFsZkpSeUxyZmxEZmx5dlAwb1hwbFFsZw?oc=5",
+     "source": "Business press",
+     "sourceSector": "PSU bank",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "today",
+     "sev": 0.4,
+     "corr": 1.15,
+     "vel": 1.0,
+     "stg": 1.0,
+     "dec": 1.0,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (3 article(s))",
+      "Resolved entity → State Bank of India",
+      "Classified: Catalyst · Corporate",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "today",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-SBIN-1011"
+      },
+      {
+       "time": "today",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (PSU bank)",
+       "id": "TG-2011"
+      }
+     ]
+    }
+   ]
   },
   "kotak": {
    "name": "Kotak Mahindra Bank",
@@ -2214,7 +2843,7 @@ window.FI_DATA = {
     "controversy": 60,
     "risk": 14,
     "esg": 23,
-    "momentum": 45,
+    "momentum": 44,
     "catalyst": 48,
     "sentiment": 13
    },
@@ -2321,7 +2950,7 @@ window.FI_DATA = {
      8
     ]
    },
-   "articleCount": 189,
+   "articleCount": 188,
    "events": [
     {
      "id": "kotak-0",
@@ -2955,118 +3584,743 @@ window.FI_DATA = {
    "sector": "Private bank",
    "meta": "Indian BFSI · Jan–Jun 2026",
    "scores": {
-    "controversy": 0,
-    "risk": 0,
-    "esg": 0,
-    "momentum": 0,
-    "catalyst": 0,
-    "sentiment": 0
+    "controversy": 22,
+    "risk": 19,
+    "esg": 11,
+    "momentum": 54,
+    "catalyst": 52,
+    "sentiment": 8
    },
-   "trend": 0,
-   "quarantined": 0,
-   "narrative": "Axis Bank: no material corroborated events this window.",
+   "trend": 4,
+   "quarantined": 12,
+   "narrative": "Axis Bank: Axis Bank CFO Puneet Sharma resigned effective August 31 after six years and was subsequently named HDFC Bank's CFO-designate, with no Axis successor announced — driving the catalyst index. Axis Bank's Q4 net profit slipped marginally to about Rs 7,071 crore on lower trading income and higher provisions, missing some estimates — driving the momentum index. 12 low-trust item(s) remain quarantined pending corroboration.",
    "history": [
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50
+    61,
+    60,
+    62,
+    62,
+    64,
+    64,
+    65,
+    64,
+    64,
+    64,
+    64,
+    68
    ],
    "indexHistory": {
     "controversy": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     28,
+     30,
+     29,
+     29,
+     28,
+     27,
+     27,
+     26,
+     25,
+     24,
+     23,
+     22
     ],
     "risk": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     18,
+     18,
+     24,
+     24,
+     23,
+     22,
+     22,
+     21,
+     20,
+     20,
+     19,
+     19
     ],
     "esg": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     18,
+     17,
+     17,
+     16,
+     15,
+     15,
+     14,
+     14,
+     13,
+     12,
+     12,
+     11
     ],
     "momentum": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     51,
+     50,
+     57,
+     57,
+     57,
+     56,
+     57,
+     55,
+     54,
+     53,
+     52,
+     54
     ],
     "catalyst": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     40,
+     39,
+     47,
+     46,
+     48,
+     47,
+     45,
+     44,
+     42,
+     41,
+     43,
+     52
     ],
     "sentiment": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     5,
+     4,
+     3,
+     3,
+     7,
+     6,
+     9,
+     8,
+     7,
+     6,
+     5,
+     8
     ]
    },
-   "articleCount": 0,
-   "events": []
+   "articleCount": 175,
+   "events": [
+    {
+     "id": "axis-0",
+     "index": "catalyst",
+     "pillar": "Corporate",
+     "title": "India's Axis Bank says finance chief Puneet Sharma to exit",
+     "desc": "Axis Bank CFO Puneet Sharma resigned effective August 31 after six years and was subsequently named HDFC Bank's CFO-designate, with no Axis successor announced.",
+     "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOeUZ5X1F1VFkxX3Bla21uYmRRWkV2VFB4VFRMMl9xdGVBUTNkbVR4U1FKZjY4V1FOZWI5T1luajNBTm0yQmp3REwwNDFNaFpuNVlBU2NHaDUyV29OQTJQVXNtdjFnTTFlVkZmQ29kMnIxcERvT1JXVjY1TnZJRXctaVNB?oc=5",
+     "source": "Agency wires",
+     "sourceSector": "Private bank",
+     "direction": "employer",
+     "dir": "neg",
+     "time": "today",
+     "sev": 0.55,
+     "corr": 1.15,
+     "vel": 1.3,
+     "stg": 1.0,
+     "dec": 1.0,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Agency wires",
+       "cred": "High"
+      },
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (6 article(s))",
+      "Resolved entity → Axis Bank",
+      "Classified: Catalyst · Corporate",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "today",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-AXISBANK-1000"
+      },
+      {
+       "time": "today",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Private bank)",
+       "id": "TG-2000"
+      }
+     ]
+    },
+    {
+     "id": "axis-1",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "India's Axis Bank slips on profit miss, $2 billion equity fundraise",
+     "desc": "Axis Bank's Q4 net profit slipped marginally to about Rs 7,071 crore on lower trading income and higher provisions, missing some estimates.",
+     "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOMWtnc2Q2cnJwb1FJeTlwdWFxbkM5VDdmNWJMTHYweGpCclpXQjNTZmtLUkcyc2VaTDlobHNZS1l2b21pYWN1aVo5Q2FzbmowQkthVnlpc3UwNExtQVFTZUxCcnlaenNZX0F4STg5bFR3VFNhQU56V0RVbldXYXRLdjUtNjdxQU9CTEYza2lBdHkwd2dXa3U3TUxXSnQwWVI4ODRkT2hCN3h5SUlTdWc?oc=5",
+     "source": "Agency wires",
+     "sourceSector": "Private bank",
+     "direction": "subject",
+     "dir": "neg",
+     "time": "2mo ago",
+     "sev": 0.5,
+     "corr": 1.45,
+     "vel": 1.3,
+     "stg": 1.0,
+     "dec": 0.69,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Agency wires",
+       "cred": "High"
+      },
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "General & regional press",
+       "cred": "Medium"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (6 article(s))",
+      "Resolved entity → Axis Bank",
+      "Classified: Momentum · Financial",
+      "Corroborated across 4 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "2mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-AXISBANK-1001"
+      },
+      {
+       "time": "2mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Private bank)",
+       "id": "TG-2001"
+      }
+     ]
+    },
+    {
+     "id": "axis-2",
+     "index": "controversy",
+     "pillar": "Legal & compliance",
+     "title": "Case registered against former Reliance Home Finance director in Rs 150 crore Axis Bank fraud case",
+     "desc": "Axis Bank's complaint alleging a roughly Rs 150 crore loan fraud involving a former Reliance group finance director led Mumbai police to register a case against ADAG-linked entities and officials.",
+     "url": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxPWjhQNl8ycDFsUFlZRkRQUXJKUTJMWEgtMHpQNTVfTldabUN4NWM4MkFzeDZTZElmOGhsUXh1YmlTYlNCZElfb2ZKQkhLYXRhSTZ0X3JUZG5zQXJWbXR1UVVmNFNzUWFfSzhPMFhrRFRaRWhmbWtpM21raUZob3k3b3U3T1JYWjYyS2lIMW9uUXpVc3dyQmdTclRMLUt5T2hyRVo5bkMzUU83ZGdyQkVFQ2t3LU5URmFrNVByblNSTkI4b2NDNndrMExsenBwY3BBVUZTV3V5SUFwd3h4NVlxeUNjY2hzQi1lMWtJZFNHelowM2la?oc=5",
+     "source": "Agency wires",
+     "sourceSector": "Private bank",
+     "direction": "complainant",
+     "dir": "neg",
+     "time": "1mo ago",
+     "sev": 0.5,
+     "corr": 1.45,
+     "vel": 0.9,
+     "stg": 1.2,
+     "dec": 0.82,
+     "stage": "probe",
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Agency wires",
+       "cred": "High"
+      },
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "General & regional press",
+       "cred": "Medium"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (6 article(s))",
+      "Resolved entity → Axis Bank",
+      "Classified: Controversy · Legal & compliance · probe",
+      "Corroborated across 4 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "4mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-AXISBANK-1002"
+      },
+      {
+       "time": "1mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Private bank)",
+       "id": "TG-2002"
+      }
+     ]
+    },
+    {
+     "id": "axis-3",
+     "index": "catalyst",
+     "pillar": "Corporate",
+     "title": "Axis Bank raises $800 million through dual bond sale",
+     "desc": "Axis Bank raised $800 million through a dual-tranche dollar bond sale under its GMTN programme.",
+     "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPelFucXVUNGdWaHpHbzBONDN2SkhZRWpDRVdfWFJuUEk1b1hZYmVYRkZXTHk3M25PVEV2aEdKWDFEU09pNVkwR2xZZGJxM29SdVpfNDlXdlZsRU92Yy1aakRRVEpfcEJRVDFpYm9mNzRWQ1B5d2RWZ21BZGMtdzlJeXhGNWQ4ZE85RHZQYUxEUk1XZTR3M2trUHNDV1lIczlwb1hyTXgyZ3JHdnVKRFk4M2NWOERXdHFpU2lB0gHAAUFVX3lxTE5tbExSM0twY0RVN25ZNzJnVTRWWVJzT3ROb3JibVJTTTJnbWhrU044QjRQUS1CMlB0S1lfZ2RHWGJWUVJWXzc4dVVjeWdSUEw0WnRkaGoyLS13SXV5R1FxTVVFVGtUdVQzYzJLX0pDZWFMMlRodVhGbndacjNCRmFRRHVDUC1rTjlubG83V1UwYVJiUDd1c21neGUyU1kyR211Mk1fcURLSkRnVEZ5cThib1ZCUTR3MUM3Rk82cjZUaw?oc=5",
+     "source": "Business press",
+     "sourceSector": "Private bank",
+     "direction": "issuer",
+     "dir": "pos",
+     "time": "5d ago",
+     "sev": 0.45,
+     "corr": 1.15,
+     "vel": 1.2,
+     "stg": 1.0,
+     "dec": 0.94,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (5 article(s))",
+      "Resolved entity → Axis Bank",
+      "Classified: Catalyst · Corporate",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "6d ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-AXISBANK-1003"
+      },
+      {
+       "time": "5d ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Private bank)",
+       "id": "TG-2003"
+      }
+     ]
+    },
+    {
+     "id": "axis-4",
+     "index": "catalyst",
+     "pillar": "Corporate",
+     "title": "Axis Bank Declares Final Dividend; Approves Raising Rs 55,000 Crore Via Debt, Equities",
+     "desc": "Axis Bank's board approved raising up to Rs 55,000 crore via debt and equity for FY27, alongside a final dividend.",
+     "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOckN0V3liWGhEdnhETlJzT0lqX3hyVjJJSlZFbWlWb19VeF9ZalgtbTFPTHRnRUktdFZMQVZFQTM3NDBUdHBxcDl6OEh0bXpnalJSb2ViNVFvZk9wLVZrVkNzeEJONGxSdXdSVUFoS0VKMUgybHdEQU51ZDI2RHZFQ0t3dXBlbHBOdFhJUzNneTRTQXd1Q1lwZWczQV9MY3k4TGFPNWJMT2wzUXZMSUNtb3NXOU85UzR5WGNhRXZDY1NQYVlJYkVZ0gHPAUFVX3lxTE53MnBLQWpVYnFGcXdWRG9HcnlfOVgxZ3ZwUkJYZGFsRmV1dVdvcmR0UFhncEVTWlhwY1BreW1seVM2cXRrcldncHNGWEU2T0Z5U3ZjNkxpNnZHLWEzQjdRR1Z6d0I2RnBvaW81R2JZemVqUGlHUWdXa195cWVyT2U4WlBiNlZqXzlrZzAwUWpydDRuXzB1MHdUZnhSbzRWUGVqMmFINEZ5LWJMVVJDX2t6RFZmcUlIUDBpLXN6V3I0NnlqRjJMNXdDSk9reWNZMA?oc=5",
+     "source": "Business press",
+     "sourceSector": "Private bank",
+     "direction": "issuer",
+     "dir": "pos",
+     "time": "4d ago",
+     "sev": 0.5,
+     "corr": 1.15,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.95,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (3 article(s))",
+      "Resolved entity → Axis Bank",
+      "Classified: Catalyst · Corporate",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "2mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-AXISBANK-1004"
+      },
+      {
+       "time": "4d ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Private bank)",
+       "id": "TG-2004"
+      }
+     ]
+    },
+    {
+     "id": "axis-5",
+     "index": "catalyst",
+     "pillar": "Corporate",
+     "title": "Axis Bank hikes stake in Axis Max Life Insurance to 19.9%",
+     "desc": "Axis Bank received RBI approval and raised its stake in Axis Max Life Insurance to 19.99%, with plans advancing to list the life insurance JV.",
+     "url": "https://news.google.com/rss/articles/CBMijgJBVV95cUxPcmxLaHZHR1J6MkFOYkRWaWhLUzhkbU50aGs3VThIVnVDVjh0Mk9VNzFiZXpfN3NiMVhQWXR4Qms5cmdqWDFqUXl6YjF6QTNIcmJ2OVdoeDFOOUY1YTd3UFVndWdpU2xfd0lWWVVhc0RyZHR0SzFqdnZ3Szg1Z3hXR1A2V1B0d3diUmlFSEc4QXFqM1dQYmpyd0I5WEY0NzFfV2VZeUp6dmR1Q0Nlc0JqQW9LYURjQnRoVHBFbzBuOWw4VmRod3U1S1dMNERJY3VZQVlRNzJRbW04NDdoSWo4cXh4d1ZYdXFWTDkxdnhUWmZfNlVYaFNFdVVKWlNvNldqd2dyS3B4ckI0eW5xTEHSAZMCQVVfeXFMTTRVblNKWWtoNjZ2cjlGNF9KLV9zM1JXVFJudkpvUTUwOVh5ell2dzBodXZMNVlFRTJFV3FveXBLc0ttd3lJdTZvcVdoQThtZzBldjZISEZXbC1TaWI0R2Z6RkoxMDZhcnlFWHRIMzVsN2loM21PaHZTUmoxcXRBSGZteTB3a1NtV1VJUHlWWTFHZVptV0dBZmRfRTNWb0lMZ0ZfaTE2WmM0S2hoQmc5M3AyVG9hSDlDQ2FYNzZGbVF6dVAxUGRMRUt6RlpqSWZST2lscWJfdDZ2ZWhiNUVJOF9PdTVoVmZ4ZEtTUGIyWHJJTnllTkNsMks2ejd1VkRSTTNTNzF5NzNqODBsdzRpMlNkMms?oc=5",
+     "source": "Business press",
+     "sourceSector": "Private bank",
+     "direction": "parent",
+     "dir": "pos",
+     "time": "4w ago",
+     "sev": 0.45,
+     "corr": 1.3,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.72,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "General & regional press",
+       "cred": "Medium"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (4 article(s))",
+      "Resolved entity → Axis Bank",
+      "Classified: Catalyst · Corporate",
+      "Corroborated across 3 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "3mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-AXISBANK-1005"
+      },
+      {
+       "time": "4w ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Private bank)",
+       "id": "TG-2005"
+      }
+     ]
+    },
+    {
+     "id": "axis-6",
+     "index": "catalyst",
+     "pillar": "Corporate",
+     "title": "Axis Bank hires McKinsey veteran as AI officer to drive enterprise-wide push",
+     "desc": "Axis Bank appointed McKinsey veteran Namrata Dubashi as its first chief AI officer.",
+     "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxQcGR4RTZ6VFktYXcwX0MwWlJyZTZvbThlYzlHbHM2WUtWaGEwZkF3cGVwTUpGVmRYTnFIVUdjZ19PQ0NKcUlGVWRGNG9wWENyR2RialZrY21GbElpVlNiOEpITGRpYUpJSmRaQ2RNYWRKQ0w0WUpSWHVPUS1BWHltci1HMlVhYlJZbW9heUZZekJ6dVFwWnFCMDFpSlRwUTAtY1JZSTROQ1BKYmZBTHZZaHg5Y09NYU9fc0J5R3ctUjVxbEtVbXpCU2Q4VzRkYzRpT2fSAdcBQVVfeXFMTV9RR0t1TERRdEJ2ajBiTmtRSlZDalVZR3R2aXIxaEFIUmJWSjdiWTNBbGRZZGxGWGRKRGhUSFYwcmhpTDJQOWtOTndtMmRzNkpOZHpCTUlvOTdzeXZvNGlhVEhQQURhUHNuUjZJMEZRWWVhWXFoUThaSk5ueWJVcE1hZ1NhV0IzdWk5NEhreFo0akVqbFMtaEpsRzFQR25DWkJQajZLUUtnVzFDSlg1cWlSc1UwWVo4SlBLX2VNRXZHVDR6cF9CRTFwekEyc29mSklQQ256aG8?oc=5",
+     "source": "Business press",
+     "sourceSector": "Private bank",
+     "direction": "employer",
+     "dir": "pos",
+     "time": "5d ago",
+     "sev": 0.35,
+     "corr": 1.15,
+     "vel": 1.0,
+     "stg": 1.0,
+     "dec": 0.94,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (3 article(s))",
+      "Resolved entity → Axis Bank",
+      "Classified: Catalyst · Corporate",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "1w ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-AXISBANK-1006"
+      },
+      {
+       "time": "5d ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Private bank)",
+       "id": "TG-2006"
+      }
+     ]
+    },
+    {
+     "id": "axis-7",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "India's Axis Bank posts surprise rise in quarterly profit on healthy loan growth",
+     "desc": "Axis Bank reported Q3 net profit up about 3% YoY to Rs 6,490 crore on healthy loan growth with stable asset quality.",
+     "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQN1ByYTdIMDg5VlBZSXNzSDBOSkJGZllUWEJJcjNleG5iNlRpdWtmNm5vOExsdW5SY01EWGF4cFl2a1drZFJPbjVjN0hGYzllX0ZIbDh0a01JM0ZOZDhCYUtua2tNZUlIMkY3VHkwNkprRDhzWDlxa2pFNjZNeVRBYjVHNF9yakE3cFRjQkdDSGIySGMxNTNmVm05RnM2cmtiTTBV?oc=5",
+     "source": "Agency wires",
+     "sourceSector": "Private bank",
+     "direction": "subject",
+     "dir": "pos",
+     "time": "5mo ago",
+     "sev": 0.5,
+     "corr": 1.3,
+     "vel": 1.3,
+     "stg": 1.0,
+     "dec": 0.41,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Agency wires",
+       "cred": "High"
+      },
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "General & regional press",
+       "cred": "Medium"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (6 article(s))",
+      "Resolved entity → Axis Bank",
+      "Classified: Momentum · Financial",
+      "Corroborated across 3 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "5mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-AXISBANK-1007"
+      },
+      {
+       "time": "5mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Private bank)",
+       "id": "TG-2007"
+      }
+     ]
+    },
+    {
+     "id": "axis-8",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "Axis Bank sees loan growth outpacing industry, margins improving",
+     "desc": "Axis Bank management guided for loan growth ahead of industry while seeking an optimal balance with margins.",
+     "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPcmwzMVdDMjRjNnJSZllPcGpkT0VGVzcwYThOQUVyVGl5bjRDTDdBdmt2VF9reUtkTGFiamxJVXlUbGtLcVVZbXhxNzM3RkNuaWowbXFPRXJ4ckZMTU1nQi1wOVpzTlpCSFRHc3M5cFI1NmZULVJvMVhiLWlmdm1IazE2RmZjVk40MkdNWC00S2lRLTBEVUdRNWo0Ylh6X0ZKb2pjNFVfYWVxU0tPUkZBRnd2U0xQbW05UFA2N2Q4V2NybnNTN1J3N0FTT0FGbUwtZFHSAdcBQVVfeXFMUHdzeFNMeGd3N3dQS3BOX2lYZXpsUXNxZmFZak83NkVUUUNOaUJOaE8wcWx1TXBOUnBaU3hGejdOVHY2TmtsQWVuTWRMU0poNTIzMjNsN0ZoUVZLSEJlblctTDEtWC1wYVd2OXo5MTNDQUVHLVZBemw5LVRKeDIxYVNsSDJPUkp6aGFTNjBaUHZLZ3FMRGJVb1FCRXdzajdkbWJzSlE4YnI3RG5oQVdSR19qbHNpem95UU9LRC1oS09CTENJR18zLThicXJVb2hPMTVKbUVWbnM?oc=5",
+     "source": "Business press",
+     "sourceSector": "Private bank",
+     "direction": "subject",
+     "dir": "pos",
+     "time": "4d ago",
+     "sev": 0.4,
+     "corr": 1.0,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.98,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (2 article(s))",
+      "Resolved entity → Axis Bank",
+      "Classified: Momentum · Financial",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "4mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-AXISBANK-1008"
+      },
+      {
+       "time": "4d ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Private bank)",
+       "id": "TG-2008"
+      }
+     ]
+    },
+    {
+     "id": "axis-9",
+     "index": "momentum",
+     "pillar": "Strategic",
+     "title": "Axis Bank plans 500 new branches, targets presence in 700 districts in FY27",
+     "desc": "Axis Bank plans about 500 new branches and a presence in 700 districts in FY27.",
+     "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQQW1hbmJxRUVlWlBzLUVGWHBZRk0zTFh2aHhzWU1fWXoyTG5zSzl3QUhMcVZhY1Zla1psU041SFk4anFOZ1B0OFBvSE1MelA4cnA4Z0NWakZmWFdNVi0ya1VucnhhcTNiY3I5VmNxcjQ4cWcxdm9aU0s0UUJGS29HMHYwMDB2Mkl3akRiSDFZUzJnTkN1WTNydFRKVFEtZXpXUXdfVHhDNGRxQW84UlpTQlowWkVYSW1OWk03TU5MYk9ZY0xOM1o5UHpMM19RUUlmQV90THBZMTRIbjRSbnfSAeMBQVVfeXFMTlh3NEJWZi1lWlVTcUNqczY3MGRVZ2hwRkRrbHJrRVVGTm9ZSFF3WTBPNkxoU1BRaW05VG5tQjFRSF9VeDM1N2g5bHRDMktVUjd1a2RXZzVRY1ZIVGpCZy02SEJFbmduU1c3QndiWjhxLXhtMmplOGFoMzM4eVJoZkxxMW52Z0dOSGlOU1Z2U0w1dWZ2Q2ItWEd3M3c4bHFVbE5mY0Vwa1pteEQxaEdSaHR0TElMVzV2cTc4dVpvZmF0d3NVaWdaSzYwYVNfVE1fNjIyMWJidmZkRUI1T00yMEVab2s?oc=5",
+     "source": "Business press",
+     "sourceSector": "Private bank",
+     "direction": "subject",
+     "dir": "pos",
+     "time": "6d ago",
+     "sev": 0.4,
+     "corr": 1.0,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.93,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (2 article(s))",
+      "Resolved entity → Axis Bank",
+      "Classified: Momentum · Strategic",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "1mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-AXISBANK-1009"
+      },
+      {
+       "time": "6d ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Private bank)",
+       "id": "TG-2009"
+      }
+     ]
+    },
+    {
+     "id": "axis-10",
+     "index": "risk",
+     "pillar": "Financial",
+     "title": "Axis Bank says Rs 2,001 crore one-time provision buffer created against identified pool of assets",
+     "desc": "Axis Bank created a one-time provision buffer of about Rs 2,001 crore against an identified pool of assets amid West Asia-related uncertainty.",
+     "url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxPVDB0RFIxNzQwTHNDYUtiVFJFMVJ2VW5wTWVDZjFwNU9Sa1V1dFFieHJKSlYxYVMxRnREVzcwVW9TYkU2dTNOdE5lb0JLdnZDT2RBZU1nQlp3VGlON1lnVHhKYnpfLTBHUmtKY0JvUVFYbk5iaWRYcmFjR21JMFFyaXA5NmJnRjgxWmtLR2Y0YS1TWWFEX0JVSmtUSzJzX1dnT21qSEFKaUN5Um9DMTE3S3pMeEY2XzBUa2hzX2YwMnNxVTZseEpRbWtvU2ZycjZidlByS0ZwMVBmNjR5UGIzem1WZXV5aDE4cG9LQXR4QmxsZ9IB9wFBVV95cUxPVG82eWJ1UTFZLVRBaHg0QjB4czNJeEtTVlBwdEt3T294ZGNNY2hMXy1FcG9OQ2VKRTh6UC1PYW1oRkYwWjBYQVpEX0JxVnRBLTg3OWwxVWk5WVN2VjhZa2luRVg4ZWhwdEhwNGhqSVFEQ1NCdjBjQ2FZZ29CblRGMlh3bGRpQ3M5dFFKeGtaekItcDVvUlRUYi13TnJHUUNZbjNuX1Vic2VWOWpkMV9nbW5DNDVUVjhhdTJ5aEFVRklVcjM1aHNxNzhQWjBRMm4xSEp0Zi1jNVlfclM3X2dzbm42MXFuU0ctMWNGZ2JIYVNVcHpVMThv?oc=5",
+     "source": "Business press",
+     "sourceSector": "Private bank",
+     "direction": "subject",
+     "dir": "neg",
+     "time": "2mo ago",
+     "sev": 0.45,
+     "corr": 1.0,
+     "vel": 1.0,
+     "stg": 1.0,
+     "dec": 0.69,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (3 article(s))",
+      "Resolved entity → Axis Bank",
+      "Classified: Risk · Financial",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "2mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-AXISBANK-1010"
+      },
+      {
+       "time": "2mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Private bank)",
+       "id": "TG-2010"
+      }
+     ]
+    },
+    {
+     "id": "axis-11",
+     "index": "catalyst",
+     "pillar": "Corporate",
+     "title": "Axis Finance gets Rs 2,250 crore infusion from Axis Bank, Kedaara Capital",
+     "desc": "Axis Finance is raising Rs 2,250 crore from Axis Bank and Kedaara Capital, valuing the NBFC at over $1.5 billion.",
+     "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQMGZ4Z0lNQjdrYnFtTHZFdDZuaXpGdDk5cncyYlVoN21tM1BucHdpT2NlVzZOLWN2SXhfUkFvVnVkWGpvbEFjcWo1OEZEbjh0eXJ0cTNFbVlVeDVYdjF3TFdXZmZnZkVWRVJNSGxVMkNVSXVSUThTMURVbVgzN1VKRmE1SUNlNERJQW9zTzRvQ1BISFdpaXRTMXFVcm1VWl9aVGRtUERuVVF1TTVHcUxhU0RFUTVtUS1ucFUxS3NvNTJzRXNXQkRJc1o0a9IB0AFBVV95cUxPdDJXN2JRUExxcnJDSHZIUl9KZHd6VHBNUFB4TVl2X2hSekdEdU5tNHoxelVEamM0dmpXUnA5eFBqcUlkTU9XNmRGaE9nQU9IUUJ2b09nbmp1OVdxMkRiSFotOFU4WTVGalNhbS1BSkQxU2ZmcmxPMGdkU0Z6N2Q1SkJNN2N4Y24xZzBlVnF1dnd3Q1ZCM2NpYlI5UFRwdmdSVWRKM2hWN2xTZldvUzVrSk5VSjd6ODBseE1Iamgtd0w5LTc4Y1BLTUsxXy1XdGR3?oc=5",
+     "source": "Business press",
+     "sourceSector": "Private bank",
+     "direction": "parent",
+     "dir": "pos",
+     "time": "1mo ago",
+     "sev": 0.45,
+     "corr": 1.15,
+     "vel": 1.0,
+     "stg": 1.0,
+     "dec": 0.59,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (5 article(s))",
+      "Resolved entity → Axis Bank",
+      "Classified: Catalyst · Corporate",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "2mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-AXISBANK-1011"
+      },
+      {
+       "time": "1mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Private bank)",
+       "id": "TG-2011"
+      }
+     ]
+    }
+   ]
   },
   "shriram": {
    "name": "Shriram Finance",
