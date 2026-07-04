@@ -18,6 +18,7 @@ Usage: python3 score.py    (reads data/classified.jsonl, writes ../data.js)
 """
 import json
 import re
+import sys
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -245,12 +246,17 @@ def main():
             "events": ui_events,
         }
 
-    # default selection: entity with the strongest single risk-side event (hero candidate)
+    # default selection: --hero <id> override, else the entity with the
+    # strongest single risk-side event
     def hero_key(kv):
         evts = ev_by_ent.get(kv[0], [])
         risky = [escore(e) for e in evts if INDICES[e["index"]]["side"] == "Risk" and not e["quarantined"]]
         return max(risky) if risky else 0
     default_entity = max(out_entities.items(), key=hero_key)[0] if out_entities else None
+    if "--hero" in sys.argv:
+        override = sys.argv[sys.argv.index("--hero") + 1]
+        if override in out_entities:
+            default_entity = override
 
     payload = {
         "generatedAt": SNAPSHOT.strftime("%Y-%m-%d"),

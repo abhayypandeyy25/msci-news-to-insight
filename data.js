@@ -3795,28 +3795,28 @@ window.FI_DATA = {
    "meta": "Indian BFSI · Jan–Jun 2026",
    "scores": {
     "controversy": 0,
-    "risk": 0,
-    "esg": 0,
-    "momentum": 0,
-    "catalyst": 0,
-    "sentiment": 0
+    "risk": 9,
+    "esg": 13,
+    "momentum": 45,
+    "catalyst": 7,
+    "sentiment": 3
    },
-   "trend": 0,
-   "quarantined": 0,
-   "narrative": "L&T Finance: no material corroborated events this window.",
+   "trend": -3,
+   "quarantined": 14,
+   "narrative": "L&T Finance: L&T Finance's Q4 net profit surged 27% on higher NII growth and the company declared a dividend — lifting the opportunity side. L&T Finance's consolidated March 2026 net sales rose 18.6% YoY to Rs 4,771 crore — lifting the opportunity side. 14 low-trust item(s) remain quarantined pending corroboration.",
    "history": [
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50
+    61,
+    61,
+    64,
+    64,
+    64,
+    64,
+    66,
+    65,
+    64,
+    64,
+    64,
+    62
    ],
    "indexHistory": {
     "controversy": [
@@ -3834,78 +3834,687 @@ window.FI_DATA = {
      0
     ],
     "risk": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     12,
+     12,
+     11,
+     11,
+     11,
+     11,
+     10,
+     10,
+     10,
+     9,
+     9,
+     9
     ],
     "esg": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     15,
+     14,
+     14,
+     13,
+     13,
+     12,
+     12,
+     11,
+     11,
+     10,
+     10,
+     13
     ],
     "momentum": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     44,
+     43,
+     54,
+     53,
+     52,
+     51,
+     52,
+     51,
+     49,
+     48,
+     47,
+     45
     ],
     "catalyst": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     5,
+     5,
+     5,
+     4,
+     4,
+     4,
+     11,
+     10,
+     9,
+     9,
+     8,
+     7
     ],
     "sentiment": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     7,
+     6,
+     6,
+     5,
+     7,
+     6,
+     6,
+     5,
+     4,
+     4,
+     3,
+     3
     ]
    },
-   "articleCount": 0,
-   "events": []
+   "articleCount": 99,
+   "events": [
+    {
+     "id": "ltfinance-0",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "L&T Finance Q4 Results | Net profit surges 27% on higher NII growth, declares dividend",
+     "desc": "L&T Finance's Q4 net profit surged 27% on higher NII growth and the company declared a dividend.",
+     "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxPWUpBamlOQlI3MkpFSHIyenVfd1ZPTkItN2NwT0ttV2FEWGV2cGN5VXN0VnhfLXlrTy1qaTNWZll1M2Q2YTQ2NzZBc1cxWGgzdUhYUTU3SFhsNFo1cEZKTkRfaHZ3VUtCNEVJcl9VdVhBenVDWTRVY3lzZmNzT3NXTDQtcVh3cEFmdm1iR0dvYnZMb3FaeFBoeEotdXpWV2J5SlRjZDFvTHNuTFhWa1pYNi1pSXd2OERodWxydmwzX00zcjY5QXlJNnVxYmhHSll2cDFGSWhWODM2UTdtUTNBSktJRnDSAeoBQVVfeXFMT3EzcGluLUJnM0lRRnpxaFZacHFELTRWVlZjQ2hvNlIyT2xpWmg2OXhMOEE5aDlUWXA5MmdvWFZVTUNaaHAxYjdZdmFJRnF2U0xmUzRCWEs2amNCQzhkQThhMDZNRHFxdnB0ZW82a0NiUGVBLXZTNVJzaDNUQ0tUbkVmVXlpREZjMlBIMGJyNWg1VWJmQ2pRVkh6SkpJb0txZnNxWTM3VUZkNS1jdTJTNnNxVjJDRjZCZktoR0hxS2ozTnhKdDVvS1J6bEF2NFFaa2JSQ1NBQjFFXzJvSmdZcklOMzVSeFhOb1Rn?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "subject",
+     "dir": "pos",
+     "time": "2mo ago",
+     "sev": 0.55,
+     "corr": 1.15,
+     "vel": 1.3,
+     "stg": 1.0,
+     "dec": 0.69,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (6 article(s))",
+      "Resolved entity → L&T Finance",
+      "Classified: Momentum · Financial",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "2mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-LTF-1000"
+      },
+      {
+       "time": "2mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2000"
+      }
+     ]
+    },
+    {
+     "id": "ltfinance-1",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "L&T Finance Consolidated March 2026 Net Sales at Rs 4,771.03 crore, up 18.6% Y-o-Y",
+     "desc": "L&T Finance's consolidated March 2026 net sales rose 18.6% YoY to Rs 4,771 crore.",
+     "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxQLTI2YkxJVjVCUjRreWhQV2R0NWZCSkxPS1J1eE5zUUczZVBVQTZ5dXk2NW0yRTJNek9DZ0JyNVNGZlprUEhaVTBuT2tzNElOUGFvdldPOUUzQm5GeGdwcEtIT0VkblZmX1dXbzFoQm1xeFlHeDBxUFh3ZUNEYnZCVW9rZmhSY2E1TUt2ZjVTUWluTEw4NHVyTjc2UXhqUGdaUDdKS0JLcnduaV9HbU56dkZJZm9RVHBJZnhqQjR4YlZhUVdCMVJQRUxPNTBWNVBnU0ZOMmcyUnhFQmRw0gHiAUFVX3lxTE5NenB0Z2JwOUNpTFAzTlh5WkpqbTBEeUxJVkVxVThJVFBqNkd1RkFnSlFVVERMT1hvYXk5WHMzTkVENUtDQmc5UXJOTWc1SXVzT1lWR1l5RlVtZ3M5blBYWUN2OXpSUE1uNWlzNEpEX3lxd1dPazZlcDBZeWZUNV9NVkV5dWlzN0I5ZzJJZ3RpN2RBcmExWDBULVhDVE5wUkp4cnBjU1NlOUVaN0Rxdi1YRDBOOHgyM1BlUHdKT29GanV1cjY4YW52S0NxYk8wcG8wU1kxNC1kSWFMSFktYlh0VEE?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "subject",
+     "dir": "pos",
+     "time": "1mo ago",
+     "sev": 0.5,
+     "corr": 1.3,
+     "vel": 1.0,
+     "stg": 1.0,
+     "dec": 0.72,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "General & regional press",
+       "cred": "Medium"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (4 article(s))",
+      "Resolved entity → L&T Finance",
+      "Classified: Momentum · Financial",
+      "Corroborated across 3 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "2mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-LTF-1001"
+      },
+      {
+       "time": "1mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2001"
+      }
+     ]
+    },
+    {
+     "id": "ltfinance-2",
+     "index": "risk",
+     "pillar": "Concentration",
+     "title": "L&T Finance, Utkarsh SFB, Fusion Finance tank up to 11% as Bihar passes MFI Bill 2026. Here’s what’s causi",
+     "desc": "L&T Finance shares fell up to 11% along with other microfinance-exposed lenders after Bihar passed its MFI Bill 2026.",
+     "url": "https://news.google.com/rss/articles/CBMijAJBVV95cUxOUlZmcHZDUm8ycFA3V1dDeUhrTjRzYnVjWkV2aEpha2E5SFQwMnEyemF6VEp5MHFlTlhQdUdqQlZrWFJHQzhKbXRiLXlmRnExYWpsd1ZfWERfeld4dDNGczc4am0xSEVxQ1lVcGVyWDV3c0pQOXlscUNSY0FTWF9Ebzc4VTdZSkhkN1dBWmFwejIzLWpJbnhtSkZtcTZmQTh2NmxuSUN0TmRRSWx0NFpLVHFUZEhxaGdqTkRncWluTjNuamVhSC0xZnB1T1J0MnVYOS1oS1VoSWtYTF9jblE3NzkxWkVOZk9FNl9CbWxuSGhJS0ZSZFUxS2xGQnRNcnJfdjg4Z1Y2dkg0Ml9K0gGSAkFVX3lxTE9qR1NrazVfeVBFRzBHQ1VGVWNQcjRqQ1RvYlJ1X2VtelR2MTIyLVRxZ1Y4R3huMThPWm1qbmE1VDFuMlhxMW10c19TS1ZtMzdJcXB4dy1sX19UeFJzSUJVTW9zaFRCTUtkcGpNZXI2Y0xkZHVLVkhlWE1tR0pFTGJhVFZMUnlPazBkU3NISVlHQUMydEUtc1o0Q2ZxX2YtSERJOW1YTUpvN2NXamRSNHMwZ0dzRm5hblNNWlZBeS1Rc2s0RDZ0SlhFRTZpel9xdWh4U0trYW1YakNhcG03M0xGTnk1Ui1GYU1mMTk5aWZ2WFZSQ1hsN1hFUFJDOEJTcGVMdlhRVk1WUVpZbTZJZkRSRXc?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "subject",
+     "dir": "neg",
+     "time": "4mo ago",
+     "sev": 0.6,
+     "corr": 1.15,
+     "vel": 1.0,
+     "stg": 1.0,
+     "dec": 0.57,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (3 article(s))",
+      "Resolved entity → L&T Finance",
+      "Classified: Risk · Concentration",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "4mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-LTF-1002"
+      },
+      {
+       "time": "4mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2002"
+      }
+     ]
+    },
+    {
+     "id": "ltfinance-3",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "L&T Finance Q3 results: Net profit up 18% on improved interest margin, fees",
+     "desc": "L&T Finance's Q3 net profit rose 18% on improved net interest margin and fee income.",
+     "url": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxPUkhfbmVaN0ZnQkhvVWZWQS1xWnh0VWFtdFZGcjdiVmpTeklpR0FyOVIzdGt6MzFTTXdMdGd4bGtBcHYtUnNmYTZpcjQ1Uko5cGdfb2FKbEtqNHhfRkdYOGlFTFVVcHZWOVMzOEg3bnhqZE9HQUJrZVF4Uk5WMGtoMmRka2xrbXJqcHJmckJtTWtYcE5vaEkxdzhBczlfdHBiUUJzMTRGQlRMNVBOWjRyNmZ0RHBTR3JYV09FdGdjSGFzQXBzb2pCY29sV2FNd05yMXRGdW5JTFhvcFVlV1A3Q29pOWlOcGdQc0HSAe8BQVVfeXFMUDhIOXk5cHI0WTFZdlk4ZmwzV2w2eFBneURCUUNHWWJ3bjdGMXZyZDhSLXBqeFFKRU9rQi1Zc2EwVDdSd0QyZXQ2TW9DMzRQTm1ackRYd2RETVhlV1NPLUlUcGJGdm5LV3VEZUdwdnZrWTVMNXpJSWFVQjFaZWV6SndhZllhMlB5TUJmamUwS3FiTXdhVW9qM3FfYnBScVBnbGI0WVpvTmYtM0NIeFZsMThlV0dtN0FtRjlyUXlqWjJjYUFSZTRYcVJNTFE0SjBqZ3FUMzVzM0t3eW4tb1Rsa2JQZWlvV3VpbHd1MldVbVU?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "subject",
+     "dir": "pos",
+     "time": "5mo ago",
+     "sev": 0.55,
+     "corr": 1.3,
+     "vel": 1.2,
+     "stg": 1.0,
+     "dec": 0.4,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "General & regional press",
+       "cred": "Medium"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (6 article(s))",
+      "Resolved entity → L&T Finance",
+      "Classified: Momentum · Financial",
+      "Corroborated across 3 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "5mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-LTF-1003"
+      },
+      {
+       "time": "5mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2003"
+      }
+     ]
+    },
+    {
+     "id": "ltfinance-4",
+     "index": "momentum",
+     "pillar": "Strategic",
+     "title": "We're building our own cloud, says L&T Finance CEO Sudipta Roy",
+     "desc": "L&T Finance CEO Sudipta Roy said the company is building its own private cloud infrastructure.",
+     "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQVzhWV296cVJYQU0xMGhlQWkzNnVqQ2RMTmtGZFZPRHE5YUhMLTZOejJHVVdUV2VnWGRTMXNlUGlNcDlFQl9hVGJidm8xa19UcmpRbTR0RGhyZ2ZGdkhZdHI1MHAyOUFiVWRpQlpsWXN1dVprM1hkS1ZXZ1BhaXhCMmJsVE51Ri1NaUpFTEdSTHRZVm9UWU1yaE82bzFlOVZYRFdFU2p5eVhaMXFGQk8ydDU4RkJWcm1aMmRaWdIBwgFBVV95cUxNc1d5RG02SERvSDlqMXBXVFlYNXBUQlBjWk40X1RreTVBUS1kdjdYSVc0N01WeFUzT2FlZlh6aWcxQVNnYnlmdkhpbjlIWElNQS16T1l4Z3A0Y3M1S3JoVWVaT05TajdVWnFIbTQ0Xy1FamdHSzhkTVJpZ18tVUxTNlQ3a0ZNTTRsanRYUGFFVEwwMTNfSWdya04zUFFRZjEtbXBRV3REOUtTS21QR3oxd0Y4OG5aRmN3VmNwd3RBb3NGUQ?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "subject",
+     "dir": "pos",
+     "time": "5d ago",
+     "sev": 0.3,
+     "corr": 1.15,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.94,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (3 article(s))",
+      "Resolved entity → L&T Finance",
+      "Classified: Momentum · Strategic",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "1mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-LTF-1004"
+      },
+      {
+       "time": "5d ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2004"
+      }
+     ]
+    },
+    {
+     "id": "ltfinance-5",
+     "index": "momentum",
+     "pillar": "Strategic",
+     "title": "What is Lakshya 2031? How L&T Finance plans to become an AI-led retail lender",
+     "desc": "L&T Finance outlined its Lakshya 2031 plan to become an AI-led retail lender.",
+     "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQd3ZWTDc1cnVjWE81VXh5aEMtOXg2Zm9hYnVEd1g2Z1AwUDF0c1kxQWY3OG0tcU1JLUdWd1Fscks5ZEc3WWstZ0VJYW1ZbDRObEVaSVFSN01rUFBVbVJYWVZ0WFVwLVlzWi0wblJLbjZhLXdxdWFBa0phdnFkTy1wNnJrQ0NKeTVKMDg5RlBITGhpVWNGeTJhdE5PcVQ3YjdGc0hVY2p2VEFBNk1zc3BVbUttczRCNUV5NHdFdlpNOEtRUk1XSmI4RzJmZndTd0VucmRWaktrQmRiMGZGV3fSAeMBQVVfeXFMTUFZTWMyN19EMjZvZnVRUldkRm1fdVVQQzJ6cWczWWJScHlFRTJVYm9OdU1XRmVkMlZVeUhnQk9COHRRSXFNNndkdnNmYmRQREpkVzFtZFFUYTJBbVNfLUVjX0lKUmIwVC1EalBqcmtkdUZNWDJ2Z0dfd21YV2xlTTdGVjFqcXlXS0UtVFFueGI1T2c4a244YThCR3BRSHJWaTZKeUF2cWpuMjBFbEdoQmJJWU4zelM1bE9FMi12NFFsX0pkTWxJd3AwVTJnTmQ0b2F0ZDNtRUx4aWpLY3JaZnBPRjQ?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "subject",
+     "dir": "pos",
+     "time": "1mo ago",
+     "sev": 0.4,
+     "corr": 1.15,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.68,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (4 article(s))",
+      "Resolved entity → L&T Finance",
+      "Classified: Momentum · Strategic",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "5mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-LTF-1005"
+      },
+      {
+       "time": "1mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2005"
+      }
+     ]
+    },
+    {
+     "id": "ltfinance-6",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "Buy RBL Bank, L&T Finance shares, stay cautious on Jio Financial, suggests YES Securities",
+     "desc": "YES Securities recommended buying L&T Finance shares alongside RBL Bank.",
+     "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNWF9QZEI1YXd5bWVqaGJkMy1xVVBHSUtwUDlkTUN2RDhuLVZCV05qRU56ZUE5c1N0a2lRbHY5cmVBSThnZnV2WEdLaDlyZEYteGZvdmNPSGtIR0Q1NUpETmtVNXpkdXJtVlRhUGNLcWZQU1BINWFzSmNIWE5Oc3pqa0RVRVhaaFJiTDdBX19ndWljaHROang2Zk84dHJKR2ZOaXl3X1IxTnczMHFIQ3o3X0JpZ1pUQTI5RDNSWGlWT01RNXZwaFRQYlBKNmcxSE5CVWdtU2dDMHJKRG9VWGRxbkREUGJEMjdI0gHuAUFVX3lxTE1rUDZDTnNmcFhteFQ0empndFhsMEgwQW51MTY3TFR0TEhmb0xLU3hhM0JHb2ctcm5hZy12MWlEYTZ6ZGdKR002N0pwUzRBNUQ3T3BiUjlWdGFMaVZaXzl0eUFsZUtVZjBxYmJzNkVfTVJwRzM2cnl0Z3E4cE41WkxwRVRpdmhrMFM3ZWNCSFE3UHdkU3BIaWIwQTdoVmMxNmdVSi1jTTJuN2NJa0pta29xNmFQY2x4MnROTFFKZmNKcWdwWXNGQTdXX0tRSzRLX0RHbVNNY1hDcmRzOC05eGVCWmRsaTVlMFhWVHE3QkE?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "subject",
+     "dir": "pos",
+     "time": "1mo ago",
+     "sev": 0.3,
+     "corr": 1.15,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.82,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (4 article(s))",
+      "Resolved entity → L&T Finance",
+      "Classified: Momentum · Financial",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "5mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-LTF-1006"
+      },
+      {
+       "time": "1mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2006"
+      }
+     ]
+    },
+    {
+     "id": "ltfinance-7",
+     "index": "momentum",
+     "pillar": "Commercial",
+     "title": "L&T Finance retail disbursements jump 62% YoY to ₹24,080 crore in Q4",
+     "desc": "L&T Finance's Q4 retail disbursements jumped 62% YoY to Rs 24,080 crore.",
+     "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNUjhYcXplMmtGQmRFVGdvVVpBNU5xX3MtQ0NWcF9MOUxnUEhYWUYxMnV3VUlWR1U3X0NfWFh3cWN3Umo3QVU4emlrM0NZWmNfdFB6RGdJZmZRbFV4NDVUalRpWFFMQW9Bb3VINEhlcy1VQzRMQ29xeW9aenY4VnlWbkpzM1I1OGN5OWdlRUhnWW9va2cxY1FOVmJUYjVEdk5vMmJ2NmtjMFNHMGl4eEhSNjUzMnN0b0l5dTE0bDhiRE50NDRoQmt4Z1VR0gHPAUFVX3lxTE9ZUHZLa3BNN3VkTlJldmxvaHRQbUpqR2xZUlh6LW1OWVZDNTB0NGRwc3JJYWwxMGo1TElMRU9oS0ZIa29NR3hUT0x6cF84akh2Q0pDejlGWlBBTzB6eXBMZndZZS1uaFowZnJESzEyWWVPZWNRcEM4RzlRcUx6Y29jYjRHcml5bm8wNUg4TmZqNHdPSjktVWNOaWlhTXNzMDc0bG5HNkRkdkRqakF3emQ4bWVZanRlMElob3BzTTNidko4QlRJc1V3SHBjUzRQaw?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "subject",
+     "dir": "pos",
+     "time": "2mo ago",
+     "sev": 0.5,
+     "corr": 1.15,
+     "vel": 1.1,
+     "stg": 1.0,
+     "dec": 0.38,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (4 article(s))",
+      "Resolved entity → L&T Finance",
+      "Classified: Momentum · Commercial",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "2mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-LTF-1007"
+      },
+      {
+       "time": "2mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2007"
+      }
+     ]
+    },
+    {
+     "id": "ltfinance-8",
+     "index": "catalyst",
+     "pillar": "Corporate",
+     "title": "L&T Finance may raise equity capital by the end of FY27 or early next year, says CEO Sudipta Roy",
+     "desc": "L&T Finance CEO Sudipta Roy said the company may raise equity capital by end-FY27 or early the following year.",
+     "url": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxNY2M3alh6MHAya2NJTkl1aHg5bnd5YlBvZkY5bXp4Z2o0TDNzNjhwQjF4R2djQm9yaDdfM2p4TXJsR1R2STM2Zk40amt0b19WOFNlVFY2Qi1hM1ludVJjbkxLRkFFSGo5WTNaNWNqdkctS3kyY2laaGJJVnBzdkpwQS1pNDNmY1pKOVFnYmRKNmRJZ0s5RDJDMm1HeUExTUxSRjJYY2l3czg3MmdySVpYYWgzdUJESDYwb2hNYndZQ2YwQUxyTVp2WnZPa05pUThRd3hRYldUME1QSlZzeGF3ZzE2WDgwbkRWQUHSAe8BQVVfeXFMTW4welFGTEtiZW5MdWwtQnNUM2ZPQXU3YkpNQ1lna3hIQ0RsZjFJMzlCZWd5c3hUVzlRb0FXNG5KSlc4eEhKUVJhMDFjb0JBYUt3T1k2SEViVk5OVjRqakxQU3IzMHR0WllMWEFUUmFhN1pTd1FISzQ3dmxtNmNNUnYwTXh0aDBPS3EwaWNaby1uZmZaV2piNTY1Wmpneko3OVhjLXh1RjRwdmFCMXVJcUJpaTFDVl9jTzc0Y0tZazFZOHdDRXlBQm9DVFRaWE1VTFFiZDVKLTJ1UFN5NjRVcGQxY3RjRDg1a2Y3ZFpNVm8?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "issuer",
+     "dir": "pos",
+     "time": "1mo ago",
+     "sev": 0.4,
+     "corr": 1.0,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.64,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (1 article(s))",
+      "Resolved entity → L&T Finance",
+      "Classified: Catalyst · Corporate",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "1mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-LTF-1008"
+      },
+      {
+       "time": "1mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2008"
+      }
+     ]
+    },
+    {
+     "id": "ltfinance-9",
+     "index": "esg",
+     "pillar": "Social",
+     "title": "How L&T Finance is building socially responsible lending",
+     "desc": "L&T Finance was profiled for building socially responsible lending practices.",
+     "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQaWVadUtkVklZZUs1M2c0eS04QTBlSXlib0h3dVQ2SVJwVzJKSXBtclRuYWdLQTVpM3I3dEV2d1U5U0RxOEtyek9rTjRjZlh6Y1lRa2dWdmhuSTJjYTNVYjNab0xsa0lPUU1rME92MnVETGQyTGsxNVhwUndWd3A5ZWQtOHVXb3FVTGV5Sk1KeDA1ZHdWRGpHeTVMZ2NFTC1tcEFEcXlkMzBpQ1dYRHlTYjZLcDFDN0dmVEdIS2ZfTXpPWUE5OXfSAcsBQVVfeXFMT1JkcFl4SlUtNEFTNEpfN0hPYmpWRVhMQURzMlZIRFpia2VfR09Ed3FkQ19KQW5ObEVHdHBUYW5CSm5oMk9PUUI4VldfeHFnbzR5bjVBYmtyVWJNOURNb2xQdDdaOGJ4YWtvel9yYVlFR1I2NWUtb1NFM3NjS00yWGdfWTBNZkxtcEVxcW9FemhBVmx3REQ1bWswSFdTbnNOdXU5eFNvZnlQeFo0MS1yc0RXZ2lSdEkxdS1IS1llcXBpUWxYNjItWDFfYjQ?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "subject",
+     "dir": "pos",
+     "time": "4d ago",
+     "sev": 0.25,
+     "corr": 1.0,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.97,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (1 article(s))",
+      "Resolved entity → L&T Finance",
+      "Classified: Esg · Social",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "4d ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-LTF-1009"
+      },
+      {
+       "time": "4d ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2009"
+      }
+     ]
+    },
+    {
+     "id": "ltfinance-10",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "‘Microfinance revival to drive margins’: Sudipta Roy, MD & CEO of L&T Finance",
+     "desc": "L&T Finance MD and CEO Sudipta Roy said a microfinance revival would drive margins.",
+     "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxPVDNGWEhJSWN0UEZjX0ZLQ2VFcDFZSWlUdnhXSlRVbU05eEx4dG9CTXlQZ01Ba09obDUwdVdsR2RGSzdKTG9kTFhZS3dHdHdVODdwM2p5QjhLZm1TcFEzaE5HMTZvWTVnTDNHalZ6OUNCdHlXdEFUMlVXRGxfQmdSZVBudEZGX1N4VldKb0xwanVXbzZLclFkLTBGZWFPSFV0YktDVmk1NjdtSWpwcndFTTVubTZMTTY1RlNDNmgzUXRZcFFranU1d0w0QlUxUdIB1AFBVV95cUxQbzF6N2p3am45S25FbkEta21UYzBSVm1VUEh0ZGVvNUVYejVlSl9sRTZxUGZiUjlNbWRqSU92dkh2Q1k3d09tajU4cXdteW9hYW0xeC05Q0dFNWlGSC0xTlUybjg0V25QMXR0N2xmaGR0Q2M0QXNPdmhCU3B5OE5seEU2a2ZFbDU5X0thb0FETnVUUUUwX1ZyTUZyVFFzTzlvRk55MmltY2lYREJPbU9GUF9ZdHdpOU1nTml4N3BnMjVlNmctZWYycDNDTkJlamprZG4xYQ?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "subject",
+     "dir": "pos",
+     "time": "2mo ago",
+     "sev": 0.35,
+     "corr": 1.0,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.69,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (1 article(s))",
+      "Resolved entity → L&T Finance",
+      "Classified: Momentum · Financial",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "2mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-LTF-1010"
+      },
+      {
+       "time": "2mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2010"
+      }
+     ]
+    },
+    {
+     "id": "ltfinance-11",
+     "index": "momentum",
+     "pillar": "Strategic",
+     "title": "ET AI Conclave | L&T Finance’s AI-powered lending tools: Dr. Debarag Banerjee, Chief AI Data Officer",
+     "desc": "L&T Finance's Chief AI Data Officer showcased the company's AI-powered lending tools at the ET AI Conclave.",
+     "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxOWU5GTVdwWERmUjR2bGk3dFlEMHQ1TUpLaUlHaU5tOTBhTWd5TExpLW1tNUFoX0toSkZlci15TFRZM3IzTTE5T3QwOFlxUDU3NWdmYmhyWjVvcHN2cUZNdDUxWVN4YzN0b1NJTEhBZlNpZkpKNFhEaTU4TDZLczdVM1E1REpsX0UzVjNYZzF2TmhzWHZSVVI3V2pzQVEtYWFPZjdJdTdocmhBX1lSMUlXSk5qM1k5eDdSZGN4UDdCVURla0N3dU8tcnNZMEVtMS03eENKSnJMeUprbVFoZDE4WVBSU0p3Y0NQSmtmZ1Zn0gHzAUFVX3lxTE9KVU5OaHdIalR3dGEyRmROX3B2Y2pmcnhCbjRjbGhiQ0kySC1hZ3QwdU8zWTVVNkV4VFIwenhPQ0JlZ3ZqSWhDRmJHeWwxVUtHUkUwR18tYkdVS0NPWTZPS011Z3NDTG10dkhzdXB6aVRGRGdJb0dkN29peEVSOTJubDZSV0lkNXAxVmkzdU9ISHpERmFJZ1NRT1RsVmtOSnV5cmFuaVlERThFVTM2T3RhRVluSWE3Wno3cGFEOFNMOXdhdnctWXBydEJVcFEtUUF3V2NPd2lJcWRNOGVlRERuelhIUG1oS2J4TXBuRERtYkFUTQ?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "subject",
+     "dir": "pos",
+     "time": "1mo ago",
+     "sev": 0.3,
+     "corr": 1.15,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.64,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (5 article(s))",
+      "Resolved entity → L&T Finance",
+      "Classified: Momentum · Strategic",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "5mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-LTF-1011"
+      },
+      {
+       "time": "1mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2011"
+      }
+     ]
+    }
+   ]
   },
   "smfg": {
    "name": "SMFG India Credit",
@@ -4613,7 +5222,7 @@ window.FI_DATA = {
    "narrative": "Piramal Finance: Piramal Finance reported a sharp jump in Q4 FY26 net profit aided by exceptional gains, with FY26 PAT at Rs 1,506 crore, AUM crossing Rs 1 lakh crore and a Rs 11 dividend declared — lifting the opportunity side. Piramal Finance shares rallied around 11-12% after the strong Q4 FY26 results, with brokerages turning constructive on the stock — lifting the opportunity side. 12 low-trust item(s) remain quarantined pending corroboration.",
    "history": [
     61,
-    61,
+    60,
     63,
     67,
     66,
@@ -4669,17 +5278,17 @@ window.FI_DATA = {
      0
     ],
     "momentum": [
-     29,
      28,
-     36,
-     45,
-     44,
-     44,
-     47,
-     46,
+     27,
+     35,
      45,
      44,
      43,
+     46,
+     46,
+     44,
+     43,
+     42,
      41
     ],
     "catalyst": [
@@ -4711,7 +5320,7 @@ window.FI_DATA = {
      9
     ]
    },
-   "articleCount": 115,
+   "articleCount": 111,
    "events": [
     {
      "id": "piramal-0",
@@ -5129,53 +5738,6 @@ window.FI_DATA = {
      "id": "piramal-8",
      "index": "momentum",
      "pillar": "Financial",
-     "title": "Nomura bets on AI-led NBFC growth; Piramal, LT Fin, Tata Capital rated Buy",
-     "desc": "Nomura initiated coverage on Piramal Finance with a Buy rating, citing AI-led NBFC growth and seeing 21-26% upside alongside Tata Capital and L&T Finance.",
-     "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxNbnBYOEpPRDhFeldJc0ppazJHR183NnZUcVBoRXlaUjRvemxKcTQzc3lYN1pLaGptUmxfYmVNQTZrVmdxT0NDSnY4TGRoSExKRExFUWR0X3BGTzgwTlhLWl94aXk0SDB6Q1JZcjBjNHJCRVVXVnhKanVzaTRYelBpdlBJaXFYSjFwY253cElIT3h1YnNCVmVEdFhUMTVlTEhyUDVwU0VndVRZcUlnSFdJazZOS0VOaVRHT0lkSjJwUTdTTGt0QThhRnp3cWJCM1JKUy1YTG44aktWdU41cnE40gHkAUFVX3lxTE9vVVZqeF8tUEhUWnFZR191MXpUbmFic2k1V1dBbkMtWmNNNGViZHVoU19pNGdMRmlCWGNrR1Z4MGV3RlRFeWx6NXdMci11dFJSMjk2Z2ZLWmVzanpUVnpwb1pvUFB3WmJUclhHa1JEWndBUHU1YmFLdDhFNmRvWi04M1dsMV9nWTV5Z2dwWTNOUEV3c0Z3VnBBVENwLUJkenlyWndQODRPeVZyVENtQk1oSlJoOUoyS1NWSW5fdHJqbW5BbFVXbUxVWTFyeElpc25LNlNkMGQ2ZktoaDlUT0ZDN2Mteg?oc=5",
-     "source": "Business press",
-     "sourceSector": "NBFC",
-     "direction": "subject",
-     "dir": "pos",
-     "time": "3mo ago",
-     "sev": 0.3,
-     "corr": 1.0,
-     "vel": 1.1,
-     "stg": 1.0,
-     "dec": 0.55,
-     "stage": null,
-     "quarantined": false,
-     "corroboration": [
-      {
-       "name": "Business press",
-       "cred": "High"
-      }
-     ],
-     "provenance": [
-      "Captured from GDELT DOC feed (5 article(s))",
-      "Resolved entity → Piramal Finance",
-      "Classified: Momentum · Financial",
-      "Corroborated across 1 source class(es)",
-      "Scored through event engine"
-     ],
-     "audit": [
-      {
-       "time": "3mo ago",
-       "actor": "Signal layer",
-       "action": "Event extracted & classified",
-       "id": "EV-PEL-1008"
-      },
-      {
-       "time": "3mo ago",
-       "actor": "Trust tollgate",
-       "action": "Credibility resolved (NBFC)",
-       "id": "TG-2008"
-      }
-     ]
-    },
-    {
-     "id": "piramal-9",
-     "index": "momentum",
-     "pillar": "Financial",
      "title": "Piramal Finance receives order allowing a tax loss of ₹10,110 crore",
      "desc": "Piramal Finance received a tax assessment order allowing a loss of Rs 10,110 crore for assessment year 2024-25.",
      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOVlV5X2FoeVJCQ25FLUl2ME9LUDhmeVJSZDFNdUZKa3FxVHJIOEUwb1BnRWRBZmYzbEdVUUk4YXQxajlaU0tSUW93TkRrWUFXbDRVbktyLTUxZ3dIWW1vUTc0ME9XMG44Y0lBRUl5LTRmUUw0RVdGWXJmVGFLMmpjeENxa1JmWU1pdW1oS2pRN09CdTdwRmtrbmM2WUI5Nmh3b0FyQk9QYXh1OG8xU21OY0syS19EcmVReXNVdXpXdmhUX1NtcWRoS2FKQW5WRzBDVW80T2J6VdIB3gFBVV95cUxNYTBTc3gzN0FNSDdLNHBkOTdxNGp0bXBMcXlBYzJjY3NUWXQtRXhUOEg4UHh2ODVuUFFGdElNRTRzVEhEWEN6UHd1R0hWMThNZDgzYUZWZll5VkpuamtLeFlpekNhMkJRVUlXQkdhamx0YkczLTJSamdXNUJWa0UyM2FyVGRjVnd3dXFfYzhwOXVuVExKOXRBaUh1T3lfc2xJQ1pCQjVldG45U3RhaGZ4YzVMYnlraDgxejB6NVd5YkVrR2RNYmJNVmgxcGF1bmRsV1JGdEpqRTRGaFl0UUE?oc=5",
@@ -5213,18 +5775,18 @@ window.FI_DATA = {
        "time": "3mo ago",
        "actor": "Signal layer",
        "action": "Event extracted & classified",
-       "id": "EV-PEL-1009"
+       "id": "EV-PEL-1008"
       },
       {
        "time": "3mo ago",
        "actor": "Trust tollgate",
        "action": "Credibility resolved (NBFC)",
-       "id": "TG-2009"
+       "id": "TG-2008"
       }
      ]
     },
     {
-     "id": "piramal-10",
+     "id": "piramal-9",
      "index": "catalyst",
      "pillar": "Corporate",
      "title": "NCLAT Allows Piramal Finance Plea On Merger Scheme Of Four Companies",
@@ -5264,18 +5826,18 @@ window.FI_DATA = {
        "time": "3mo ago",
        "actor": "Signal layer",
        "action": "Event extracted & classified",
-       "id": "EV-PEL-1010"
+       "id": "EV-PEL-1009"
       },
       {
        "time": "1mo ago",
        "actor": "Trust tollgate",
        "action": "Credibility resolved (NBFC)",
-       "id": "TG-2010"
+       "id": "TG-2009"
       }
      ]
     },
     {
-     "id": "piramal-11",
+     "id": "piramal-10",
      "index": "controversy",
      "pillar": "Key-person risk",
      "title": "Piramal Finance Retail CEO to lead IndusInd Bank's consumer business",
@@ -5315,10 +5877,57 @@ window.FI_DATA = {
        "time": "4mo ago",
        "actor": "Signal layer",
        "action": "Event extracted & classified",
-       "id": "EV-PEL-1011"
+       "id": "EV-PEL-1010"
       },
       {
        "time": "2mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2010"
+      }
+     ]
+    },
+    {
+     "id": "piramal-11",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "Piramal Finance reports Q3 PAT at ₹401 crore",
+     "desc": "Piramal Finance reported Q3 FY26 net profit of Rs 401 crore with assets under management growing over 23% year-on-year.",
+     "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPZWV2d2wtMXNucVRzekFkWno3X1Fuc3o1a0NZZG9ieTNEZHhNT1EtTDQtMG9WaTYwR1dPZ2JuVDdiRlgzR0RoZEhLVU5YczdlMlk2X011VHhoSklKT2t4RVV3MDdZVXZtblU3ajczWGdTVzh4cTIyYTJjRjYzeWxXVXllbFd4LUFHYk5wc18tcHVRVGlJamhaNHczSnZ6VHpId0lXRW5ObTBrVFFMcXAxN2gza9IBugFBVV95cUxQclpSaDJSdU95SzRqT1BmLU5xNndscFAtTGlyQW1CZ0dkX0NZNnd3U0lFN29yRWxwM2dDWlNSQTRTcVpZV1Nta21RMjhEM1lWMlRKMzZKQWFKTUFOdk9XQ1Etb3JYc3dZeTViMTR1cXZCN3QwQ2EtVGEzYnNyRDYtanJmRUZBbmpUdG9oVkVJMFlkVEF5RkhtV1JtYXBjVXJ3aVVlZXh6dE5ra1BoNWQ3Q2dTaUNyR0Y3dmc?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "subject",
+     "dir": "pos",
+     "time": "5mo ago",
+     "sev": 0.4,
+     "corr": 1.0,
+     "vel": 1.0,
+     "stg": 1.0,
+     "dec": 0.4,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (3 article(s))",
+      "Resolved entity → Piramal Finance",
+      "Classified: Momentum · Financial",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "5mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-PEL-1011"
+      },
+      {
+       "time": "5mo ago",
        "actor": "Trust tollgate",
        "action": "Credibility resolved (NBFC)",
        "id": "TG-2011"
@@ -7505,58 +8114,58 @@ window.FI_DATA = {
    "sector": "Housing finance",
    "meta": "Indian BFSI · Jan–Jun 2026",
    "scores": {
-    "controversy": 0,
-    "risk": 0,
+    "controversy": 19,
+    "risk": 17,
     "esg": 0,
-    "momentum": 0,
+    "momentum": 31,
     "catalyst": 0,
-    "sentiment": 0
+    "sentiment": 6
    },
    "trend": 0,
-   "quarantined": 0,
-   "narrative": "PNB Housing Finance: no material corroborated events this window.",
+   "quarantined": 16,
+   "narrative": "PNB Housing Finance: PNB Housing Finance posted higher Q4 profit on robust loan growth and improved asset quality — lifting the opportunity side. CBI filed a seventh chargesheet in the builder-banker nexus case against Sequel Buildcon, a matter linked to housing lenders including PNB Housing — driving the controversy index. 16 low-trust item(s) remain quarantined pending corroboration.",
    "history": [
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50
+    55,
+    57,
+    58,
+    57,
+    55,
+    52,
+    52,
+    52,
+    52,
+    52,
+    51,
+    52
    ],
    "indexHistory": {
     "controversy": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     14,
+     14,
+     13,
+     13,
+     13,
+     23,
+     22,
+     21,
+     21,
+     20,
+     20,
+     19
     ],
     "risk": [
      0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     5,
+     12,
+     12,
+     19,
+     19,
+     18,
+     18,
+     18,
+     17,
+     17,
+     16
     ],
     "esg": [
      0,
@@ -7573,18 +8182,18 @@ window.FI_DATA = {
      0
     ],
     "momentum": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     22,
+     33,
+     41,
+     39,
+     38,
+     37,
+     37,
+     36,
+     34,
+     33,
+     32,
+     31
     ],
     "catalyst": [
      0,
@@ -7601,22 +8210,619 @@ window.FI_DATA = {
      0
     ],
     "sentiment": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     10,
+     10,
+     9,
+     9,
+     8,
+     8,
+     7,
+     7,
+     7,
+     6,
+     6,
+     6
     ]
    },
-   "articleCount": 0,
-   "events": []
+   "articleCount": 83,
+   "events": [
+    {
+     "id": "pnbhousing-0",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "India's PNB Housing Finance posts higher profit on robust loan growth, asset quality boost",
+     "desc": "PNB Housing Finance posted higher Q4 profit on robust loan growth and improved asset quality.",
+     "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPNE5xSG82RjAtckg3OEd2TE5STlpSMHlDaWJaTUlNdjFGMmZONVE0ajhNejUwZFcwT0dmd3ROSFY0c1hGeHVpV2JTSy1sVld0ZFdDZ2ZBZlFGLUJ5QmJHYjRjVFBUbHM5LVFTNXF5WHRrdWZId2tldDdFd21EQ1haWnRXM1ZrWkFMOEpSRVVwVEt6UzdGcjFGVGR5V0tJaDhTSGdJSEtzN3Rqbl9IQVpYNGhIYlB2aXZpNU9rNDgyV3JfNGp0RkE?oc=5",
+     "source": "Agency wires",
+     "sourceSector": "Housing finance",
+     "direction": "primary",
+     "dir": "pos",
+     "time": "2mo ago",
+     "sev": 0.45,
+     "corr": 1.3,
+     "vel": 1.3,
+     "stg": 1.0,
+     "dec": 0.67,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Agency wires",
+       "cred": "High"
+      },
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (6 article(s))",
+      "Resolved entity → PNB Housing Finance",
+      "Classified: Momentum · Financial",
+      "Corroborated across 3 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "2mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-PNBHOUSING-1000"
+      },
+      {
+       "time": "2mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Housing finance)",
+       "id": "TG-2000"
+      }
+     ]
+    },
+    {
+     "id": "pnbhousing-1",
+     "index": "controversy",
+     "pillar": "Legal & compliance",
+     "title": "CBI files seventh chargesheet in builder-banker nexus 'scam' against Sequel Buildcon",
+     "desc": "CBI filed a seventh chargesheet in the builder-banker nexus case against Sequel Buildcon, a matter linked to housing lenders including PNB Housing.",
+     "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxQanRTNzBiNUFta3ptLV9yZ2UzTzlWWnZ0bUd0a2Jraml0N2FVck1Wa21Ubkh3bzRTLUFrbHhwWHVPUGJIY2ZyYkkyNU9xc0hXTXdqNVMyUG1lVlo0YjdaZnNvMlQ0ekxBMkZIVDY3dkMydHh1VGtubXBSNUcxWnAzRFUyXzhyaF9LQTl0UWwwZ2o0SXYzd3dtNHdMckdpSmY2M3JTaGpnd045WnJDX0VESkx3WExFWjFhRjVBZ3RxcmpnYlliMjFJUUhaZVhYS09Ld1dPNkJ3T21BcXJWY3FhSFFHOXhwTzTSAewBQVVfeXFMTko1RjlLU1JFR285alN3RFNzeC1VVklDN1pOZVpBbDFPYlhSeW9HZVdvZ005RUFYWHNMMzZYVXNkSWhIdzJqUmNWQUczc3ZnV2xiS29HcXpRYmIyUU5ZNFQxWHFnc2lhd1diMzF4eTR5ZXRzRFA3ZUVTUnAwc2FhZlAwZmNBV2V2cmhob0k5Z1NrLVFvSldubjMtS21EMm02QjRCYmNzM0dfYUhZcmVad2FwaEhURkhITUNIVi15dFZSdklyX3dNdnlVRE1laTg0bFlFd2Y1Ri1IS2FkbS12Qi1kVHNVY3llaXFaVDQ?oc=5",
+     "source": "Business press",
+     "sourceSector": "Housing finance",
+     "direction": "peripheral",
+     "dir": "neg",
+     "time": "1mo ago",
+     "sev": 0.5,
+     "corr": 1.0,
+     "vel": 0.9,
+     "stg": 1.4,
+     "dec": 0.76,
+     "stage": "charge",
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (1 article(s))",
+      "Resolved entity → PNB Housing Finance",
+      "Classified: Controversy · Legal & compliance · charge",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "1mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-PNBHOUSING-1001"
+      },
+      {
+       "time": "1mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Housing finance)",
+       "id": "TG-2001"
+      }
+     ]
+    },
+    {
+     "id": "pnbhousing-2",
+     "index": "controversy",
+     "pillar": "Financial integrity",
+     "title": "NHB flags ₹933 crore additional bad loans in PNB Housing Finance's books",
+     "desc": "Regulator NHB flagged Rs 933 crore of additional bad loans in PNB Housing Finance's books.",
+     "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOcE1oOXJCbVE0QjdhMEQyMnUySmRGS1dKbzBWaWVZcmZPS3ZkVWJzZ21NN2QySC1xSW1PZXBvNDZoNHdNaTFMVTVKdFdfOW9YU1NMR3NxcVRuUVVoUl91LTZWS201d1drckFVbm54R3NGSldNbkZ3TU12MmlaOHV3dEpTMGdfOUQtV0szTTMycGlVaDZLaTRhQU9taEdjdnRqNlY2aG5YUXJOOWVFdmJVV19VNFYxZWloWDVoRDhraU50ZE9KMW5aQ3h2ak5ZYmZ6RFlPRHRGc0dWTi04MVg3VNIB5gFBVV95cUxQNjJKdUIwQVh2SjNqa0RiQVRkQjRxRUJhT2RZN2RxVENrMEJYTUVWalFFdXNqWHdtajJVR0dQVmU1c0hRU0NnbFA2Q3Etb1RvQjRxVW1GT2taOFliWjVoZElOenAweEJRZW1WTjVPVm9xS0w3cXJJY3FVODdNc0RreGduQ3NLNGxjeUI4M1VBMWt1ZVQ1V3BVcndOanB3QzdxeVk2ZlRRR3laVEJNUFpnUl9DRl9PT2xRQ0tnaExReFlSUkVBemRLaXd2UENTdUdQSUxpSXdpdjFieWFjOWplUktzcVhFZw?oc=5",
+     "source": "Business press",
+     "sourceSector": "Housing finance",
+     "direction": "primary",
+     "dir": "neg",
+     "time": "2mo ago",
+     "sev": 0.65,
+     "corr": 1.0,
+     "vel": 0.9,
+     "stg": 1.2,
+     "dec": 0.67,
+     "stage": "probe",
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (2 article(s))",
+      "Resolved entity → PNB Housing Finance",
+      "Classified: Controversy · Financial integrity · probe",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "2mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-PNBHOUSING-1002"
+      },
+      {
+       "time": "2mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Housing finance)",
+       "id": "TG-2002"
+      }
+     ]
+    },
+    {
+     "id": "pnbhousing-3",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "PNB Housing Finance soars 10% post Q4 results: Why Morgan Stanley, other brokerages remain bullish",
+     "desc": "PNB Housing Finance shares soared 10% post Q4 results as Morgan Stanley and other brokerages stayed bullish.",
+     "url": "https://news.google.com/rss/articles/CBMi_gFBVV95cUxOZjB1RzdBTUJEQU5mVENTbkw4VGVNNXA4V29EX1dvQ05DaUpGZHg1Rnh1OVQwSTN6Z05sRm1mMHZJLW1Xc1QzZGRBUUpyaE9wT2VIbEhxc2J2bFRzSy1IeXo3bS04aEJPVE1rakdxc0pTOTJ5amNCZW9pUjRRUUZiM2ZZRFVhY2Vyb3lnZ01UbjRkUkFlbjJpUVAtcjNpYV9XQWMwelNtcVoybTVhZjRnWFBwUTBsWXJveThnb0NIZ2Y5NHFTaXR5bExjU1hMalR0ZnhrRWtlckR0RFJ0UzFJZEpfTVRIR3p3RkhBNHVEaTM3czQzM3VFVzhIUXBaZ9IBgwJBVV95cUxOaDZmOWFXRElUU2RZWVRaS0NYWHVESmVnQm9WRGY5UjQtQ2tqSnJaTEFRNGtZS2FDbEZ1RkcydmJ3VUZWa1BvWHBSM2J3RndqZ1cyVUpSaTZGVTVJSmduTzZxUHNFSkdoZWE3d0lYVlVaVEtBQjFsa3E2bGVMc2hpOWV0VlV2WlRIbm5CSG9LaUkwMnU2VUV6emRfRVhfcHUwN29tUTlUamZISHhqWENDUUtST1d2Qmx5Zjc3SVllYmhsNk5NdjBYZHVXVGRkc0w2UlpzU1NvN0dkMWp5Nnp5REZkSXJJQ0Z4YnZkb18yZ3AwZ1JLdjVXbHRkelg5UmRoMWcw?oc=5",
+     "source": "Business press",
+     "sourceSector": "Housing finance",
+     "direction": "primary",
+     "dir": "pos",
+     "time": "2mo ago",
+     "sev": 0.4,
+     "corr": 1.0,
+     "vel": 1.3,
+     "stg": 1.0,
+     "dec": 0.67,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (6 article(s))",
+      "Resolved entity → PNB Housing Finance",
+      "Classified: Momentum · Financial",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "2mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-PNBHOUSING-1003"
+      },
+      {
+       "time": "2mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Housing finance)",
+       "id": "TG-2003"
+      }
+     ]
+    },
+    {
+     "id": "pnbhousing-4",
+     "index": "risk",
+     "pillar": "Financial",
+     "title": "Ratings upgrade to ease costs of funds by 10-15 bps, says PNB Housing CEO Ajai Shukla",
+     "desc": "PNB Housing's CEO said the ratings upgrade would ease its cost of funds by 10-15 basis points.",
+     "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxNNnd0aHdVSUlHM2xtN1JacmlFYXZMZm1GTF9OcDVPakh0ejh4d3ViRXFuNmUtTHBkR1VpOUpOY1piT0tpcDc3RTlZcVpLQ0l6N1lFcDVSLThXalBmZlhXZGZVbkxORDVGQ1R3NGdBOEN1dnRHNWxlNlBHM0ZsdmhaRWNrazdRUm1LVUFHWjFpNG8wTTRRa2Z1YzJremdaRElZUkRLZkVPa1c3cno5NzR4RnR2UzlwTjA0dG9lbThJSTBZNmFqRWJyajJvZUg2d1JhM29KajlTQWHSAd4BQVVfeXFMTXdmbWdpX0pXd1VFTGl6cjRJbGt6eDBQbTJmV2MzVWU3QThuSzFkV2xXNEY0WEVibVNRRDVvbFlaR1YtTklwblExWVZRVTVfUHVZWTdwdTdOa2VtZjhGaTRyNG9iY0xId08zbWNvcE9LOUwyZXpqWmc2Y3FqbUtuRDNQNHUyY2Y4SUNIbXlJdmEtZjlBa2p6cllNYUxUNzdGQU5ieUg5c1VYRmFPNnVSYUF6VXZMMldMY2VRR0xhVzc3UzRpRDdmdlI4N3E0MzJGN3ZITHBqb21vRmRzbEJn?oc=5",
+     "source": "Business press",
+     "sourceSector": "Housing finance",
+     "direction": "primary",
+     "dir": "pos",
+     "time": "1mo ago",
+     "sev": 0.4,
+     "corr": 1.15,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.74,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (2 article(s))",
+      "Resolved entity → PNB Housing Finance",
+      "Classified: Risk · Financial",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "1mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-PNBHOUSING-1004"
+      },
+      {
+       "time": "1mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Housing finance)",
+       "id": "TG-2004"
+      }
+     ]
+    },
+    {
+     "id": "pnbhousing-5",
+     "index": "risk",
+     "pillar": "Financial",
+     "title": "PNB Housing Finance faces margin challenge ahead even as NPAs remain low",
+     "desc": "PNB Housing Finance faces margin challenges ahead even as its NPAs remain low.",
+     "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQSmFZaDhWYjB1RE93Uzc2VFFrd3ZlblhfbVVLMjZOekpXTllFaTl1SE5TOU9rMm1Id3VENEhwaVZwb3YzZm0wUWpqVlVPeF9NY1Nqa0xTQk44R0ZqdlNHVFdhb09ub3BXVnVfVk4zejNwdGoyaXdIU01fTFNkYjJRaG5NSjFiTThnUUxSV29heHFrVVlmbG9oZEd0bkRQQlR1alV4MWpnOUpldm1pemVSbWMtdEgxcGtfSENXZFdfakV6UEZvRElB?oc=5",
+     "source": "Business press",
+     "sourceSector": "Housing finance",
+     "direction": "primary",
+     "dir": "neg",
+     "time": "3w ago",
+     "sev": 0.3,
+     "corr": 1.15,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.89,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (2 article(s))",
+      "Resolved entity → PNB Housing Finance",
+      "Classified: Risk · Financial",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "2mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-PNBHOUSING-1005"
+      },
+      {
+       "time": "3w ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Housing finance)",
+       "id": "TG-2005"
+      }
+     ]
+    },
+    {
+     "id": "pnbhousing-6",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "Buy PNB Housing Finance; target of Rs 1250: Motilal Oswal",
+     "desc": "Motilal Oswal reiterated a Buy on PNB Housing Finance with a target price of Rs 1,250.",
+     "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQTm1SaFNVdUhBR2F2WEpUWHZ3LVRnUU9ZU0tBUzNWRXJ3NS1UUGFNSDJBWG5DN29WcHl4X2E3TUh5NWxYN0ZvU1JCWE1VZEtsMjZhdmVFLWY5S2o4Q3AwX2E2Mmk0bE14bUZtQkdxMFNEZzIzYWxvSDFIbHFMM21NWGZhWGlmMzczcFhFVEpPV19LaFI3Y294a1Y0ZzFVcG51OE1uRGwzNDZkemF5YjdYQjZR0gG3AUFVX3lxTE5wdVZIUWpzYlNlRGFXUFNRQmdJR3p5V3ktdWRHOG0yOHhfdmhRUVJ5bDlfQjVEaEY1LXUzXy04RFZNaEpkQWUxZUVZQXJwbXhYZjFiN3lLeU5wTi1IVjBmTXlJaUpQcERIMVF3OHd0VGNHNVhLRUxURWUtY2dXQll4ZnpkVkNKNUxORGxFeHVXdHlhVzd2cmZzZVRTUUdmMGNhMnktVk9pR1NUR3NBeUdmRkdOUzV0WQ?oc=5",
+     "source": "Business press",
+     "sourceSector": "Housing finance",
+     "direction": "primary",
+     "dir": "pos",
+     "time": "1mo ago",
+     "sev": 0.3,
+     "corr": 1.15,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.83,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (6 article(s))",
+      "Resolved entity → PNB Housing Finance",
+      "Classified: Momentum · Financial",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "5mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-PNBHOUSING-1006"
+      },
+      {
+       "time": "1mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Housing finance)",
+       "id": "TG-2006"
+      }
+     ]
+    },
+    {
+     "id": "pnbhousing-7",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "PNB Housing Finance shares tumble 8% as Q3 misses street's estimates",
+     "desc": "PNB Housing Finance shares fell 8% after Q3 results missed street estimates.",
+     "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxQbHowSVZFLWJxNHgyckluTlk4OTVmWGg0NWRiWnkwaG4zTmt1N2hINklPWEhiSnpwVURUMzl0aVpjRWVBYnZkblFuVlVoNTBzQXlrMTlqRHhKa3BUUGI1Z3lqV21wTnBFYkVIU2hSV0pWWVBkQlYxZ2lIaTJfdDgtejJTQ25CZlM4dWlxaWxTaWU0dVNoRTVOQnR2bnJIR0ZBamdfOWxwR21kT0ZyMG1fbV9fUVQzUEF5SlFYUXhWa2Y1Rkxhc0dhblJ0ZWM1WGvSAdQBQVVfeXFMUFJwZk1PN1dPdFJ5Z2hZb1VyQnFRM2ZpMlV4Ung3TDRfWXJ2djBfNGdSNFpMNTVDN2gxX09va1BNamN3MWZxLWVsclJQUFFMWkpWRXRGakIxZU5aWUVEUk9TVGR4dUdQbi04TFRDbTFQNjZ4NW9fcFV5WHBWWXZ2MHRWbUZfNUU5dUxGRTJocUxpa1pFY0Z6RVJvcVh3MWx1NEI4NnhOVGUwWHVVZTFISlE4YXhmajFHaEFtRFRJLUg3dXJPbXRtN1UyLWtuVHNZTjVrNHE?oc=5",
+     "source": "Business press",
+     "sourceSector": "Housing finance",
+     "direction": "primary",
+     "dir": "neg",
+     "time": "5mo ago",
+     "sev": 0.4,
+     "corr": 1.15,
+     "vel": 1.3,
+     "stg": 1.0,
+     "dec": 0.4,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "General & regional press",
+       "cred": "Medium"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (6 article(s))",
+      "Resolved entity → PNB Housing Finance",
+      "Classified: Momentum · Financial",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "5mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-PNBHOUSING-1007"
+      },
+      {
+       "time": "5mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Housing finance)",
+       "id": "TG-2007"
+      }
+     ]
+    },
+    {
+     "id": "pnbhousing-8",
+     "index": "risk",
+     "pillar": "Operational",
+     "title": "Sammaan, PNB Housing may lose NBFC-UL status under RBI's rejig; IRFC structure warrants exemption",
+     "desc": "PNB Housing may exit NBFC upper-layer status under the RBI's proposed reclassification framework.",
+     "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxQc2N4bHBrTEdod3B2TjFacGFYSk50aUxpeE9Walpfa3dIMDlwLS1NWTdIbUxUU3c1M0pXak9rM0NVejBDdy1sSHY0Q1Q5R21qaGM3c2VKVmhGZF8xNWRtTWhLMTFfZS0xTk91UVhoY2lyVXVkTTZ5b1pmSk1pTkZCVXdJWE9CcnAzczVwTXZCYUJralRaY0YwaWFsTkZHUjlvTkZKNG00ZVF0N3h4dzBfai1DWjBCb1dVdG1CaE5zSkV6YlZPSWdrUmROcGROTHhidllqT3U2UXFDWFhzZDFUVHJJYnlydVBoeXlR0gHwAUFVX3lxTE93NDNJRUhIcEUyNGRFYS10X0tlaEZNazJhYUZQX0ZtZGwtTmE2VGh4d3NuMWw3TnRxNXhyQTBpZUhzSEhQZkFqSjJvc2NFZEh1WUc3ZTN5cTZyejdaeGdMeFZaN3FSSWNTMjc0QXhTYjV5eXRBREJidzJ4RUhHUXRpekE4eDJ6a3NnZU9lb0d6Um1XSXduWVhZRkl2QUV1bTBNMWRmVk14Yzhva3Z6WlZYdFYzWENEdmpBX3NMQ2V6QnBiTmNYa2tvRWp0d1VIbFplTWZneU84ZXpHNHRWeTBxREdsWXpidUFjWi0yU3NuYg?oc=5",
+     "source": "Business press",
+     "sourceSector": "Housing finance",
+     "direction": "primary",
+     "dir": "pos",
+     "time": "4d ago",
+     "sev": 0.25,
+     "corr": 1.0,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.98,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (2 article(s))",
+      "Resolved entity → PNB Housing Finance",
+      "Classified: Risk · Operational",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "2mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-PNBHOUSING-1008"
+      },
+      {
+       "time": "4d ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Housing finance)",
+       "id": "TG-2008"
+      }
+     ]
+    },
+    {
+     "id": "pnbhousing-9",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "PNB Housing Finance's net profit up 7.71% in Q3 FY26",
+     "desc": "PNB Housing Finance reported a 7.71% year-on-year rise in net profit for Q3 FY26.",
+     "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxNU2FOUzhfMl9CRDNzeVdzLWh1M25nbWZsTHZKMDRWT1pZWUtSY3kwTTZxelZxSVJfUVNWYU9SOWN5NVpUWndqa0FlQm01ZjBpOU9wT19adkE4Z0x3TGtHR2VmTVZoMmZwbDlaOE5TSE5PQnlZWTZGUk9FY1I5a3hXZjhJLW9qMWk2dWc0V2NWVTJkc09Rb3RWeWxiN3oxWWF2TkpsZWg1clg2NTU5RURKbWpIeWJkd0lxU0JxVnpxOE9ERm_SAcgBQVVfeXFMTjVFYndzQXRkX1ZsVlJHa1l1cmdFVTd6LTNBU1FfdDhXSnZMclE5bHhUN2VucFNBWlJENWR3ZktNZ1BwX01obTlrNWwzQVpNR28xZXdHSG01Zk5xbFdlZ0lqa2libS10ZkhNaG1FWHBVV21mTm5jSFp0X2c5Zl9uZThyUzlwOE5DdHdHQjdQcWtvWkZuMXUySWtLR2ZyVWFUMTBFYmxaOFlUWHBDYVJCXzJ4OGtCTUwxaU5NcnJ2bUVLLWVORTBwRU0?oc=5",
+     "source": "Business press",
+     "sourceSector": "Housing finance",
+     "direction": "primary",
+     "dir": "pos",
+     "time": "5mo ago",
+     "sev": 0.35,
+     "corr": 1.15,
+     "vel": 1.3,
+     "stg": 1.0,
+     "dec": 0.4,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (6 article(s))",
+      "Resolved entity → PNB Housing Finance",
+      "Classified: Momentum · Financial",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "5mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-PNBHOUSING-1009"
+      },
+      {
+       "time": "5mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Housing finance)",
+       "id": "TG-2009"
+      }
+     ]
+    },
+    {
+     "id": "pnbhousing-10",
+     "index": "sentiment",
+     "pillar": "Entity tone",
+     "title": "PNB Housing Finance - MFs kept buying these 11 stocks for 8 straight quarters; shares surge up to 250% in 2 ye",
+     "desc": "PNB Housing Finance was among 11 stocks mutual funds bought for eight straight quarters, with shares up sharply over two years.",
+     "url": "https://news.google.com/rss/articles/CBMijgJBVV95cUxNUkIzUG9acERobnI0b2s5RlJERXRTNDlMbkZoUU5ySWJxVzV2T2RzVkUyRk14bjFJQnpmOVpCZkt0ZVVkc0lMa21DUUMwdWg5dlJscGNjUXRiZUNpb0Y1eVdsbGpLcUFZN1dxUHNvaGM4TzZUVW04Q1hHMTZ6ZlhPX29IMWhFbTV1NGFCM2lZc2R2RVZ0VkJGRktjODZxYXRLeWZMZmZMRnl3RzJiRkx1bmdoUVpqNkEyNWRjeWxIR3dJRF9Tbnp3eVNod2xmUDkydDhuWDJrcDBfZVNEWHFDc0x2bkQyeVBWZnZMcWtNcm9Ca1hleWdBLUhHck9hRS1SMlp1NElfdC1LX0pjOEE?oc=5",
+     "source": "Business press",
+     "sourceSector": "Housing finance",
+     "direction": "primary",
+     "dir": "pos",
+     "time": "today",
+     "sev": 0.2,
+     "corr": 1.15,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 1.0,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (4 article(s))",
+      "Resolved entity → PNB Housing Finance",
+      "Classified: Sentiment · Entity tone",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "5mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-PNBHOUSING-1010"
+      },
+      {
+       "time": "today",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Housing finance)",
+       "id": "TG-2010"
+      }
+     ]
+    },
+    {
+     "id": "pnbhousing-11",
+     "index": "momentum",
+     "pillar": "Strategic",
+     "title": "PNB Housing Finance gives 18-20% growth guidance in FY27",
+     "desc": "PNB Housing Finance guided for 18-20% growth in FY27.",
+     "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQT0dDNFpXMzNlOTVpYWJ6UVcxVVdQNGFuQ04xaE4yVVBKejFkaS1STWV5ZjdzVjF3a05QcVMwcDlaZEVqSy1BZFZOLU5pZjhGeTdyeTAwRWpyX0cyQ1NpUmVsMlBINGVIUzhoVWNqQWdfMHdkSzdfb1R0NzNsSFIzT1ROeDYwbjJUQkNMaUxkd0tScUdHcVdxSTlaSVBZdElxT2JGUnVwTzRNMlVTaVVYVkd5SnZ3cG1heHVlUFZVQ3Bic3E0N05IeExCdWs5a05RRWhqbndZb21fUdIB3wFBVV95cUxNSi1pejkycXdFVy1saXByT3hCUVJBNGtEanhxWFN6Q25Scm5qbERESHdWNTh3VGh6V3hZVnFKSW9pV3hTdGJoZy1YREp0NVpOaWpoYVE3V3huS045YTdMLWlqUFk1QXpqWHJsMEZ1VXR4aldYZXppUlZlUjFDQTlaYzNpbkdzTGIxcWdvWUFINFMzMTMycV9xUExCLWlOUVFNUmFtcVFYWXRoQ3RiNXB3VHNZTlJMQUdoUFNRb2JUQWFmVUE3V0R3dVZuQ1JJNEEzMnprS2tYdTA0aDVpbXNj?oc=5",
+     "source": "Business press",
+     "sourceSector": "Housing finance",
+     "direction": "primary",
+     "dir": "pos",
+     "time": "2mo ago",
+     "sev": 0.35,
+     "corr": 1.0,
+     "vel": 1.0,
+     "stg": 1.0,
+     "dec": 0.48,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (4 article(s))",
+      "Resolved entity → PNB Housing Finance",
+      "Classified: Momentum · Strategic",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "2mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-PNBHOUSING-1011"
+      },
+      {
+       "time": "2mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (Housing finance)",
+       "id": "TG-2011"
+      }
+     ]
+    }
+   ]
   },
   "abcapital": {
    "name": "Aditya Birla Capital",
