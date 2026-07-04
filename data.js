@@ -2926,28 +2926,28 @@ window.FI_DATA = {
    "meta": "Indian BFSI · Jan–Jun 2026",
    "scores": {
     "controversy": 0,
-    "risk": 0,
+    "risk": 4,
     "esg": 0,
-    "momentum": 0,
-    "catalyst": 0,
-    "sentiment": 0
+    "momentum": 37,
+    "catalyst": 23,
+    "sentiment": 4
    },
-   "trend": 0,
-   "quarantined": 0,
-   "narrative": "Poonawalla Fincorp: no material corroborated events this window.",
+   "trend": -1,
+   "quarantined": 16,
+   "narrative": "Poonawalla Fincorp: Poonawalla Fincorp's Q4 FY26 profit jumped 70% QoQ to Rs 255 crore — lifting the opportunity side. Poonawalla Fincorp raised Rs 2,500 crore through the QIP route — lifting the opportunity side. 16 low-trust item(s) remain quarantined pending corroboration.",
    "history": [
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50
+    69,
+    69,
+    68,
+    67,
+    71,
+    70,
+    69,
+    68,
+    69,
+    68,
+    68,
+    67
    ],
    "indexHistory": {
     "controversy": [
@@ -2965,18 +2965,18 @@ window.FI_DATA = {
      0
     ],
     "risk": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     6,
+     6,
+     6,
+     6,
+     5,
+     5,
+     5,
+     5,
+     5,
+     5,
+     4,
+     4
     ],
     "esg": [
      0,
@@ -2993,50 +2993,655 @@ window.FI_DATA = {
      0
     ],
     "momentum": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     34,
+     33,
+     32,
+     31,
+     41,
+     40,
+     39,
+     38,
+     40,
+     39,
+     38,
+     37
     ],
     "catalyst": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     37,
+     38,
+     36,
+     34,
+     33,
+     31,
+     30,
+     28,
+     27,
+     25,
+     24,
+     23
     ],
     "sentiment": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     5,
+     5,
+     5,
+     5,
+     5,
+     5,
+     5,
+     5,
+     5,
+     5,
+     5,
+     4
     ]
    },
-   "articleCount": 0,
-   "events": []
+   "articleCount": 87,
+   "events": [
+    {
+     "id": "poonawalla-0",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "Poonawalla Fincorp Q4 results: Profit jumps 70% QoQ to Rs 255 crore",
+     "desc": "Poonawalla Fincorp's Q4 FY26 profit jumped 70% QoQ to Rs 255 crore.",
+     "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxOOFV4ejRIRmlRaFQ5SVdURUZjRFNjRzNndk9nbU1EZmt1cWFRUUZNNkwxSmpfMW9heTNqWTMwcWswYnhWY0JnSm9kU1JCcE1QbVlKMmFzZjc5V1BVQVdrelN2VGRXNnFUMnBRTUlkZ3dQUzJya29uZkdtNHVmbW8xcHBocC1fVHNhSllZN1hydEYxY2wtaUhsZ21VUUF0aTlDd2p3UkdaaW96SHhtZzVaeTNaQUVnYVVXeEhaaVRwZVpmSDhmQXgtcHFPLU14MEZkeGR4SnZYQy0xUDTSAeABQVVfeXFMTXJCWEhOLWxQaXlyZXp3X2tRMWxldnlYRlBPZTV6S1VnQnAtQi1TTW9RWi10bGFXcDFiRGFVT1VwMWZqWVNkcjYyekpzNm9aVG5wTV9GU3VGcmNZTkZwUGs3Z0xsMXNlM0ZwX0oxclZrOExTWFB3dDhSaC1KT3RXZ2J6MmpwVjd5WXBWUEhWU0VZTG5wWXBfRzhrZldfVmNJS3NLc0J0RWtqN1pGalpNY2FXYVN6QmZJeWVrdGc0a0haZmUtTTkzZUNnM3lQd0pWeC03VWlBVVdSUlg0RmJxV0I?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "1mo ago",
+     "sev": 0.6,
+     "corr": 1.0,
+     "vel": 1.3,
+     "stg": 1.0,
+     "dec": 0.73,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (6 article(s))",
+      "Resolved entity → Poonawalla Fincorp",
+      "Classified: Momentum · Financial",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "1mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-POONAWALLA-1000"
+      },
+      {
+       "time": "1mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2000"
+      }
+     ]
+    },
+    {
+     "id": "poonawalla-1",
+     "index": "catalyst",
+     "pillar": "Corporate",
+     "title": "Poonawalla Fincorp raises Rs. 2500 crores via QIP route",
+     "desc": "Poonawalla Fincorp raised Rs 2,500 crore through the QIP route.",
+     "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPSEQzWGZDZVVyQmhBU0VYQ2Nsc3cyYi0zR3U2R0k1bXNRdVhNMjdkalhudEh4LVExQWxNa24yTUhGM05uTm1BRVlvZS14WmV3UXlqc0c5SER6bnpNMFljSjRJejJlMlAwVU4yM2hleURUQ3NtQUdJYnNzSXZGOENvcjVrcjBQekN1cW1saWNZMXJOZm1CVFlVWTZvaVd2RlBjMkVNdHZkdXQ?oc=5",
+     "source": "Agency wires",
+     "sourceSector": "NBFC",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "2mo ago",
+     "sev": 0.55,
+     "corr": 1.3,
+     "vel": 1.3,
+     "stg": 1.0,
+     "dec": 0.42,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Agency wires",
+       "cred": "High"
+      },
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (6 article(s))",
+      "Resolved entity → Poonawalla Fincorp",
+      "Classified: Catalyst · Corporate",
+      "Corroborated across 3 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "2mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-POONAWALLA-1001"
+      },
+      {
+       "time": "2mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2001"
+      }
+     ]
+    },
+    {
+     "id": "poonawalla-2",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "Poonawalla Fincorp Q3: Net profit doubles sequentially to ₹150 crore; plans massive ₹5,500 crore fundraise",
+     "desc": "Poonawalla Fincorp's Q3 FY26 net profit doubled sequentially to Rs 150 crore alongside plans for a Rs 5,500 crore fundraise.",
+     "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxPZWtLUXFvVEhWQWR5SUdGNm9CbEk5clkzYkhGMEthZjhkNzUyaC1jb19ZM2plU0x6R3RTdzN3b28zUnVYa0drSkpFczB1bURzVEYzLVNjZ1dFN3V5Y3dnSEJnZ3U2Ni1OMkZxRHNibWlxSDlKWjBUWnBHbFZVbTZGUkVVc1QwTWlSSngtc3NqOU1PMFFEWGdOTFp5NlN3cHRMOVQ5a195MjB3Y20xTEQtT0NKY1pHd3UwR010NVJUM1hoS1hmd1Z1X2ZvMEM4SVctNE0tVXQzQW5tel9NdnN0QWJDTEJaZ9IB8wFBVV95cUxPYmhabXlkN1o1dmZkQXdMUmV3QUUtMnVJSU5XYnVIbFh0VFU2TExmNW9SUS1mcXJEV0VVejVjS01QZEl5QlkxWkppMUY3RXlrVmdsd0Y5akRySzlUUW84LWpTNlZldllsYnJNdTlhXzdJWWtkdzlFWEFodWlCd2pab2c4YTlBZVlhTFRxQlJfOHcwQzRoenRXa3RKb1NxWGFNNkJ5REhtaGNIVmNBNzFOcDF1eVJId1h1ZEVtbFphUGtPZlhlenBkdVhrVklmd0lmODR3WFQyRmFoOVJCemxuUHN2SzlnVEptVk11QTZLbW1yTjg?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "2mo ago",
+     "sev": 0.5,
+     "corr": 1.15,
+     "vel": 1.0,
+     "stg": 1.0,
+     "dec": 0.63,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (4 article(s))",
+      "Resolved entity → Poonawalla Fincorp",
+      "Classified: Momentum · Financial",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "5mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-POONAWALLA-1002"
+      },
+      {
+       "time": "2mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2002"
+      }
+     ]
+    },
+    {
+     "id": "poonawalla-3",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "Jefferies initiates coverage on Poonawalla Fincorp with Buy rating. Why are analysts bullish?",
+     "desc": "Jefferies initiated coverage on Poonawalla Fincorp with a Buy rating citing growth prospects.",
+     "url": "https://news.google.com/rss/articles/CBMi-AFBVV95cUxQcVNFdkdwV3ZWYzVkNC1GNElabHMtZVZrRkdmcEI4eTBWX0hEbXFmeGNyVUY1MlgyMGlvVDFac3lUSjR3QTQ4RWpJN2psU2FYTklkZlJhNnpBd3ZtOGl3elY3aUlGYXJnbEZwS2p0Vk5xa1dEQkpZajBrRDBQNHhQWHJFWVJTSXV4QzF1RUhFSzBXRFBBUU84SHk3bV9JdDlyWmlIUXdKc2xDSExoR21XR3pzM2xLaDBWTHVoVDFLYmVJVkhMVU1mMF81TEpFOFFhbW15U0dVVUVvdUo2RHRjQmJUdGVKUTdyOWVzZTl3RkZmeU56SDV2TNIB_gFBVV95cUxORFZRdENCT0x2Q1IwRC1xaVlLclVMOXRJZm93TWFPU2hqUThQY2VYLUFNRjR6QnFGbWhSU1hTWnVteG1rcThVMGRLbkJYNjRkME1qOWFyR2FBY09tcGUtUGp6TFRIN0Y2ZWJiWFpQU1lMZzBLTzdtSnZLLWlYUm9SUTZ4Vi0wdmxpYmRtMHFoeUtGTnhfOEpuanB0cEMzWE42MnhidDlIYm1LTm91eWFzQk9QbWRJbVh5Nk9wakV6VXdxbWpjU1JYLURSUS1LYmxlQnRwTjhsQm5nUG5BaGJWc3JfU3ZQTlAweDVwNUFhblJWbkpoblhGamx0UXpaQQ?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "3w ago",
+     "sev": 0.4,
+     "corr": 1.0,
+     "vel": 1.0,
+     "stg": 1.0,
+     "dec": 0.87,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (3 article(s))",
+      "Resolved entity → Poonawalla Fincorp",
+      "Classified: Momentum · Financial",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "3w ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-POONAWALLA-1003"
+      },
+      {
+       "time": "3w ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2003"
+      }
+     ]
+    },
+    {
+     "id": "poonawalla-4",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "Buy Poonawalla Fincorp; target of Rs 520: Motilal Oswal",
+     "desc": "Motilal Oswal reiterated Buy on Poonawalla Fincorp with a Rs 520 target after Q4 results.",
+     "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOOHNKcjhsZVFaRTdCQThCVmZVUXdnUWtFYkpreFdmWjFrOHdqYlMxNmFLRFZVeHpNLTdrRVI2dWZPVElLWk5hVjVlbXg1LWZzUzRzdEJsalYtQjhEVmtNbU5seXEzYVNDZk02NVUxd0Z4MGFqUnIzOFdDRUd1SmRFX202eDFRN0JST1I0bmxlRlNSYmp4b0JFUGUxV2NvcXlwMmVDX2lIX2Jua1lnMmJZ0gG0AUFVX3lxTE53QXVib3loVzJtUnNmOW42MEZVT1VQZ3h5TmpKVXpKSEt2bVZhZURrdHEtX1FfRXFCU1BJeFB3Z2Z0cXk3dnQxdFJka0hWQWhRWkh5RWdSNWZTQ21ST0Jvb2R6alg1VzJMbnMxbTZLQkx5anRaZHBpcFlUdGVSOU8zNTJJZlhhdlFLZEtXQVlQczhXQkNBSlFYN29QSkdtUzRDeGUxVzJiWE02eUVNV3lEWlZWSQ?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "1mo ago",
+     "sev": 0.4,
+     "corr": 1.0,
+     "vel": 1.0,
+     "stg": 1.0,
+     "dec": 0.74,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (3 article(s))",
+      "Resolved entity → Poonawalla Fincorp",
+      "Classified: Momentum · Financial",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "1mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-POONAWALLA-1004"
+      },
+      {
+       "time": "1mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2004"
+      }
+     ]
+    },
+    {
+     "id": "poonawalla-5",
+     "index": "catalyst",
+     "pillar": "Corporate",
+     "title": "Poonawalla Fincorp launches QIP at a floor price of ₹390.26 per share, down 2.6% from previous close; stock up",
+     "desc": "Poonawalla Fincorp launched its QIP at a floor price of Rs 390.26 per share.",
+     "url": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxOOW0wSi1jNDJteExBZzNwQnEydnBRSmpYWWNiVzl0MUxBd2QtUUt6elE4a3c1WjJMcDNwaTFYckVycW5sdHVrbnFJMS11MUlpbnEydkZDY25ibGxlNUFYOHZYRTh0cE9mekVRUFN5UUtFZXJ1LTh2ZTNSNUhPTmtod2t4WEZkSUp0TlVFd2l6ZW5sSWxEWENzSFpHYk5IVDFIZ0FkRVY5alBIR2JVSktIei1YWFVUeVAzV25oRTNnNjVXNFl5YVoxcGU3N1ZPSmNOdFd6X2xiWGM4WXNGNDF5MF9ILVF2YzFPWHhuZmpLUEU3aEJEX0R3QjZ5TENoMnfSAYQCQVVfeXFMTzBUWVEzSExTU3RHNjdUendRa2RqSnJjdGtPSFI1b1pWTTUwUDJDbDZzUExWbHEwb1lsc3BNLXl0NExKNE0wdzhpd051b3Z5UHVCRFQ2VTFwOE53NUhzdjhGNFJlUjNYb2pjeHZhUmMzNy13Z3U5WHF2RHItMWJUcUM3TEMzWFlsTmNNOEcyVEZ1RlY2M2ZldWd2ak1OV2dnS2Y5UUhwVU5GMEZsdnF0V1FRbm11WjE4UDdfWkZzdERRS1h6WFpaQ1BMWHhESjh0eGRHdzdYbTVRcGxMbndCOHB6ekVSNHpWN2V0eXphUW1RZndJVTR4S1BWODdPZGx0NnBJank?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "2mo ago",
+     "sev": 0.5,
+     "corr": 1.15,
+     "vel": 1.2,
+     "stg": 1.0,
+     "dec": 0.4,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (5 article(s))",
+      "Resolved entity → Poonawalla Fincorp",
+      "Classified: Catalyst · Corporate",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "2mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-POONAWALLA-1005"
+      },
+      {
+       "time": "2mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2005"
+      }
+     ]
+    },
+    {
+     "id": "poonawalla-6",
+     "index": "momentum",
+     "pillar": "Commercial",
+     "title": "Poonawalla Fincorp AUM tops ₹60,000 crore but stock swings between gains and losses",
+     "desc": "Poonawalla Fincorp's AUM topped Rs 60,000 crore while the stock swung between gains and losses.",
+     "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQSHZkMzYyc1Q2YzhrNjRrbU5uVmJPY0NGOFBzcFFua01FS090aXJVZTJVSFNFLThobkpoZWJTM3Y0MWljaHVidXhGT1ZMT2xuRFZ3SEdIYlNsYUVzb1JudUFDcWtVX3Bqenc2aGY4blF1ZFo2akRzYS00d2RRTVdqNVlGS1lCM19jcmllNHA5anpJWVhGNUtLM3J6OUZlSi1RX2xHSnViX0NJMUZJSHVNWUZSUFQ5SVZzU2fSAb8BQVVfeXFMTl9XYk9hMzNDNl9rZW1RQUhub3E4LTZ4TGNjSjR2TGhiVWtvSWJXS0tnY0I3MVB3YVBhaTB6a3BWWkZqemdaSURDdU9xMFUwdGNaYkczNzNSd0RIR2RNQ216cXA3eUdZRUNFY2VMdVhhTXpPb3owdXNrajd2NU1ZY1V2YmZTZ0UzVHpmWTV1Qll6WHRQQ3FFM3VMMTBSV25QcVlsSjVRT2FqakR0S0NReWF3Q1I4TUNlUWZoT2pFNDg?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "2mo ago",
+     "sev": 0.5,
+     "corr": 1.3,
+     "vel": 1.0,
+     "stg": 1.0,
+     "dec": 0.38,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "General & regional press",
+       "cred": "Medium"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (3 article(s))",
+      "Resolved entity → Poonawalla Fincorp",
+      "Classified: Momentum · Commercial",
+      "Corroborated across 3 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "2mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-POONAWALLA-1006"
+      },
+      {
+       "time": "2mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2006"
+      }
+     ]
+    },
+    {
+     "id": "poonawalla-7",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "Buy Poonawalla Fincorp; target of Rs 560: Motilal Oswal",
+     "desc": "Motilal Oswal recommended Buy on Poonawalla Fincorp with a target of Rs 560.",
+     "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQUHpXa1k0d3Z0THNYTXBHMzhOXy1hak03VjRaTEsyYzBqNmdEYWZ1dFUwNWZwaTV2S0k0QW9LMmxMT1dvLXhxVlFhQmpnUVQ0TWRickhBVk9vN0kyUVU0MzZTN1NGQmlBQUY3bDVvMmdudTVpc0JnVVNFNFY4ZDlZUC1wMWJ3T1Bzay1ub2hWNjB3a05xMFh2WHVISnVzYThZY3pTSHpud1ZmNzdrT0JsU3BNWUxsbW9D0gG-AUFVX3lxTE1zLUtCNGxiMTc5NEh3UDFhQ0N0LUFYWXRfa3JCQjJqa2VENEZxc1F6ZE1CMnp2T2ZhdVZCVEVJc2hzekFadTYzOThTQTBpaUNJdkEwSVRXRkZTVlVyVmwzTlJ3Y1pfQmVEQkMzUUZMWWJkanFxRjlfeVhzUFBWX2I0OHcyLXFBVjV4MEhjY1RtUHowOHZMVlVIUjRob0c5SU9yeXktUHpXLW5aTk14VWRFcWtwZEtUMDExY1hWdmc?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "3mo ago",
+     "sev": 0.35,
+     "corr": 1.15,
+     "vel": 1.0,
+     "stg": 1.0,
+     "dec": 0.55,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (3 article(s))",
+      "Resolved entity → Poonawalla Fincorp",
+      "Classified: Momentum · Financial",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "3mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-POONAWALLA-1007"
+      },
+      {
+       "time": "3mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2007"
+      }
+     ]
+    },
+    {
+     "id": "poonawalla-8",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "Poonawalla Fincorp Is A 'Buy', Says UBS On Initiation — Check Target Price",
+     "desc": "UBS initiated coverage on Poonawalla Fincorp with a Buy rating.",
+     "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOZFdJY2p5R055TlVmbjJpU3JXNnFVQXBSdGtTa0w0S2t5VU5Zbk9pQkl3YWhDaEZadTBCdEdUZUxfcGZpSlBXZVpiNGFMRGpzaVkyZzB4T29tYXo1d3JvTnlYMldjc01DekV4ZUxCLXNoV2d5bUhSdEN0WXFzd3ROZkxEV3N3Wkp0Umo3VlV5Y1V2WW9sazdWbmVBdndfREtxbUQ3YnZ2UmRON0xlUEdn0gG3AUFVX3lxTE9xaGNfWmlBSnlaS2VtdER1Q0NYZW9VSFFFaHlBWUNNd0lCMjd1d2VuaVphLW9tY2pIRHRpZ3ZmazBuR01NRjdYVG53UC1XWnA5MzhGelYyY2U3Rmo5QlV0Wm9WU2FrVHlyc2VjallXRTJST3l6UzZDR0R2SHFBaEV6RXA4SndlV3g3bzJaMUFPZmJhSmgzTjZWWTJEc1lIWk1wbkpmRV9VWGNfM2hsT05CR3d0cjJfbw?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "3mo ago",
+     "sev": 0.4,
+     "corr": 1.15,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.5,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (3 article(s))",
+      "Resolved entity → Poonawalla Fincorp",
+      "Classified: Momentum · Financial",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "4mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-POONAWALLA-1008"
+      },
+      {
+       "time": "3mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2008"
+      }
+     ]
+    },
+    {
+     "id": "poonawalla-9",
+     "index": "catalyst",
+     "pillar": "Capacity",
+     "title": "Poonawalla Fincorp deepens commitment to its AI-first approach",
+     "desc": "Poonawalla Fincorp deepened its commitment to an AI-first approach with new enterprise solutions.",
+     "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxQZFVvOEtzdDlhdkM2R0ppV011VUwwWUZ0dUxndnc3eHV5cmpCT056eWxidkNpdTdGV3ZscGFpNzVmVGdSd2VYU2t2Zm45RElJbXROdzBBSWt6dGU4LUJsQ2g4NWI5YTJlRy1FZndfSFNHRThNZEYtdkNuUzVOZU5BckJqakpRRkg5OWs2U3JGak9BMVByMmJKU19kOHhNZjY1TlhHYjA1YTE2OVFPamJGSFNtOEZVV2I4TVBHbU92aEVMOTJQcDRrOS1kUHNjVlR2S1pkcFVETl9KdnNy0gHiAUFVX3lxTE5wYUJORDlSeVFLNlQ3ci1RMnl5QVphMEhza0V5bHhTWjljU09SLTFsdmdEbE15OGpaVHdVU0JmZTJwQ2w1MTB6dXE5eWFpM2lDMG9RZy1nRkpZd0JBX0dQQW9SY09sLW1ha08wZ09jbzJzTUh3MXoyejBTa0tJanNpVXkwZ1ZDUEtIUkU1bTRBaHNFNkw0WjlXSjRseHNyMkh1cmQ1QmJoLTIzWDNyQmJXNmI1UmsxcUc2ZHJPNnJkSXhycVBDSHRKR0ZEUFJxX01MWEJTbWVOal9JeDdjcDhCRlE?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "4mo ago",
+     "sev": 0.35,
+     "corr": 1.15,
+     "vel": 1.2,
+     "stg": 1.0,
+     "dec": 0.38,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (6 article(s))",
+      "Resolved entity → Poonawalla Fincorp",
+      "Classified: Catalyst · Capacity",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "5mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-POONAWALLA-1009"
+      },
+      {
+       "time": "4mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2009"
+      }
+     ]
+    },
+    {
+     "id": "poonawalla-10",
+     "index": "risk",
+     "pillar": "Financial",
+     "title": "Budget impact: Shriram Fin, Poonawalla Fincorp, other NBFC shares fall up to 5% as higher gross borrowing...",
+     "desc": "NBFC shares including Poonawalla Fincorp fell up to 5% on Budget-driven concerns over NIM pressure.",
+     "url": "https://news.google.com/rss/articles/CBMilgJBVV95cUxPand0LXpET20wNnNyejFFUFgzVWZGT052VExtRUQ3dnZ0cFVGM2dTNFdleE9rMzhMNUUyWER1bUFQUVNPYkgwQk5MblpaeGdpUFNGMFFfTC1RT2RHR2RfRzVhMlNMM3JIS1VFYV9VNXdvZElTNFowTE90dEZfekQtNWlpTmVNT2hOQmF1NEVYUGhhMUF3NVl5ZWRRRTYyOXl6c0xuR09LMS1yOTBGNGg3akwxYWNNS3lqYmdvZHNzZHlYV0F3WmExRHBxLXBYUnNYNElyU3ZZNkpNTmIyaU5NSmFOSjRsYlBDWTVfRmY1TWx1X1BYaDZndkY4TUxSbERzMGt3Vm90OWhLNG9EX2k1d3Z4QktrZ9IBmwJBVV95cUxQc2dDMHI2aXNYUDNHT2drbUs0Nmlqdk5QcEg0eFYtQzB4WERPQ0tHVDJvLW9iWFJ5YVU1TDI2TGJjVkRZRmVBdjZQS1dvd1Z0MHRwemN3UkZSVU95VVdERk9od3hmVUJTQTJvWTJNMmhWMU1PLXRuX0VJTU91bDhneTFEVlNNS29vVl9TWEpJcExKQUkzaEpQVnFvdkpUMjgtNzhJODVBQ2p6ZXQxamV2T2p5MnRjV3gyV2ltQ0lhY3FtYWMtMGtBMlBJU1Y1b3hTUk1pWFAxTUczTzRyUV95S1FPeU5aaVdYY091Zm85OWJiSWhkZUVSXzVBRzlnTnJyd2tDNmczem1YcmJJcHk3dUU3TGdpaUZxdzVR?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Subject",
+     "dir": "neg",
+     "time": "4mo ago",
+     "sev": 0.4,
+     "corr": 1.15,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.43,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (2 article(s))",
+      "Resolved entity → Poonawalla Fincorp",
+      "Classified: Risk · Financial",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "4mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-POONAWALLA-1010"
+      },
+      {
+       "time": "4mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2010"
+      }
+     ]
+    },
+    {
+     "id": "poonawalla-11",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "Poonawalla Fincorp shares jump 6% intraday; JM Fin upgrades stock after Q3",
+     "desc": "JM Financial upgraded Poonawalla Fincorp after Q3 results, sending the stock up 6% intraday.",
+     "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQS2FteVBpdHpPVGNKZDZBWFQybkRaeHlUdlZYZkVmUnVEZzFtRUNwblY5c2dEdVdONWwzS2dHVThFSlNJU0wxN29tUDc3TjNhU2F5cm5TNW9SZ0stTlBkcm54SEcwYVpPalpTdVJKT0xyUE1IME9STFkxTDdDcTRLTE5CQ3JBMTRHMHVGSEFkOXFUZFhWdzlFNHQ0N3dKWkZCVS03NmdsbzNGNlBkMVZJemYtOE1SYVlMVUJVcnFjSVBVem1aM1k2V0tKbEdWeEkzaTU5TTNmNl_SAd4BQVVfeXFMT01ZZk45OWdLeUh0RV9LMGV5N2xYNHZyUDM2c0dlV1RCakp2cThxZHpHRjFtRUF4QlJKVUo4ajBzTGhZTDJMVUlOV0NjRkt5VVhSSTdGYkF1bEhJeTJJSHFKQ2toTTVuSURpd21DRGZ0WmE5cDNlZGUwWDR6cTAwUjR4ODJKUVpXZmkyMmNLdVZjWWRaUEJ1Rl9nRWRYV0djMXdLYTFDTEoyTnNkUmdZVFpsSU1FOXJQanBFN1N1OExPMmw5Z2JPQkZzUU03MjZhOTM2LWNVaEtQeWVObEd3?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "5mo ago",
+     "sev": 0.4,
+     "corr": 1.0,
+     "vel": 1.0,
+     "stg": 1.0,
+     "dec": 0.4,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (3 article(s))",
+      "Resolved entity → Poonawalla Fincorp",
+      "Classified: Momentum · Financial",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "5mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-POONAWALLA-1011"
+      },
+      {
+       "time": "5mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2011"
+      }
+     ]
+    }
+   ]
   },
   "iifl": {
    "name": "IIFL Finance",
@@ -3044,118 +3649,727 @@ window.FI_DATA = {
    "sector": "NBFC",
    "meta": "Indian BFSI · Jan–Jun 2026",
    "scores": {
-    "controversy": 0,
-    "risk": 0,
-    "esg": 0,
-    "momentum": 0,
-    "catalyst": 0,
-    "sentiment": 0
+    "controversy": 36,
+    "risk": 3,
+    "esg": 1,
+    "momentum": 27,
+    "catalyst": 33,
+    "sentiment": 8
    },
    "trend": 0,
-   "quarantined": 0,
-   "narrative": "IIFL Finance: no material corroborated events this window.",
+   "quarantined": 19,
+   "narrative": "IIFL Finance: IIFL Finance received a Rs 476 crore income-tax demand for the 2018-2025 block period and said it will challenge the order — driving the controversy index. IIFL Finance shares fell about 13% after the Income Tax department ordered a special audit of its accounts — driving the controversy index. 19 low-trust item(s) remain quarantined pending corroboration.",
    "history": [
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50
+    58,
+    58,
+    58,
+    63,
+    63,
+    58,
+    57,
+    57,
+    57,
+    57,
+    56,
+    57
    ],
    "indexHistory": {
     "controversy": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     24,
+     24,
+     23,
+     23,
+     22,
+     41,
+     40,
+     39,
+     38,
+     37,
+     37,
+     36
     ],
     "risk": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     5,
+     4,
+     4,
+     4,
+     4,
+     4,
+     4,
+     3,
+     3,
+     3,
+     3,
+     3
     ],
     "esg": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     1,
+     1,
+     1,
+     1
     ],
     "momentum": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     20,
+     20,
+     19,
+     34,
+     33,
+     32,
+     31,
+     30,
+     29,
+     29,
+     28,
+     27
     ],
     "catalyst": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     38,
+     36,
+     35,
+     34,
+     36,
+     35,
+     34,
+     32,
+     31,
+     30,
+     28,
+     33
     ],
     "sentiment": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0
+     9,
+     9,
+     12,
+     11,
+     11,
+     13,
+     12,
+     12,
+     11,
+     10,
+     9,
+     8
     ]
    },
-   "articleCount": 0,
-   "events": []
+   "articleCount": 109,
+   "events": [
+    {
+     "id": "iifl-0",
+     "index": "controversy",
+     "pillar": "Financial integrity",
+     "title": "IIFL Finance receives ₹476 crore tax demand for 2018–2025 block period; to challenge order",
+     "desc": "IIFL Finance received a Rs 476 crore income-tax demand for the 2018-2025 block period and said it will challenge the order.",
+     "url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxQWXhOSVVRdmx6YkstMWREMmFOaXZJb19lVlR6dGVDUjBCanRHcVBEQmgzbHgwazlPRHd2NzRoYWpuNjByYW91aU81OVlzc3Zzd3dCWnd1elVYeWdsMDVuUTZXS29VY1dPRUdkMkVjRXEzZjg5STJ1V2tGMHAtYzJWNllYdG5HcTVrQmhXYlc4NWtxX0lnb0FvUVVCdnlVdDluQW9EQ082RHRDOHB0TVl1S0RYMEJqdlJ4NWNGeThuZFROcDVtcmRSYUhTNTFWSFhwdXg3THJIdmdzREZIcFRqLXllNVdHd1VFaDZjNVBaUlp5Z9IB9wFBVV95cUxPX2NLRzVZUm1Fc3FrYW1VYms3eEFyeENQeWVydXFEeUlIUFhFbXRIQTc1U216SFFFNlJQQzgyRlJINXI0eU9YcVJlNlBPUU9acXdsTFY2OFdPVXF6Z1oxQkJkWndIejQzUHBxSDktNk5reTVIUENtbGpZWVAwUmZYeFo4UWdMd1MwQ3VHdmhnMmtCSTFNNFNDR3dvejRiTWxxVFdlSG84dlJzR05YTzAxRVd4UEQzTUZnTVdJVzc4UkFOV1pHc1JjUm9xNmo4RENXWjZ2NzM0X2JsV2o3aEdLM3k3RkhJZEdRbEZwMVdnbm9WWnFUdlI4?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Subject — under probe",
+     "dir": "neg",
+     "time": "1mo ago",
+     "sev": 0.7,
+     "corr": 1.15,
+     "vel": 1.2,
+     "stg": 1.4,
+     "dec": 0.8,
+     "stage": "charge",
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (5 article(s))",
+      "Resolved entity → IIFL Finance",
+      "Classified: Controversy · Financial integrity · charge",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "1mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-IIFL-1000"
+      },
+      {
+       "time": "1mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2000"
+      }
+     ]
+    },
+    {
+     "id": "iifl-1",
+     "index": "controversy",
+     "pillar": "Financial integrity",
+     "title": "Shares of IIFL Finance tank 13% after I-T dept orders special audit",
+     "desc": "IIFL Finance shares fell about 13% after the Income Tax department ordered a special audit of its accounts.",
+     "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxNdHF6dDhJd1RmelA1ZDlYSUh2VVJ5azdkLW5sMS1FTjJuVUtIZFNsbldpQ0tWakpVWWw1ZFJXTDdPaGpvOHBXd0hubHdRelBpOFNhWVUyV1E1WncxM1g3aUlscHk5NXFmaTZ3akY3bVV2TjZhSHNHYU1vVFZXYi0tOW5IaF9RWE91Q2hKTThidWcyTHFIVUpQb2EwNnQ0a2ZINDFoVmZLV2FPczkyUnU2VkZCbUU1dlZJbUlzOTg1ZGNfV2NVVlp1SGYwV3d5eklT0gHWAUFVX3lxTE9DSnczTW1zTUZuRWJMcV8xcmpRTWQwZUU1NlRzN2YxRXIxLXNMaUsyZnpmVExFQjFNU2thRTN1V2ZrQ1o4VFpaMjhpOHVNa1BMbms3UE5DcktLTFpqTnVMd0dvbUtXRFNUa0Q4WjdaSHRtNl91SmJ1TXQ5SG1lcmlMak5WNTB0aDlmdDhSblMteHRDMlRqSTZMMkxHVGU5T2p1cThBZGgwU0ZaZXUwUERva2lIN0FZbUxMVm9KN3B6WldGR2RpMzdhY1A2VnhPT3kxZVNva3c?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Subject — under probe",
+     "dir": "neg",
+     "time": "3mo ago",
+     "sev": 0.75,
+     "corr": 1.3,
+     "vel": 1.2,
+     "stg": 1.2,
+     "dec": 0.65,
+     "stage": "probe",
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "General & regional press",
+       "cred": "Medium"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (6 article(s))",
+      "Resolved entity → IIFL Finance",
+      "Classified: Controversy · Financial integrity · probe",
+      "Corroborated across 3 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "5mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-IIFL-1001"
+      },
+      {
+       "time": "3mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2001"
+      }
+     ]
+    },
+    {
+     "id": "iifl-2",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "IIFL Finance Q4 profit nearly triples, powered by booming gold loans and better asset quality",
+     "desc": "IIFL Finance's Q4 profit nearly tripled on booming gold loans and improved asset quality.",
+     "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQY3FYVUpmOVAxbWtZbVJLRlNSSWpieUV2VWlCeHZUd0hGQnJmcmJDLW53SzVlX3l0d1AzTkpreEZwdVhsNDBvV0ViUGtaa3E5Y1V6ZXVCNWliYVREWGRHS3pGNEJ4X2lEb2c3aEl6WEM5dlpNdUZJbjlTalFkM1JjMEphNTNua21oRm5UQlY3aTZRRS1vc0RRZXNldHNSYUtWX0JqYWUtQ0J4RmJ0VEJRLTVMM1RTZW42WTgzSnFILWRlZ0NMaG9tUlFQU1FKT212UG44dNIB2gFBVV95cUxNU2drNFlQazRhMjlVQ3Zod0t2YUhWdl8zVVZKVjZSXzNqNzg2T1BkOGdqVEpBZU9zZGFDYmxpTlNNWFpycHBIUjAtR1RjeWtpUWVYY1NYeXRGa3hreHlHb09ORnBRQUR0WHduRU1CcXpsMlNzMF9oaUs0XzBfaWZIb3VkeHptMkcyWll2dVl1ZkoyOWVQelhlZTRjV3NqNDJieDViUEZILXN6ZlVTc1N1R0NjcFRHLXg0bDE0Q1ZLTVc5NHVETjZTTXJPak1keGpoblVxS3A3T09UZw?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "2mo ago",
+     "sev": 0.55,
+     "corr": 1.15,
+     "vel": 1.3,
+     "stg": 1.0,
+     "dec": 0.71,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (6 article(s))",
+      "Resolved entity → IIFL Finance",
+      "Classified: Momentum · Financial",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "2mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-IIFL-1002"
+      },
+      {
+       "time": "2mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2002"
+      }
+     ]
+    },
+    {
+     "id": "iifl-3",
+     "index": "catalyst",
+     "pillar": "Capacity",
+     "title": "IIFL Finance plans ₹10,000 crore fund raise; board also ups borrowing limits",
+     "desc": "IIFL Finance's board plans a Rs 10,000 crore fund raise and approved higher borrowing limits.",
+     "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOb0RjYXpfanNCZGNxMDZWMGd1OHc1UTdsa2c1WGY2VzA2NTUyc0FiSHRUR2NPVmI5X1EwLXNnS2FKY0dJQVdGd054cU1OZFVjM2FWSW94eXpGTzIzUzJkdDZacm5tRTRvVzI2QURXV1FJY0hkS3labGxTTGg0V05zMWRnLThOeUY4Vi1BdGIzb3p0YXRBWTBJbjZTc1UzbEFISFdoTl8ybGdES2ZFc3hBMDlGN3ZHT3FZX1puYUdR0gHDAUFVX3lxTFBTMjNyZ2t0WE5OQUstRWE1Y1llVjRGUFdVZElpeGM3ZXhKWWJDWFNxN1dIeVlIZmc3cU9DZzVLVGVlY3BkV3prbGdqNlctcU1WNGduT1NSeHBieFNxcUptbXFwNlA2dFU5VUJrQzFNMXBNeU8xbkV0cExNeXNldGdrbHRSV3lXTUtNNTdCUnpaeGZtX00zRy1MUmlMbl9UQ2hWZGhFeVJ4bkV5V2hHczkxSmd5blVhQU5kOHpuOTExM3BCQQ?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Issuer",
+     "dir": "pos",
+     "time": "today",
+     "sev": 0.45,
+     "corr": 1.15,
+     "vel": 1.0,
+     "stg": 1.0,
+     "dec": 1.0,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (4 article(s))",
+      "Resolved entity → IIFL Finance",
+      "Classified: Catalyst · Capacity",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "2d ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-IIFL-1003"
+      },
+      {
+       "time": "today",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2003"
+      }
+     ]
+    },
+    {
+     "id": "iifl-4",
+     "index": "catalyst",
+     "pillar": "Capacity",
+     "title": "IIFL Finance raises $500 million in debut social bond sale",
+     "desc": "IIFL Finance raised $500 million in its debut social dollar bond sale.",
+     "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxNRlJxd0pPczlPN3NKWlpFMWlsSTN6M2Eyc0xZZkNRWkNSS2k0WF94X2VRMVF4UmRaTllpaHc4aTJ0bVZkdmpPdWdzTHFlSTBfTjBvdG1XQ0NnS0ZXYzFYdHFMTzRzMkZHY1ZCZEplcjRFUDJtS1RwRG9CNWxGNVNPT081ajJQRGlsaWVjUWFESGhXMnI3bi1XVGhFUS1MazZVYXB4NFpDb1JkTF9EdjV4YlQycWxiUmJnUTZlQm9hYzk5NFZMZmtOWm1zUWlFRzdPY3fSAdcBQVVfeXFMTnU1MVpjS3k5VDBxdjhiaUpRLUhoZi05bV9mSU5GZVh6RGNhUXFhWkpKV01hakg3Z1lJYk5QX2VzcG5Lek9VSkEzZlFneVc2UWZzMDZYazVua0JwMkloVnY4UGdyd1QxQ3FRUWt2ZG0tM3prRGtQOXowZDRHZUU3UnlQa0pOSENqZjVzX1N0Slk1WmI4M0dPVWM1eDQ0MkhSNU5TM1lpcVpPaVJ3ekc4V09ZOVhTaGNONTRCMlBxODNLdTN3Q3BnN0JyUTctcndUalpyVEFRYms?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Issuer",
+     "dir": "pos",
+     "time": "3w ago",
+     "sev": 0.5,
+     "corr": 1.15,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.82,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (6 article(s))",
+      "Resolved entity → IIFL Finance",
+      "Classified: Catalyst · Capacity",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "3mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-IIFL-1004"
+      },
+      {
+       "time": "3w ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2004"
+      }
+     ]
+    },
+    {
+     "id": "iifl-5",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "IIFL Finance jumps 6% on healthy Q4; Motilal Oswal eyes up to 34% upside",
+     "desc": "IIFL Finance shares jumped 6% on strong Q4 results as Motilal Oswal saw up to 34% upside.",
+     "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxObVVrdUYyZ1RQRGdWWmFXb0E1QWlldWZkNllETTlNd3lHY1VNN2NOR18xVDdJQURoYVRYZHgwUEEtYkZZTmlzN1I2T25ZRjdjYkl0eDBSQ3ZnY29RRWkyZm5NTkk5ajBnU1dBbWx2ZXVYVjB1RTJQVUtSdERUeGoxaHZ0S0pwQ2FzRTBlMWcycnZ1MWMweFk0QjdPMWd4TlFSd2xyeWFwLVNFazEwNHdhUm1QbGE4T2c3T19pelpxVUZ6Z1M5RmZQd3ZMQUFVMUYwTEHSAdcBQVVfeXFMTU83TTlLOC1sdnZRczBRQnJYa3pkVXF1RGM1Y2ZRTG5JZldURDFILVVZTzJmdTlFdmEzcjdvT3lDMThIeUx5U0p1NGpubWFOMmZ5WGx5Qjl1SGJVczBzYnQ1aDR0QlY4cTByLUxZclVtQ3Y0Y2dQX3VrTEVKOE9GUzRWQUZQeHNoSHVaTl9TZzdhcUVLT0xGY3FjTWoydVBiQThxRnoxaWFRME1RVkpaTWFvd2w2Uzk5Y2RER0VPc0hwUVNwZEdPckQtaThpLUlmQk1pOG9OdTg?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "2mo ago",
+     "sev": 0.4,
+     "corr": 1.0,
+     "vel": 1.1,
+     "stg": 1.0,
+     "dec": 0.71,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (4 article(s))",
+      "Resolved entity → IIFL Finance",
+      "Classified: Momentum · Financial",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "2mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-IIFL-1005"
+      },
+      {
+       "time": "2mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2005"
+      }
+     ]
+    },
+    {
+     "id": "iifl-6",
+     "index": "momentum",
+     "pillar": "Financial",
+     "title": "IIFL Finance Q3 Results: Stock tanks 15% despite sharp surge in Gold loans; Here's why",
+     "desc": "IIFL Finance's Q3 results showed a sharp surge in gold loans even as the stock fell on the tax audit order.",
+     "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPSXFuMG82Y3BTS3YzcE1veDNXQmViUDB1dVJWdGNNSnUwNUxfanUtTmRSalhlVUw1aXlPa0tWMEctQW4wR1M4Tmd2SUJ6WkNBNWNlUzItbjNma2JQeEpGZTNJYVlJQnlEUVVESUVGN2VKeHJiNndRNkRmb0ZBSHdzaEpidlE4Rk1ZengxR3BqbE9PUDRNX04xWkJhM0JtRWFPYTA3Q1RTMnAzbVpocXZTbTY0bVN2cV9hNFpsNHdEZm10Z9IBxwFBVV95cUxNT3V4TXJacE5ieFl2eXR6bU9hdG5iWm1Ta2NGaENGWTMyNzFSQnNOOEJRTUFyTkpvNXIyMnVXb2hFUzkxRUo1R1lnaGxtNHY5OEt3TEtCYl9jUVMyNHpLQlZZbHdia18zZDZrQ0p5UnlqRi1uNDFld0QxS1dZM093MFlKbHdfTk1zc2tNVTZLd01NZ3ZsX0VlM3BJbExXcWo2NnBYNktPeE5XSEZvOEx3Wm0tYTVSVlJ1LUNVR3V5U2xoSEhjLUM4?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Subject",
+     "dir": "pos",
+     "time": "5mo ago",
+     "sev": 0.5,
+     "corr": 1.15,
+     "vel": 1.3,
+     "stg": 1.0,
+     "dec": 0.41,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (6 article(s))",
+      "Resolved entity → IIFL Finance",
+      "Classified: Momentum · Financial",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "5mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-IIFL-1006"
+      },
+      {
+       "time": "5mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2006"
+      }
+     ]
+    },
+    {
+     "id": "iifl-7",
+     "index": "controversy",
+     "pillar": "Legal & compliance",
+     "title": "Reserve Bank of India imposes Rs 3.10 lakh penalty on IIFL Finance Limited",
+     "desc": "The RBI imposed a Rs 3.10 lakh penalty on IIFL Finance.",
+     "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOdE1hdGF5bjdjYTBmTFZIOGxOOEt4bE9LZi1adkF5Mk5KZUxVTmVNWkFidEJSdFV0MjRCUDU3TmRMM2l3RHVlRWxXVkJadEpmNk9mWVo5X1NKdV91X052dWlRZXlRZ2VyUmRmc0QtY0pIdlVESUJFR3JXWkJ4SnJUdU1EVWcwSHVHenBKR1ZSbl9WNDRlaTUzb2QzN1B1ci01VkhuNzg1Rzd3Q09wOURTV2IyRnJjaEY1ZENtRnNmb21hdw?oc=5",
+     "source": "Agency wires",
+     "sourceSector": "NBFC",
+     "direction": "Subject — penalized",
+     "dir": "neg",
+     "time": "1mo ago",
+     "sev": 0.7,
+     "corr": 1.3,
+     "vel": 1.1,
+     "stg": 0.3,
+     "dec": 0.8,
+     "stage": "resolution",
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Agency wires",
+       "cred": "High"
+      },
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (6 article(s))",
+      "Resolved entity → IIFL Finance",
+      "Classified: Controversy · Legal & compliance · resolution",
+      "Corroborated across 3 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "1mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-IIFL-1007"
+      },
+      {
+       "time": "1mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2007"
+      }
+     ]
+    },
+    {
+     "id": "iifl-8",
+     "index": "catalyst",
+     "pillar": "Capacity",
+     "title": "IIFL Finance plans to raise $400 million in ECBs",
+     "desc": "IIFL Finance plans to raise $400 million through external commercial borrowings.",
+     "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOVkhwSGNRUjdJd3ZIdUxacGFtbTFWWWx0dHp1WGhhRDJnbS1lWldBbVRPdHprbVNCQWdRYkFySUlPR3hXSWNEV0FocE56Z1pFMlJwTXVZQ18wdlBTdGNicVFLWEw1TmxDM0lPYWhpQkZ0T3lMNkFESnRVYzJ6MDJGZ2ZQeWV1dEVtVTRqbVFJUmVNUlUwbW9wWXVfNGhzWlNNVFc0S2dMN19RN1A2M0ZweFJQc2xwdmI1Wjk1N2lB0gHDAUFVX3lxTFBBZWJ0bkJfMEZwQ1ZlMDFpdFQwX2p1ZGdnREUzRVhfWFpIRG5Jek9TU19XZmdPbW5MeTBVVHJDZGUtUk02OWRSNE1wMHJiTk9adjBMU3FZSEwtdTZ5MGY3RDBqdlI2Z21GSmk1eEtqaHl5VjNVc3RxVWVkR2lqZHdhV193cGR4NmJnV2daaEJmSl9MY185MV9BVlI1azVHMzA2QUpSbEJwSFd6dTVzTXFQMDhFU3pQbnhWQWdQZGo5cnp1Zw?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Issuer",
+     "dir": "pos",
+     "time": "1mo ago",
+     "sev": 0.35,
+     "corr": 1.0,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.66,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (1 article(s))",
+      "Resolved entity → IIFL Finance",
+      "Classified: Catalyst · Capacity",
+      "Corroborated across 1 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "1mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-IIFL-1008"
+      },
+      {
+       "time": "1mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2008"
+      }
+     ]
+    },
+    {
+     "id": "iifl-9",
+     "index": "sentiment",
+     "pillar": "Sectoral",
+     "title": "Gold, silver prices hit 7-month low: Hindustan Zinc, IIFL Finance shares fall up to 3%",
+     "desc": "IIFL Finance shares fell as gold and silver prices hit a seven-month low.",
+     "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxPNlJMd29mdWVyYkxuVkRIcFdzak9PQndaZTA2T2VucWs1dTlrcWRrTEwzODVUdGFuR3docENoc3lJOXYwcDF1OXRmTGJpVzdoeDlyMGJLN0lLVFVvQVo1UTNEeVg3b0lJQ1dvek9vMDhuQ3QwZXhTT2NsZ0NIY2FlcmpuT0RMRElPckhzU0MzMEtmVnUtdk91bERzSFlnWk1hemtkVXB5bERUTERCaTh4dGlMM2dqd3FvU1ViX3ZLa1Z2cFI2NHFob0xOUlVIS2s2U3JVYmFacTJScWpH0gHiAUFVX3lxTE5OZXVJU1E5Vng3OUk4NHp0cm93RXUwR3F6VENjcG5iUm94VXo5MHh0UE9pazA0SmhoRTluY2lQdks0LXB3dDN2enlzb3Vfcm9Hd0YybzNmeGhraTVkQTNuWDQ2MmswaENHelN2T1RjeGhXVzViVzdNWDBjUHZ1cklTWVRyOXJTczFJOE1tWkl4SVhseFM4cTUtczc4LW5PelZOM1JjV3RjS3VpeFo0Q1liS1k3UWcxN21hWWRkVFdsV21xMGFfSnB5cldBVVpXOFVyNlZJbVFUR0NxeTFjSTVNcXc?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Subject",
+     "dir": "neg",
+     "time": "4d ago",
+     "sev": 0.2,
+     "corr": 1.15,
+     "vel": 0.9,
+     "stg": 1.0,
+     "dec": 0.91,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (2 article(s))",
+      "Resolved entity → IIFL Finance",
+      "Classified: Sentiment · Sectoral",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "4mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-IIFL-1009"
+      },
+      {
+       "time": "4d ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2009"
+      }
+     ]
+    },
+    {
+     "id": "iifl-10",
+     "index": "controversy",
+     "pillar": "Legal & compliance",
+     "title": "Supreme Court Appoints Former Judge Justice Abhay Oka As Mediator In IIFL Finance-Paramvir Developers...",
+     "desc": "The Supreme Court appointed former judge Justice Abhay Oka as mediator in the IIFL Finance-Paramvir Developers dispute.",
+     "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxOOGFNSFZOLU5nV2Z2R3g1TWZDVk1uWE1XUWtzVjVNenhmcmN2Tkw0LUhIV1Q5YUR5R0F2MTNYS2JJTGVhdXVnaGFzdzlQdkRSeXowX0FaM3gyNUVBNVBjbGdxN0RXRUdQLTJzVE9GNGx6SThfSlN3UmIwUWFGOWhnb0VXUDJWVU5tcEE1N2xCQzIxV01BOVlqQ1ZTb0ZlcGw4RmRjNUlYNE5SWWZBa0NNY24wMUxBbFFnZFJzekRRb2NBRGstaUxjUm9yY0lIenVfSS1GTE95WDI1UdIB3wFBVV95cUxNNUFwQktPbk5GaS12bXNRZV9OdkxyZkhPeFZvTzBaM1daRFU2aElrbXhMbHFkTVlDSmZjYV8tZ3l5eThYZFJ4QXR6MVNwNlctTlJnc1lPZDlMMjlmWi04LXdMaDl0aW5zbEhJbm9xcU9abEJYcUpkeXpfMzhhQ3hzMU5WSkNCSnVaTEpLTGNOWm9PbGZGVGE5LW1SdEVlaHhUWEpUQXVaMGZicWZsZ3NnWER3X1VyREFaM0RPU2ZGVGpQSExhMDkzTWZobHZqSXRwbFVHbEc2VXJfNDdJWUlv?oc=5",
+     "source": "Aggregators & other",
+     "sourceSector": "NBFC",
+     "direction": "Subject — defendant",
+     "dir": "neg",
+     "time": "today",
+     "sev": 0.4,
+     "corr": 1.0,
+     "vel": 0.9,
+     "stg": 1.2,
+     "dec": 1.0,
+     "stage": "probe",
+     "quarantined": true,
+     "corroboration": [
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (1 article(s))",
+      "Resolved entity → IIFL Finance",
+      "Classified: Controversy · Legal & compliance · probe",
+      "Corroborated across 1 source class(es)",
+      "Quarantined (trust cell below 0.5)"
+     ],
+     "audit": [
+      {
+       "time": "today",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-IIFL-1010"
+      },
+      {
+       "time": "today",
+       "actor": "Trust tollgate",
+       "action": "Quarantined (low trust)",
+       "id": "TG-2010"
+      }
+     ]
+    },
+    {
+     "id": "iifl-11",
+     "index": "catalyst",
+     "pillar": "Corporate",
+     "title": "Piramal Finance and IIFL in exploratory talks for an MFI deal: Sources",
+     "desc": "Piramal Finance and IIFL Finance are in exploratory talks over a deal for the Samasta microfinance business.",
+     "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOWmdXMzJsQU5ZN2s0TzNDdHlkaTR6WnJqNGQtWUV1Sm5HUGg2VHVkNzZ4aldrcUMtSC1faXFaZVhwa0lQam5vaE9BeWg5VWdjZ0FiTU1LcnV4NDc0amk0M1FhS1BXVk1TMklfU2ZPOWlvdjdvM2lxRFJ5a3BvSVpFNURBcjc0WThkZTJjWUI3eHQ4QUxtcHNRN0RTZXRQbXFMaWlObFppdS1yVUVJSkdITHVsNXQ1bFZEYS1XQngxY2pVZzhFUnVGNFNXemLSAdIBQVVfeXFMT19Ramp2dmtRWEZiSXR6RGdoaWw1S1p1ZmEwbWo3U3k1OEs3b2puMGRhem05WDRHRVVUNUR5OVF1Mmc0blA0M2tzMWZJTS1oWUVOakIxVmhNOVV1dTBtWTQ5VklJb21ucnRYU25wM1NlX01sdVRQMWJ5VVB4ZzJIQVI5a2lXSDliRThtdjVyZzhZX055YUk3enJFVWl4ZUhHSmp5VnhYU2FVcU9qUDRNTHppb2NvbkNqV20wY3NZLVlqa0lJVGczbmIxNEFSY3JSV3dR?oc=5",
+     "source": "Business press",
+     "sourceSector": "NBFC",
+     "direction": "Seller",
+     "dir": "pos",
+     "time": "3mo ago",
+     "sev": 0.5,
+     "corr": 1.15,
+     "vel": 1.2,
+     "stg": 1.0,
+     "dec": 0.26,
+     "stage": null,
+     "quarantined": false,
+     "corroboration": [
+      {
+       "name": "Business press",
+       "cred": "High"
+      },
+      {
+       "name": "Aggregators & other",
+       "cred": "Low"
+      }
+     ],
+     "provenance": [
+      "Captured from GDELT DOC feed (5 article(s))",
+      "Resolved entity → IIFL Finance",
+      "Classified: Catalyst · Corporate",
+      "Corroborated across 2 source class(es)",
+      "Scored through event engine"
+     ],
+     "audit": [
+      {
+       "time": "3mo ago",
+       "actor": "Signal layer",
+       "action": "Event extracted & classified",
+       "id": "EV-IIFL-1011"
+      },
+      {
+       "time": "3mo ago",
+       "actor": "Trust tollgate",
+       "action": "Credibility resolved (NBFC)",
+       "id": "TG-2011"
+      }
+     ]
+    }
+   ]
   },
   "manappuram": {
    "name": "Manappuram Finance",
