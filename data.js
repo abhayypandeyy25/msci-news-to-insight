@@ -1,6 +1,178 @@
 window.FI_DATA = {
  "generatedAt": "2026-06-30",
  "defaultEntity": "kotak",
+ "sources": [
+  {
+   "name": "Regulator & exchange",
+   "records": 0,
+   "outlets": 0,
+   "trustMin": 0.93,
+   "trustMax": 0.95,
+   "topDomains": []
+  },
+  {
+   "name": "Agency wires",
+   "records": 42,
+   "outlets": 3,
+   "trustMin": 0.83,
+   "trustMax": 0.85,
+   "topDomains": [
+    {
+     "d": "reuters.com",
+     "n": 18
+    },
+    {
+     "d": "bloomberg.com",
+     "n": 14
+    },
+    {
+     "d": "aninews.in",
+     "n": 10
+    }
+   ]
+  },
+  {
+   "name": "Business press",
+   "records": 863,
+   "outlets": 23,
+   "trustMin": 0.72,
+   "trustMax": 0.78,
+   "topDomains": [
+    {
+     "d": "moneycontrol.com",
+     "n": 110
+    },
+    {
+     "d": "business-standard.com",
+     "n": 105
+    },
+    {
+     "d": "cnbctv18.com",
+     "n": 104
+    },
+    {
+     "d": "thehindubusinessline.com",
+     "n": 104
+    },
+    {
+     "d": "m.economictimes.com",
+     "n": 99
+    },
+    {
+     "d": "livemint.com",
+     "n": 68
+    },
+    {
+     "d": "bfsi.economictimes.indiatimes.com",
+     "n": 68
+    },
+    {
+     "d": "ndtvprofit.com",
+     "n": 57
+    }
+   ]
+  },
+  {
+   "name": "General & regional press",
+   "records": 177,
+   "outlets": 20,
+   "trustMin": 0.48,
+   "trustMax": 0.55,
+   "topDomains": [
+    {
+     "d": "timesofindia.indiatimes.com",
+     "n": 36
+    },
+    {
+     "d": "indianexpress.com",
+     "n": 26
+    },
+    {
+     "d": "thehindu.com",
+     "n": 25
+    },
+    {
+     "d": "newindianexpress.com",
+     "n": 22
+    },
+    {
+     "d": "freepressjournal.in",
+     "n": 14
+    },
+    {
+     "d": "theprint.in",
+     "n": 13
+    },
+    {
+     "d": "ndtv.com",
+     "n": 9
+    },
+    {
+     "d": "m.thewire.in",
+     "n": 7
+    }
+   ]
+  },
+  {
+   "name": "Aggregators & other",
+   "records": 598,
+   "outlets": 169,
+   "trustMin": 0.3,
+   "trustMax": 0.35,
+   "topDomains": [
+    {
+     "d": "scanx.trade",
+     "n": 125
+    },
+    {
+     "d": "marketsmojo.com",
+     "n": 18
+    },
+    {
+     "d": "whalesbook.com",
+     "n": 16
+    },
+    {
+     "d": "rediff.com",
+     "n": 16
+    },
+    {
+     "d": "tradingview.com",
+     "n": 14
+    },
+    {
+     "d": "upstox.com",
+     "n": 13
+    },
+    {
+     "d": "businessworld.in",
+     "n": 9
+    },
+    {
+     "d": "investywise.com",
+     "n": 9
+    }
+   ]
+  }
+ ],
+ "rawTotal": 7702,
+ "feeds": [
+  {
+   "name": "Google News RSS · India edition",
+   "detail": "15 entity channels · month-sliced queries",
+   "status": "LIVE"
+  },
+  {
+   "name": "GDELT DOC 2.0 API",
+   "detail": "Global news firehose · quota-managed backfill",
+   "status": "QUOTA-MANAGED"
+  },
+  {
+   "name": "GDELT Events (CAMEO)",
+   "detail": "Structured event codes · cross-validation",
+   "status": "PLANNED"
+  }
+ ],
  "window": "Jan–Jun 2026",
  "sectorLabel": "Indian BFSI",
  "matrixSources": [
@@ -817,7 +989,8 @@ window.FI_DATA = {
       }
      ]
     }
-   ]
+   ],
+   "rawCount": 1317
   },
   "icicibank": {
    "name": "ICICI Bank",
@@ -1541,7 +1714,8 @@ window.FI_DATA = {
       }
      ]
     }
-   ]
+   ],
+   "rawCount": 1283
   },
   "bajfinance": {
    "name": "Bajaj Finance",
@@ -2084,7 +2258,8 @@ window.FI_DATA = {
       }
      ]
     }
-   ]
+   ],
+   "rawCount": 447
   },
   "sbi": {
    "name": "State Bank of India",
@@ -2832,7 +3007,8 @@ window.FI_DATA = {
       }
      ]
     }
-   ]
+   ],
+   "rawCount": 984
   },
   "kotak": {
    "name": "Kotak Mahindra Bank",
@@ -3576,7 +3752,8 @@ window.FI_DATA = {
       }
      ]
     }
-   ]
+   ],
+   "rawCount": 657
   },
   "axis": {
    "name": "Axis Bank",
@@ -4320,7 +4497,8 @@ window.FI_DATA = {
       }
      ]
     }
-   ]
+   ],
+   "rawCount": 592
   },
   "shriram": {
    "name": "Shriram Finance",
@@ -5040,7 +5218,8 @@ window.FI_DATA = {
       }
      ]
     }
-   ]
+   ],
+   "rawCount": 475
   },
   "ltfinance": {
    "name": "L&T Finance",
@@ -5768,7 +5947,8 @@ window.FI_DATA = {
       }
      ]
     }
-   ]
+   ],
+   "rawCount": 249
   },
   "smfg": {
    "name": "SMFG India Credit",
@@ -6456,7 +6636,8 @@ window.FI_DATA = {
       }
      ]
     }
-   ]
+   ],
+   "rawCount": 76
   },
   "piramal": {
    "name": "Piramal Finance",
@@ -7188,7 +7369,8 @@ window.FI_DATA = {
       }
      ]
     }
-   ]
+   ],
+   "rawCount": 231
   },
   "poonawalla": {
    "name": "Poonawalla Fincorp",
@@ -7912,7 +8094,8 @@ window.FI_DATA = {
       }
      ]
     }
-   ]
+   ],
+   "rawCount": 178
   },
   "iifl": {
    "name": "IIFL Finance",
@@ -8640,7 +8823,8 @@ window.FI_DATA = {
       }
      ]
     }
-   ]
+   ],
+   "rawCount": 261
   },
   "manappuram": {
    "name": "Manappuram Finance",
@@ -9360,7 +9544,8 @@ window.FI_DATA = {
       }
      ]
     }
-   ]
+   ],
+   "rawCount": 334
   },
   "pnbhousing": {
    "name": "PNB Housing Finance",
@@ -10076,7 +10261,8 @@ window.FI_DATA = {
       }
      ]
     }
-   ]
+   ],
+   "rawCount": 236
   },
   "abcapital": {
    "name": "Aditya Birla Capital",
@@ -10824,7 +11010,8 @@ window.FI_DATA = {
       }
      ]
     }
-   ]
+   ],
+   "rawCount": 382
   }
  }
 };

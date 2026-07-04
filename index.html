@@ -302,8 +302,8 @@ if (FI) {
   if (FI.defaultEntity && entities[FI.defaultEntity]) state.entity = FI.defaultEntity;
 }
 
-var titleMap = {workbench:'Analyst Workbench',indices:'Index Suite',tollgate:'Trust Tollgate',scoring:'Scoring Model',pipeline:'Pipeline Architecture',distribution:'Distribution'};
-var kickerMap = {workbench:'Entity analysis',indices:'Six indices · one composite',tollgate:'Source × sector credibility',scoring:'Shared event engine',pipeline:'News → insight flow',distribution:'API · licensing · narratives'};
+var titleMap = {workbench:'Analyst Workbench',indices:'Index Suite',tollgate:'Trust Tollgate',scoring:'Scoring Model',pipeline:'Pipeline Architecture',sources:'Source Monitor',distribution:'Distribution'};
+var kickerMap = {workbench:'Entity analysis',indices:'Six indices · one composite',tollgate:'Source × sector credibility',scoring:'Shared event engine',pipeline:'News → insight flow',sources:'Ingestion coverage · 24×7',distribution:'API · licensing · narratives'};
 
 /* ============================ MODEL ============================ */
 function eventScore(e){ var cred=cellVal(e.source,e.sourceSector); return e.sev*cred*e.corr*e.vel*e.stg*e.dec; }
@@ -343,7 +343,7 @@ function renderSidebar(){
   var groups=[
     {label:'Analysis',items:[['workbench','Workbench','layout-dashboard'],['indices','Index Suite','layers']]},
     {label:'Trust & Scoring',items:[['tollgate','Trust Tollgate','shield-check'],['scoring','Scoring Model','gauge']]},
-    {label:'Platform',items:[['pipeline','Pipeline','git-branch'],['distribution','Distribution','share']]}
+    {label:'Platform',items:[['pipeline','Pipeline','git-branch'],['sources','Source Monitor','activity'],['distribution','Distribution','share']]}
   ];
   var totalQ=totalQuarantined();
   var nav=groups.map(function(g){
@@ -767,6 +767,83 @@ function renderPipeline(){
     +'<div style="display:flex;flex-direction:column;gap:0">'+stages+'</div></div>';
 }
 
+/* ------------ SOURCE MONITOR ------------ */
+function renderSources(){
+  var statusMeta={ 'LIVE':{c:C.opp,bg:C.oppBg,pulse:true}, 'QUOTA-MANAGED':{c:C.gate,bg:C.gateBg,pulse:false}, 'PLANNED':{c:C.mute,bg:'#EFEADD',pulse:false} };
+  var feeds=(FI&&FI.feeds)||[
+    {name:'Google News RSS · India edition',detail:'Entity channels · month-sliced queries',status:'LIVE'},
+    {name:'GDELT DOC 2.0 API',detail:'Global news firehose · quota-managed backfill',status:'QUOTA-MANAGED'},
+    {name:'GDELT Events (CAMEO)',detail:'Structured event codes · cross-validation',status:'PLANNED'}
+  ];
+  var srcRows=(FI&&FI.sources)||[];
+  var totalRecords=srcRows.reduce(function(a,s){return a+s.records;},0);
+  var rawTotal=(FI&&FI.rawTotal)||0;
+
+  var feedCards=feeds.map(function(f){
+    var m=statusMeta[f.status]||statusMeta['PLANNED'];
+    return '<div style="flex:1;min-width:240px;background:#FBF8F1;border:1px solid #DED7C5;border-radius:12px;padding:16px 18px">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:9px">'
+      +'<span style="display:inline-flex;align-items:center;gap:7px;font:600 11px \'Hanken Grotesk\';color:'+m.c+';background:'+m.bg+';padding:4px 10px;border-radius:7px">'
+      +'<span style="width:7px;height:7px;border-radius:50%;background:'+m.c+(m.pulse?';animation:fiPulse 2.2s infinite':'')+'"></span>'+f.status+'</span>'
+      +'<span style="color:'+C.signal+';display:flex">'+icon('plug',15,2,C.signal)+'</span></div>'
+      +'<div style="font:600 15px \'Hanken Grotesk\';color:#16140F">'+f.name+'</div>'
+      +'<div style="font:400 12px/1.5 \'Hanken Grotesk\';color:#8A8474;margin-top:4px">'+f.detail+'</div></div>';
+  }).join('');
+
+  function stat(label,val,color){
+    return '<div style="flex:1;min-width:150px;background:#FBF8F1;border:1px solid #DED7C5;border-radius:11px;padding:14px 16px">'
+      +'<div style="font:500 10px \'Hanken Grotesk\';color:#8A8474;text-transform:uppercase;letter-spacing:.07em">'+label+'</div>'
+      +'<div style="font:700 22px \'IBM Plex Mono\';color:'+(color||'#16140F')+';margin-top:5px">'+val+'</div></div>';
+  }
+  var stats=stat('Feeds monitored',feeds.length)+stat('Raw articles processed',rawTotal.toLocaleString())
+    +stat('Relevant events extracted',totalRecords.toLocaleString(),C.comp)+stat('Coverage window',(FI&&FI.window)||'Live','#16140F');
+
+  var classCards=srcRows.map(function(s){
+    var chips=s.topDomains.map(function(t){
+      return '<span style="font:500 11px \'IBM Plex Mono\';background:#F0EBDE;color:#4A463C;padding:3px 8px;border-radius:6px">'+t.d+' <span style="color:#A79F8C">'+t.n+'</span></span>';
+    }).join(' ');
+    var mid=(s.trustMin+s.trustMax)/2;
+    var mcol=mid>=0.8?C.opp:mid>=0.5?C.gate:C.risk;
+    return '<div style="background:#FBF8F1;border:1px solid #E9E3D5;border-left:3px solid '+mcol+';border-radius:11px;padding:15px 18px">'
+      +'<div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px">'
+      +'<span style="font:600 15px \'Hanken Grotesk\';color:#16140F">'+s.name+'</span>'
+      +'<span style="font:600 11px \'IBM Plex Mono\';color:'+mcol+'">trust '+s.trustMin.toFixed(2)+'–'+s.trustMax.toFixed(2)+'</span>'
+      +'<span style="margin-left:auto;font:500 12px \'Hanken Grotesk\';color:#8A8474">'+s.outlets+' outlets · '+s.records+' events</span></div>'
+      +'<div style="display:flex;gap:6px;flex-wrap:wrap">'+(chips||'<span style="font:500 12px \'Hanken Grotesk\';color:#A79F8C">no records this window</span>')+'</div></div>';
+  }).join('');
+
+  var covRows=Object.keys(entities).map(function(id){
+    var e=entities[id];
+    return '<tr>'
+      +'<td style="padding:9px 12px;font:600 12.5px \'Hanken Grotesk\';color:#16140F;white-space:nowrap">'+e.name+'</td>'
+      +'<td style="padding:9px 12px;font:600 12px \'IBM Plex Mono\';color:#6E6858;text-align:right">'+((e.rawCount||0).toLocaleString())+'</td>'
+      +'<td style="padding:9px 12px;font:600 12px \'IBM Plex Mono\';color:'+C.comp+';text-align:right">'+(e.articleCount||0)+'</td>'
+      +'<td style="padding:9px 12px;font:600 12px \'IBM Plex Mono\';color:'+C.gate+';text-align:right">'+(e.quarantined||0)+'</td>'
+      +'<td style="padding:9px 12px;text-align:right"><span style="display:inline-flex;align-items:center;gap:6px;font:600 10.5px \'IBM Plex Mono\';color:'+C.opp+'"><span style="width:7px;height:7px;border-radius:50%;background:'+C.opp+';animation:fiPulse 2.2s infinite"></span>WATCHING</span></td></tr>';
+  }).join('');
+
+  return '<div style="padding:24px 30px 44px 30px;max-width:1120px;margin:0 auto">'
+    +'<div style="display:flex;align-items:flex-start;gap:15px;margin-bottom:22px">'
+    +'<div style="width:48px;height:48px;border-radius:12px;background:#E0EBF0;display:flex;align-items:center;justify-content:center;flex:0 0 auto">'+icon('activity',24,1.7,C.signal)+'</div>'
+    +'<div><h2 style="font:600 24px/1.05 \'Newsreader\',serif;color:#16140F;margin:0">What the platform is watching</h2>'
+    +'<p style="font:400 14px/1.5 \'Hanken Grotesk\';color:#4A463C;margin:7px 0 0 0;max-width:74ch">Continuous multi-feed ingestion across the coverage universe. Every article is entity-resolved, trust-weighted through the tollgate, and either scored or quarantined — nothing is silently dropped.</p></div></div>'
+    +'<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px">'+stats+'</div>'
+    +'<h4 style="font:700 12px \'Hanken Grotesk\';letter-spacing:.11em;text-transform:uppercase;color:#8A8474;margin:0 0 12px 0">Ingestion feeds</h4>'
+    +'<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px">'+feedCards+'</div>'
+    +(classCards?'<h4 style="font:700 12px \'Hanken Grotesk\';letter-spacing:.11em;text-transform:uppercase;color:#8A8474;margin:0 0 12px 0">Source classes observed · '+(FI?FI.window:'')+'</h4>'
+    +'<div style="display:flex;flex-direction:column;gap:10px;margin-bottom:26px">'+classCards+'</div>':'')
+    +'<h4 style="font:700 12px \'Hanken Grotesk\';letter-spacing:.11em;text-transform:uppercase;color:#8A8474;margin:0 0 12px 0">Entity coverage</h4>'
+    +'<div style="background:#FBF8F1;border:1px solid #DED7C5;border-radius:13px;padding:8px 10px;overflow-x:auto">'
+    +'<table style="border-collapse:collapse;width:100%"><thead><tr>'
+    +'<th style="padding:9px 12px;text-align:left;font:700 9.5px \'Hanken Grotesk\';letter-spacing:.1em;text-transform:uppercase;color:#8A8474">Entity</th>'
+    +'<th style="padding:9px 12px;text-align:right;font:700 9.5px \'Hanken Grotesk\';letter-spacing:.1em;text-transform:uppercase;color:#8A8474">Raw articles</th>'
+    +'<th style="padding:9px 12px;text-align:right;font:700 9.5px \'Hanken Grotesk\';letter-spacing:.1em;text-transform:uppercase;color:#8A8474">Relevant</th>'
+    +'<th style="padding:9px 12px;text-align:right;font:700 9.5px \'Hanken Grotesk\';letter-spacing:.1em;text-transform:uppercase;color:#8A8474">Quarantined</th>'
+    +'<th style="padding:9px 12px;text-align:right;font:700 9.5px \'Hanken Grotesk\';letter-spacing:.1em;text-transform:uppercase;color:#8A8474">Status</th>'
+    +'</tr></thead><tbody>'+covRows+'</tbody></table></div>'
+    +'</div>';
+}
+
 /* ------------ DISTRIBUTION ------------ */
 function renderDistribution(){
   var cards=indexOrder.map(function(k){
@@ -953,7 +1030,7 @@ function renderDrawer(){
 }
 
 /* ============================ RENDER ============================ */
-var viewRenderers={workbench:renderWorkbench,indices:renderIndices,tollgate:renderTollgate,scoring:renderScoring,pipeline:renderPipeline,distribution:renderDistribution};
+var viewRenderers={workbench:renderWorkbench,indices:renderIndices,tollgate:renderTollgate,scoring:renderScoring,pipeline:renderPipeline,sources:renderSources,distribution:renderDistribution};
 
 function render(){
   var app=document.getElementById('app');

@@ -258,9 +258,42 @@ def main():
         if override in out_entities:
             default_entity = override
 
+    # source-monitor summary: per source class, outlets and volumes actually seen
+    src_stats = {}
+    all_rows = [json.loads(l) for l in IN_PATH.read_text().splitlines() if l.strip()]
+    for r in all_rows:
+        s = src_stats.setdefault(r["source_class"], {"records": 0, "domains": {}})
+        s["records"] += 1
+        if r.get("domain"):
+            s["domains"][r["domain"]] = s["domains"].get(r["domain"], 0) + 1
+    sources = []
+    for cls in TRUST:
+        s = src_stats.get(cls, {"records": 0, "domains": {}})
+        top = sorted(s["domains"].items(), key=lambda kv: -kv[1])[:8]
+        row = TRUST[cls]
+        sources.append({
+            "name": cls, "records": s["records"], "outlets": len(s["domains"]),
+            "trustMin": min(row), "trustMax": max(row),
+            "topDomains": [{"d": d, "n": n} for d, n in top],
+        })
+    raw_dir = HERE.parent / "data" / "raw"
+    raw_total = 0
+    for ent in cfg["entities"]:
+        f = raw_dir / f"{ent['id']}.jsonl"
+        n = sum(1 for l in f.read_text().splitlines() if l.strip()) if f.exists() else 0
+        out_entities[ent["id"]]["rawCount"] = n
+        raw_total += n
+
     payload = {
         "generatedAt": SNAPSHOT.strftime("%Y-%m-%d"),
         "defaultEntity": default_entity,
+        "sources": sources,
+        "rawTotal": raw_total,
+        "feeds": [
+            {"name": "Google News RSS · India edition", "detail": str(len(cfg["entities"])) + " entity channels · month-sliced queries", "status": "LIVE"},
+            {"name": "GDELT DOC 2.0 API", "detail": "Global news firehose · quota-managed backfill", "status": "QUOTA-MANAGED"},
+            {"name": "GDELT Events (CAMEO)", "detail": "Structured event codes · cross-validation", "status": "PLANNED"},
+        ],
         "window": "Jan–Jun 2026",
         "sectorLabel": "Indian BFSI",
         "matrixSources": list(TRUST.keys()),
