@@ -42,7 +42,12 @@
 </head>
 <body>
 <div id="app"></div>
-<script src="data.js"></script>
+<script>
+// cache-busted data load: Pages/CDN caches aggressively; a stale data.js next
+// to a fresh index.html breaks the Source Monitor counts. document.write keeps
+// the load synchronous so FI_DATA exists before the app script runs.
+document.write('<scr'+'ipt src="data.js?v='+Date.now()+'"></scr'+'ipt>');
+</script>
 <script>
 (function(){
 'use strict';
