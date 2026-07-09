@@ -1,6 +1,7 @@
 # News-to-Insight — Client Demo Script
 
-**URL:** https://abhayypandeyy25.github.io/msci-news-to-insight/
+**URL:** [abhayypandeyy25.github.io/msci-news-to-insight](https://abhayypandeyy25.github.io/msci-news-to-insight/)
+
 **Length:** ~12–15 minutes + Q&A. Refresh the page once BEFORE the call starts.
 
 ---

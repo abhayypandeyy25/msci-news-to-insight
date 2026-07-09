@@ -1,5 +1,7 @@
 # private correspondence — never commit
 *.pdf
+# generated demo script is ours and safe to publish
+!DEMO.pdf
 
 # secrets
 pipeline/.env
