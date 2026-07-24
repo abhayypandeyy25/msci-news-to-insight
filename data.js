@@ -107,6 +107,36 @@ window.FI_DATA = {
    }
   }
  },
+ "apiStatus": {
+  "checkedAt": "2026-07-24 08:06 UTC",
+  "testQuery": "HDFC Bank",
+  "providers": [
+   {
+    "name": "NewsAPI.org",
+    "status": "WORKING",
+    "latencyMs": 1697,
+    "articles": 25,
+    "note": "Free dev tier: 100 req/day · 24h article delay · ~1 month history",
+    "extra": "715 total matches · 2026-07-23 newest"
+   },
+   {
+    "name": "NewsData.io",
+    "status": "NOT CONFIGURED",
+    "latencyMs": 0,
+    "articles": 0,
+    "note": "Awaiting API key (NEWSDATA_IO_KEY)",
+    "extra": ""
+   },
+   {
+    "name": "NewsAPI.ai",
+    "status": "NOT CONFIGURED",
+    "latencyMs": 0,
+    "articles": 0,
+    "note": "Awaiting API key (NEWSAPI_AI_KEY)",
+    "extra": ""
+   }
+  ]
+ },
  "sources": [
   {
    "name": "Regulator & exchange",

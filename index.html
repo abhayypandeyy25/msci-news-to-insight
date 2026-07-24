@@ -1201,14 +1201,38 @@ function renderSources(){
     {name:'Google News RSS · India edition',detail:'Entity channels · month-sliced queries',status:'LIVE'},
     {name:'GDELT DOC 2.0 API',detail:'Global news firehose · quota-managed backfill',status:'QUOTA-MANAGED'},
     {name:'GDELT Events (CAMEO)',detail:'Structured event codes · cross-validation',status:'PLANNED'}
-  ]).concat([
+  ]).concat(FI&&FI.apiStatus?[]:[
     {name:'NewsAPI.org',detail:'REST JSON headlines, 150,000+ sources — free tier is dev/test only',status:'CANDIDATE'},
     {name:'NewsData.io',detail:'Real-time + 10y historical, ~97,000 sources — free tier 12h delay',status:'CANDIDATE'},
-    {name:'NewsAPI.ai',detail:'Real-time + archive, token-based pay-as-you-go',status:'CANDIDATE'},
+    {name:'NewsAPI.ai',detail:'Real-time + archive, token-based pay-as-you-go',status:'CANDIDATE'}
+  ]).concat([
     {name:'Reuters News Wire',detail:'Wholesale licensed wire feed — fast, trusted journalism',status:'PREMIUM · ROADMAP'},
     {name:'Factiva (Dow Jones)',detail:'~32,000+ sources · 200+ countries · 28+ languages',status:'PREMIUM · ROADMAP'},
     {name:'LexisNexis / Law360',detail:'Specialist legal & business news, litigation analysis',status:'PREMIUM · ROADMAP'}
   ]);
+
+  // live API status panel (real test calls made by pipeline/api_status.py)
+  var apiPanel='';
+  if(FI&&FI.apiStatus){
+    var stMeta={ 'WORKING':{c:C.opp,bg:C.oppBg,pulse:true}, 'FAILED':{c:C.risk,bg:C.riskBg,pulse:false}, 'NOT CONFIGURED':{c:C.mute,bg:'#EFEADD',pulse:false} };
+    var cardsApi=FI.apiStatus.providers.map(function(p){
+      var m=stMeta[p.status]||stMeta['NOT CONFIGURED'];
+      return '<div style="flex:1;min-width:250px;background:#FBF8F1;border:1px solid '+(p.status==='WORKING'?'#BCD6C4':'#DED7C5')+';border-radius:12px;padding:16px 18px">'
+        +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">'
+        +'<span style="display:inline-flex;align-items:center;gap:7px;font:600 11px \'Hanken Grotesk\';color:'+m.c+';background:'+m.bg+';padding:4px 10px;border-radius:7px">'
+        +'<span style="width:7px;height:7px;border-radius:50%;background:'+m.c+(m.pulse?';animation:fiPulse 2.2s infinite':'')+'"></span>'+p.status+'</span>'
+        +(p.status==='WORKING'?'<span style="font:600 11px \'IBM Plex Mono\';color:#6E6858">'+p.latencyMs+'ms</span>':'')+'</div>'
+        +'<div style="font:600 15px \'Hanken Grotesk\';color:#16140F">'+p.name+'</div>'
+        +(p.status==='WORKING'
+          ?'<div style="font:500 12px \'IBM Plex Mono\';color:'+C.opp+';margin-top:5px">'+p.articles+' articles returned</div>'
+           +(p.extra?'<div style="font:400 11.5px \'Hanken Grotesk\';color:#4A463C;margin-top:3px">'+p.extra+'</div>':'')
+          :(p.extra?'<div style="font:400 11.5px \'Hanken Grotesk\';color:'+C.risk+';margin-top:5px">'+p.extra+'</div>':''))
+        +'<div style="font:400 11px/1.5 \'Hanken Grotesk\';color:#8A8474;margin-top:7px;padding-top:7px;border-top:1px solid #EDE7D9">'+p.note+'</div></div>';
+    }).join('');
+    apiPanel='<div style="display:flex;align-items:baseline;gap:10px;margin:0 0 12px 0"><h4 style="font:700 12px \'Hanken Grotesk\';letter-spacing:.11em;text-transform:uppercase;color:#8A8474;margin:0">News API status · live checks</h4>'
+      +'<span style="font:500 11px \'Hanken Grotesk\';color:#A79F8C">test query "'+FI.apiStatus.testQuery+'" · verified '+FI.apiStatus.checkedAt+'</span></div>'
+      +'<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px">'+cardsApi+'</div>';
+  }
   var srcRows=(FI&&FI.sources)||[];
   var totalRecords=srcRows.reduce(function(a,s){return a+s.records;},0);
   var rawTotal=(FI&&FI.rawTotal)||0;
@@ -1264,6 +1288,7 @@ function renderSources(){
     +'<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px">'+stats+'</div>'
     +'<h4 style="font:700 12px \'Hanken Grotesk\';letter-spacing:.11em;text-transform:uppercase;color:#8A8474;margin:0 0 12px 0">Ingestion feeds</h4>'
     +'<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px">'+feedCards+'</div>'
+    +apiPanel
     +(classCards?'<h4 style="font:700 12px \'Hanken Grotesk\';letter-spacing:.11em;text-transform:uppercase;color:#8A8474;margin:0 0 12px 0">Source classes observed · '+(FI?FI.window:'')+'</h4>'
     +'<div style="display:flex;flex-direction:column;gap:10px;margin-bottom:26px">'+classCards+'</div>':'')
     +'<h4 style="font:700 12px \'Hanken Grotesk\';letter-spacing:.11em;text-transform:uppercase;color:#8A8474;margin:0 0 12px 0">Entity coverage</h4>'

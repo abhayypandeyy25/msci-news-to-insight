@@ -286,11 +286,14 @@ def main():
         raw_total += n
 
     trust_profiles = json.loads((HERE / "trust_profiles.json").read_text())
+    api_status_file = HERE.parent / "data" / "api_status.json"
+    api_status = json.loads(api_status_file.read_text()) if api_status_file.exists() else None
 
     payload = {
         "generatedAt": SNAPSHOT.strftime("%Y-%m-%d"),
         "defaultEntity": default_entity,
         "trustProfiles": trust_profiles,
+        "apiStatus": api_status,
         "sources": sources,
         "rawTotal": raw_total,
         "feeds": [
