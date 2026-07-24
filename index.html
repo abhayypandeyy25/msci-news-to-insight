@@ -365,8 +365,8 @@ function timeDays(t){
   return m[2]==='h'?0:m[2]==='d'?n:m[2]==='w'?n*7:n*30;
 }
 
-var titleMap = {monitor:'Watchlist Monitor',setup1:'Build your watchlist',setup2:'Choose your sources',alerts:'Alert Rules',workbench:'Analyst Workbench',indices:'Index Suite',tollgate:'Trust Tollgate',scoring:'Scoring Model',pipeline:'Pipeline Architecture',sources:'Source Monitor',distribution:'Distribution'};
-var kickerMap = {monitor:'Coverage overview · live signals',setup1:'Setup · step 1 of 2',setup2:'Setup · step 2 of 2',alerts:'Thresholds · channels · batching',workbench:'Entity analysis',indices:'Six indices · one composite',tollgate:'Source × sector credibility',scoring:'Shared event engine',pipeline:'News → insight flow',sources:'Ingestion coverage · 24×7',distribution:'API · licensing · narratives'};
+var titleMap = {monitor:'Watchlist Monitor',articles:'Article Explorer',setup1:'Build your watchlist',setup2:'Choose your sources',alerts:'Alert Rules',workbench:'Analyst Workbench',indices:'Index Suite',tollgate:'Trust Tollgate',scoring:'Scoring Model',pipeline:'Pipeline Architecture',sources:'Source Monitor',distribution:'Distribution'};
+var kickerMap = {monitor:'Coverage overview · live signals',articles:'Every fetched article · nothing hidden',setup1:'Setup · step 1 of 2',setup2:'Setup · step 2 of 2',alerts:'Thresholds · channels · batching',workbench:'Entity analysis',indices:'Six indices · one composite',tollgate:'Source × sector credibility',scoring:'Shared event engine',pipeline:'News → insight flow',sources:'Ingestion coverage · 24×7',distribution:'API · licensing · narratives'};
 
 /* ============================ MODEL ============================ */
 function eventScore(e){ var cred=cellVal(e.source,e.sourceSector); return e.sev*cred*e.corr*e.vel*e.stg*e.dec; }
@@ -405,7 +405,7 @@ function totalQuarantined(){
 function renderSidebar(){
   var groups=[
     {label:'Setup',items:[['setup1','Companies','landmark'],['setup2','Sources','plug']]},
-    {label:'Analysis',items:[['monitor','Watchlist Monitor','layout-dashboard'],['workbench','Workbench','newspaper'],['indices','Index Suite','layers']]},
+    {label:'Analysis',items:[['monitor','Watchlist Monitor','layout-dashboard'],['articles','Articles','file-text'],['workbench','Workbench','newspaper'],['indices','Index Suite','layers']]},
     {label:'Trust & Scoring',items:[['tollgate','Trust Tollgate','shield-check'],['scoring','Scoring Model','gauge'],['alerts','Alerts','bell']]},
     {label:'Platform',items:[['pipeline','Pipeline','git-branch'],['sources','Source Monitor','activity'],['distribution','Distribution','share']]}
   ];
@@ -453,6 +453,115 @@ function renderHeader(){
     +'<button class="icon-btn" style="width:36px;height:36px;border-radius:8px;border:1px solid #DED7C5;background:#F5F1E8;display:flex;align-items:center;justify-content:center;color:#4A463C;cursor:pointer;position:relative">'+icon('bell',17)
     +'<span style="position:absolute;top:8px;right:9px;width:6px;height:6px;border-radius:50%;background:#A8331F;border:1.5px solid #F5F1E8"></span></button>'
     +'</div></header>';
+}
+
+/* ------------ ARTICLE EXPLORER ------------ */
+var artF={ent:'all',month:'all',src:'all',band:'all',disp:'all',origin:'all',q:'',limit:50};
+var articlesLoading=false;
+function loadArticles(){
+  if(window.FI_ARTICLES||articlesLoading) return;
+  articlesLoading=true;
+  var s=document.createElement('script');
+  s.src='articles.js?v='+Date.now();
+  s.onload=function(){ articlesLoading=false; if(state.view==='articles') render(); };
+  s.onerror=function(){ articlesLoading=false; window.FI_ARTICLES={counts:{total:0},articles:[],error:true}; if(state.view==='articles') render(); };
+  document.body.appendChild(s);
+}
+var MONTH_NAMES={'202601':'Jan','202602':'Feb','202603':'Mar','202604':'Apr','202605':'May','202606':'Jun','202607':'Jul (live)'};
+function renderArticles(){
+  if(!FI) return '<div style="padding:40px;text-align:center;font:500 13px \'Hanken Grotesk\';color:#A79F8C">Article explorer needs real data — generate data.js with the pipeline.</div>';
+  if(!window.FI_ARTICLES){
+    loadArticles();
+    return '<div style="padding:60px;text-align:center"><div style="font:600 14px \'Hanken Grotesk\';color:#6E6858">Loading article corpus…</div><div style="font:500 11.5px \'Hanken Grotesk\';color:#A79F8C;margin-top:6px">~7,000 fetched articles, one-time load</div></div>';
+  }
+  var A=window.FI_ARTICLES;
+  if(A.error) return '<div style="padding:40px;text-align:center;font:500 13px \'Hanken Grotesk\';color:'+C.risk+'">articles.js failed to load — run pipeline/build_articles.py</div>';
+
+  var wl=watchIds();
+  var rows=A.articles.filter(function(a){
+    if(wl.indexOf(a.e)<0) return false;
+    if(artF.ent!=='all'&&a.e!==artF.ent) return false;
+    if(artF.month!=='all'&&a.d.slice(0,6)!==artF.month) return false;
+    if(artF.origin!=='all'&&a.o!==artF.origin) return false;
+    if(artF.disp!=='all'&&String(a.s)!==artF.disp) return false;
+    if(artF.src!=='all'&&source_class_of(a.dm)!==artF.src) return false;
+    if(artF.band!=='all'){
+      var p=trustProfileFor(a.dm,source_class_of(a.dm));
+      if(!p||p.band!==artF.band) return false;
+    }
+    if(artF.q&&a.t.toLowerCase().indexOf(artF.q)<0) return false;
+    return true;
+  });
+
+  function sel(name,opts,cur){
+    return '<select data-artf="'+name+'" style="font:500 12px \'Hanken Grotesk\';color:#16140F;background:#FBF8F1;border:1px solid #DED7C5;border-radius:8px;padding:7px 10px;outline:none">'
+      +opts.map(function(o){ return '<option value="'+o[0]+'"'+(cur===o[0]?' selected':'')+'>'+o[1]+'</option>'; }).join('')+'</select>';
+  }
+  var entOpts=[['all','All entities']].concat(wl.map(function(id){ return [id,entities[id].ticker]; }));
+  var monthOpts=[['all','All months']].concat(Object.keys(MONTH_NAMES).map(function(m){ return [m,MONTH_NAMES[m]+' 2026']; }));
+  var srcOpts=[['all','All source classes']].concat((FI.sources||[]).map(function(s){ return [s.name,s.name]; }));
+  var dispOpts=[['all','All dispositions'],['1','Scored'],['2','Quarantined'],['0','Filtered out']];
+  var originOpts=[['all','All feeds'],['Google News RSS','Google News RSS'],['GDELT','GDELT'],['NewsAPI.org','NewsAPI.org']];
+  var bandOpts=[['all','Any trust'],['High','High trust'],['Medium','Medium trust'],['Low','Low trust']];
+
+  var list=rows.slice(0,artF.limit).map(function(a){
+    var dispBadge;
+    if(a.s===1){
+      var ix=indices[a.ix];
+      dispBadge=a.ev
+        ?'<button data-act="drawer" data-id="'+a.ev+'" style="cursor:pointer;border:none;font:600 10px \'Hanken Grotesk\';color:'+ix.color+';background:'+rgba(ix.color,0.12)+';padding:3px 9px;border-radius:6px">SCORED → '+ix.name+' ⌕</button>'
+        :'<span style="font:600 10px \'Hanken Grotesk\';color:'+ix.color+';background:'+rgba(ix.color,0.12)+';padding:3px 9px;border-radius:6px">SCORED → '+ix.name+'</span>';
+    } else if(a.s===2){
+      dispBadge='<span style="font:600 10px \'Hanken Grotesk\';color:#B5791A;background:#F6EBD6;padding:3px 9px;border-radius:6px">QUARANTINED</span>';
+    } else {
+      dispBadge='<span style="font:600 10px \'Hanken Grotesk\';color:#A79F8C;background:#EFEADD;padding:3px 9px;border-radius:6px">FILTERED</span>';
+    }
+    var dstr=a.d?a.d.slice(6,8)+' '+(MONTH_NAMES[a.d.slice(0,6)]||a.d.slice(4,6)):'—';
+    return '<div style="display:flex;align-items:center;gap:11px;padding:10px 2px;border-bottom:1px solid #EDE7D9">'
+      +'<span style="flex:0 0 52px;font:500 11px \'IBM Plex Mono\';color:#8A8474">'+dstr+'</span>'
+      +'<span style="flex:0 0 78px;font:600 10.5px \'IBM Plex Mono\';color:#4A463C">'+entities[a.e].ticker+'</span>'
+      +'<a href="'+a.u+'" target="_blank" rel="noopener" style="flex:1;min-width:0;font:500 12.5px/1.35 \'Hanken Grotesk\';color:#16140F;text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" class="q-title">'+a.t+'</a>'
+      +'<span data-trust="'+a.dm+'" data-trust-class="'+source_class_of(a.dm)+'" style="flex:0 0 auto;font:500 10.5px \'IBM Plex Mono\';color:#8A8474;background:#F0EBDE;padding:2px 8px;border-radius:5px;max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+a.dm+'</span>'
+      +'<span style="flex:0 0 auto;font:500 9.5px \'Hanken Grotesk\';color:#B0A891">'+a.o.replace('Google News ','')+'</span>'
+      +'<span style="flex:0 0 auto">'+dispBadge+'</span></div>';
+  }).join('');
+
+  return '<div style="padding:24px 30px 44px 30px;max-width:1320px;margin:0 auto">'
+    +'<div style="display:flex;align-items:flex-start;gap:15px;margin-bottom:18px">'
+    +'<div style="width:48px;height:48px;border-radius:12px;background:#E0EBF0;display:flex;align-items:center;justify-content:center;flex:0 0 auto">'+icon('file-text',24,1.7,C.signal)+'</div>'
+    +'<div><h2 style="font:600 24px/1.05 \'Newsreader\',serif;color:#16140F;margin:0">Every article the platform fetched</h2>'
+    +'<p style="font:400 14px/1.5 \'Hanken Grotesk\';color:#4A463C;margin:7px 0 0 0;max-width:76ch">'+A.counts.total.toLocaleString()+' fetched · '+A.counts.scored.toLocaleString()+' scored · '+A.counts.quarantined+' quarantined · '+A.counts.filtered.toLocaleString()+' filtered as roundups, duplicates, or passing mentions. Nothing is silently dropped — every disposition is inspectable.</p></div></div>'
+    +'<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px">'
+    +'<input id="art-q" placeholder="Search headlines…" value="'+artF.q.replace(/"/g,'&quot;')+'" style="width:220px" />'
+    +sel('ent',entOpts,artF.ent)+sel('month',monthOpts,artF.month)+sel('src',srcOpts,artF.src)+sel('band',bandOpts,artF.band)+sel('disp',dispOpts,artF.disp)+sel('origin',originOpts,artF.origin)
+    +'<span style="display:inline-flex;align-items:center;gap:5px;font:600 11px \'Hanken Grotesk\';color:#4A463C;background:#EFEADD;padding:6px 11px;border-radius:8px">'+icon('flag',11,2)+'Region: India <span style="color:#B0A891">· global roadmap</span></span>'
+    +'<button data-act="art-clear" style="font:600 11.5px \'Hanken Grotesk\';color:#5A4A8C;background:none;border:none;cursor:pointer">Clear filters</button></div>'
+    +'<div style="font:500 11.5px \'Hanken Grotesk\';color:#8A8474;margin-bottom:8px">'+rows.length.toLocaleString()+' articles match</div>'
+    +'<div style="background:#FBF8F1;border:1px solid #DED7C5;border-radius:13px;padding:6px 16px">'
+    +(list||'<div style="padding:24px;text-align:center;font:500 12.5px \'Hanken Grotesk\';color:#A79F8C">No articles match these filters.</div>')
+    +'</div>'
+    +(rows.length>artF.limit?'<div style="text-align:center;margin-top:14px"><button data-act="art-more" style="font:600 12.5px \'Hanken Grotesk\';color:#16140F;background:#FBF8F1;border:1px solid #DED7C5;border-radius:9px;padding:10px 22px;cursor:pointer">Show 100 more · '+(rows.length-artF.limit).toLocaleString()+' remaining</button></div>':'')
+    +'</div>';
+}
+// domain -> source class, mirrored from the pipeline mapping (UI-side, for filtering)
+var SRC_CLASS_CACHE={};
+function source_class_of(dm){
+  if(SRC_CLASS_CACHE[dm]!==undefined) return SRC_CLASS_CACHE[dm];
+  var d=(dm||'').toLowerCase(), cls='Aggregators & other';
+  var map=[
+    ['Regulator & exchange',['rbi.org.in','sebi.gov.in','nseindia','bseindia','irdai','pib.gov.in']],
+    ['Agency wires',['reuters','ptinews','aninews','ians','bloomberg','apnews']],
+    ['Business press',['economictimes','livemint','business-standard','moneycontrol','businesstoday','financialexpress','thehindubusinessline','businessline','cnbctv18','zeebiz','ndtvprofit','bqprime','fortuneindia','forbesindia']],
+    ['General & regional press',['timesofindia','hindustantimes','thehindu','indianexpress','news18','indiatoday','deccanherald','telegraphindia','tribuneindia','freepressjournal','dnaindia','firstpost','theprint','thewire','scroll.in','oneindia','dailyhunt','amarujala','bhaskar','jagran','navbharattimes','zeenews','abplive','ndtv.com']]
+  ];
+  for(var i=0;i<map.length;i++){
+    for(var j=0;j<map[i][1].length;j++){
+      if(d.indexOf(map[i][1][j])>=0){ cls=map[i][0]; break; }
+    }
+    if(cls!=='Aggregators & other') break;
+  }
+  SRC_CLASS_CACHE[dm]=cls;
+  return cls;
 }
 
 /* ------------ SETUP WIZARD ------------ */
@@ -1496,7 +1605,7 @@ function renderDrawer(){
 }
 
 /* ============================ RENDER ============================ */
-var viewRenderers={monitor:renderMonitor,setup1:renderSetup1,setup2:renderSetup2,alerts:renderAlerts,workbench:renderWorkbench,indices:renderIndices,tollgate:renderTollgate,scoring:renderScoring,pipeline:renderPipeline,sources:renderSources,distribution:renderDistribution};
+var viewRenderers={monitor:renderMonitor,articles:renderArticles,setup1:renderSetup1,setup2:renderSetup2,alerts:renderAlerts,workbench:renderWorkbench,indices:renderIndices,tollgate:renderTollgate,scoring:renderScoring,pipeline:renderPipeline,sources:renderSources,distribution:renderDistribution};
 
 function render(){
   if(!entities[state.entity]||watchIds().indexOf(state.entity)<0) state.entity=watchIds()[0];
@@ -1578,6 +1687,18 @@ document.getElementById('app').addEventListener('click',function(ev){
   else if(act==='alert-toggle'){ alertsInit(); state.alerts[t.getAttribute('data-id')].on=!state.alerts[t.getAttribute('data-id')].on; saveSetup(); render(); }
   else if(act==='ch-toggle'){ alertsInit(); var ch=t.getAttribute('data-id'); state.alertChannels[ch]=!state.alertChannels[ch]; saveSetup(); render(); }
   else if(act==='alerts-save'){ saveSetup(); toast('Alert rules saved — '+ALERT_RULES.filter(function(r){return state.alerts[r.id].on;}).length+' active rules, '+ALERT_CHANNELS.filter(function(c){return state.alertChannels[c[0]];}).length+' channels'); }
+  else if(act==='art-more'){ artF.limit+=100; render(); }
+  else if(act==='art-clear'){ artF={ent:'all',month:'all',src:'all',band:'all',disp:'all',origin:'all',q:'',limit:50}; render(); }
+});
+
+// article-explorer filter selects
+document.getElementById('app').addEventListener('change',function(ev){
+  var t=ev.target;
+  if(t.matches&&t.matches('select[data-artf]')){
+    artF[t.getAttribute('data-artf')]=t.value;
+    artF.limit=50;
+    render();
+  }
 });
 
 function toast(msg){
@@ -1615,6 +1736,20 @@ document.getElementById('app').addEventListener('input',function(ev){
   }
   if(t.matches&&t.matches('[data-alert-batch]')){
     state.alertBatch=t.checked; saveSetup();
+    return;
+  }
+  if(t.id==='art-q'){
+    artF.q=t.value.trim().toLowerCase();
+    artF.limit=50;
+    // re-render list only, preserving input focus
+    clearTimeout(window._artT);
+    window._artT=setTimeout(function(){
+      var scroll=document.getElementById('main')?document.getElementById('main').scrollTop:0;
+      render();
+      var q2=document.getElementById('art-q');
+      if(q2){ q2.focus(); q2.setSelectionRange(q2.value.length,q2.value.length); }
+      if(document.getElementById('main')) document.getElementById('main').scrollTop=scroll;
+    },250);
     return;
   }
   if(t.id==='wl-search'){
