@@ -1,0 +1,141 @@
+<h2 class="sr-only">Entity detail view for IIFL Finance: composite health score, six sub-index breakdown, score history with decay and reignition, and the event timeline driving the scores.</h2>
+
+<div style="padding:1rem 0;font-family:var(--font-sans);">
+
+<button onclick="sendPrompt('Take me back to the dashboard.')" style="font-size:12px;color:var(--text-secondary);background:none;border:none;cursor:pointer;padding:0;margin-bottom:14px;"><i class="ti ti-arrow-left" style="font-size:14px;vertical-align:-2px;" aria-hidden="true"></i> Back to watchlist</button>
+
+<div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:20px;">
+  <div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="width:44px;height:44px;border-radius:10px;background:var(--surface-3);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;color:var(--text-secondary);">IF</div>
+      <div>
+        <h3 style="font-size:19px;font-weight:500;margin:0;">IIFL Finance</h3>
+        <p style="font-size:12px;color:var(--text-secondary);margin:2px 0 0;">NBFC · BFSI · India &nbsp;·&nbsp; NSE: IIFL</p>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex;gap:10px;align-items:center;">
+    <div style="text-align:right;">
+      <p style="font-size:12px;color:var(--text-secondary);margin:0;">Entity health score</p>
+      <p style="font-size:15px;font-weight:500;margin:2px 0 0;">42 <span style="font-size:12px;color:var(--text-secondary);">/ 100</span></p>
+    </div>
+    <div style="width:1px;height:34px;background:var(--border);"></div>
+    <div style="text-align:right;">
+      <p style="font-size:12px;color:var(--text-secondary);margin:0;">Controversy</p>
+      <p style="font-size:15px;font-weight:500;margin:2px 0 0;color:var(--text-danger);">71 <span style="font-size:12px;">▲18</span></p>
+    </div>
+  </div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;margin-bottom:22px;">
+
+  <div>
+    <div style="font-size:13px;font-weight:500;margin-bottom:10px;">Controversy score — 90 days</div>
+    <svg viewBox="0 0 340 150" style="width:100%;height:auto;" role="img" aria-label="Controversy score over 90 days showing a spike, decay, and reignition">
+      <line x1="30" y1="10" x2="30" y2="120" stroke="var(--border)" stroke-width="1"/>
+      <line x1="30" y1="120" x2="335" y2="120" stroke="var(--border)" stroke-width="1"/>
+      <text x="4" y="24" font-size="9" fill="var(--text-muted)" font-family="sans-serif">80</text>
+      <text x="4" y="72" font-size="9" fill="var(--text-muted)" font-family="sans-serif">40</text>
+      <text x="4" y="118" font-size="9" fill="var(--text-muted)" font-family="sans-serif">0</text>
+      <line x1="30" y1="48" x2="335" y2="48" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.5"/>
+      <text x="300" y="45" font-size="8" fill="var(--text-muted)" font-family="sans-serif">alert 60</text>
+      <path d="M30 108 L70 104 L95 40 L130 58 L160 70 L185 66 L205 30 L240 44 L275 52 L310 56 L335 58"
+        fill="none" stroke="var(--text-danger)" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M30 108 L70 104 L95 40 L130 58 L160 70 L185 66 L205 30 L240 44 L275 52 L310 56 L335 58 L335 120 L30 120 Z"
+        fill="var(--text-danger)" opacity="0.08"/>
+      <circle cx="95" cy="40" r="3" fill="var(--text-danger)"/>
+      <circle cx="205" cy="30" r="3" fill="var(--text-danger)"/>
+      <text x="80" y="32" font-size="8.5" fill="var(--text-secondary)" font-family="sans-serif">RBI action</text>
+      <text x="182" y="22" font-size="8.5" fill="var(--text-secondary)" font-family="sans-serif">reignited</text>
+    </svg>
+    <div style="font-size:11.5px;color:var(--text-muted);margin-top:4px;display:flex;gap:14px;flex-wrap:wrap;">
+      <span><i class="ti ti-trending-up" style="font-size:12px;vertical-align:-2px;color:var(--text-danger);" aria-hidden="true"></i> Spike on regulatory event</span>
+      <span><i class="ti ti-trending-down" style="font-size:12px;vertical-align:-2px;" aria-hidden="true"></i> Decay as it aged</span>
+      <span><i class="ti ti-refresh" style="font-size:12px;vertical-align:-2px;color:var(--text-danger);" aria-hidden="true"></i> Reignited on follow-up</span>
+    </div>
+  </div>
+
+  <div>
+    <div style="font-size:13px;font-weight:500;margin-bottom:10px;">Index breakdown</div>
+    <div id="indices" style="display:flex;flex-direction:column;gap:7px;"></div>
+  </div>
+
+</div>
+
+<div style="border-top:0.5px solid var(--border);margin:0 0 16px;"></div>
+
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+  <div style="display:flex;align-items:center;gap:7px;">
+    <i class="ti ti-timeline" style="font-size:16px;color:var(--text-secondary);" aria-hidden="true"></i>
+    <span style="font-size:14px;font-weight:500;">Event timeline — what's driving the score</span>
+  </div>
+  <span style="font-size:12px;color:var(--text-muted);">most recent first</span>
+</div>
+
+<div id="timeline" style="display:flex;flex-direction:column;gap:0;"></div>
+
+</div>
+
+<script>
+(function(){
+  function band(w){if(w>=0.8)return{bg:'#E1F5EE',fg:'#0F6E56',l:'High'};if(w>=0.5)return{bg:'#FAEEDA',fg:'#854F0B',l:'Med'};return{bg:'#FCEBEB',fg:'#A32D2D',l:'Low'};}
+
+  var INDICES=[
+    {n:"Controversy",v:71,side:"risk",flag:true},
+    {n:"Risk",v:48,side:"risk"},
+    {n:"ESG",v:33,side:"risk"},
+    {n:"Momentum",v:29,side:"opp"},
+    {n:"Catalyst",v:22,side:"opp"},
+    {n:"Sentiment",v:38,side:"opp"}
+  ];
+  var ib=document.getElementById('indices');
+  INDICES.forEach(function(x){
+    var risk=x.side==="risk";
+    var col=risk?'#A32D2D':'#3B6D11';var track=risk?'#F7C1C1':'#C0DD97';
+    var row=document.createElement('button');
+    row.style.cssText='display:flex;align-items:center;gap:10px;padding:7px 9px;border-radius:9px;border:0.5px solid '+(x.flag?col:'var(--border)')+';background:var(--surface-2);cursor:pointer;text-align:left;';
+    row.innerHTML='<span style="font-size:12.5px;min-width:78px;">'+x.n+'</span>'+
+      '<span style="flex:1;height:7px;border-radius:5px;background:var(--surface-3);position:relative;overflow:hidden;">'+
+      '<span style="position:absolute;left:0;top:0;bottom:0;width:'+x.v+'%;background:'+track+';"></span></span>'+
+      '<span style="font-size:13px;font-weight:500;min-width:24px;text-align:right;color:'+col+';">'+x.v+'</span>';
+    row.onclick=function(){sendPrompt('Break down the '+x.n+' index for IIFL Finance — which component events contribute and their weights.');};
+    ib.appendChild(row);
+  });
+
+  var EVENTS=[
+    {stage:"Investigation",dir:"adverse",pillar:"Legal & compliance",title:"Follow-up regulatory review reported",src:"SEBI / RBI",w:0.95,contrib:"+2.4",date:"3 days ago",note:"Reignited the score — reset the decay clock"},
+    {stage:"Allegation",dir:"adverse",pillar:"PR & reputational",title:"Media coverage on lending practices",src:"Economic Times",w:0.79,contrib:"+0.7",date:"12 days ago"},
+    {stage:"Charge",dir:"adverse",pillar:"Legal & compliance",title:"RBI restriction on specific loan segment",src:"SEBI / RBI",w:0.96,contrib:"+3.1",date:"41 days ago",note:"Original trigger event — highest severity"},
+    {stage:"Resolved",dir:"positive",pillar:"Financial",title:"Capital raise to strengthen balance sheet",src:"NSE / BSE",w:0.94,contrib:"−0.9",date:"55 days ago",note:"Momentum-side offset"},
+    {stage:"Allegation",dir:"adverse",pillar:"Operational",title:"Branch-level compliance lapse flagged",src:"Social stream",w:0.33,contrib:"quarantined",date:"60 days ago",note:"Low trust — held pending corroboration"}
+  ];
+
+  var tl=document.getElementById('timeline');
+  EVENTS.forEach(function(ev,i){
+    var b=band(ev.w);
+    var adverse=ev.dir==="adverse";
+    var quarantined=ev.contrib==="quarantined";
+    var row=document.createElement('button');
+    row.style.cssText='display:flex;gap:12px;padding:13px 4px;text-align:left;background:none;border:none;'+(i>0?'border-top:0.5px solid var(--border);':'')+'cursor:pointer;width:100%;';
+    var dot=quarantined?'var(--text-muted)':(adverse?'#A32D2D':'#3B6D11');
+    row.innerHTML=
+      '<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;padding-top:2px;">'+
+        '<span style="width:10px;height:10px;border-radius:50%;background:'+dot+';"></span>'+
+        (i<EVENTS.length-1?'<span style="width:1px;flex:1;background:var(--border);margin-top:4px;min-height:24px;"></span>':'')+
+      '</div>'+
+      '<div style="flex:1;min-width:0;">'+
+        '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:2px;">'+
+          '<span style="font-size:13.5px;font-weight:500;">'+ev.title+'</span>'+
+          '<span style="font-size:10px;padding:1px 7px;border-radius:20px;background:var(--surface-3);color:var(--text-secondary);">'+ev.stage+'</span>'+
+        '</div>'+
+        '<div style="font-size:12px;color:var(--text-secondary);margin-bottom:4px;">'+ev.pillar+' · '+ev.date+(ev.note?' · '+ev.note:'')+'</div>'+
+        '<div style="display:flex;align-items:center;gap:8px;">'+
+          '<span style="font-size:10.5px;padding:1px 8px;border-radius:20px;background:'+b.bg+';color:'+b.fg+';">'+ev.src+' · '+b.l+' '+ev.w.toFixed(2)+'</span>'+
+        '</div>'+
+      '</div>'+
+      '<div style="flex-shrink:0;align-self:center;font-size:13px;font-weight:500;color:'+(quarantined?'var(--text-muted)':(adverse?'var(--text-danger)':'#3B6D11'))+';min-width:70px;text-align:right;">'+ev.contrib+'</div>';
+    row.onclick=function(){sendPrompt('Show the source article and full scoring detail for the event: '+ev.title+' on IIFL Finance.');};
+    tl.appendChild(row);
+  });
+})();
+</script>

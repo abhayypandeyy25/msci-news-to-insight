@@ -1,8 +1,8 @@
-# News-to-Insight — Client Demo Script
+# News-to-Insight — Client Demo Script (v2)
 
 **URL:** [abhayypandeyy25.github.io/msci-news-to-insight](https://abhayypandeyy25.github.io/msci-news-to-insight/)
 
-**Length:** ~12–15 minutes + Q&A. Refresh the page once BEFORE the call starts.
+**Length:** ~15 minutes + Q&A. Refresh the page once BEFORE the call starts.
 
 ---
 
@@ -12,130 +12,111 @@
 > flow 24×7 — public feeds today, licensed feeds in production — and converts it into
 > six scored indices per company: three on the risk side (Controversy, Risk, ESG) and
 > three on the opportunity side (Momentum, Catalyst, Sentiment), netted into a single
-> 0–100 health score. The key differentiator: every single point on every score drills
-> down to dated, sourced, corroborated news events. Nothing is a black box.
-> And what you're seeing today is not mock data — this is six months of real news,
-> January to June 2026, across 15 Indian banks and NBFCs: about 7,000 articles
-> distilled into 1,700 scored events."
+> 0–100 health score. Analysts set up their own watchlist and source mix, monitor
+> everything from one screen, and tune their own alerts. The key differentiator:
+> every single point on every score drills down to dated, sourced, corroborated news
+> events — and every source carries an explainable trust insight. This is real data:
+> January to June 2026, 15 Indian banks and NBFCs, ~7,000 articles distilled into
+> 1,700 scored events."
 
 ---
 
-## Act 1 — The hero story (Workbench, ~4 min)
+## Act 1 — The setup story (Companies + Sources, ~2 min)
 
-The app opens on **Kotak Mahindra Bank** deliberately. Tell the story:
+Start in the sidebar **Setup** group — this answers "how would MY team use it?"
 
-**Say:** "Let me show you why Kotak is front and center. Through this window, a real
-controversy played out — ₹150 crore of Panchkula Municipal Corporation fixed deposits
-went missing at a Kotak branch. Watch how the platform tracked it."
+1. **Companies:** show the sector chips (bulk-add BFSI segments), search, paste-a-list,
+   and the "Recommended for you" suggestions. Toggle the NBFC chip off and on — watch
+   the tracking count change. **Say:** "The watchlist scopes everything — monitor,
+   feeds, alerts."
+2. **Sources:** each source class carries its real sector-calibrated trust weight —
+   **hover a weight badge** to show the trust insight card. Toggle "Aggregators &
+   other" off: the metrics update and its events vanish from every feed. Point at the
+   **premium roadmap rows** (Reuters Wire, Factiva, LexisNexis) — "production source
+   strategy, already framed."
 
-**Point at (top to bottom):**
-1. **Health score 53 — "Watch"** — and the declining 12-week history sparkline.
-2. **The netting bar** — "opportunity side 38 vs risk side 34 — good news offsets bad,
-   it's not a naive bad-news counter."
-3. **Six index cards** — Controversy at 60 is the cohort max. "Each card is one lens;
-   click one and the feed filters to just those events."
-4. **Live event stream** — scroll slowly. The arc is visible as separate events:
-   FD fraud discovered → staff arrested → **ED PMLA raids** → ex-VP arrested →
-   Haryana de-empanels Kotak. Plus the CEO's surprise exit — a *different pillar*
-   (key-person risk) on the same entity at the same time.
+## Act 2 — Watchlist Monitor (the analyst's morning screen, ~3 min)
 
-**Money line:** "Every one of these is a real, checkable event. Watch —"
+Click **Finish setup** — you land on the Monitor.
 
-## Act 2 — The evidence drawer (THE differentiator, ~3 min)
+1. **KPI strip** — 15 entities, 177 events, biggest mover, avg feed trust 0.75,
+   quarantine count. All computed from the real backfill.
+2. **Needs attention** — ranked by move × severity. Kotak sits high with a red box.
+3. **Live event stream** — cross-entity, each row shows the trust band (hover it —
+   trust insight card) and a signed score contribution.
+4. **Heatmap** — the whole watchlist at a glance; use the Risk-side / Opportunity
+   filter buttons; quiet entities stay gray. **Say:** "This is the 8:55am screen —
+   where do I spend my morning?"
 
-**Click the ED-arrest event card** (controversy, stage badge). The drawer opens.
+## Act 3 — The hero story (click Kotak in the queue, ~3 min)
 
-Walk it top to bottom — slowly:
-1. **Event score 0.80** and the **six factors** with bars: Severity × Credibility ×
-   Corroboration × Velocity × Stage × Decay. "Severity 0.75 — an arrest is material.
-   Credibility 0.78 — that's not a global score, it's this source *in this sector*."
-2. **Stage modifier timeline** — allegation 0.6 → probe 1.2 → **charge 1.4 (lit up)** →
-   resolution 0.3. **Say:** "This is what makes it a live gauge, not a blocklist —
-   when a matter settles, the score collapses toward 0.3× and releases. Companies
-   aren't punished forever."
-3. **Trust tollgate cell** — source class × sector weight feeding credibility.
-4. **Corroboration** — independent source classes that confirmed it.
-5. **Provenance chain** — capture → entity resolution → classification → corroboration → scoring.
-6. **Audit trail + Analyst review** — click **Confirm** live: an audit entry appears
-   ("You · just now"). "Human-in-the-loop, fully audited."
-7. **"Source article" chip** — "and it links to the actual article." (Don't click it —
-   just point; avoids losing your tab.)
+Workbench opens on **Kotak Mahindra Bank**:
 
-Press **Esc** to close.
+**Say:** "₹150 crore of Panchkula Municipal fixed deposits went missing at a Kotak
+branch. Watch how the platform tracked the whole arc."
 
-## Act 3 — The contrast (30 sec)
+- Health 53/Watch, netting bar, six index cards (now with fill bars), the annotated
+  12-week history (◎ marks the sharpest weekly move).
+- Feed events now carry **stage badges** (allegation → probe → charge) and signed
+  contributions: FD fraud discovered → staff arrested → **ED PMLA raids** → ex-VP
+  arrested → Haryana de-empanels Kotak — plus the CEO's surprise exit (key-person
+  pillar, same window).
 
-**Click the POONAWALLA chip** in the coverage strip.
+## Act 4 — The evidence drawer (THE differentiator, ~3 min)
 
-**Say:** "Same engine, opposite story. Poonawalla Fincorp came through the window
-clean — zero controversy events. Profit up ~4×, a ₹2,500 crore QIP — health 67,
-all green. The system doesn't manufacture drama where there isn't any."
+**Click the ED-arrest event.** Walk top to bottom:
+1. Six factors with bars (severity × credibility × corroboration × velocity × stage × decay).
+2. **Stage timeline** — charge 1.4× lit; "settlement collapses it to 0.3× — a live
+   gauge, not a blocklist."
+3. **Trust tollgate card — now with the trust insight**: the actual outlet's
+   natural-language verdict sits under the numeric weight. **Say:** "Not just a
+   number — the platform explains *why* it trusts a source, per sector."
+4. Corroboration, provenance chain, audit trail → click **Confirm** (audit entry
+   appears). Point at the "Source article" chip; don't click it.
 
-(Optionally flash SBI — health 41, ₹6,338 crore tax demand — "and the range in between.")
+Press Esc. Optionally flash **Poonawalla** (clean, health 67) — "the system doesn't
+manufacture drama."
 
-## Act 4 — Trust Tollgate (~2 min)
+## Act 5 — Alerts (the analyst's contract with the system, ~2 min)
 
-**Click Trust Tollgate** in the sidebar (note the quarantine count badge).
-
-1. **The matrix** — "No source gets one global trust score. The same outlet can be
-   strong in banking and weak in pharma. These weights ARE the credibility factor."
-2. **Quarantine queue** — "Low-trust items aren't deleted — they're held in a watch
-   state. Two independent confirmations promote them out. Nothing silently dropped,
-   nothing polluting the score."
-
-## Act 5 — Scoring Model, live (~2 min — the interactive wow)
-
-**Click Scoring Model.** Show the formula card, then the **live calculator**:
-
-**Do:** Drag **Stage modifier** slowly from 1.2 down to 0.3.
-**Say:** "Watch the event score collapse — this is a settlement. And the entity score
-falls but doesn't crater, because the roll-up is saturating — no single event can run
-a company to 100, and no single settlement erases a pattern."
-
-(Optionally drag Credibility down: "a weak source simply can't move the needle much.")
+Sidebar → **Alerts**:
+- Six rules; drag the **Controversy spike** threshold — the **fire-rate estimate
+  updates live, computed from the real six-month backfill**. "Tune signal vs noise
+  against history, not guesswork."
+- Event-driven rules (regulatory, key-person) are critical — always push; the rest
+  batch into a daily digest. Delivery: in-app, email, Slack/Teams, webhook.
+- Click **Save alert rules** for the confirmation toast.
 
 ## Act 6 — Platform close (~2 min)
 
-Quick pass, one line each:
-- **Index Suite:** "Same engine, six lenses — each with its own pillars, weights,
-  decay half-lives. Click through a tab or two."
-- **Source Monitor:** "What the system watches 24×7 — 7,700 raw articles this window,
-  the actual outlets by trust class, per-entity coverage. Regulator-direct feeds and
-  CAMEO event codes are the production roadmap items you see marked."
-- **Pipeline:** "The six-layer architecture: ingest → normalize → trust tollgate →
-  extract → score → deliver."
-- **Distribution (end here — the business slide):** "Each index licenses independently
-  to a different buyer — controversy to risk desks, ESG to mandate screening, catalyst
-  to event-driven funds. Delivered as APIs, this dashboard, and generated analyst
-  briefs that cite their events."
+One line each: **Trust Tollgate** (matrix + quarantine queue), **Scoring Model**
+(drag Stage to 0.3 live), **Source Monitor** (7,700 raw articles; candidate APIs —
+NewsAPI.org, NewsData.io, NewsAPI.ai — and premium feeds as roadmap), end on
+**Distribution** — "each index licenses independently; APIs, dashboard, narratives."
 
-**Closing line:** "So: raw news in, six explainable indices out, every score point
-traceable to a sourced event, a trust gate in the middle, and a human in the loop.
-That's News-to-Insight."
+**Closing line:** "Raw news in → trust-gated, stage-tracked, explainable indices out.
+The analyst controls the watchlist, the sources, and the alert contract — and can
+audit every number down to the article."
 
 ---
 
-## Q&A prep (likely questions, honest answers)
+## Q&A prep
 
-- **"Is this live/real-time?"** — "This demo runs on a Jan–Jun 2026 backfill, refreshed
-  by our pipeline. The production build adds scheduled continuous ingestion and the
-  API layer — the architecture you saw in Pipeline/Distribution."
-- **"What sources?"** — "Today: Google News RSS + GDELT, free feeds — which got us
-  7,000 articles across 15 entities. Production: licensed wires, regulator/exchange
-  direct feeds. The trust matrix is built exactly for that mix."
-- **"How is classification done?"** — "An LLM pass classifies each article: index,
-  pillar, direction — 'sued' vs 'won' — severity, stage, and story clustering for
-  corroboration. Deterministic rules handle source-class and trust."
-- **"Can I trust the scores?"** — open any drawer: "You never have to trust a number —
-  you audit it. Factors, sources, provenance, and the human review trail are right there."
-- **"Different sector/market?"** — "Sector-agnostic engine: swap the entity list,
-  recalibrate pillar weights and the trust matrix — the email pitch is BFSI first."
+- **"Is this live?"** — "Jan–Jun 2026 backfill refreshed by our pipeline; production
+  adds scheduled ingestion + the API layer (architecture in Pipeline/Distribution)."
+- **"Where do trust insights come from?"** — "Curated per-outlet profiles today,
+  bound to the same source×sector weights the scorer uses; production versions are
+  maintained editorially and recalibrated by realized outcomes."
+- **"What sources?"** — "Free feeds proved the pipeline (7,000 articles). The source
+  strategy Deepak raised — Reuters Wire, Factiva, LexisNexis — is framed in the
+  product as premium roadmap; candidate news APIs are listed in Source Monitor."
+- **"Different sector/market?"** — "Sector-agnostic engine — swap the entity list,
+  recalibrate weights and the trust matrix. Region scoping is already in the wizard."
 
 ## Practical tips
 
-- Hard-refresh (Cmd+Shift+R) once before the call; keep a second tab preloaded as backup.
-- Best flow order = the acts above; skip Act 6 items if time is short — never skip Act 2.
-- If the projector is small: browser zoom 110–125% reads well; the layout is fluid.
-- Don't click "Source article" mid-demo (opens a news site tab); point at it instead.
-- If asked something you can't answer, the Source Monitor page is a good "here's
-  exactly what the system saw" fallback.
+- Hard-refresh before the call; keep a preloaded backup tab.
+- If you toggled sources/watchlist while rehearsing, hit **Reset to all** (Companies)
+  and re-enable all source classes — or clear site data — so counts match this script.
+- Never skip Act 4. If time is short, drop Act 6.
+- Don't click "Source article" mid-demo; point at it.

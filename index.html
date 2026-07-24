@@ -38,6 +38,14 @@
   .fi-search:focus{border-color:#A8331F!important;background:#fff!important}
   .drawer-anim{animation:fiDrawer .3s cubic-bezier(.22,1,.36,1) both}
   .backdrop-anim{animation:fiBackdrop .25s ease both}
+  /* trust-insight hover card */
+  #trustpop{position:fixed;z-index:60;width:280px;background:#FBF8F1;border:1px solid #DED7C5;border-radius:11px;box-shadow:0 10px 30px rgba(20,18,12,.18);padding:13px 15px;pointer-events:none;opacity:0;transition:opacity .12s}
+  #trustpop.show{opacity:1}
+  [data-trust]{cursor:help}
+  .hm-cell:hover{filter:brightness(0.96);box-shadow:0 4px 12px rgba(20,18,12,.12)}
+  .q-card:hover{box-shadow:0 6px 18px rgba(20,18,12,.08);transform:translateY(-1px)}
+  .toggle-row:hover{border-color:#B9AF98!important}
+  input[type=checkbox].fi-check{accent-color:#2F6B4F;width:15px;height:15px}
 </style>
 </head>
 <body>
@@ -55,7 +63,9 @@ document.write('<scr'+'ipt src="data.js?v='+Date.now()+'"></scr'+'ipt>');
 /* ============================ STATE ============================ */
 var state = {
   view:'workbench', entity:'lumora', drawer:null, review:{}, userAudit:{}, indexTab:'controversy',
-  calc:{sev:0.9,cred:1,corr:1.3,vel:1.3,stg:1.2,dec:0.95,k:3}, promoted:{}, feedFilter:'all'
+  calc:{sev:0.9,cred:1,corr:1.3,vel:1.3,stg:1.2,dec:0.95,k:3}, promoted:{}, feedFilter:'all',
+  monitorFilter:'all', watchlist:null, sourcesOff:{}, setupMode:'sector',
+  alerts:null, alertChannels:null, alertBatch:true
 };
 var lastDrawer = null; // to only animate drawer on open, not on internal re-renders
 
@@ -111,6 +121,8 @@ var PATHS = {
   'sliders':'<line x1="4" x2="4" y1="21" y2="14"/><line x1="4" x2="4" y1="10" y2="3"/><line x1="12" x2="12" y1="21" y2="12"/><line x1="12" x2="12" y1="8" y2="3"/><line x1="20" x2="20" y1="21" y2="16"/><line x1="20" x2="20" y1="12" y2="3"/><line x1="2" x2="6" y1="14" y2="14"/><line x1="10" x2="14" y1="8" y2="8"/><line x1="18" x2="22" y1="16" y2="16"/>',
   'inbox':'<polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>',
   'home':'<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
+  'plus':'<path d="M5 12h14"/><path d="M12 5v14"/>',
+  'sparkles':'<path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/>',
   'briefcase':'<rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>',
   'coins':'<circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/>'
 };
@@ -129,16 +141,28 @@ function genSeries(end,delta,n,s){
     a.push(Math.max(3,Math.min(100,Math.round(v)))); }
   a[n-1]=Math.max(3,Math.min(100,end)); return a;
 }
-function sparkSvg(vals,color,h,fillId){
+function sparkSvg(vals,color,h,fillId,markerIdx){
   var n=vals.length, mn=Math.min.apply(null,vals), mx=Math.max.apply(null,vals), rng=(mx-mn)||1, w=100;
   function X(i){ return (i/(n-1))*w; } function Y(v){ return h-((v-mn)/rng)*(h-3)-1.5; }
   var ln=''; vals.forEach(function(v,i){ ln+=(i?'L':'M')+X(i).toFixed(1)+' '+Y(v).toFixed(1)+' '; });
   var ar=ln+'L'+w+' '+h+' L0 '+h+' Z';
+  var marker=(typeof markerIdx==='number'&&markerIdx>=0&&markerIdx<n)
+    ?'<circle cx="'+X(markerIdx)+'" cy="'+Y(vals[markerIdx])+'" r="3.4" fill="none" stroke="'+color+'" stroke-width="1.6"/>'
+     +'<circle cx="'+X(markerIdx)+'" cy="'+Y(vals[markerIdx])+'" r="1.4" fill="'+color+'"/>'
+    :'';
   return '<svg width="100%" height="'+h+'" viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none" style="display:block">'
     +'<defs><linearGradient id="'+fillId+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+color+'" stop-opacity="0.22"/><stop offset="1" stop-color="'+color+'" stop-opacity="0"/></linearGradient></defs>'
     +'<path d="'+ar+'" fill="url(#'+fillId+')"/>'
     +'<path d="'+ln+'" fill="none" stroke="'+color+'" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>'
+    +marker
     +'<circle cx="'+X(n-1)+'" cy="'+Y(vals[n-1])+'" r="2.2" fill="'+color+'"/></svg>';
+}
+// week index of the sharpest move in a history series (spike marker)
+function spikeIdx(hist){
+  if(!hist||hist.length<2) return -1;
+  var bi=-1,bd=0;
+  for(var i=1;i<hist.length;i++){ var d=Math.abs(hist[i]-hist[i-1]); if(d>bd){bd=d;bi=i;} }
+  return bd>=3?bi:-1;
 }
 
 /* ============================ DATA ============================ */
@@ -307,10 +331,42 @@ if (FI) {
     'Housing finance':{icon:'home'}, 'Gold-loan NBFC':{icon:'coins'}
   };
   if (FI.defaultEntity && entities[FI.defaultEntity]) state.entity = FI.defaultEntity;
+  state.view = 'monitor';
+  // wizard + alert state persists across sessions (demo-level)
+  try {
+    var saved = JSON.parse(localStorage.getItem('fiSetup') || '{}');
+    if (saved.watchlist && saved.watchlist.length) state.watchlist = saved.watchlist;
+    if (saved.sourcesOff) state.sourcesOff = saved.sourcesOff;
+    if (saved.alerts) state.alerts = saved.alerts;
+    if (saved.alertChannels) state.alertChannels = saved.alertChannels;
+    if (typeof saved.alertBatch === 'boolean') state.alertBatch = saved.alertBatch;
+  } catch (e) {}
+}
+function saveSetup(){
+  try { localStorage.setItem('fiSetup', JSON.stringify({
+    watchlist: state.watchlist, sourcesOff: state.sourcesOff,
+    alerts: state.alerts, alertChannels: state.alertChannels, alertBatch: state.alertBatch
+  })); } catch (e) {}
+}
+function watchIds(){
+  var all = Object.keys(entities);
+  if (!state.watchlist) return all;
+  var w = all.filter(function(id){ return state.watchlist.indexOf(id) >= 0; });
+  return w.length ? w : all;
+}
+function srcVisible(cls){ return !state.sourcesOff[cls]; }
+// relative-time string -> approx days ago, for cross-entity feed ordering
+function timeDays(t){
+  if(!t) return 999;
+  if(t==='today') return 0;
+  var m=t.match(/(\d+)(d|w|mo|h)/);
+  if(!m) return 999;
+  var n=parseInt(m[1],10);
+  return m[2]==='h'?0:m[2]==='d'?n:m[2]==='w'?n*7:n*30;
 }
 
-var titleMap = {workbench:'Analyst Workbench',indices:'Index Suite',tollgate:'Trust Tollgate',scoring:'Scoring Model',pipeline:'Pipeline Architecture',sources:'Source Monitor',distribution:'Distribution'};
-var kickerMap = {workbench:'Entity analysis',indices:'Six indices · one composite',tollgate:'Source × sector credibility',scoring:'Shared event engine',pipeline:'News → insight flow',sources:'Ingestion coverage · 24×7',distribution:'API · licensing · narratives'};
+var titleMap = {monitor:'Watchlist Monitor',setup1:'Build your watchlist',setup2:'Choose your sources',alerts:'Alert Rules',workbench:'Analyst Workbench',indices:'Index Suite',tollgate:'Trust Tollgate',scoring:'Scoring Model',pipeline:'Pipeline Architecture',sources:'Source Monitor',distribution:'Distribution'};
+var kickerMap = {monitor:'Coverage overview · live signals',setup1:'Setup · step 1 of 2',setup2:'Setup · step 2 of 2',alerts:'Thresholds · channels · batching',workbench:'Entity analysis',indices:'Six indices · one composite',tollgate:'Source × sector credibility',scoring:'Shared event engine',pipeline:'News → insight flow',sources:'Ingestion coverage · 24×7',distribution:'API · licensing · narratives'};
 
 /* ============================ MODEL ============================ */
 function eventScore(e){ var cred=cellVal(e.source,e.sourceSector); return e.sev*cred*e.corr*e.vel*e.stg*e.dec; }
@@ -348,8 +404,9 @@ function totalQuarantined(){
 /* ============================ VIEW BUILDERS ============================ */
 function renderSidebar(){
   var groups=[
-    {label:'Analysis',items:[['workbench','Workbench','layout-dashboard'],['indices','Index Suite','layers']]},
-    {label:'Trust & Scoring',items:[['tollgate','Trust Tollgate','shield-check'],['scoring','Scoring Model','gauge']]},
+    {label:'Setup',items:[['setup1','Companies','landmark'],['setup2','Sources','plug']]},
+    {label:'Analysis',items:[['monitor','Watchlist Monitor','layout-dashboard'],['workbench','Workbench','newspaper'],['indices','Index Suite','layers']]},
+    {label:'Trust & Scoring',items:[['tollgate','Trust Tollgate','shield-check'],['scoring','Scoring Model','gauge'],['alerts','Alerts','bell']]},
     {label:'Platform',items:[['pipeline','Pipeline','git-branch'],['sources','Source Monitor','activity'],['distribution','Distribution','share']]}
   ];
   var totalQ=totalQuarantined();
@@ -398,13 +455,371 @@ function renderHeader(){
     +'</div></header>';
 }
 
+/* ------------ SETUP WIZARD ------------ */
+function wlCurrent(){ return state.watchlist ? state.watchlist.slice() : Object.keys(entities); }
+function wlSet(arr){
+  var all=Object.keys(entities);
+  var clean=all.filter(function(id){ return arr.indexOf(id)>=0; });
+  state.watchlist = (clean.length===all.length) ? null : clean;
+  saveSetup();
+}
+function renderSetup1(){
+  var all=Object.keys(entities);
+  var wl=wlCurrent();
+  var segs={};
+  all.forEach(function(id){ var s=entities[id].sector; (segs[s]=segs[s]||[]).push(id); });
+  var mode=state.setupMode;
+
+  var tabs=[['sector','By sector','landmark'],['search','Search','search'],['paste','Paste list','file-text']].map(function(t){
+    var active=mode===t[0];
+    return '<button data-act="setup-mode" data-m="'+t[0]+'" style="display:inline-flex;align-items:center;gap:7px;border:1px solid '+(active?C.ink:'#DED7C5')+';background:'+(active?'#FBF8F1':'transparent')+';cursor:pointer;border-radius:9px;padding:8px 14px;font:600 12.5px \'Hanken Grotesk\';color:'+(active?C.ink:'#6E6858')+'">'+icon(t[2],14,2)+t[1]+'</button>';
+  }).join('');
+
+  var panel='';
+  if(mode==='sector'){
+    panel='<div style="display:flex;gap:8px;flex-wrap:wrap">'+Object.keys(segs).map(function(s){
+      var allIn=segs[s].every(function(id){return wl.indexOf(id)>=0;});
+      return '<button data-act="wl-seg" data-s="'+s+'" class="chip" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;border-radius:9px;padding:8px 13px;border:1px solid '+(allIn?C.opp:'#DED7C5')+';background:'+(allIn?C.oppBg:'#FBF8F1')+'">'
+        +'<span style="display:flex;color:'+(allIn?C.opp:C.mute)+'">'+icon(sectors[s]?sectors[s].icon:'landmark',13,2)+'</span>'
+        +'<span style="font:600 12.5px \'Hanken Grotesk\';color:#16140F">'+s+'</span>'
+        +'<span style="font:600 10.5px \'IBM Plex Mono\';color:#8A8474">'+segs[s].length+'</span>'
+        +(allIn?icon('check',12,2.6,C.opp):icon('plus',12,2.2,C.mute))+'</button>';
+    }).join('')+'</div>'
+    +'<div style="font:400 11.5px \'Hanken Grotesk\';color:#A79F8C;margin-top:10px">Region scope: <b style="font-weight:600;color:#4A463C">India</b> · US / SE Asia / Europe available with global feed licensing (roadmap)</div>';
+  } else if(mode==='search'){
+    panel='<input id="wl-search" placeholder="Search companies or tickers…" style="width:100%;max-width:420px" />'
+      +'<div id="wl-results" style="display:flex;flex-direction:column;gap:6px;margin-top:10px;max-width:420px"></div>';
+  } else {
+    panel='<textarea id="wl-paste" rows="5" placeholder="One company per line — e.g.&#10;IIFL Finance&#10;KOTAKBANK" style="width:100%;max-width:420px;resize:vertical"></textarea>'
+      +'<div style="margin-top:9px"><button data-act="wl-paste-add" style="font:600 12.5px \'Hanken Grotesk\';color:#F5F1E8;background:#16140F;border:none;border-radius:8px;padding:9px 16px;cursor:pointer">Add these</button></div>';
+  }
+
+  var pills=wl.map(function(id){
+    return '<span style="display:inline-flex;align-items:center;gap:7px;font:600 12px \'Hanken Grotesk\';color:#16140F;background:#FBF8F1;border:1px solid #DED7C5;border-radius:20px;padding:5px 6px 5px 12px">'+entities[id].ticker
+      +'<button data-act="wl-rm" data-id="'+id+'" style="width:18px;height:18px;border-radius:50%;border:none;background:#EFEADD;color:#6E6858;cursor:pointer;display:inline-flex;align-items:center;justify-content:center">'+icon('x',10,2.6)+'</button></span>';
+  }).join(' ');
+
+  // recommendations: same-segment co-occurrence with current selection
+  var recs=[];
+  if(wl.length&&wl.length<all.length){
+    var segCount={};
+    wl.forEach(function(id){ segCount[entities[id].sector]=(segCount[entities[id].sector]||0)+1; });
+    recs=all.filter(function(id){ return wl.indexOf(id)<0; })
+      .map(function(id){ return {id:id,score:segCount[entities[id].sector]||0}; })
+      .sort(function(a,b){ return b.score-a.score; }).slice(0,5);
+  }
+  var recRows=recs.map(function(r){
+    return '<button data-act="wl-add" data-id="'+r.id+'" class="chip" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;border-radius:9px;padding:7px 12px;border:1px solid #DED7C5;background:#FBF8F1">'
+      +'<span style="font:600 12.5px \'Hanken Grotesk\';color:#16140F">'+entities[r.id].name+'</span>'
+      +'<span style="font:500 10.5px \'Hanken Grotesk\';color:#A79F8C">'+entities[r.id].sector+'</span>'
+      +icon('plus',12,2.2,C.opp)+'</button>';
+  }).join(' ');
+
+  return '<div style="padding:24px 30px 44px 30px;max-width:900px;margin:0 auto">'
+    +'<div style="display:flex;align-items:flex-start;gap:15px;margin-bottom:22px">'
+    +'<div style="width:48px;height:48px;border-radius:12px;background:#E9E5F3;display:flex;align-items:center;justify-content:center;flex:0 0 auto">'+icon('landmark',24,1.7,C.comp)+'</div>'
+    +'<div><h2 style="font:600 24px/1.05 \'Newsreader\',serif;color:#16140F;margin:0">Build your watchlist</h2>'
+    +'<p style="font:400 14px/1.5 \'Hanken Grotesk\';color:#4A463C;margin:7px 0 0 0;max-width:70ch">Pick the entities the platform should monitor. Add whole sectors, search individually, or paste a list — the monitor, feeds, and alerts scope to this selection.</p></div></div>'
+    +'<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">'+tabs+'</div>'
+    +'<div style="background:#FBF8F1;border:1px solid #DED7C5;border-radius:13px;padding:18px 20px;margin-bottom:20px">'+panel+'</div>'
+    +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:11px"><h4 style="font:700 12px \'Hanken Grotesk\';letter-spacing:.11em;text-transform:uppercase;color:#8A8474;margin:0">Tracking '+wl.length+'</h4>'
+    +(state.watchlist?'<button data-act="wl-clear" style="font:600 11.5px \'Hanken Grotesk\';color:#5A4A8C;background:none;border:none;cursor:pointer">Reset to all</button>':'')+'</div>'
+    +'<div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:22px">'+(pills||'<span style="font:500 12.5px \'Hanken Grotesk\';color:#A79F8C">Nothing tracked yet — add a sector to begin.</span>')+'</div>'
+    +(recRows?'<div style="display:flex;align-items:center;gap:7px;margin-bottom:10px"><span style="color:'+C.comp+';display:flex">'+icon('sparkles',15,2,C.comp)+'</span><h4 style="font:700 12px \'Hanken Grotesk\';letter-spacing:.11em;text-transform:uppercase;color:#8A8474;margin:0">Recommended for you</h4></div>'
+    +'<div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:22px">'+recRows+'</div>':'')
+    +'<button data-act="view" data-v="setup2" style="display:inline-flex;align-items:center;gap:8px;font:600 13.5px \'Hanken Grotesk\';color:#F5F1E8;background:#16140F;border:none;border-radius:9px;padding:12px 20px;cursor:pointer">Continue to sources '+icon('arrow-right',14,2.2,'#F5F1E8')+'</button>'
+    +'</div>';
+}
+
+var PREMIUM_SOURCES=[
+  {name:'Reuters News Wire',desc:'Wholesale wire feed — fast, trusted journalism in multiple formats and languages',tag:'PREMIUM · ROADMAP'},
+  {name:'Factiva (Dow Jones)',desc:'~32,000+ aggregated sources across 200+ countries incl. Dow Jones newswires',tag:'PREMIUM · ROADMAP'},
+  {name:'LexisNexis / Law360',desc:'Specialist legal & business news — litigation dockets and legal-industry analysis',tag:'PREMIUM · ROADMAP'}
+];
+function renderSetup2(){
+  var rows=(FI&&FI.sources?FI.sources:[]).map(function(s){
+    var off=!!state.sourcesOff[s.name];
+    var mid=(s.trustMin+s.trustMax)/2;
+    var bc=mid>=0.8?C.opp:mid>=0.5?C.gate:C.risk;
+    return '<button data-act="src-toggle" data-s="'+s.name+'" class="toggle-row" style="text-align:left;width:100%;cursor:pointer;display:flex;align-items:center;gap:13px;background:'+(off?'#F5F1E8':'#FBF8F1')+';border:1px solid '+(off?'#DED7C5':'#BCD6C4')+';border-radius:11px;padding:13px 16px;opacity:'+(off?0.6:1)+'">'
+      +'<span style="display:flex;color:'+(off?C.mute:C.opp)+'">'+icon(off?'plus':'check',16,2.4)+'</span>'
+      +'<div style="flex:1;min-width:0"><div style="font:600 13.5px \'Hanken Grotesk\';color:#16140F">'+s.name+'</div>'
+      +'<div style="font:400 11.5px \'Hanken Grotesk\';color:#8A8474;margin-top:1px">'+s.outlets+' outlets observed · '+s.records+' events this window</div></div>'
+      +'<span data-trust-class="'+s.name+'" style="font:600 11.5px \'IBM Plex Mono\';color:'+bc+';background:'+rgba(bc,0.12)+';padding:4px 10px;border-radius:7px">'+s.trustMin.toFixed(2)+'–'+s.trustMax.toFixed(2)+'</span>'
+      +'</button>';
+  }).join('');
+
+  var premium=PREMIUM_SOURCES.map(function(p){
+    return '<div style="display:flex;align-items:center;gap:13px;background:#FBF8F1;border:1px dashed #DED7C5;border-radius:11px;padding:13px 16px;opacity:.85">'
+      +'<span style="display:flex;color:'+C.gate+'">'+icon('lock',15,2)+'</span>'
+      +'<div style="flex:1;min-width:0"><div style="font:600 13.5px \'Hanken Grotesk\';color:#16140F">'+p.name+'</div>'
+      +'<div style="font:400 11.5px \'Hanken Grotesk\';color:#8A8474;margin-top:1px">'+p.desc+'</div></div>'
+      +'<span style="font:600 9.5px \'Hanken Grotesk\';letter-spacing:.07em;color:#8A5A0E;background:#F6EBD6;padding:4px 9px;border-radius:6px">'+p.tag+'</span></div>';
+  }).join('');
+
+  var sel=(FI&&FI.sources?FI.sources:[]).filter(function(s){return !state.sourcesOff[s.name];});
+  var avg=sel.length?sel.reduce(function(a,s){return a+(s.trustMin+s.trustMax)/2;},0)/sel.length:0;
+  var hi=sel.length?sel.filter(function(s){return (s.trustMin+s.trustMax)/2>=0.8;}).length/sel.length*100:0;
+  function metric(l,v,c){ return '<div style="flex:1;min-width:140px;background:#FBF8F1;border:1px solid #DED7C5;border-radius:11px;padding:13px 16px"><div style="font:500 10px \'Hanken Grotesk\';color:#8A8474;text-transform:uppercase;letter-spacing:.07em">'+l+'</div><div style="font:700 20px \'IBM Plex Mono\';color:'+(c||'#16140F')+';margin-top:4px">'+v+'</div></div>'; }
+
+  return '<div style="padding:24px 30px 44px 30px;max-width:900px;margin:0 auto">'
+    +'<div style="display:flex;align-items:flex-start;gap:15px;margin-bottom:22px">'
+    +'<div style="width:48px;height:48px;border-radius:12px;background:#E0EBF0;display:flex;align-items:center;justify-content:center;flex:0 0 auto">'+icon('plug',24,1.7,C.signal)+'</div>'
+    +'<div><h2 style="font:600 24px/1.05 \'Newsreader\',serif;color:#16140F;margin:0">Choose your sources</h2>'
+    +'<p style="font:400 14px/1.5 \'Hanken Grotesk\';color:#4A463C;margin:7px 0 0 0;max-width:70ch">Every source class carries a sector-calibrated trust weight that becomes the credibility factor in scoring. Switching a class off removes its events from your feeds — hover any weight for the trust insight.</p></div></div>'
+    +'<h4 style="font:700 12px \'Hanken Grotesk\';letter-spacing:.11em;text-transform:uppercase;color:#8A8474;margin:0 0 11px 0">Active source classes</h4>'
+    +'<div style="display:flex;flex-direction:column;gap:9px;margin-bottom:22px">'+(rows||'<div style="font:500 12.5px \'Hanken Grotesk\';color:#A79F8C">Demo mode — generate data.js to configure real sources.</div>')+'</div>'
+    +'<h4 style="font:700 12px \'Hanken Grotesk\';letter-spacing:.11em;text-transform:uppercase;color:#8A8474;margin:0 0 11px 0">Premium feeds · production roadmap</h4>'
+    +'<div style="display:flex;flex-direction:column;gap:9px;margin-bottom:22px">'+premium+'</div>'
+    +'<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px">'
+    +metric('Source classes on',sel.length+' / '+(FI&&FI.sources?FI.sources.length:0))
+    +metric('Avg trust weight',avg.toFixed(2),avg>=0.8?C.opp:C.gate)
+    +metric('High-trust share',Math.round(hi)+'%',hi>=50?C.opp:C.gate)+'</div>'
+    +'<button data-act="view" data-v="monitor" style="display:inline-flex;align-items:center;gap:8px;font:600 13.5px \'Hanken Grotesk\';color:#F5F1E8;background:#16140F;border:none;border-radius:9px;padding:12px 20px;cursor:pointer">Finish setup '+icon('arrow-right',14,2.2,'#F5F1E8')+'</button>'
+    +'</div>';
+}
+
+/* ------------ ALERTS ------------ */
+var ALERT_RULES=[
+  {id:'ctrl',name:'Controversy spike',sub:'Controversy index',type:'threshold',min:30,max:90,step:5,def:60,unit:'',critical:true,on:true,
+   desc:'Fires when an entity’s controversy index crosses the threshold.'},
+  {id:'vel',name:'Escalating coverage',sub:'Event velocity',type:'threshold',min:1.0,max:1.5,step:0.05,def:1.3,unit:'×',critical:false,on:true,
+   desc:'Fires when a story cluster’s velocity factor exceeds the threshold.'},
+  {id:'mom',name:'Momentum breakout',sub:'Momentum index',type:'threshold',min:5,max:30,step:1,def:15,unit:' pts',critical:false,on:true,
+   desc:'Fires on a week-over-week momentum jump larger than the threshold.'},
+  {id:'reg',name:'Regulatory / legal event',sub:'Legal & compliance pillar',type:'event',critical:true,on:false,
+   desc:'Event-driven — fires whenever a corroborated legal or regulatory event lands.'},
+  {id:'key',name:'Key-person change',sub:'Key-person pillar',type:'event',critical:true,on:false,
+   desc:'Event-driven — fires on corroborated leadership exits or governance shocks.'},
+  {id:'esg',name:'ESG breach',sub:'ESG index',type:'threshold',min:30,max:80,step:5,def:50,unit:'',critical:false,on:false,
+   desc:'Fires when the ESG index crosses the threshold.'}
+];
+var ALERT_CHANNELS=[['inapp','In-app'],['email','Email digest'],['slack','Slack / Teams'],['webhook','Webhook / API']];
+function alertsInit(){
+  if(!state.alerts){
+    state.alerts={};
+    ALERT_RULES.forEach(function(r){ state.alerts[r.id]={on:r.on,thr:r.def}; });
+  }
+  if(!state.alertChannels) state.alertChannels={inapp:true,email:true,slack:false,webhook:false};
+}
+// fire-rate per week estimated from the real backfill window
+function alertRate(id,thr){
+  var ids=watchIds(), weeks=12, n=0;
+  function crossings(key){
+    var c=0;
+    ids.forEach(function(eid){
+      var h=entities[eid].indexHistory&&entities[eid].indexHistory[key];
+      if(!h) return;
+      if(h[0]>=thr) c++; // already elevated at window start counts as one firing
+      for(var i=1;i<h.length;i++) if(h[i]>=thr&&h[i-1]<thr) c++;
+    });
+    return c;
+  }
+  function evCount(fn){
+    var c=0;
+    ids.forEach(function(eid){ (entities[eid].events||[]).forEach(function(e){ if(!e.quarantined&&fn(e)) c++; }); });
+    return c;
+  }
+  if(id==='ctrl') n=crossings('controversy');
+  else if(id==='esg') n=crossings('esg');
+  else if(id==='mom'){
+    ids.forEach(function(eid){
+      var h=entities[eid].indexHistory&&entities[eid].indexHistory.momentum;
+      if(!h) return;
+      for(var i=1;i<h.length;i++) if(h[i]-h[i-1]>=thr) n++;
+    });
+  }
+  else if(id==='vel') n=evCount(function(e){ return e.vel>=thr; });
+  else if(id==='reg'){ n=evCount(function(e){ return e.pillar==='Legal & compliance'; }); weeks=26; }
+  else if(id==='key'){ n=evCount(function(e){ return e.pillar==='Key-person risk'; }); weeks=26; }
+  var r=n/weeks;
+  return r>=1?('~'+r.toFixed(1)+'/week'):r>0?('~'+(r*4).toFixed(1)+'/month'):'rare';
+}
+function renderAlerts(){
+  alertsInit();
+  var cards=ALERT_RULES.map(function(r){
+    var st=state.alerts[r.id];
+    var body='';
+    if(st.on&&r.type==='threshold'){
+      body='<div style="display:grid;grid-template-columns:1fr 120px;gap:14px;align-items:center;margin-top:13px">'
+        +'<input type="range" data-alert="'+r.id+'" min="'+r.min+'" max="'+r.max+'" step="'+r.step+'" value="'+st.thr+'" />'
+        +'<div style="text-align:right"><span id="thr-'+r.id+'" style="font:700 15px \'IBM Plex Mono\';color:#16140F">'+st.thr+r.unit+'</span>'
+        +'<div id="fr-'+r.id+'" style="font:600 10.5px \'IBM Plex Mono\';color:'+C.comp+';margin-top:2px">'+alertRate(r.id,st.thr)+'</div></div></div>';
+    } else if(st.on){
+      body='<div style="display:flex;justify-content:space-between;align-items:center;margin-top:13px">'
+        +'<span style="font:500 12px \'Hanken Grotesk\';color:#8A8474">Event-driven — fires on occurrence</span>'
+        +'<span style="font:600 10.5px \'IBM Plex Mono\';color:'+C.comp+'">'+alertRate(r.id,0)+'</span></div>';
+    }
+    return '<div style="background:#FBF8F1;border:1px solid '+(st.on?'#DED7C5':'#E9E3D5')+';border-radius:13px;padding:16px 18px;opacity:'+(st.on?1:0.55)+'">'
+      +'<div style="display:flex;align-items:center;gap:10px">'
+      +'<div style="flex:1;min-width:0"><div style="display:flex;align-items:center;gap:8px"><span style="font:600 14.5px \'Hanken Grotesk\';color:#16140F">'+r.name+'</span>'
+      +(r.critical?'<span style="font:600 9px \'Hanken Grotesk\';letter-spacing:.06em;color:'+C.risk+';background:'+C.riskBg+';padding:2px 7px;border-radius:5px;text-transform:uppercase">Critical</span>':'')+'</div>'
+      +'<div style="font:500 11px \'Hanken Grotesk\';color:#A79F8C;margin-top:1px">'+r.sub+'</div></div>'
+      +'<button data-act="alert-toggle" data-id="'+r.id+'" style="flex:0 0 auto;width:40px;height:23px;border-radius:12px;border:none;cursor:pointer;background:'+(st.on?C.opp:'#DED7C5')+';position:relative;transition:background .15s">'
+      +'<span style="position:absolute;top:2.5px;'+(st.on?'right:3px':'left:3px')+';width:18px;height:18px;border-radius:50%;background:#FBF8F1;box-shadow:0 1px 2px rgba(0,0,0,.2)"></span></button></div>'
+      +'<div style="font:400 12px/1.5 \'Hanken Grotesk\';color:#4A463C;margin-top:8px">'+r.desc+'</div>'
+      +body+'</div>';
+  }).join('');
+
+  var chans=ALERT_CHANNELS.map(function(c){
+    var on=!!state.alertChannels[c[0]];
+    return '<button data-act="ch-toggle" data-id="'+c[0]+'" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;border-radius:9px;padding:9px 15px;border:1px solid '+(on?'#BCD6C4':'#DED7C5')+';background:'+(on?C.oppBg:'#FBF8F1')+';font:600 12.5px \'Hanken Grotesk\';color:#16140F">'
+      +icon(on?'check':'plus',13,2.4,on?C.opp:C.mute)+c[1]+'</button>';
+  }).join(' ');
+
+  return '<div style="padding:24px 30px 44px 30px;max-width:820px;margin:0 auto">'
+    +'<div style="display:flex;align-items:flex-start;gap:15px;margin-bottom:20px">'
+    +'<div style="width:48px;height:48px;border-radius:12px;background:#F6EBD6;display:flex;align-items:center;justify-content:center;flex:0 0 auto">'+icon('bell',24,1.7,C.gate)+'</div>'
+    +'<div><h2 style="font:600 24px/1.05 \'Newsreader\',serif;color:#16140F;margin:0">Alert rules</h2>'
+    +'<p style="font:400 14px/1.5 \'Hanken Grotesk\';color:#4A463C;margin:7px 0 0 0;max-width:72ch">Each rule watches your '+watchIds().length+' tracked entities. Fire-rate estimates are computed from the real '+(FI?FI.window:'')+' backfill — tune thresholds to balance signal against noise.</p></div></div>'
+    +'<div style="display:flex;flex-direction:column;gap:11px;margin-bottom:24px">'+cards+'</div>'
+    +'<h4 style="font:700 12px \'Hanken Grotesk\';letter-spacing:.11em;text-transform:uppercase;color:#8A8474;margin:0 0 11px 0">Delivery</h4>'
+    +'<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px">'+chans+'</div>'
+    +'<label style="display:flex;align-items:center;gap:10px;background:#FBF8F1;border:1px solid #DED7C5;border-radius:11px;padding:13px 16px;margin-bottom:22px;cursor:pointer">'
+    +'<input type="checkbox" class="fi-check" data-alert-batch '+(state.alertBatch?'checked':'')+' />'
+    +'<div><div style="font:600 12.5px \'Hanken Grotesk\';color:#16140F">Batch non-critical alerts into a daily digest</div>'
+    +'<div style="font:400 11.5px \'Hanken Grotesk\';color:#8A8474">Critical rules (controversy spike, regulatory, key-person) always push immediately.</div></div></label>'
+    +'<button data-act="alerts-save" style="display:inline-flex;align-items:center;gap:8px;font:600 13.5px \'Hanken Grotesk\';color:#F5F1E8;background:#16140F;border:none;border-radius:9px;padding:12px 20px;cursor:pointer">'+icon('check',14,2.4,'#F5F1E8')+'Save alert rules</button>'
+    +'</div>';
+}
+
+/* ------------ WATCHLIST MONITOR ------------ */
+function domSignal(sc){
+  var riskMax=Math.max(sc.controversy,sc.risk,sc.esg);
+  var oppMax=Math.max(sc.momentum,sc.catalyst,sc.sentiment);
+  if(riskMax<25&&oppMax<25) return {side:'quiet',hi:false};
+  var side=riskMax>=oppMax?'risk':'opp';
+  return {side:side,hi:(side==='risk'?riskMax:oppMax)>=55};
+}
+function monitorEvents(){
+  var out=[];
+  watchIds().forEach(function(id){
+    (entities[id].events||[]).forEach(function(e){
+      if(!srcVisible(e.source)) return;
+      var q=e.quarantined&&!(state.review[e.id]==='confirmed'||state.review[e.id]==='overridden')&&!state.promoted[e.id];
+      out.push({e:e,ent:entities[id],entId:id,q:q,days:timeDays(e.time),score:eventScore(e)});
+    });
+  });
+  out.sort(function(a,b){ return a.days-b.days || b.score-a.score; });
+  return out;
+}
+function renderMonitor(){
+  var ids=watchIds();
+  var mf=state.monitorFilter;
+  var sideMap={risk:['controversy','risk','esg'],opp:['momentum','catalyst','sentiment']};
+
+  // KPIs
+  var totalEvents=0, trustSum=0, trustN=0, mover=null;
+  ids.forEach(function(id){
+    var e=entities[id];
+    totalEvents+=(e.events||[]).length;
+    (e.events||[]).forEach(function(ev){
+      if(!ev.quarantined){ trustSum+=cellVal(ev.source,ev.sourceSector); trustN++; }
+    });
+    if(!mover||Math.abs(e.trend)>Math.abs(mover.trend)) mover=e;
+  });
+  var avgTrust=trustN?(trustSum/trustN):0;
+  function kpi(label,val,color,sub){
+    return '<div style="flex:1;min-width:150px;background:#FBF8F1;border:1px solid #DED7C5;border-radius:11px;padding:14px 16px">'
+      +'<div style="font:500 10px \'Hanken Grotesk\';color:#8A8474;text-transform:uppercase;letter-spacing:.07em">'+label+'</div>'
+      +'<div style="font:700 22px \'IBM Plex Mono\';color:'+(color||'#16140F')+';margin-top:5px">'+val+'</div>'
+      +(sub?'<div style="font:500 10.5px \'Hanken Grotesk\';color:#A79F8C;margin-top:2px">'+sub+'</div>':'')+'</div>';
+  }
+  var moverStr=mover?(mover.ticker+' '+(mover.trend>0?'▲':'▼')+Math.abs(mover.trend)):'—';
+  var kpis=kpi('Entities tracked',ids.length)
+    +kpi('Events this window',totalEvents)
+    +kpi('Biggest mover',moverStr,mover&&mover.trend<0?C.risk:C.opp,'4-week composite move')
+    +kpi('Avg feed trust',avgTrust.toFixed(2),avgTrust>=0.8?C.opp:C.gate,'corroborated events only')
+    +kpi('Quarantined held',totalQuarantined(),C.gate);
+
+  // attention queue
+  var ranked=ids.map(function(id){
+    var e=entities[id];
+    var top=(e.events||[]).filter(function(ev){return !ev.quarantined&&srcVisible(ev.source);})[0];
+    var ch=compositeHealth(e.scores), hm=healthMeta(ch.health);
+    var sig=domSignal(e.scores);
+    return {id:id,e:e,top:top,health:ch.health,hm:hm,sig:sig,rank:Math.abs(e.trend)*2+(top?eventScore(top):0)};
+  }).sort(function(a,b){return b.rank-a.rank;});
+  var queue=ranked.slice(0,6).map(function(r){
+    if(mf!=='all'&&r.sig.side!==mf) return '';
+    var ix=r.top?indices[r.top.index]:null;
+    return '<button data-act="goent" data-id="'+r.id+'" class="q-card" style="text-align:left;width:100%;cursor:pointer;background:#FBF8F1;border:1px solid #E9E3D5;border-radius:11px;padding:13px 15px;display:flex;gap:13px;align-items:center;transition:box-shadow .14s,transform .14s">'
+      +'<div style="flex:0 0 auto;width:52px;height:52px;border-radius:10px;background:'+r.hm.bg+';display:flex;flex-direction:column;align-items:center;justify-content:center">'
+      +'<span style="font:700 19px \'IBM Plex Mono\';color:'+r.hm.c+'">'+r.health+'</span><span style="font:600 8px \'Hanken Grotesk\';letter-spacing:.05em;color:'+r.hm.c+';text-transform:uppercase">'+r.hm.label+'</span></div>'
+      +'<div style="flex:1;min-width:0"><div style="display:flex;align-items:center;gap:8px"><span style="font:600 13.5px \'Hanken Grotesk\';color:#16140F">'+r.e.name+'</span>'
+      +'<span style="font:600 11px \'IBM Plex Mono\';color:'+(r.e.trend<0?C.risk:r.e.trend>0?C.opp:C.mute)+'">'+(r.e.trend>0?'▲':r.e.trend<0?'▼':'')+Math.abs(r.e.trend)+'</span></div>'
+      +'<div style="font:400 12px/1.4 \'Hanken Grotesk\';color:#4A463C;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(r.top?r.top.title:'No corroborated events this cycle')+'</div>'
+      +(ix?'<div style="display:flex;gap:6px;margin-top:5px"><span style="font:700 9.5px \'Hanken Grotesk\';letter-spacing:.05em;text-transform:uppercase;color:'+ix.color+'">'+ix.name+'</span><span style="font:500 10px \'Hanken Grotesk\';color:#A79F8C">· '+(r.sig.side==='risk'?'risk-side':'opportunity')+'</span></div>':'')
+      +'</div>'+icon('chevron-right',16,2,'#C9C2B2')+'</button>';
+  }).join('');
+
+  // heatmap
+  var hmCells=ids.map(function(id){
+    var e=entities[id];
+    var ch=compositeHealth(e.scores);
+    var sig=domSignal(e.scores);
+    var dim=(mf!=='all'&&sig.side!==mf);
+    var bg,fg;
+    if(sig.side==='quiet'){bg='#ECE7DA';fg='#8A8474';}
+    else if(sig.side==='risk'){bg=sig.hi?C.risk:'#E8B3A6';fg=sig.hi?'#F7E7E2':'#7A2617';}
+    else {bg=sig.hi?C.opp:'#BCD6C4';fg=sig.hi?'#EAF3EC':'#1F4A35';}
+    return '<button data-act="goent" data-id="'+id+'" class="hm-cell" style="cursor:pointer;border:none;border-radius:9px;padding:11px 8px;background:'+bg+';color:'+fg+';display:flex;flex-direction:column;align-items:center;gap:3px;opacity:'+(dim?0.25:1)+';transition:opacity .15s">'
+      +'<span style="font:700 12px \'IBM Plex Mono\'">'+e.ticker+'</span>'
+      +'<span style="font:600 11px \'Hanken Grotesk\'">'+ch.health+'</span></button>';
+  }).join('');
+  var legend=[['#ECE7DA','Quiet'],[C.risk,'Risk · high'],['#E8B3A6','Risk · building'],[C.opp,'Opp · high'],['#BCD6C4','Opp · building']].map(function(l){
+    return '<span style="display:inline-flex;align-items:center;gap:6px;font:500 11px \'Hanken Grotesk\';color:#4A463C"><span style="width:13px;height:13px;border-radius:4px;background:'+l[0]+'"></span>'+l[1]+'</span>';
+  }).join('');
+
+  // cross-entity feed
+  var feedRows=monitorEvents().filter(function(r){
+    if(mf==='all') return true;
+    return sideMap[mf].indexOf(r.e.index)>=0;
+  }).slice(0,14).map(function(r){
+    var ix=indices[r.e.index], dirPos=r.e.dir==='pos';
+    var cred=cellVal(r.e.source,r.e.sourceSector);
+    var band=cred>=0.8?'High':cred>=0.5?'Med':'Low';
+    var bc=cred>=0.8?C.opp:cred>=0.5?C.gate:C.risk;
+    return '<button data-act="drawer" data-id="'+r.e.id+'" style="text-align:left;width:100%;cursor:pointer;background:none;border:none;border-bottom:1px solid #EDE7D9;padding:10px 2px;display:flex;align-items:center;gap:10px" class="q-title">'
+      +'<span style="flex:0 0 auto;font:600 10.5px \'IBM Plex Mono\';color:#4A463C;background:#F0EBDE;padding:3px 7px;border-radius:5px">'+r.ent.ticker+'</span>'
+      +'<div style="flex:1;min-width:0"><div style="font:600 12.5px/1.3 \'Hanken Grotesk\';color:#16140F;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+r.e.title+'</div>'
+      +'<div style="display:flex;align-items:center;gap:7px;margin-top:2px"><span style="font:700 9px \'Hanken Grotesk\';letter-spacing:.04em;text-transform:uppercase;color:'+ix.color+'">'+ix.name+'</span>'
+      +'<span style="font:500 10.5px \'Hanken Grotesk\';color:#A79F8C">'+r.e.pillar+'</span>'
+      +'<span data-trust="'+(r.e.domain||'')+'" data-trust-class="'+r.e.source+'" style="display:inline-flex;align-items:center;gap:4px;font:600 9.5px \'Hanken Grotesk\';color:'+bc+';background:'+rgba(bc,0.12)+';padding:1px 7px;border-radius:5px">'+band+' '+cred.toFixed(2)+'</span></div></div>'
+      +'<div style="flex:0 0 auto;text-align:right"><div style="font:700 12px \'IBM Plex Mono\';color:'+(r.q?C.mute:(dirPos?C.opp:C.risk))+'">'+(r.q?'held':(dirPos?'+':'−')+r.score.toFixed(2))+'</div>'
+      +'<div style="font:500 10px \'Hanken Grotesk\';color:#B0A891">'+r.e.time+'</div></div></button>';
+  }).join('');
+
+  var filters=[['all','All signals'],['risk','Risk-side'],['opp','Opportunity']].map(function(f){
+    var active=mf===f[0];
+    return '<button data-act="mfilter" data-f="'+f[0]+'" style="border:none;cursor:pointer;border-radius:7px;padding:6px 13px;font:600 12px \'Hanken Grotesk\';color:'+(active?C.ink:'#8A8474')+';background:'+(active?'#fff':'transparent')+';box-shadow:'+(active?'0 1px 2px rgba(20,18,12,.1)':'none')+'">'+f[1]+'</button>';
+  }).join('');
+
+  return '<div style="padding:24px 30px 44px 30px;max-width:1320px;margin:0 auto">'
+    +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px">'
+    +'<div style="font:500 12.5px \'Hanken Grotesk\';color:#6E6858">'+ids.length+' entities · '+(FI?FI.sectorLabel:'demo')+' · '+(FI?FI.window:'')+(state.watchlist?' · custom watchlist':'')+'</div>'
+    +'<div style="display:flex;gap:5px;background:#EFEADD;padding:4px;border-radius:9px">'+filters+'</div></div>'
+    +'<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px">'+kpis+'</div>'
+    +'<div style="display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:22px;align-items:start">'
+    +'<div><h3 style="font:600 17px \'Newsreader\',serif;color:#16140F;margin:0 0 12px 0">Needs attention</h3>'
+    +'<div style="display:flex;flex-direction:column;gap:9px">'+queue+'</div></div>'
+    +'<div><h3 style="font:600 17px \'Newsreader\',serif;color:#16140F;margin:0 0 12px 0">Live event stream</h3>'
+    +'<div class="fi-scroll" style="background:#FBF8F1;border:1px solid #DED7C5;border-radius:13px;padding:6px 14px;max-height:460px;overflow-y:auto">'+feedRows+'</div></div>'
+    +'</div>'
+    +'<h3 style="font:600 17px \'Newsreader\',serif;color:#16140F;margin:26px 0 12px 0">Watchlist heatmap</h3>'
+    +'<div style="background:#FBF8F1;border:1px solid #DED7C5;border-radius:13px;padding:16px 18px">'
+    +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px">'+hmCells+'</div>'
+    +'<div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:13px">'+legend+'</div></div>'
+    +'</div>';
+}
+
 /* ------------ WORKBENCH ------------ */
 function renderWorkbench(){
   var ent=entities[state.entity], ch=compositeHealth(ent.scores), hm=healthMeta(ch.health);
   var eSeed=Object.keys(entities).indexOf(state.entity);
 
   // entity strip
-  var strip=Object.keys(entities).map(function(id){
+  var strip=watchIds().map(function(id){
     var e=entities[id], c=compositeHealth(e.scores), m=healthMeta(c.health), active=state.entity===id;
     return '<button data-act="entity" data-id="'+id+'" class="chip" style="display:flex;align-items:center;gap:8px;cursor:pointer;border-radius:9px;padding:6px 11px;border:1px solid '+(active?C.ink:'#DED7C5')+';background:'+(active?'#FBF8F1':'transparent')+'">'
       +'<span style="display:flex;color:'+(active?C.ink:C.mute)+'">'+icon(sectors[e.sector].icon,13,2)+'</span>'
@@ -417,7 +832,10 @@ function renderWorkbench(){
   var trend=(ent.trend>0?'+':'')+ent.trend;
   var trendColor=ent.trend>0?C.opp:(ent.trend<0?C.risk:C.mute);
   var trendIcon=icon(ent.trend>0?'trending-up':'trending-down',15,2.2,ent.trend>0?C.opp:C.risk);
-  var history=sparkSvg(ent.history&&ent.history.length?ent.history:genSeries(ch.health,ent.trend,12,eSeed+20),hm.c,54,'comphist');
+  var histSeries=ent.history&&ent.history.length?ent.history:genSeries(ch.health,ent.trend,12,eSeed+20);
+  var history=sparkSvg(histSeries,hm.c,54,'comphist',FI?spikeIdx(histSeries):-1);
+  var hasStaged=ent.events&&ent.events.some&&ent.events.some(function(ev){return ev.stage;});
+  var histLegend=FI?'<div style="display:flex;gap:12px;margin-top:6px;font:500 10px \'Hanken Grotesk\';color:#A79F8C"><span>◎ sharpest weekly move</span><span>▼ decay as events age</span>'+(hasStaged?'<span>↻ stage-tracked clusters can reignite</span>':'')+'</div>':'';
 
   // index cards
   var ff=state.feedFilter||'all';
@@ -442,7 +860,8 @@ function renderWorkbench(){
       +'<div style="font:600 12.5px/1.15 \'Hanken Grotesk\';color:#16140F;margin-top:9px;min-height:29px">'+ix.name+'</div>'
       +'<div style="display:flex;align-items:baseline;gap:5px;margin-top:6px"><span style="font:700 24px/1 \'IBM Plex Mono\';color:'+ix.color+'">'+sc+'</span>'
       +'<span style="font:600 10px \'IBM Plex Mono\';color:'+dcolor+'">'+(dv>0?'+':'')+dv+'</span></div>'
-      +'<div style="margin-top:8px;height:22px">'+spark+'</div></button>';
+      +'<div style="height:4px;border-radius:2px;background:#EFEADD;overflow:hidden;margin-top:7px"><div style="height:100%;width:'+sc+'%;background:'+ix.color+';border-radius:2px"></div></div>'
+      +'<div style="margin-top:7px;height:22px">'+spark+'</div></button>';
   }).join('');
 
   // weights
@@ -456,7 +875,7 @@ function renderWorkbench(){
 
   // feed
   var sideMap={risk:['controversy','risk','esg'],opp:['momentum','catalyst','sentiment']};
-  var rawFeed=ent.events.slice().sort(function(a,b){ return eventScore(b)-eventScore(a); });
+  var rawFeed=ent.events.slice().filter(function(e){ return srcVisible(e.source); }).sort(function(a,b){ return eventScore(b)-eventScore(a); });
   if(ff==='risk') rawFeed=rawFeed.filter(function(e){ return sideMap.risk.indexOf(e.index)>=0; });
   else if(ff==='opp') rawFeed=rawFeed.filter(function(e){ return sideMap.opp.indexOf(e.index)>=0; });
   else if(indexOrder.indexOf(ff)>=0) rawFeed=rawFeed.filter(function(e){ return e.index===ff; });
@@ -472,12 +891,13 @@ function renderWorkbench(){
       +'<div style="font:600 15px/1.35 \'Hanken Grotesk\';color:#16140F">'+e.title+'</div>'
       +'<div style="font:400 13px/1.5 \'Hanken Grotesk\';color:#4A463C;margin-top:4px">'+e.desc+'</div>'
       +'<div style="display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap">'
-      +'<span style="display:inline-flex;align-items:center;gap:5px;font:500 11px \'IBM Plex Mono\';color:#6E6858;background:#F0EBDE;padding:3px 8px;border-radius:6px">'+e.source+'</span>'
+      +'<span data-trust="'+(e.domain||'')+'" data-trust-class="'+e.source+'" style="display:inline-flex;align-items:center;gap:5px;font:500 11px \'IBM Plex Mono\';color:#6E6858;background:#F0EBDE;padding:3px 8px;border-radius:6px">'+icon('shield',11,2)+e.source+'</span>'
       +'<span style="display:inline-flex;align-items:center;gap:5px;font:600 11px \'Hanken Grotesk\';color:'+(dirPos?C.opp:C.risk)+';background:'+(dirPos?C.oppBg:C.riskBg)+';padding:3px 9px;border-radius:6px">'+icon(dirPos?'arrow-up-right':'arrow-down-right',11,2.4,dirPos?C.opp:C.risk)+e.direction+'</span>'
+      +(e.stage?'<span style="display:inline-flex;align-items:center;gap:5px;font:600 10.5px \'Hanken Grotesk\';color:#8A5A0E;background:#F6EBD6;padding:3px 9px;border-radius:6px;text-transform:capitalize">'+icon('clock',11,2.2,'#8A5A0E')+e.stage+'</span>':'')
       +(q?'<span style="display:inline-flex;align-items:center;gap:5px;font:600 11px \'Hanken Grotesk\';color:#B5791A;background:#F6EBD6;border:1px solid #E4C98A;padding:3px 9px;border-radius:6px">'+icon('lock',11,2.2,C.gate)+'Quarantined</span>':'')
       +'<span style="margin-left:auto;display:inline-flex;align-items:center;gap:7px">'
-      +'<span style="font:500 10px \'Hanken Grotesk\';color:#A79F8C;text-transform:uppercase;letter-spacing:.05em">Event score</span>'
-      +'<span style="font:700 13px \'IBM Plex Mono\';color:'+ix.color+'">'+eventScore(e).toFixed(2)+'</span>'
+      +'<span style="font:500 10px \'Hanken Grotesk\';color:#A79F8C;text-transform:uppercase;letter-spacing:.05em">Contribution</span>'
+      +'<span style="font:700 13px \'IBM Plex Mono\';color:'+(dirPos?C.opp:C.risk)+'">'+(dirPos?'+':'−')+eventScore(e).toFixed(2)+'</span>'
       +'<span style="color:#5A4A8C;display:flex">'+icon('arrow-right',13,2.2,C.comp)+'</span></span>'
       +'</div></button>';
   }).join('');
@@ -548,7 +968,7 @@ function renderWorkbench(){
     +'<div style="margin-top:16px">'
     +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px"><span style="font:700 9.5px \'Hanken Grotesk\';letter-spacing:.1em;text-transform:uppercase;color:#8A8474">12-week history</span>'
     +'<span style="display:inline-flex;align-items:center;gap:5px;font:600 10px \'IBM Plex Mono\';color:'+trendColor+'">'+trendIcon+trend+' · 30d</span></div>'
-    +'<div style="height:54px">'+history+'</div></div></div>'
+    +'<div style="height:54px">'+history+'</div>'+histLegend+'</div></div>'
     +'</div>'
     // six index rail
     +'<div style="border-top:1px solid #E9E3D5;padding:18px 26px 20px 26px">'
@@ -647,7 +1067,7 @@ function renderTollgate(){
       return '<td style="padding:0"><div style="height:44px;border-radius:7px;background:'+m.bg+';color:'+m.fg+';display:flex;flex-direction:column;align-items:center;justify-content:center;font:600 14px \'IBM Plex Mono\'">'+v.toFixed(2)
         +'<span style="font:600 8.5px \'Hanken Grotesk\';letter-spacing:.06em;text-transform:uppercase;opacity:.85;margin-top:1px">'+m.tier.split(' ')[0]+'</span></div></td>';
     }).join('');
-    return '<tr><th style="text-align:left;font:600 12.5px \'Hanken Grotesk\';color:#16140F;white-space:nowrap;padding-right:12px">'+src+'</th>'+cells+'</tr>';
+    return '<tr><th data-trust-class="'+src+'" style="text-align:left;font:600 12.5px \'Hanken Grotesk\';color:#16140F;white-space:nowrap;padding-right:12px">'+src+'</th>'+cells+'</tr>';
   }).join('');
 
   var legend=[{c:C.opp,l:'High · trusted (≥0.80)'},{c:C.gate,l:'Medium (0.50–0.79)'},{c:C.risk,l:'Low · quarantine (<0.50)'}].map(function(lg){
@@ -776,12 +1196,19 @@ function renderPipeline(){
 
 /* ------------ SOURCE MONITOR ------------ */
 function renderSources(){
-  var statusMeta={ 'LIVE':{c:C.opp,bg:C.oppBg,pulse:true}, 'QUOTA-MANAGED':{c:C.gate,bg:C.gateBg,pulse:false}, 'PLANNED':{c:C.mute,bg:'#EFEADD',pulse:false} };
-  var feeds=(FI&&FI.feeds)||[
+  var statusMeta={ 'LIVE':{c:C.opp,bg:C.oppBg,pulse:true}, 'QUOTA-MANAGED':{c:C.gate,bg:C.gateBg,pulse:false}, 'PLANNED':{c:C.mute,bg:'#EFEADD',pulse:false}, 'CANDIDATE':{c:C.signal,bg:C.signalBg,pulse:false}, 'PREMIUM · ROADMAP':{c:'#8A5A0E',bg:C.gateBg,pulse:false} };
+  var feeds=((FI&&FI.feeds)||[
     {name:'Google News RSS · India edition',detail:'Entity channels · month-sliced queries',status:'LIVE'},
     {name:'GDELT DOC 2.0 API',detail:'Global news firehose · quota-managed backfill',status:'QUOTA-MANAGED'},
     {name:'GDELT Events (CAMEO)',detail:'Structured event codes · cross-validation',status:'PLANNED'}
-  ];
+  ]).concat([
+    {name:'NewsAPI.org',detail:'REST JSON headlines, 150,000+ sources — free tier is dev/test only',status:'CANDIDATE'},
+    {name:'NewsData.io',detail:'Real-time + 10y historical, ~97,000 sources — free tier 12h delay',status:'CANDIDATE'},
+    {name:'NewsAPI.ai',detail:'Real-time + archive, token-based pay-as-you-go',status:'CANDIDATE'},
+    {name:'Reuters News Wire',detail:'Wholesale licensed wire feed — fast, trusted journalism',status:'PREMIUM · ROADMAP'},
+    {name:'Factiva (Dow Jones)',detail:'~32,000+ sources · 200+ countries · 28+ languages',status:'PREMIUM · ROADMAP'},
+    {name:'LexisNexis / Law360',detail:'Specialist legal & business news, litigation analysis',status:'PREMIUM · ROADMAP'}
+  ]);
   var srcRows=(FI&&FI.sources)||[];
   var totalRecords=srcRows.reduce(function(a,s){return a+s.records;},0);
   var rawTotal=(FI&&FI.rawTotal)||0;
@@ -807,7 +1234,7 @@ function renderSources(){
 
   var classCards=srcRows.map(function(s){
     var chips=s.topDomains.map(function(t){
-      return '<span style="font:500 11px \'IBM Plex Mono\';background:#F0EBDE;color:#4A463C;padding:3px 8px;border-radius:6px">'+t.d+' <span style="color:#A79F8C">'+t.n+'</span></span>';
+      return '<span data-trust="'+t.d+'" data-trust-class="'+s.name+'" style="font:500 11px \'IBM Plex Mono\';background:#F0EBDE;color:#4A463C;padding:3px 8px;border-radius:6px">'+t.d+' <span style="color:#A79F8C">'+t.n+'</span></span>';
     }).join(' ');
     var mid=(s.trustMin+s.trustMax)/2;
     var mcol=mid>=0.8?C.opp:mid>=0.5?C.gate:C.risk;
@@ -1008,7 +1435,14 @@ function renderDrawer(){
     +'<div style="text-align:center;background:'+cm.bg+';border-radius:9px;padding:9px 15px">'
     +'<div style="font:700 20px/1 \'IBM Plex Mono\';color:'+cm.fg+'">'+cred.toFixed(2)+'</div>'
     +'<div style="font:600 9px \'Hanken Grotesk\';letter-spacing:.08em;text-transform:uppercase;color:'+cm.fg+';margin-top:3px">'+cm.tier+'</div></div></div>'
-    +'<div style="font:400 11px/1.5 \'Hanken Grotesk\';color:#A79F8C;margin-top:11px">This source-sector weight is the credibility factor above. '+(cred<0.5?'Below the 0.5 threshold — event routed to quarantine until independently confirmed.':'At or above threshold — event flows straight to scoring.')+'</div></div>'
+    +'<div style="font:400 11px/1.5 \'Hanken Grotesk\';color:#A79F8C;margin-top:11px">This source-sector weight is the credibility factor above. '+(cred<0.5?'Below the 0.5 threshold — event routed to quarantine until independently confirmed.':'At or above threshold — event flows straight to scoring.')+'</div>'
+    +(function(){ var p=trustProfileFor(e.domain,e.source); if(!p) return '';
+      var bc=bandColor(p.band);
+      return '<div style="margin-top:12px;padding-top:12px;border-top:1px solid #E9E3D5">'
+        +'<div style="display:flex;align-items:center;gap:7px;margin-bottom:6px"><span style="display:inline-flex;align-items:center;gap:5px;font:600 10.5px \'Hanken Grotesk\';color:'+bc+';background:'+rgba(bc,0.12)+';padding:3px 9px;border-radius:6px"><span style="width:6px;height:6px;border-radius:50%;background:'+bc+'"></span>'+p.band+' trust</span>'
+        +'<span style="font:600 11px \'IBM Plex Mono\';color:#8A8474">'+p.label+'</span></div>'
+        +'<div style="font:400 12px/1.55 \'Hanken Grotesk\';color:#4A463C">'+p.verdict+'</div></div>';
+    })()+'</div>'
     // corroboration
     +'<div style="background:#FBF8F1;border:1px solid #DED7C5;border-radius:13px;padding:16px 18px">'
     +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px"><div style="display:flex;align-items:center;gap:8px"><span style="color:#2C5C73;display:flex">'+icon('square-check',16)+'</span><span style="font:700 12.5px \'Hanken Grotesk\';color:#16140F">Corroboration</span></div>'
@@ -1037,9 +1471,10 @@ function renderDrawer(){
 }
 
 /* ============================ RENDER ============================ */
-var viewRenderers={workbench:renderWorkbench,indices:renderIndices,tollgate:renderTollgate,scoring:renderScoring,pipeline:renderPipeline,sources:renderSources,distribution:renderDistribution};
+var viewRenderers={monitor:renderMonitor,setup1:renderSetup1,setup2:renderSetup2,alerts:renderAlerts,workbench:renderWorkbench,indices:renderIndices,tollgate:renderTollgate,scoring:renderScoring,pipeline:renderPipeline,sources:renderSources,distribution:renderDistribution};
 
 function render(){
+  if(!entities[state.entity]||watchIds().indexOf(state.entity)<0) state.entity=watchIds()[0];
   var app=document.getElementById('app');
   var mainEl=document.getElementById('main');
   var mainScroll=mainEl?mainEl.scrollTop:0;
@@ -1067,6 +1502,8 @@ document.getElementById('app').addEventListener('click',function(ev){
   if(!t) return;
   var act=t.getAttribute('data-act');
   if(act==='view'){ state.view=t.getAttribute('data-v'); state.drawer=null; render(); }
+  else if(act==='goent'){ state.entity=t.getAttribute('data-id'); state.view='workbench'; state.drawer=null; render(); }
+  else if(act==='mfilter'){ state.monitorFilter=t.getAttribute('data-f'); render(); }
   else if(act==='entity'){ state.entity=t.getAttribute('data-id'); state.drawer=null; render(); }
   else if(act==='drawer'){ state.drawer=t.getAttribute('data-id'); render(); }
   else if(act==='close-drawer'){ state.drawer=null; render(); }
@@ -1081,24 +1518,134 @@ document.getElementById('app').addEventListener('click',function(ev){
     state.review[id]=t.getAttribute('data-status');
     render();
   }
+  else if(act==='setup-mode'){ state.setupMode=t.getAttribute('data-m'); render(); }
+  else if(act==='wl-seg'){
+    var seg=t.getAttribute('data-s'), wl=wlCurrent();
+    var segIds=Object.keys(entities).filter(function(i){return entities[i].sector===seg;});
+    var allIn=segIds.every(function(i){return wl.indexOf(i)>=0;});
+    if(allIn) wl=wl.filter(function(i){return segIds.indexOf(i)<0;});
+    else segIds.forEach(function(i){ if(wl.indexOf(i)<0) wl.push(i); });
+    wlSet(wl); render();
+  }
+  else if(act==='wl-add'){ var wl2=wlCurrent(); wl2.push(t.getAttribute('data-id')); wlSet(wl2); render(); }
+  else if(act==='wl-rm'){ wlSet(wlCurrent().filter(function(i){return i!==t.getAttribute('data-id');})); render(); }
+  else if(act==='wl-clear'){ state.watchlist=null; saveSetup(); render(); }
+  else if(act==='wl-paste-add'){
+    var ta=document.getElementById('wl-paste');
+    if(ta){
+      var wl3=wlCurrent();
+      ta.value.split('\n').forEach(function(line){
+        var q=line.trim().toLowerCase(); if(!q) return;
+        Object.keys(entities).forEach(function(i){
+          if(entities[i].name.toLowerCase().indexOf(q)>=0||entities[i].ticker.toLowerCase()===q){
+            if(wl3.indexOf(i)<0) wl3.push(i);
+          }
+        });
+      });
+      wlSet(wl3); render();
+    }
+  }
+  else if(act==='src-toggle'){
+    var s=t.getAttribute('data-s');
+    if(state.sourcesOff[s]) delete state.sourcesOff[s]; else state.sourcesOff[s]=true;
+    saveSetup(); render();
+  }
+  else if(act==='alert-toggle'){ alertsInit(); state.alerts[t.getAttribute('data-id')].on=!state.alerts[t.getAttribute('data-id')].on; saveSetup(); render(); }
+  else if(act==='ch-toggle'){ alertsInit(); var ch=t.getAttribute('data-id'); state.alertChannels[ch]=!state.alertChannels[ch]; saveSetup(); render(); }
+  else if(act==='alerts-save'){ saveSetup(); toast('Alert rules saved — '+ALERT_RULES.filter(function(r){return state.alerts[r.id].on;}).length+' active rules, '+ALERT_CHANNELS.filter(function(c){return state.alertChannels[c[0]];}).length+' channels'); }
 });
 
-// slider: update in place, no full re-render (would interrupt the drag)
+function toast(msg){
+  var el=document.createElement('div');
+  el.style.cssText='position:fixed;bottom:26px;left:50%;transform:translateX(-50%);z-index:70;background:#16140F;color:#F5F1E8;font:600 12.5px \'Hanken Grotesk\';padding:11px 18px;border-radius:9px;box-shadow:0 8px 24px rgba(20,18,12,.3);animation:fiBackdrop .2s ease both';
+  el.textContent=msg;
+  document.body.appendChild(el);
+  setTimeout(function(){ el.remove(); },2600);
+}
+
+// slider/search: update in place, no full re-render (would interrupt the drag/typing)
 document.getElementById('app').addEventListener('input',function(ev){
   var t=ev.target;
-  if(!(t.matches&&t.matches('input[type=range][data-k]'))) return;
-  var k=t.getAttribute('data-k');
-  state.calc[k]=parseFloat(t.value);
-  var r=calcScores();
-  var disp=document.getElementById('disp-'+k);
-  if(disp) disp.textContent=k==='k'?state.calc.k.toFixed(1):state.calc[k].toFixed(2);
-  var e1=document.getElementById('calc-ev1'); if(e1) e1.textContent=r.ev1.toFixed(2);
-  var es=document.getElementById('calc-entity'); if(es) es.textContent=r.entityScore;
+  if(t.matches&&t.matches('input[type=range][data-k]')){
+    var k=t.getAttribute('data-k');
+    state.calc[k]=parseFloat(t.value);
+    var r=calcScores();
+    var disp=document.getElementById('disp-'+k);
+    if(disp) disp.textContent=k==='k'?state.calc.k.toFixed(1):state.calc[k].toFixed(2);
+    var e1=document.getElementById('calc-ev1'); if(e1) e1.textContent=r.ev1.toFixed(2);
+    var es=document.getElementById('calc-entity'); if(es) es.textContent=r.entityScore;
+    return;
+  }
+  if(t.matches&&t.matches('input[type=range][data-alert]')){
+    alertsInit();
+    var id=t.getAttribute('data-alert');
+    var rule=ALERT_RULES.filter(function(x){return x.id===id;})[0];
+    var thr=parseFloat(t.value);
+    state.alerts[id].thr=thr; saveSetup();
+    var thrEl=document.getElementById('thr-'+id);
+    if(thrEl) thrEl.textContent=(rule.step<1?thr.toFixed(2):thr)+rule.unit;
+    var frEl=document.getElementById('fr-'+id);
+    if(frEl) frEl.textContent=alertRate(id,thr);
+    return;
+  }
+  if(t.matches&&t.matches('[data-alert-batch]')){
+    state.alertBatch=t.checked; saveSetup();
+    return;
+  }
+  if(t.id==='wl-search'){
+    var q=t.value.trim().toLowerCase();
+    var res=document.getElementById('wl-results');
+    if(!res) return;
+    if(!q){ res.innerHTML=''; return; }
+    var wl=wlCurrent();
+    var matches=Object.keys(entities).filter(function(i){
+      return entities[i].name.toLowerCase().indexOf(q)>=0||entities[i].ticker.toLowerCase().indexOf(q)>=0;
+    }).slice(0,6);
+    res.innerHTML=matches.map(function(i){
+      var inWl=wl.indexOf(i)>=0;
+      return '<button data-act="'+(inWl?'wl-rm':'wl-add')+'" data-id="'+i+'" class="chip" style="display:flex;align-items:center;gap:10px;cursor:pointer;text-align:left;border-radius:9px;padding:9px 13px;border:1px solid '+(inWl?C.opp:'#DED7C5')+';background:'+(inWl?C.oppBg:'#FBF8F1')+'">'
+        +'<span style="font:600 12.5px \'Hanken Grotesk\';color:#16140F;flex:1">'+entities[i].name+'</span>'
+        +'<span style="font:500 10.5px \'IBM Plex Mono\';color:#8A8474">'+entities[i].ticker+'</span>'
+        +icon(inWl?'check':'plus',13,2.4,inWl?C.opp:C.mute)+'</button>';
+    }).join('')||'<div style="font:500 12px \'Hanken Grotesk\';color:#A79F8C;padding:6px 2px">No matches in the coverage universe.</div>';
+  }
 });
 
 // esc closes drawer
 document.addEventListener('keydown',function(ev){
   if(ev.key==='Escape'&&state.drawer){ state.drawer=null; render(); }
+});
+
+/* ============================ TRUST POPOVER ============================ */
+function trustProfileFor(domain,cls){
+  if(!FI||!FI.trustProfiles) return null;
+  var tp=FI.trustProfiles;
+  if(domain&&tp.outlets[domain]) return {label:domain,band:tp.outlets[domain].band,verdict:tp.outlets[domain].verdict};
+  if(cls&&tp.classes[cls]) return {label:cls,band:tp.classes[cls].band,verdict:tp.classes[cls].verdict};
+  return null;
+}
+var trustPop=document.createElement('div');
+trustPop.id='trustpop';
+document.body.appendChild(trustPop);
+function bandColor(b){ return b==='High'?C.opp:b==='Medium'?C.gate:C.risk; }
+document.getElementById('app').addEventListener('mouseover',function(ev){
+  var t=ev.target.closest('[data-trust]');
+  if(!t) return;
+  var p=trustProfileFor(t.getAttribute('data-trust'),t.getAttribute('data-trust-class'));
+  if(!p) return;
+  var bc=bandColor(p.band);
+  trustPop.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">'
+    +'<span style="font:600 12px \'IBM Plex Mono\';color:#16140F">'+p.label+'</span>'
+    +'<span style="display:inline-flex;align-items:center;gap:5px;font:600 10.5px \'Hanken Grotesk\';color:'+bc+';background:'+rgba(bc,0.12)+';padding:3px 9px;border-radius:6px"><span style="width:6px;height:6px;border-radius:50%;background:'+bc+'"></span>'+p.band+' trust</span></div>'
+    +'<div style="font:400 12px/1.55 \'Hanken Grotesk\';color:#4A463C">'+p.verdict+'</div>';
+  var r=t.getBoundingClientRect();
+  var top=r.bottom+8, left=Math.min(window.innerWidth-296, Math.max(8, r.left));
+  if(top+170>window.innerHeight) top=r.top-8-170;
+  trustPop.style.top=top+'px'; trustPop.style.left=left+'px';
+  trustPop.classList.add('show');
+});
+document.getElementById('app').addEventListener('mouseout',function(ev){
+  if(ev.target.closest('[data-trust]')) trustPop.classList.remove('show');
 });
 
 render();

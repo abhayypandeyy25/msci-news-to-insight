@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>News-to-Insight — Analyst Prototype</title>
+<style>
+  :root{
+    --ink:#141821; --ink-soft:#454B58; --ink-mute:#828997;
+    --paper:#F3F4F1; --panel:#FBFBF9; --surface:#FFFFFF;
+    --surface-2:#F7F7F4; --surface-3:#ECEDE8;
+    --line:#E1E2DC; --line-strong:#CFD1C8;
+    --accent:#1F5C4D; --accent-bg:#E4EFEA; --accent-soft:#2C7A66;
+    --risk:#B23A2E; --risk-bg:#F7E7E4; --risk-mid:#E8A99F;
+    --opp:#4C7A1E; --opp-bg:#EAF1DE; --opp-mid:#B4CE8A;
+    --gold:#9A6B12; --gold-bg:#F4EAD6;
+    --radius:11px; --radius-sm:8px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Inter","Helvetica Neue",Arial,sans-serif;line-height:1.55;
+    -webkit-font-smoothing:antialiased;font-size:14px;}
+  .serif{font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;}
+  .mono{font-family:"SF Mono","JetBrains Mono",Menlo,monospace;}
+  button{font-family:inherit;}
+  svg.ic{width:1em;height:1em;vertical-align:-0.13em;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
+  input,textarea{font-family:inherit;font-size:13px;padding:9px 12px;border:1px solid var(--line-strong);
+    border-radius:var(--radius-sm);background:var(--surface);color:var(--ink);outline:none;}
+  input:focus,textarea:focus{border-color:var(--accent);}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);}
+
+  /* Shell */
+  .app{display:grid;grid-template-columns:236px 1fr;min-height:100vh;}
+  .rail{background:var(--ink);color:#E8EAE6;padding:22px 16px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;}
+  .brand{display:flex;align-items:center;gap:10px;padding:0 6px 20px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:16px;}
+  .brand .logo{width:30px;height:30px;border-radius:8px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;}
+  .brand .bt{font-size:14px;font-weight:600;line-height:1.2;}
+  .brand .bs{font-size:11px;color:#9AA0A8;}
+  .nav{display:flex;flex-direction:column;gap:2px;flex:1;}
+  .nav-label{font-size:10px;letter-spacing:0.13em;text-transform:uppercase;color:#6C737E;padding:12px 8px 6px;font-weight:600;}
+  .nav-item{display:flex;align-items:center;gap:11px;padding:9px 10px;border-radius:8px;color:#C4C8CD;
+    background:none;border:none;cursor:pointer;font-size:13.5px;text-align:left;width:100%;transition:background .12s,color .12s;}
+  .nav-item:hover{background:rgba(255,255,255,.06);color:#fff;}
+  .nav-item.active{background:var(--accent-soft);color:#fff;font-weight:500;}
+  .nav-item svg{font-size:17px;opacity:.9;}
+  .nav-item .step-n{margin-left:auto;font-size:11px;opacity:.6;}
+  .rail-foot{font-size:11px;color:#6C737E;padding:12px 8px 0;border-top:1px solid rgba(255,255,255,.1);}
+
+  .main{padding:0;overflow-x:hidden;}
+  .screen{display:none;padding:34px 40px 60px;max-width:1120px;animation:fade .28s ease;}
+  .screen.active{display:block;}
+  @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+  .step-tag{display:inline-flex;align-items:center;gap:6px;background:var(--accent-bg);color:var(--accent);
+    font-size:12px;padding:3px 11px;border-radius:20px;font-weight:500;}
+  .h-title{font-size:22px;font-weight:600;margin:12px 0 4px;letter-spacing:-0.01em;}
+  .h-sub{font-size:14px;color:var(--ink-soft);margin:0 0 22px;max-width:70ch;}
+
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);}
+  .divider{border-top:1px solid var(--line);margin:20px 0;}
+
+  /* Segmented tabs */
+  .seg{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+  .seg button{display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:8px 14px;border-radius:var(--radius-sm);
+    border:1px solid var(--line-strong);background:var(--surface-2);cursor:pointer;color:var(--ink-soft);transition:all .12s;}
+  .seg button.on{background:var(--accent-bg);border-color:var(--accent);color:var(--accent);font-weight:500;}
+  .seg button svg{font-size:15px;}
+
+  .chip{font-size:13px;padding:7px 13px;border-radius:20px;border:1px solid var(--line-strong);
+    background:var(--surface-2);cursor:pointer;color:var(--ink);transition:all .12s;}
+  .chip:hover{border-color:var(--ink-mute);}
+  .chip.on{background:var(--accent-bg);border-color:var(--accent);color:var(--accent);}
+  .row-add{display:flex;align-items:center;justify-content:space-between;font-size:13px;padding:9px 12px;
+    border-radius:var(--radius-sm);border:1px solid var(--line);background:var(--surface-2);cursor:pointer;text-align:left;width:100%;transition:all .12s;}
+  .row-add:hover{border-color:var(--accent);}
+  .row-add .add-cue{color:var(--accent);font-size:12px;}
+
+  .pill-sel{display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:5px 8px 5px 12px;
+    border-radius:20px;background:var(--accent-bg);color:var(--accent);}
+  .pill-sel svg{cursor:pointer;font-size:15px;}
+
+  .band{font-size:10.5px;padding:2px 8px;border-radius:20px;white-space:nowrap;}
+  .band.hi{background:var(--opp-bg);color:var(--opp);}
+  .band.md{background:var(--gold-bg);color:var(--gold);}
+  .band.lo{background:var(--risk-bg);color:var(--risk);}
+
+  .btn-primary{display:inline-flex;align-items:center;gap:7px;font-size:14px;padding:9px 18px;border-radius:var(--radius-sm);
+    border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer;transition:background .12s;}
+  .btn-primary:hover{background:var(--accent-soft);}
+  .btn-ghost{font-size:12px;color:var(--ink-mute);background:none;border:none;cursor:pointer;padding:0;}
+  .btn-ghost:hover{color:var(--ink);}
+
+  .metric-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px;}
+  .metric{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:13px 15px;}
+  .metric .m-l{font-size:12px;color:var(--ink-mute);margin:0;}
+  .metric .m-v{font-size:23px;font-weight:600;margin:4px 0 0;letter-spacing:-0.01em;}
+
+  .col-head{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;margin-bottom:11px;}
+  .col-head svg{font-size:16px;color:var(--ink-mute);}
+
+  .footbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:24px;flex-wrap:wrap;}
+
+  @media(max-width:860px){
+    .app{grid-template-columns:1fr;}
+    .rail{position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center;gap:6px;padding:12px;}
+    .brand{border:none;margin:0;padding:0 10px 0 0;}
+    .nav{flex-direction:row;flex-wrap:wrap;gap:4px;}
+    .nav-label,.rail-foot{display:none;}
+    .nav-item{width:auto;padding:7px 10px;}
+    .nav-item .step-n{display:none;}
+    .screen{padding:22px 18px 50px;}
+    .metric-strip{grid-template-columns:1fr 1fr;}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="rail">
+    <div class="brand">
+      <div class="logo serif">N</div>
+      <div><div class="bt">News-to-Insight</div><div class="bs">Analyst workspace</div></div>
+    </div>
+    <nav class="nav" id="nav">
+      <div class="nav-label">Setup</div>
+      <button class="nav-item active" data-screen="companies"><svg class="ic" viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9v.01M9 13v.01M9 17v.01M15 9v.01M15 13v.01M15 17v.01"/></svg>Companies<span class="step-n">1</span></button>
+      <button class="nav-item" data-screen="sources"><svg class="ic" viewBox="0 0 24 24"><path d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16M6 19a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg>Sources<span class="step-n">2</span></button>
+      <div class="nav-label">Monitor</div>
+      <button class="nav-item" data-screen="dashboard"><svg class="ic" viewBox="0 0 24 24"><path d="M3 3v18h18M7 15l4-4 3 3 5-6"/></svg>Dashboard</button>
+      <button class="nav-item" data-screen="alerts"><svg class="ic" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/></svg>Alerts</button>
+      <button class="nav-item" data-screen="entity"><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20"/></svg>Entity detail</button>
+    </nav>
+    <div class="rail-foot">Prototype · illustrative data</div>
+  </aside>
+
+  <main class="main" id="main">
+
+    <!-- ============ SCREEN 1 · COMPANIES ============ -->
+    <section class="screen active" id="s-companies">
+      <span class="step-tag"><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Step 1 of 2</span>
+      <h1 class="h-title">Build your watchlist</h1>
+      <p class="h-sub">Choose the companies to track. Add a whole sector, scope by region, search individually, or paste a list — they all feed one watchlist, and recommendations sharpen as you go.</p>
+
+      <div class="seg" id="co-modes">
+        <button class="on" data-m="sector"><svg class="ic" viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14"/></svg>By sector</button>
+        <button data-m="region"><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM2 12h20"/></svg>By region</button>
+        <button data-m="search"><svg class="ic" viewBox="0 0 24 24"><path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.3-4.3"/></svg>Search</button>
+        <button data-m="paste"><svg class="ic" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Upload / paste</button>
+      </div>
+
+      <div class="co-panel" id="cp-sector">
+        <p class="h-sub" style="margin-bottom:10px;">Pick a sector to add its constituents.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;" id="sector-chips"></div>
+      </div>
+      <div class="co-panel" id="cp-region" style="display:none;">
+        <p class="h-sub" style="margin-bottom:10px;">Scope by geography.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;" id="region-chips"></div>
+      </div>
+      <div class="co-panel" id="cp-search" style="display:none;">
+        <input type="text" id="co-search" placeholder="Type a company name, e.g. Bajaj Finance" style="width:100%;margin-bottom:10px;">
+        <div id="co-search-res" style="display:flex;flex-direction:column;gap:5px;"></div>
+      </div>
+      <div class="co-panel" id="cp-paste" style="display:none;">
+        <textarea id="co-paste" rows="5" placeholder="One company per line —&#10;HDFC Bank&#10;ICICI Bank&#10;Bajaj Finance" style="width:100%;margin-bottom:10px;" class="mono"></textarea>
+        <button class="chip" id="co-paste-add">Add these</button>
+      </div>
+
+      <div class="divider"></div>
+
+      <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:22px;align-items:start;">
+        <div>
+          <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px;">
+            <span style="font-size:14px;font-weight:600;">Tracking <span id="co-count" style="color:var(--accent);">0</span></span>
+            <button class="btn-ghost" id="co-clear">Clear all</button>
+          </div>
+          <div id="co-selected" style="display:flex;flex-wrap:wrap;gap:7px;min-height:46px;padding:12px;border:1px dashed var(--line-strong);border-radius:var(--radius);background:var(--surface-2);">
+            <span id="co-empty" style="font-size:13px;color:var(--ink-mute);">Nothing selected yet — pick a sector or search above.</span>
+          </div>
+        </div>
+        <div>
+          <div class="col-head"><svg class="ic" viewBox="0 0 24 24"><path d="M12 3l1.9 5.8H20l-4.9 3.6 1.9 5.8L12 14.6 7 18.2l1.9-5.8L4 8.8h6.1z"/></svg>Recommended for you</div>
+          <div id="co-recos" style="display:flex;flex-direction:column;gap:6px;">
+            <span style="font-size:13px;color:var(--ink-mute);">Suggestions appear as you add companies.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footbar" style="justify-content:flex-end;">
+        <button class="btn-primary" data-go="sources">Continue to sources<svg class="ic" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+    </section>
+
+    <!-- ============ SCREEN 2 · SOURCES ============ -->
+    <section class="screen" id="s-sources">
+      <span class="step-tag"><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Step 2 of 2</span>
+      <h1 class="h-title">Select your sources</h1>
+      <p class="h-sub">Recommendations are ranked by trust weight for your watchlist. Higher-trust sources carry more weight when scoring — the trust band shows where each one sits.</p>
+
+      <div class="col-head"><svg class="ic" viewBox="0 0 24 24"><path d="M12 3l1.9 5.8H20l-4.9 3.6 1.9 5.8L12 14.6 7 18.2l1.9-5.8L4 8.8h6.1z"/></svg>Recommended &amp; trusted for your watchlist</div>
+      <div id="src-reco" style="display:flex;flex-direction:column;gap:8px;margin-bottom:22px;"></div>
+
+      <div class="divider"></div>
+
+      <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px;">
+        <span style="font-size:14px;font-weight:600;">Add more sources</span>
+        <input type="text" id="src-search" placeholder="Search sources" style="width:200px;">
+      </div>
+      <div id="src-more" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"></div>
+
+      <div class="divider"></div>
+      <div class="metric-strip" style="grid-template-columns:repeat(3,1fr);margin-bottom:0;">
+        <div class="metric"><p class="m-l">Sources selected</p><p class="m-v" id="src-count">0</p></div>
+        <div class="metric"><p class="m-l">Avg trust weight</p><p class="m-v" id="src-avg">—</p></div>
+        <div class="metric"><p class="m-l">High-trust share</p><p class="m-v" id="src-high">—</p></div>
+      </div>
+
+      <div class="footbar">
+        <button class="btn-ghost" data-go="companies"><svg class="ic" viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> Back</button>
+        <button class="btn-primary" data-go="dashboard">Finish setup<svg class="ic" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+    </section>
+
+    <!-- ============ SCREEN 3 · DASHBOARD ============ -->
+    <section class="screen" id="s-dashboard">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:18px;">
+        <div>
+          <h1 class="h-title" style="margin-top:0;">Watchlist monitor</h1>
+          <p class="h-sub" style="margin:2px 0 0;">18 entities · BFSI-weighted · 6 sources · updated just now</p>
+        </div>
+        <div class="seg" id="db-filters" style="margin:0;">
+          <button class="on" data-f="all">All signals</button>
+          <button data-f="risk">Risk-side</button>
+          <button data-f="opp">Opportunity</button>
+        </div>
+      </div>
+
+      <div class="metric-strip">
+        <div class="metric"><p class="m-l">Entities tracked</p><p class="m-v">18</p></div>
+        <div class="metric"><p class="m-l">Alerts since last visit</p><p class="m-v" style="color:var(--risk);">7</p></div>
+        <div class="metric"><p class="m-l">Biggest mover</p><p class="m-v" style="font-size:16px;">IIFL Finance <span style="color:var(--risk);font-size:13px;">▲18</span></p></div>
+        <div class="metric"><p class="m-l">Avg feed trust</p><p class="m-v">0.87</p></div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:20px;align-items:start;margin-bottom:22px;">
+        <div>
+          <div class="col-head"><svg class="ic" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17v.01"/></svg>Needs attention — ranked by move</div>
+          <div id="db-queue" style="display:flex;flex-direction:column;gap:7px;"></div>
+        </div>
+        <div>
+          <div class="col-head"><svg class="ic" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Live event feed</div>
+          <div id="db-feed" class="card" style="overflow:hidden;"></div>
+        </div>
+      </div>
+
+      <div class="col-head"><svg class="ic" viewBox="0 0 24 24"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z"/></svg>Watchlist heatmap <span style="font-size:12px;color:var(--ink-mute);font-weight:400;">dominant signal per entity</span></div>
+      <div id="db-heat" style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;"></div>
+      <div style="display:flex;gap:16px;margin-top:12px;font-size:12px;color:var(--ink-soft);flex-wrap:wrap;">
+        <span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;border-radius:3px;background:var(--risk-mid);"></span>Risk-side dominant</span>
+        <span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;border-radius:3px;background:var(--opp-mid);"></span>Opportunity dominant</span>
+        <span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;border-radius:3px;background:var(--surface-3);border:1px solid var(--line);"></span>Quiet</span>
+      </div>
+    </section>
+
+    <!-- ============ SCREEN 4 · ALERTS ============ -->
+    <section class="screen" id="s-alerts">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+        <div>
+          <h1 class="h-title" style="margin-top:0;">Alert rules</h1>
+          <p class="h-sub" style="margin:2px 0 0;">Each rule watches your 18 entities. The estimate shows how often it would have fired over the last 90 days — tune to balance signal against noise.</p>
+        </div>
+        <span style="font-size:12px;color:var(--ink-soft);white-space:nowrap;"><span id="al-active">3</span> active · est. <span id="al-total">~9</span>/week</span>
+      </div>
+
+      <div id="al-rules" style="display:flex;flex-direction:column;gap:10px;margin:18px 0 20px;"></div>
+
+      <div class="divider"></div>
+      <div class="col-head"><svg class="ic" viewBox="0 0 24 24"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg>Delivery</div>
+      <div id="al-channels" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:18px;"></div>
+
+      <div class="card" style="padding:14px 16px;display:flex;gap:11px;align-items:flex-start;">
+        <svg class="ic" viewBox="0 0 24 24" style="font-size:18px;color:var(--ink-mute);margin-top:1px;"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 6v6l4 2"/></svg>
+        <div>
+          <div style="font-size:13px;font-weight:600;margin-bottom:6px;">Quiet hours &amp; batching</div>
+          <label style="font-size:13px;color:var(--ink-soft);display:flex;align-items:center;gap:7px;cursor:pointer;"><input type="checkbox" checked style="width:auto;padding:0;">Batch non-critical alerts into a daily digest</label>
+          <div style="font-size:12px;color:var(--ink-mute);margin-top:6px;">Critical rules (regulatory, default-risk) always push immediately.</div>
+        </div>
+      </div>
+
+      <div class="footbar" style="justify-content:flex-end;">
+        <button class="btn-primary" data-go="dashboard">Save alert rules<svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></button>
+      </div>
+    </section>
+
+    <!-- ============ SCREEN 5 · ENTITY DETAIL ============ -->
+    <section class="screen" id="s-entity">
+      <button class="btn-ghost" data-go="dashboard" style="margin-bottom:14px;"><svg class="ic" viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> Back to watchlist</button>
+
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:22px;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:46px;height:46px;border-radius:11px;background:var(--surface-3);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;color:var(--ink-soft);">IF</div>
+          <div>
+            <h1 class="h-title" style="margin:0;">IIFL Finance</h1>
+            <p class="h-sub" style="margin:2px 0 0;">NBFC · BFSI · India · NSE: IIFL</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center;">
+          <div style="text-align:right;"><p style="font-size:12px;color:var(--ink-mute);margin:0;">Health score</p><p style="font-size:16px;font-weight:600;margin:2px 0 0;">42<span style="font-size:12px;color:var(--ink-mute);">/100</span></p></div>
+          <div style="width:1px;height:34px;background:var(--line);"></div>
+          <div style="text-align:right;"><p style="font-size:12px;color:var(--ink-mute);margin:0;">Controversy</p><p style="font-size:16px;font-weight:600;margin:2px 0 0;color:var(--risk);">71 <span style="font-size:12px;">▲18</span></p></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;margin-bottom:24px;">
+        <div>
+          <div style="font-size:13px;font-weight:600;margin-bottom:10px;">Controversy score — 90 days</div>
+          <div class="card" style="padding:14px;">
+            <svg viewBox="0 0 340 156" style="width:100%;height:auto;" role="img" aria-label="Controversy score over 90 days: spike, decay, reignition">
+              <line x1="30" y1="10" x2="30" y2="120" stroke="var(--line-strong)"/>
+              <line x1="30" y1="120" x2="335" y2="120" stroke="var(--line-strong)"/>
+              <text x="4" y="24" font-size="9" fill="var(--ink-mute)">80</text>
+              <text x="4" y="72" font-size="9" fill="var(--ink-mute)">40</text>
+              <text x="4" y="118" font-size="9" fill="var(--ink-mute)">0</text>
+              <line x1="30" y1="48" x2="335" y2="48" stroke="var(--risk-mid)" stroke-dasharray="3 3" opacity="0.7"/>
+              <text x="300" y="45" font-size="8" fill="var(--risk)">alert 60</text>
+              <path d="M30 108 70 104 95 40 130 58 160 70 185 66 205 30 240 44 275 52 310 56 335 58 335 120 30 120Z" fill="var(--risk)" opacity="0.09"/>
+              <path d="M30 108 70 104 95 40 130 58 160 70 185 66 205 30 240 44 275 52 310 56 335 58" fill="none" stroke="var(--risk)" stroke-width="2" stroke-linejoin="round"/>
+              <circle cx="95" cy="40" r="3.2" fill="var(--risk)"/>
+              <circle cx="205" cy="30" r="3.2" fill="var(--risk)"/>
+              <text x="72" y="33" font-size="8.5" fill="var(--ink-soft)">RBI action</text>
+              <text x="184" y="22" font-size="8.5" fill="var(--ink-soft)">reignited</text>
+            </svg>
+            <div style="font-size:11.5px;color:var(--ink-mute);margin-top:6px;display:flex;gap:14px;flex-wrap:wrap;">
+              <span>▲ Spike on event</span><span>▼ Decay as it ages</span><span>↻ Reignited on follow-up</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:13px;font-weight:600;margin-bottom:10px;">Index breakdown</div>
+          <div id="en-indices" style="display:flex;flex-direction:column;gap:7px;"></div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="col-head"><svg class="ic" viewBox="0 0 24 24"><path d="M12 3v18M3 8h4M3 16h4M17 8h4M17 16h4M7 8a5 5 0 0 1 10 0M7 16a5 5 0 0 0 10 0"/></svg>Event timeline — what's driving the score</div>
+      <div id="en-timeline" style="display:flex;flex-direction:column;"></div>
+    </section>
+
+  </main>
+</div>
+<script>
+(function(){
+  var X='<svg class="ic" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+  var PLUS='<svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>';
+  var CHECK='<svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>';
+
+  /* ---------- Navigation ---------- */
+  function go(id){
+    document.querySelectorAll('.screen').forEach(function(s){s.classList.toggle('active',s.id==='s-'+id);});
+    document.querySelectorAll('.nav-item').forEach(function(n){n.classList.toggle('active',n.dataset.screen===id);});
+    document.getElementById('main').scrollTop=0;
+    window.scrollTo(0,0);
+  }
+  document.querySelectorAll('.nav-item').forEach(function(n){n.onclick=function(){go(n.dataset.screen);};});
+  document.querySelectorAll('[data-go]').forEach(function(b){b.onclick=function(){go(b.dataset.go);};});
+
+  /* ---------- Screen 1: Companies ---------- */
+  var LIB={
+    "BFSI / NBFC":["HDFC Bank","ICICI Bank","Bajaj Finance","State Bank of India","Kotak Mahindra Bank","Axis Bank","Shriram Finance","IIFL Finance"],
+    "Auto & ancillary":["JK Tyre","Tata Motors","Mahindra & Mahindra","Bosch India","Motherson"],
+    "IT services":["TCS","Infosys","Wipro","HCLTech"],
+    "Pharma":["Sun Pharma","Cipla","Dr Reddy's","Divi's Labs"],
+    "Energy":["Reliance Industries","IOCL","NTPC","Adani Green"]
+  };
+  var RECO={
+    "HDFC Bank":["ICICI Bank","Axis Bank","Kotak Mahindra Bank"],
+    "Bajaj Finance":["Shriram Finance","IIFL Finance","Poonawalla Fincorp"],
+    "State Bank of India":["Punjab National Bank","Bank of Baroda"],
+    "JK Tyre":["MRF","Apollo Tyres","CEAT"],
+    "TCS":["Infosys","Wipro","LTIMindtree"],
+    "Reliance Industries":["ONGC","IOCL","GAIL"],
+    "Sun Pharma":["Cipla","Lupin","Dr Reddy's"]
+  };
+  var ALL=[];Object.keys(LIB).forEach(function(k){LIB[k].forEach(function(c){if(ALL.indexOf(c)<0)ALL.push(c);});});
+  ["Poonawalla Fincorp","MRF","Apollo Tyres","CEAT","Punjab National Bank","Bank of Baroda","LTIMindtree","Lupin","ONGC","GAIL"].forEach(function(c){if(ALL.indexOf(c)<0)ALL.push(c);});
+  var REGIONS=["India","United States","Southeast Asia","Europe"];
+  var sel=[];
+
+  function addCo(c){if(sel.indexOf(c)<0){sel.push(c);renderCo();}}
+  function rmCo(c){sel=sel.filter(function(x){return x!==c;});renderCo();}
+
+  var sc=document.getElementById('sector-chips');
+  Object.keys(LIB).forEach(function(s){
+    var b=document.createElement('button');b.className='chip';b.textContent=s;
+    b.onclick=function(){LIB[s].forEach(addCo);};sc.appendChild(b);
+  });
+  var rc=document.getElementById('region-chips');
+  REGIONS.forEach(function(r){
+    var b=document.createElement('button');b.className='chip';b.textContent=r;
+    b.onclick=function(){rc.querySelectorAll('.chip').forEach(function(x){x.classList.remove('on');});b.classList.add('on');};
+    rc.appendChild(b);
+  });
+
+  function renderCo(){
+    var box=document.getElementById('co-selected'),empty=document.getElementById('co-empty');
+    box.querySelectorAll('.pill-sel').forEach(function(p){p.remove();});
+    empty.style.display=sel.length?'none':'';
+    sel.forEach(function(c){
+      var p=document.createElement('span');p.className='pill-sel';
+      p.innerHTML=c+' '+X;
+      p.querySelector('svg').onclick=function(){rmCo(c);};
+      box.appendChild(p);
+    });
+    document.getElementById('co-count').textContent=sel.length;
+
+    var pool={};
+    sel.forEach(function(c){(RECO[c]||[]).forEach(function(r){if(sel.indexOf(r)<0)pool[r]=(pool[r]||0)+1;});});
+    var ranked=Object.keys(pool).sort(function(a,b){return pool[b]-pool[a];}).slice(0,5);
+    var rb=document.getElementById('co-recos');
+    if(!ranked.length){rb.innerHTML='<span style="font-size:13px;color:var(--ink-mute);">Suggestions appear as you add companies.</span>';return;}
+    rb.innerHTML='';
+    ranked.forEach(function(r){
+      var row=document.createElement('button');row.className='row-add';
+      row.innerHTML='<span>'+r+'</span><span class="add-cue">'+PLUS+' add</span>';
+      row.onclick=function(){addCo(r);};rb.appendChild(row);
+    });
+  }
+  document.getElementById('co-clear').onclick=function(){sel=[];renderCo();};
+  document.getElementById('co-search').oninput=function(){
+    var q=this.value.toLowerCase(),box=document.getElementById('co-search-res');
+    if(!q){box.innerHTML='';return;}
+    var hits=ALL.filter(function(c){return c.toLowerCase().indexOf(q)>=0&&sel.indexOf(c)<0;}).slice(0,6);
+    box.innerHTML='';
+    if(!hits.length){box.innerHTML='<span style="font-size:13px;color:var(--ink-mute);padding:6px;">No match — add it via paste.</span>';return;}
+    hits.forEach(function(c){
+      var row=document.createElement('button');row.className='row-add';
+      row.innerHTML='<span>'+c+'</span><span class="add-cue">'+PLUS+' add</span>';
+      row.onclick=function(){addCo(c);document.getElementById('co-search').value='';box.innerHTML='';};
+      box.appendChild(row);
+    });
+  };
+  document.getElementById('co-paste-add').onclick=function(){
+    document.getElementById('co-paste').value.split('\n').forEach(function(l){var c=l.trim();if(c)addCo(c);});
+    document.getElementById('co-paste').value='';
+  };
+  document.querySelectorAll('#co-modes button').forEach(function(t){
+    t.onclick=function(){
+      document.querySelectorAll('.co-panel').forEach(function(p){p.style.display='none';});
+      document.getElementById('cp-'+t.dataset.m).style.display='';
+      document.querySelectorAll('#co-modes button').forEach(function(x){x.classList.remove('on');});
+      t.classList.add('on');
+    };
+  });
+
+  /* ---------- Screen 2: Sources ---------- */
+  function bnd(w){if(w>=0.8)return['hi','High'];if(w>=0.5)return['md','Medium'];return['lo','Low'];}
+  var SRC_RECO=[
+    {n:"SEBI / RBI releases",d:"Regulatory filings",w:0.96,on:true,note:"Highest tier — legal & compliance"},
+    {n:"NSE / BSE announcements",d:"Exchange disclosures",w:0.94,on:true,note:"Orders, results, resignations"},
+    {n:"Reuters India",d:"Agency wire",w:0.86,on:true},
+    {n:"Bloomberg Quint",d:"Financial media",w:0.84,on:true},
+    {n:"The Economic Times",d:"Business daily",w:0.79,on:true},
+    {n:"Business Standard",d:"Business daily",w:0.77,on:false},
+    {n:"Moneycontrol",d:"Markets portal",w:0.71,on:false},
+    {n:"Banking-sector newsletter",d:"Niche BFSI",w:0.68,on:false,note:"Strong for BFSI, weak elsewhere"}
+  ];
+  var SRC_MORE=[
+    {n:"Mint",d:"Business daily",w:0.75},{n:"Hindu BusinessLine",d:"Business daily",w:0.74},
+    {n:"CNBC-TV18",d:"Markets TV",w:0.70},{n:"Financial Express",d:"Business daily",w:0.69},
+    {n:"PTI wire",d:"Agency wire",w:0.80},{n:"Company press releases",d:"Self-reported",w:0.55,note:"Treat with care"},
+    {n:"Social / X streams",d:"Social media",w:0.33,note:"Low base trust until corroborated"},{n:"Analyst blogs",d:"Independent",w:0.48}
+  ];
+  var chosen={};SRC_RECO.concat(SRC_MORE).forEach(function(s){chosen[s.n]=!!s.on;});
+  function srcRow(s,compact){
+    var on=chosen[s.n],b=bnd(s.w);
+    var row=document.createElement('button');
+    row.style.cssText='display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 13px;border-radius:var(--radius);border:1px solid '+(on?'var(--accent)':'var(--line)')+';background:'+(on?'var(--accent-bg)':'var(--surface-2)')+';cursor:pointer;text-align:left;width:100%;';
+    var ico=on?'<svg class="ic" viewBox="0 0 24 24" style="font-size:19px;color:var(--accent);"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM8 12l3 3 5-5"/></svg>':'<svg class="ic" viewBox="0 0 24 24" style="font-size:19px;color:var(--ink-mute);"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 8v8M8 12h8"/></svg>';
+    row.innerHTML='<span style="display:flex;align-items:center;gap:10px;min-width:0;">'+ico+
+      '<span style="min-width:0;"><span style="display:block;font-size:14px;font-weight:500;">'+s.n+'</span>'+
+      '<span style="display:block;font-size:12px;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+s.d+(s.note&&!compact?' · '+s.note:'')+'</span></span></span>'+
+      '<span class="band '+b[0]+'">'+b[1]+' · '+s.w.toFixed(2)+'</span>';
+    row.onclick=function(){chosen[s.n]=!chosen[s.n];renderSrc();};
+    return row;
+  }
+  function renderSrc(){
+    var rb=document.getElementById('src-reco');rb.innerHTML='';
+    SRC_RECO.forEach(function(s){rb.appendChild(srcRow(s,false));});
+    var q=(document.getElementById('src-search').value||'').toLowerCase();
+    var mb=document.getElementById('src-more');mb.innerHTML='';
+    SRC_MORE.filter(function(s){return s.n.toLowerCase().indexOf(q)>=0||s.d.toLowerCase().indexOf(q)>=0;}).forEach(function(s){mb.appendChild(srcRow(s,true));});
+    var keys=Object.keys(chosen).filter(function(k){return chosen[k];});
+    var all=SRC_RECO.concat(SRC_MORE);
+    var ws=keys.map(function(k){var f=all.find(function(x){return x.n===k;});return f?f.w:0;});
+    document.getElementById('src-count').textContent=keys.length;
+    if(ws.length){
+      document.getElementById('src-avg').textContent=(ws.reduce(function(a,b){return a+b;},0)/ws.length).toFixed(2);
+      document.getElementById('src-high').textContent=Math.round(100*ws.filter(function(w){return w>=0.8;}).length/ws.length)+'%';
+    }else{document.getElementById('src-avg').textContent='—';document.getElementById('src-high').textContent='—';}
+  }
+  document.getElementById('src-search').oninput=renderSrc;
+
+  /* ---------- Screen 3: Dashboard ---------- */
+  var QUEUE=[
+    {e:"IIFL Finance",s:71,d:18,idx:"Controversy",side:"risk",why:"RBI regulatory action"},
+    {e:"Poonawalla Fincorp",s:58,d:12,idx:"Controversy",side:"risk",why:"Key-person exit"},
+    {e:"Bajaj Finance",s:64,d:9,idx:"Momentum",side:"opp",why:"Record quarterly AUM"},
+    {e:"Kotak Mahindra Bank",s:47,d:7,idx:"Risk",side:"risk",why:"Rating outlook revised"},
+    {e:"HDFC Bank",s:52,d:6,idx:"Momentum",side:"opp",why:"Analyst upgrades"},
+    {e:"Shriram Finance",s:39,d:4,idx:"Catalyst",side:"opp",why:"New co-lending tie-up"}
+  ];
+  var FEED=[
+    {e:"IIFL Finance",p:"Legal & compliance",src:"SEBI / RBI",b:"hi",c:"+2.1",t:"9m",side:"risk"},
+    {e:"Bajaj Finance",p:"Commercial",src:"NSE / BSE",b:"hi",c:"+1.6",t:"22m",side:"opp"},
+    {e:"Poonawalla Fincorp",p:"Key-person",src:"Reuters",b:"hi",c:"+1.4",t:"41m",side:"risk"},
+    {e:"HDFC Bank",p:"Financial",src:"Bloomberg",b:"hi",c:"+1.1",t:"1h",side:"opp"},
+    {e:"Kotak Mahindra",p:"Fin. integrity",src:"ET",b:"md",c:"+0.9",t:"2h",side:"risk"},
+    {e:"Manappuram",p:"Operational",src:"Newsletter",b:"md",c:"+0.6",t:"3h",side:"risk"},
+    {e:"Shriram Finance",p:"Commercial",src:"NSE / BSE",b:"hi",c:"+0.8",t:"3h",side:"opp"}
+  ];
+  var GRID=[
+    ["IIFL","risk-hi"],["Poonawalla","risk-hi"],["Kotak","risk-lo"],["HDFC Bk","opp-lo"],["ICICI","quiet"],["Axis","quiet"],
+    ["Bajaj Fin","opp-hi"],["Shriram","opp-lo"],["SBI","quiet"],["Manappuram","risk-lo"],["PNB Hsg","quiet"],["L&T Fin","opp-lo"],
+    ["SMFG","quiet"],["Piramal","risk-lo"],["ABCapital","quiet"],["Bandhan","risk-lo"],["AU SFB","opp-lo"],["Chola","opp-hi"]
+  ];
+  var dbFilter="all";
+  function renderQueue(){
+    var q=document.getElementById('db-queue');q.innerHTML='';
+    QUEUE.filter(function(r){return dbFilter==="all"||r.side===dbFilter;}).forEach(function(r){
+      var risk=r.side==="risk";
+      var row=document.createElement('button');
+      row.style.cssText='display:flex;align-items:center;gap:12px;padding:11px 13px;border-radius:var(--radius);border:1px solid var(--line);background:var(--surface);cursor:pointer;text-align:left;width:100%;';
+      row.innerHTML='<span style="width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;flex-shrink:0;background:'+(risk?'var(--risk-bg)':'var(--opp-bg)')+';color:'+(risk?'var(--risk)':'var(--opp)')+';">'+r.s+'</span>'+
+        '<span style="flex:1;min-width:0;"><span style="display:block;font-size:14px;font-weight:500;">'+r.e+'</span><span style="display:block;font-size:12px;color:var(--ink-soft);">'+r.why+'</span></span>'+
+        '<span style="text-align:right;flex-shrink:0;"><span style="display:block;font-size:13px;font-weight:600;color:'+(risk?'var(--risk)':'var(--opp)')+';">▲'+r.d+'</span><span style="display:block;font-size:11px;color:var(--ink-mute);">'+r.idx+'</span></span>';
+      row.onclick=function(){go('entity');};
+      q.appendChild(row);
+    });
+  }
+  function renderFeed(){
+    var f=document.getElementById('db-feed');f.innerHTML='';
+    FEED.filter(function(r){return dbFilter==="all"||r.side===dbFilter;}).forEach(function(r,i){
+      var row=document.createElement('div');
+      row.style.cssText='display:flex;align-items:center;gap:9px;padding:10px 12px;'+(i>0?'border-top:1px solid var(--line);':'');
+      row.innerHTML='<span style="flex:1;min-width:0;"><span style="display:block;font-size:13px;font-weight:500;">'+r.e+'</span><span style="display:block;font-size:11px;color:var(--ink-soft);">'+r.p+' · '+r.t+'</span></span>'+
+        '<span class="band '+r.b+'">'+r.src+'</span>'+
+        '<span style="font-size:13px;font-weight:600;color:var(--ink-soft);min-width:32px;text-align:right;">'+r.c+'</span>';
+      f.appendChild(row);
+    });
+  }
+  function renderHeat(){
+    var h=document.getElementById('db-heat');h.innerHTML='';
+    var map={"risk-hi":['var(--risk-mid)','#5C1A13'],"risk-lo":['var(--risk-bg)','var(--risk)'],"opp-hi":['var(--opp-mid)','#274010'],"opp-lo":['var(--opp-bg)','var(--opp)'],"quiet":['var(--surface-3)','var(--ink-soft)']};
+    GRID.forEach(function(c){
+      var v=c[1],m=map[v];
+      var show=dbFilter==="all"||(dbFilter==="risk"&&v.indexOf("risk")===0)||(dbFilter==="opp"&&v.indexOf("opp")===0)||v==="quiet";
+      var cell=document.createElement('button');
+      cell.style.cssText='padding:12px 6px;border-radius:8px;border:1px solid '+(v==="quiet"?'var(--line)':'transparent')+';background:'+m[0]+';color:'+m[1]+';cursor:pointer;text-align:center;font-size:12px;font-weight:500;opacity:'+(show?'1':'0.25')+';';
+      cell.textContent=c[0];
+      cell.onclick=function(){go('entity');};
+      h.appendChild(cell);
+    });
+  }
+  document.querySelectorAll('#db-filters button').forEach(function(b){
+    b.onclick=function(){
+      dbFilter=b.dataset.f;
+      document.querySelectorAll('#db-filters button').forEach(function(x){x.classList.remove('on');});
+      b.classList.add('on');
+      renderQueue();renderFeed();renderHeat();
+    };
+  });
+
+  /* ---------- Screen 4: Alerts ---------- */
+  var RULES=[
+    {id:"contro",name:"Controversy spike",desc:"An entity's controversy score crosses the threshold",idx:"Controversy",side:"risk",critical:true,on:true,thr:60,min:30,max:90,step:1,unit:"score",base:0.12},
+    {id:"velocity",name:"Escalating coverage",desc:"Rate of new adverse coverage accelerating",idx:"Velocity",side:"risk",critical:false,on:true,thr:1.3,min:1.0,max:1.5,step:0.05,unit:"×",base:5},
+    {id:"momentum",name:"Momentum breakout",desc:"Positive-trajectory score jumps in a short window",idx:"Momentum",side:"opp",critical:false,on:true,thr:15,min:5,max:30,step:1,unit:"Δ",base:0.6},
+    {id:"regulatory",name:"Regulatory / legal event",desc:"High-trust regulatory or legal event on any entity",idx:"Legal & compliance",side:"risk",critical:true,on:false,fixed:true},
+    {id:"keyperson",name:"Key-person change",desc:"CEO / CFO / promoter departure or misconduct",idx:"Key-person",side:"risk",critical:true,on:false,fixed:true},
+    {id:"esg",name:"ESG breach",desc:"Environmental, social, or governance adverse event",idx:"ESG",side:"risk",critical:false,on:false,thr:50,min:30,max:80,step:1,unit:"score",base:0.08}
+  ];
+  var CHANNELS=[
+    {id:"inapp",name:"In-app",on:true,path:"M4 4h16v12H4zM8 20h8"},
+    {id:"email",name:"Email digest",on:true,path:"M3 5h18v14H3zM3 6l9 7 9-7"},
+    {id:"slack",name:"Slack / Teams",on:false,path:"M8 8h8v8H8zM4 12h4M16 12h4M12 4v4M12 16v4"},
+    {id:"webhook",name:"Webhook / API",on:false,path:"M6 12a6 6 0 1 1 12 0M9 12l3 8 3-8"}
+  ];
+  function estFire(r){if(!r.on)return 0;if(r.fixed)return r.id==="regulatory"?2:1;var span=r.max-r.min,pos=(r.thr-r.min)/span;return Math.max(0,r.base*18*(1.15-pos));}
+  function fireLbl(n){if(n<=0)return"rarely fires";if(n<1)return"~"+(Math.round(n*10)/10)+"/wk";return"~"+Math.round(n)+"/wk";}
+  function renderRules(){
+    var box=document.getElementById('al-rules');box.innerHTML='';
+    RULES.forEach(function(r){
+      var risk=r.side==="risk",fires=estFire(r);
+      var card=document.createElement('div');
+      card.className='card';
+      card.style.cssText+='padding:14px 16px;opacity:'+(r.on?'1':'0.65')+';';
+      var head='<div style="display:flex;align-items:flex-start;gap:12px;"><div style="flex:1;min-width:0;">'+
+        '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;"><span style="font-size:14px;font-weight:500;">'+r.name+'</span>'+
+        (r.critical?'<span class="band lo">Critical</span>':'')+
+        '<span class="band '+(risk?'lo':'hi')+'">'+r.idx+'</span></div>'+
+        '<div style="font-size:12px;color:var(--ink-soft);margin-top:3px;">'+r.desc+'</div></div>'+
+        '<button data-tg="'+r.id+'" style="flex-shrink:0;width:42px;height:24px;border-radius:20px;border:none;cursor:pointer;position:relative;background:'+(r.on?'var(--accent)':'var(--line-strong)')+';">'+
+        '<span style="position:absolute;top:2px;left:'+(r.on?'20px':'2px')+';width:20px;height:20px;border-radius:50%;background:#fff;transition:left .15s;"></span></button></div>';
+      var ctrl='';
+      if(r.on&&!r.fixed){
+        ctrl='<div style="display:flex;align-items:center;gap:12px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line);">'+
+          '<span style="font-size:12px;color:var(--ink-soft);white-space:nowrap;">Trigger at</span>'+
+          '<input type="range" data-thr="'+r.id+'" min="'+r.min+'" max="'+r.max+'" step="'+r.step+'" value="'+r.thr+'" style="flex:1;padding:0;">'+
+          '<span style="font-size:13px;font-weight:600;min-width:56px;text-align:right;" id="tv-'+r.id+'">'+r.thr+' '+r.unit+'</span>'+
+          '<span style="font-size:12px;color:var(--ink-soft);min-width:64px;text-align:right;" id="tf-'+r.id+'">'+fireLbl(fires)+'</span></div>';
+      }else if(r.on&&r.fixed){
+        ctrl='<div style="display:flex;align-items:center;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-soft);">'+
+          '<svg class="ic" viewBox="0 0 24 24" style="font-size:14px;"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg>Event-driven — fires on occurrence · '+fireLbl(fires)+'</div>';
+      }
+      card.innerHTML=head+ctrl;box.appendChild(card);
+    });
+    document.querySelectorAll('[data-tg]').forEach(function(b){b.onclick=function(){var r=RULES.find(function(x){return x.id===b.dataset.tg;});r.on=!r.on;renderRules();};});
+    document.querySelectorAll('[data-thr]').forEach(function(s){s.oninput=function(){
+      var r=RULES.find(function(x){return x.id===s.dataset.thr;});r.thr=parseFloat(s.value);
+      document.getElementById('tv-'+r.id).textContent=r.thr+' '+r.unit;
+      document.getElementById('tf-'+r.id).textContent=fireLbl(estFire(r));
+      sumAlerts();
+    };});
+    sumAlerts();
+  }
+  function sumAlerts(){
+    var a=RULES.filter(function(r){return r.on;});
+    document.getElementById('al-active').textContent=a.length;
+    document.getElementById('al-total').textContent="~"+Math.round(a.reduce(function(x,r){return x+estFire(r);},0));
+  }
+  function renderChannels(){
+    var box=document.getElementById('al-channels');box.innerHTML='';
+    CHANNELS.forEach(function(c){
+      var btn=document.createElement('button');
+      btn.style.cssText='display:flex;align-items:center;gap:9px;padding:11px 13px;border-radius:var(--radius);border:1px solid '+(c.on?'var(--accent)':'var(--line)')+';background:'+(c.on?'var(--accent-bg)':'var(--surface)')+';cursor:pointer;text-align:left;';
+      btn.innerHTML='<svg class="ic" viewBox="0 0 24 24" style="font-size:18px;color:'+(c.on?'var(--accent)':'var(--ink-mute)')+';"><path d="'+c.path+'"/></svg>'+
+        '<span style="font-size:13px;font-weight:500;flex:1;">'+c.name+'</span>'+
+        (c.on?'<svg class="ic" viewBox="0 0 24 24" style="font-size:15px;color:var(--accent);"><path d="M20 6 9 17l-5-5"/></svg>':'<svg class="ic" viewBox="0 0 24 24" style="font-size:15px;color:var(--ink-mute);"><path d="M12 5v14M5 12h14"/></svg>');
+      btn.onclick=function(){c.on=!c.on;renderChannels();};
+      box.appendChild(btn);
+    });
+  }
+
+  /* ---------- Screen 5: Entity ---------- */
+  var EIDX=[
+    {n:"Controversy",v:71,side:"risk",flag:true},{n:"Risk",v:48,side:"risk"},{n:"ESG",v:33,side:"risk"},
+    {n:"Momentum",v:29,side:"opp"},{n:"Catalyst",v:22,side:"opp"},{n:"Sentiment",v:38,side:"opp"}
+  ];
+  function renderEIdx(){
+    var ib=document.getElementById('en-indices');ib.innerHTML='';
+    EIDX.forEach(function(x){
+      var risk=x.side==="risk",col=risk?'var(--risk)':'var(--opp)',track=risk?'var(--risk-mid)':'var(--opp-mid)';
+      var row=document.createElement('div');
+      row.style.cssText='display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:9px;border:1px solid '+(x.flag?col:'var(--line)')+';background:var(--surface);';
+      row.innerHTML='<span style="font-size:12.5px;min-width:80px;">'+x.n+'</span>'+
+        '<span style="flex:1;height:7px;border-radius:5px;background:var(--surface-3);position:relative;overflow:hidden;"><span style="position:absolute;left:0;top:0;bottom:0;width:'+x.v+'%;background:'+track+';"></span></span>'+
+        '<span style="font-size:13px;font-weight:600;min-width:24px;text-align:right;color:'+col+';">'+x.v+'</span>';
+      ib.appendChild(row);
+    });
+  }
+  var EVENTS=[
+    {stage:"Investigation",dir:"adverse",pillar:"Legal & compliance",title:"Follow-up regulatory review reported",src:"SEBI / RBI",w:0.95,c:"+2.4",date:"3 days ago",note:"Reignited the score — reset the decay clock"},
+    {stage:"Allegation",dir:"adverse",pillar:"PR & reputational",title:"Media coverage on lending practices",src:"Economic Times",w:0.79,c:"+0.7",date:"12 days ago"},
+    {stage:"Charge",dir:"adverse",pillar:"Legal & compliance",title:"RBI restriction on a loan segment",src:"SEBI / RBI",w:0.96,c:"+3.1",date:"41 days ago",note:"Original trigger — highest severity"},
+    {stage:"Resolved",dir:"positive",pillar:"Financial",title:"Capital raise to strengthen balance sheet",src:"NSE / BSE",w:0.94,c:"−0.9",date:"55 days ago",note:"Momentum-side offset"},
+    {stage:"Allegation",dir:"adverse",pillar:"Operational",title:"Branch-level compliance lapse flagged",src:"Social stream",w:0.33,c:"quarantined",date:"60 days ago",note:"Low trust — held pending corroboration"}
+  ];
+  function renderTimeline(){
+    var tl=document.getElementById('en-timeline');tl.innerHTML='';
+    EVENTS.forEach(function(ev,i){
+      var b=bnd(ev.w),adverse=ev.dir==="adverse",quar=ev.c==="quarantined";
+      var dot=quar?'var(--ink-mute)':(adverse?'var(--risk)':'var(--opp)');
+      var row=document.createElement('div');
+      row.style.cssText='display:flex;gap:12px;padding:13px 4px;'+(i>0?'border-top:1px solid var(--line);':'');
+      row.innerHTML='<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;padding-top:2px;">'+
+        '<span style="width:10px;height:10px;border-radius:50%;background:'+dot+';"></span>'+
+        (i<EVENTS.length-1?'<span style="width:1px;flex:1;background:var(--line);margin-top:4px;min-height:22px;"></span>':'')+'</div>'+
+        '<div style="flex:1;min-width:0;"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:2px;">'+
+        '<span style="font-size:13.5px;font-weight:500;">'+ev.title+'</span>'+
+        '<span style="font-size:10px;padding:1px 7px;border-radius:20px;background:var(--surface-3);color:var(--ink-soft);">'+ev.stage+'</span></div>'+
+        '<div style="font-size:12px;color:var(--ink-soft);margin-bottom:5px;">'+ev.pillar+' · '+ev.date+(ev.note?' · '+ev.note:'')+'</div>'+
+        '<span class="band '+b[0]+'">'+ev.src+' · '+b[1]+' '+ev.w.toFixed(2)+'</span></div>'+
+        '<div style="flex-shrink:0;align-self:center;font-size:13px;font-weight:600;color:'+(quar?'var(--ink-mute)':(adverse?'var(--risk)':'var(--opp)'))+';min-width:74px;text-align:right;">'+ev.c+'</div>';
+      tl.appendChild(row);
+    });
+  }
+
+  /* ---------- Init ---------- */
+  renderCo();renderSrc();renderQueue();renderFeed();renderHeat();renderRules();renderChannels();renderEIdx();renderTimeline();
+})();
+</script>
+</body>
+</html>

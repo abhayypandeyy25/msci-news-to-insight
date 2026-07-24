@@ -1,0 +1,181 @@
+<h2 class="sr-only">Company watchlist builder: pick companies to track by sector, region, individual selection, or upload, with live recommendations.</h2>
+
+<div style="padding:1rem 0;font-family:var(--font-sans);">
+
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+  <span style="background:var(--bg-accent);color:var(--text-accent);font-size:12px;padding:3px 10px;border-radius:20px;">Step 1 of 2</span>
+  <span style="font-size:13px;color:var(--text-secondary);">Choose the companies to track</span>
+</div>
+<h3 style="font-size:18px;font-weight:500;margin:8px 0 16px;">Build your watchlist</h3>
+
+<div style="display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;" id="mode-tabs">
+  <button class="mtab" data-mode="sector" style="font-size:13px;padding:7px 14px;border-radius:var(--radius);border:0.5px solid var(--border-strong);background:var(--surface-2);cursor:pointer;"><i class="ti ti-building-bank" style="font-size:15px;vertical-align:-2px;margin-right:5px;" aria-hidden="true"></i>By sector</button>
+  <button class="mtab" data-mode="region" style="font-size:13px;padding:7px 14px;border-radius:var(--radius);border:0.5px solid var(--border-strong);background:var(--surface-2);cursor:pointer;"><i class="ti ti-world" style="font-size:15px;vertical-align:-2px;margin-right:5px;" aria-hidden="true"></i>By region</button>
+  <button class="mtab" data-mode="individual" style="font-size:13px;padding:7px 14px;border-radius:var(--radius);border:0.5px solid var(--border-strong);background:var(--surface-2);cursor:pointer;"><i class="ti ti-search" style="font-size:15px;vertical-align:-2px;margin-right:5px;" aria-hidden="true"></i>Search</button>
+  <button class="mtab" data-mode="upload" style="font-size:13px;padding:7px 14px;border-radius:var(--radius);border:0.5px solid var(--border-strong);background:var(--surface-2);cursor:pointer;"><i class="ti ti-upload" style="font-size:15px;vertical-align:-2px;margin-right:5px;" aria-hidden="true"></i>Upload / paste</button>
+</div>
+
+<div id="panel-sector" class="mpanel">
+  <p style="font-size:13px;color:var(--text-secondary);margin:0 0 10px;">Pick a sector to add its constituents, then fine-tune.</p>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <button class="chip-add" data-sector="BFSI / NBFC" style="font-size:13px;padding:7px 13px;border-radius:20px;border:0.5px solid var(--border-strong);background:var(--surface-2);cursor:pointer;">BFSI / NBFC</button>
+    <button class="chip-add" data-sector="Auto & ancillary" style="font-size:13px;padding:7px 13px;border-radius:20px;border:0.5px solid var(--border-strong);background:var(--surface-2);cursor:pointer;">Auto &amp; ancillary</button>
+    <button class="chip-add" data-sector="IT services" style="font-size:13px;padding:7px 13px;border-radius:20px;border:0.5px solid var(--border-strong);background:var(--surface-2);cursor:pointer;">IT services</button>
+    <button class="chip-add" data-sector="Pharma" style="font-size:13px;padding:7px 13px;border-radius:20px;border:0.5px solid var(--border-strong);background:var(--surface-2);cursor:pointer;">Pharma</button>
+    <button class="chip-add" data-sector="Energy" style="font-size:13px;padding:7px 13px;border-radius:20px;border:0.5px solid var(--border-strong);background:var(--surface-2);cursor:pointer;">Energy</button>
+  </div>
+</div>
+
+<div id="panel-region" class="mpanel" style="display:none;">
+  <p style="font-size:13px;color:var(--text-secondary);margin:0 0 10px;">Scope by geography — combine with a sector for tighter results.</p>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <button class="chip-region" data-region="India" style="font-size:13px;padding:7px 13px;border-radius:20px;border:0.5px solid var(--border-strong);background:var(--surface-2);cursor:pointer;">India</button>
+    <button class="chip-region" data-region="United States" style="font-size:13px;padding:7px 13px;border-radius:20px;border:0.5px solid var(--border-strong);background:var(--surface-2);cursor:pointer;">United States</button>
+    <button class="chip-region" data-region="Southeast Asia" style="font-size:13px;padding:7px 13px;border-radius:20px;border:0.5px solid var(--border-strong);background:var(--surface-2);cursor:pointer;">Southeast Asia</button>
+    <button class="chip-region" data-region="Europe" style="font-size:13px;padding:7px 13px;border-radius:20px;border:0.5px solid var(--border-strong);background:var(--surface-2);cursor:pointer;">Europe</button>
+  </div>
+</div>
+
+<div id="panel-individual" class="mpanel" style="display:none;">
+  <input type="text" id="search-box" placeholder="Type a company name, e.g. Bajaj Finance" style="width:100%;margin-bottom:10px;" oninput="renderSearch()">
+  <div id="search-results" style="display:flex;flex-direction:column;gap:4px;"></div>
+</div>
+
+<div id="panel-upload" class="mpanel" style="display:none;">
+  <textarea id="paste-box" placeholder="Paste one company per line —
+HDFC Bank
+ICICI Bank
+Bajaj Finance" rows="5" style="width:100%;font-family:var(--font-mono);font-size:13px;margin-bottom:10px;"></textarea>
+  <button onclick="ingestPaste()" style="font-size:13px;padding:8px 16px;border-radius:var(--radius);border:0.5px solid var(--border-strong);background:var(--surface-2);cursor:pointer;">Add these</button>
+</div>
+
+<div style="border-top:0.5px solid var(--border);margin:18px 0;"></div>
+
+<div style="display:grid;grid-template-columns:1.4fr 1fr;gap:20px;align-items:start;">
+  <div>
+    <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px;">
+      <span style="font-size:14px;font-weight:500;">Tracking <span id="count" style="color:var(--text-accent);">0</span></span>
+      <button onclick="clearAll()" style="font-size:12px;color:var(--text-secondary);background:none;border:none;cursor:pointer;">Clear all</button>
+    </div>
+    <div id="selected" style="display:flex;flex-wrap:wrap;gap:6px;min-height:40px;padding:10px;border:0.5px dashed var(--border-strong);border-radius:12px;background:var(--surface-1);">
+      <span id="empty-hint" style="font-size:13px;color:var(--text-muted);">Nothing selected yet — pick a sector or search above.</span>
+    </div>
+  </div>
+
+  <div>
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:10px;">
+      <i class="ti ti-sparkles" style="font-size:16px;color:var(--text-accent);" aria-hidden="true"></i>
+      <span style="font-size:14px;font-weight:500;">Recommended for you</span>
+    </div>
+    <div id="recos" style="display:flex;flex-direction:column;gap:6px;">
+      <span style="font-size:13px;color:var(--text-muted);">Suggestions appear as you add companies.</span>
+    </div>
+  </div>
+</div>
+
+<div style="display:flex;justify-content:flex-end;margin-top:20px;">
+  <button onclick="sendPrompt('Looks good — now show me Step 2, the news source selection screen with recommended trusted sources based on these companies.')" style="font-size:14px;padding:9px 20px;border-radius:var(--radius);border:0.5px solid var(--text-accent);background:var(--bg-accent);color:var(--text-accent);cursor:pointer;">Continue to sources ↗</button>
+</div>
+
+</div>
+
+<script>
+(function(){
+  var LIB={
+    "BFSI / NBFC":["HDFC Bank","ICICI Bank","Bajaj Finance","State Bank of India","Kotak Mahindra Bank","Axis Bank","Shriram Finance","IIFL Finance"],
+    "Auto & ancillary":["JK Tyre","Tata Motors","Mahindra & Mahindra","Bosch India","Motherson"],
+    "IT services":["TCS","Infosys","Wipro","HCLTech"],
+    "Pharma":["Sun Pharma","Cipla","Dr Reddy's","Divi's Labs"],
+    "Energy":["Reliance Industries","IOCL","NTPC","Adani Green"]
+  };
+  var RECO={
+    "HDFC Bank":["ICICI Bank","Axis Bank","Kotak Mahindra Bank"],
+    "Bajaj Finance":["Shriram Finance","IIFL Finance","Poonawalla Fincorp"],
+    "State Bank of India":["Punjab National Bank","Bank of Baroda"],
+    "JK Tyre":["MRF","Apollo Tyres","CEAT"],
+    "TCS":["Infosys","Wipro","LTIMindtree"],
+    "Reliance Industries":["ONGC","IOCL","GAIL"],
+    "Sun Pharma":["Cipla","Lupin","Dr Reddy's"]
+  };
+  var ALL=[];Object.keys(LIB).forEach(function(k){LIB[k].forEach(function(c){if(ALL.indexOf(c)<0)ALL.push(c);});});
+  ["Poonawalla Fincorp","MRF","Apollo Tyres","CEAT","Punjab National Bank","Bank of Baroda","LTIMindtree","Lupin","ONGC","GAIL"].forEach(function(c){if(ALL.indexOf(c)<0)ALL.push(c);});
+  var sel=[], region=null;
+
+  function add(c){if(sel.indexOf(c)<0){sel.push(c);render();}}
+  function remove(c){sel=sel.filter(function(x){return x!==c;});render();}
+  window.clearAll=function(){sel=[];render();};
+
+  function render(){
+    var box=document.getElementById('selected');
+    var hint=document.getElementById('empty-hint');
+    box.querySelectorAll('.pill').forEach(function(p){p.remove();});
+    if(sel.length===0){hint.style.display='';}else{hint.style.display='none';}
+    sel.forEach(function(c){
+      var p=document.createElement('span');
+      p.className='pill';
+      p.style.cssText='display:inline-flex;align-items:center;gap:5px;font-size:13px;padding:5px 8px 5px 11px;border-radius:20px;background:var(--bg-accent);color:var(--text-accent);';
+      p.innerHTML=c+' <i class="ti ti-x" style="font-size:14px;cursor:pointer;" aria-hidden="true"></i>';
+      p.querySelector('i').onclick=function(){remove(c);};
+      box.appendChild(p);
+    });
+    document.getElementById('count').textContent=sel.length;
+
+    var pool={};
+    sel.forEach(function(c){(RECO[c]||[]).forEach(function(r){if(sel.indexOf(r)<0)pool[r]=(pool[r]||0)+1;});});
+    var ranked=Object.keys(pool).sort(function(a,b){return pool[b]-pool[a];}).slice(0,5);
+    var rbox=document.getElementById('recos');
+    if(ranked.length===0){rbox.innerHTML='<span style="font-size:13px;color:var(--text-muted);">Suggestions appear as you add companies.</span>';return;}
+    rbox.innerHTML='';
+    ranked.forEach(function(r){
+      var row=document.createElement('button');
+      row.style.cssText='display:flex;align-items:center;justify-content:space-between;font-size:13px;padding:8px 11px;border-radius:var(--radius);border:0.5px solid var(--border);background:var(--surface-2);cursor:pointer;text-align:left;';
+      row.innerHTML='<span>'+r+'</span><span style="color:var(--text-accent);font-size:12px;">+ add</span>';
+      row.onclick=function(){add(r);};
+      rbox.appendChild(row);
+    });
+  }
+
+  document.querySelectorAll('.chip-add').forEach(function(b){
+    b.onclick=function(){var s=b.dataset.sector;(LIB[s]||[]).forEach(add);};
+  });
+  document.querySelectorAll('.chip-region').forEach(function(b){
+    b.onclick=function(){
+      document.querySelectorAll('.chip-region').forEach(function(x){x.style.background='var(--surface-2)';x.style.color='';});
+      b.style.background='var(--bg-accent)';b.style.color='var(--text-accent)';region=b.dataset.region;
+    };
+  });
+
+  window.renderSearch=function(){
+    var q=document.getElementById('search-box').value.toLowerCase();
+    var box=document.getElementById('search-results');
+    if(!q){box.innerHTML='';return;}
+    var hits=ALL.filter(function(c){return c.toLowerCase().indexOf(q)>=0&&sel.indexOf(c)<0;}).slice(0,6);
+    box.innerHTML='';
+    hits.forEach(function(c){
+      var row=document.createElement('button');
+      row.style.cssText='display:flex;align-items:center;justify-content:space-between;font-size:13px;padding:8px 11px;border-radius:var(--radius);border:0.5px solid var(--border);background:var(--surface-2);cursor:pointer;text-align:left;';
+      row.innerHTML='<span>'+c+'</span><span style="color:var(--text-accent);font-size:12px;">+ add</span>';
+      row.onclick=function(){add(c);document.getElementById('search-box').value='';box.innerHTML='';};
+      box.appendChild(row);
+    });
+    if(hits.length===0)box.innerHTML='<span style="font-size:13px;color:var(--text-muted);padding:6px;">No match in the library — you can add it via paste.</span>';
+  };
+
+  window.ingestPaste=function(){
+    var lines=document.getElementById('paste-box').value.split('\n');
+    lines.forEach(function(l){var c=l.trim();if(c)add(c);});
+    document.getElementById('paste-box').value='';
+  };
+
+  document.querySelectorAll('.mtab').forEach(function(t){
+    t.onclick=function(){
+      document.querySelectorAll('.mpanel').forEach(function(p){p.style.display='none';});
+      document.getElementById('panel-'+t.dataset.mode).style.display='';
+      document.querySelectorAll('.mtab').forEach(function(x){x.style.background='var(--surface-2)';x.style.borderColor='var(--border-strong)';});
+      t.style.background='var(--bg-accent)';t.style.borderColor='var(--text-accent)';
+    };
+  });
+  document.querySelector('.mtab').click();
+  render();
+})();
+</script>

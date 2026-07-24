@@ -1,0 +1,155 @@
+<h2 class="sr-only">Analyst monitoring dashboard: pulse metrics, an attention queue of entities that moved, a live scored-event feed, and a watchlist heatmap.</h2>
+
+<div style="padding:1rem 0;font-family:var(--font-sans);">
+
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
+  <div>
+    <h3 style="font-size:18px;font-weight:500;margin:0;">Watchlist monitor</h3>
+    <p style="font-size:12px;color:var(--text-secondary);margin:3px 0 0;"><i class="ti ti-building-bank" style="font-size:13px;vertical-align:-2px;" aria-hidden="true"></i> 18 entities · BFSI-weighted &nbsp;·&nbsp; <i class="ti ti-rss" style="font-size:13px;vertical-align:-2px;" aria-hidden="true"></i> 6 sources &nbsp;·&nbsp; updated just now</p>
+  </div>
+  <div style="display:flex;gap:6px;flex-wrap:wrap;" id="filters">
+    <button class="fbtn" data-f="all" style="font-size:12px;padding:6px 12px;border-radius:20px;border:0.5px solid var(--text-accent);background:var(--bg-accent);color:var(--text-accent);cursor:pointer;">All signals</button>
+    <button class="fbtn" data-f="risk" style="font-size:12px;padding:6px 12px;border-radius:20px;border:0.5px solid var(--border-strong);background:var(--surface-2);cursor:pointer;">Risk-side</button>
+    <button class="fbtn" data-f="opp" style="font-size:12px;padding:6px 12px;border-radius:20px;border:0.5px solid var(--border-strong);background:var(--surface-2);cursor:pointer;">Opportunity</button>
+  </div>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px;">
+  <div style="background:var(--surface-1);border-radius:var(--radius);padding:12px 14px;">
+    <p style="font-size:12px;color:var(--text-secondary);margin:0;">Entities tracked</p>
+    <p style="font-size:23px;font-weight:500;margin:3px 0 0;">18</p>
+  </div>
+  <div style="background:var(--surface-1);border-radius:var(--radius);padding:12px 14px;">
+    <p style="font-size:12px;color:var(--text-secondary);margin:0;">Alerts since last visit</p>
+    <p style="font-size:23px;font-weight:500;margin:3px 0 0;color:var(--text-danger);">7</p>
+  </div>
+  <div style="background:var(--surface-1);border-radius:var(--radius);padding:12px 14px;">
+    <p style="font-size:12px;color:var(--text-secondary);margin:0;">Biggest mover</p>
+    <p style="font-size:15px;font-weight:500;margin:5px 0 0;">IIFL Finance <span style="color:var(--text-danger);font-size:13px;">▲18</span></p>
+  </div>
+  <div style="background:var(--surface-1);border-radius:var(--radius);padding:12px 14px;">
+    <p style="font-size:12px;color:var(--text-secondary);margin:0;">Avg feed trust</p>
+    <p style="font-size:23px;font-weight:500;margin:3px 0 0;">0.87</p>
+  </div>
+</div>
+
+<div style="display:grid;grid-template-columns:1.5fr 1fr;gap:18px;align-items:start;margin-bottom:20px;">
+
+  <div>
+    <div style="display:flex;align-items:center;gap:7px;margin-bottom:10px;">
+      <i class="ti ti-alert-triangle" style="font-size:16px;color:var(--text-secondary);" aria-hidden="true"></i>
+      <span style="font-size:14px;font-weight:500;">Needs attention — ranked by move</span>
+    </div>
+    <div id="queue" style="display:flex;flex-direction:column;gap:7px;"></div>
+  </div>
+
+  <div>
+    <div style="display:flex;align-items:center;gap:7px;margin-bottom:10px;">
+      <i class="ti ti-activity" style="font-size:16px;color:var(--text-secondary);" aria-hidden="true"></i>
+      <span style="font-size:14px;font-weight:500;">Live event feed</span>
+    </div>
+    <div id="feed" style="display:flex;flex-direction:column;gap:0;border:0.5px solid var(--border);border-radius:12px;overflow:hidden;"></div>
+  </div>
+
+</div>
+
+<div style="display:flex;align-items:center;gap:7px;margin-bottom:10px;">
+  <i class="ti ti-layout-grid" style="font-size:16px;color:var(--text-secondary);" aria-hidden="true"></i>
+  <span style="font-size:14px;font-weight:500;">Watchlist heatmap</span>
+  <span style="font-size:12px;color:var(--text-muted);margin-left:4px;">dominant signal per entity</span>
+</div>
+<div id="heatmap" style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;"></div>
+<div style="display:flex;gap:16px;margin-top:12px;font-size:12px;color:var(--text-secondary);">
+  <span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;border-radius:3px;background:#F09595;"></span>Risk-side dominant</span>
+  <span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;border-radius:3px;background:#97C459;"></span>Opportunity dominant</span>
+  <span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;border-radius:3px;background:var(--surface-1);border:0.5px solid var(--border);"></span>Quiet</span>
+</div>
+
+</div>
+
+<script>
+(function(){
+  var QUEUE=[
+    {e:"IIFL Finance",s:71,d:18,idx:"Controversy",side:"risk",why:"RBI regulatory action"},
+    {e:"Poonawalla Fincorp",s:58,d:12,idx:"Controversy",side:"risk",why:"Key-person exit"},
+    {e:"Bajaj Finance",s:64,d:9,idx:"Momentum",side:"opp",why:"Record quarterly AUM"},
+    {e:"Kotak Mahindra Bank",s:47,d:7,idx:"Risk",side:"risk",why:"Rating outlook revised"},
+    {e:"HDFC Bank",s:52,d:6,idx:"Momentum",side:"opp",why:"Analyst upgrades"},
+    {e:"Shriram Finance",s:39,d:4,idx:"Catalyst",side:"opp",why:"New co-lending tie-up"}
+  ];
+  var FEED=[
+    {e:"IIFL Finance",p:"Legal & compliance",src:"SEBI / RBI",band:"High",c:"+2.1",t:"9m ago",side:"risk"},
+    {e:"Bajaj Finance",p:"Commercial",src:"NSE / BSE",band:"High",c:"+1.6",t:"22m ago",side:"opp"},
+    {e:"Poonawalla Fincorp",p:"Key-person",src:"Reuters",band:"High",c:"+1.4",t:"41m ago",side:"risk"},
+    {e:"HDFC Bank",p:"Financial",src:"Bloomberg Quint",band:"High",c:"+1.1",t:"1h ago",side:"opp"},
+    {e:"Kotak Mahindra Bank",p:"Financial integrity",src:"ET",band:"Med",c:"+0.9",t:"2h ago",side:"risk"},
+    {e:"Manappuram",p:"Operational",src:"Newsletter",band:"Med",c:"+0.6",t:"3h ago",side:"risk"},
+    {e:"Shriram Finance",p:"Commercial",src:"NSE / BSE",band:"High",c:"+0.8",t:"3h ago",side:"opp"}
+  ];
+  var GRID=[
+    {e:"IIFL",v:"risk-hi"},{e:"Poonawalla",v:"risk-hi"},{e:"Kotak",v:"risk-lo"},{e:"HDFC Bk",v:"opp-lo"},{e:"ICICI",v:"quiet"},{e:"Axis",v:"quiet"},
+    {e:"Bajaj Fin",v:"opp-hi"},{e:"Shriram",v:"opp-lo"},{e:"SBI",v:"quiet"},{e:"Manappuram",v:"risk-lo"},{e:"PNB Hsg",v:"quiet"},{e:"L&T Fin",v:"opp-lo"},
+    {e:"SMFG India",v:"quiet"},{e:"Piramal",v:"risk-lo"},{e:"ABC",v:"quiet"},{e:"Bandhan",v:"risk-lo"},{e:"AU SFB",v:"opp-lo"},{e:"Chola",v:"opp-hi"}
+  ];
+
+  function bandColor(b){if(b==="High")return{bg:'#E1F5EE',fg:'#0F6E56'};if(b==="Med")return{bg:'#FAEEDA',fg:'#854F0B'};return{bg:'#FCEBEB',fg:'#A32D2D'};}
+  var filter="all";
+
+  function renderQueue(){
+    var q=document.getElementById('queue');q.innerHTML='';
+    QUEUE.filter(function(r){return filter==="all"||r.side===filter;}).forEach(function(r){
+      var risk=r.side==="risk";
+      var row=document.createElement('button');
+      row.style.cssText='display:flex;align-items:center;gap:12px;padding:11px 13px;border-radius:12px;border:0.5px solid var(--border);background:var(--surface-2);cursor:pointer;text-align:left;width:100%;';
+      row.innerHTML=
+        '<div style="width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:500;flex-shrink:0;background:'+(risk?'#FCEBEB':'#EAF3DE')+';color:'+(risk?'#A32D2D':'#3B6D11')+';">'+r.s+'</div>'+
+        '<div style="flex:1;min-width:0;"><div style="font-size:14px;font-weight:500;">'+r.e+'</div>'+
+        '<div style="font-size:12px;color:var(--text-secondary);">'+r.why+'</div></div>'+
+        '<div style="text-align:right;flex-shrink:0;"><div style="font-size:13px;font-weight:500;color:'+(risk?'var(--text-danger)':'#3B6D11')+';">▲'+r.d+'</div>'+
+        '<div style="font-size:11px;color:var(--text-secondary);">'+r.idx+'</div></div>';
+      row.onclick=function(){sendPrompt('Show me the drill-down detail for '+r.e+' — the '+r.idx+' index breakdown and the events driving the score move.');};
+      q.appendChild(row);
+    });
+  }
+
+  function renderFeed(){
+    var f=document.getElementById('feed');f.innerHTML='';
+    FEED.filter(function(r){return filter==="all"||r.side===filter;}).forEach(function(r,i){
+      var bc=bandColor(r.band);
+      var row=document.createElement('div');
+      row.style.cssText='display:flex;align-items:center;gap:9px;padding:10px 12px;'+(i>0?'border-top:0.5px solid var(--border);':'');
+      row.innerHTML=
+        '<div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:500;">'+r.e+'</div>'+
+        '<div style="font-size:11px;color:var(--text-secondary);">'+r.p+' · '+r.t+'</div></div>'+
+        '<span style="font-size:10.5px;padding:2px 7px;border-radius:20px;background:'+bc.bg+';color:'+bc.fg+';white-space:nowrap;">'+r.src+'</span>'+
+        '<span style="font-size:13px;font-weight:500;color:var(--text-secondary);min-width:32px;text-align:right;">'+r.c+'</span>';
+      f.appendChild(row);
+    });
+  }
+
+  function renderHeat(){
+    var h=document.getElementById('heatmap');h.innerHTML='';
+    var map={"risk-hi":{bg:'#F09595',fg:'#501313'},"risk-lo":{bg:'#F7C1C1',fg:'#791F1F'},"opp-hi":{bg:'#97C459',fg:'#173404'},"opp-lo":{bg:'#C0DD97',fg:'#27500A'},"quiet":{bg:'var(--surface-1)',fg:'var(--text-secondary)'}};
+    GRID.forEach(function(c){
+      var show=filter==="all"||(filter==="risk"&&c.v.indexOf("risk")===0)||(filter==="opp"&&c.v.indexOf("opp")===0)||c.v==="quiet";
+      var m=map[c.v];var dim=!show;
+      var cell=document.createElement('button');
+      cell.style.cssText='padding:11px 6px;border-radius:8px;border:0.5px solid var(--border);background:'+m.bg+';color:'+m.fg+';cursor:pointer;text-align:center;font-size:12px;font-weight:500;opacity:'+(dim?'0.25':'1')+';transition:opacity .15s;'+(c.v==="quiet"?'':'border-color:transparent;');
+      cell.textContent=c.e;
+      cell.onclick=function(){sendPrompt('Open the '+c.e+' entity detail view.');};
+      h.appendChild(cell);
+    });
+  }
+
+  document.querySelectorAll('.fbtn').forEach(function(b){
+    b.onclick=function(){
+      filter=b.dataset.f;
+      document.querySelectorAll('.fbtn').forEach(function(x){x.style.background='var(--surface-2)';x.style.borderColor='var(--border-strong)';x.style.color='';});
+      b.style.background='var(--bg-accent)';b.style.borderColor='var(--text-accent)';b.style.color='var(--text-accent)';
+      renderQueue();renderFeed();renderHeat();
+    };
+  });
+
+  renderQueue();renderFeed();renderHeat();
+})();
+</script>

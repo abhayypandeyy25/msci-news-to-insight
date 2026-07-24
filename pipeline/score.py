@@ -205,6 +205,7 @@ def main():
                 "title": lead["title"][:110],
                 "desc": lead["summary"],
                 "url": lead["url"],
+                "domain": lead.get("domain", ""),
                 "source": lead["source_class"], "sourceSector": ent["segment"],
                 "direction": e["role"], "dir": e["dir"],
                 "time": rel_time(e["last"]),
@@ -284,9 +285,12 @@ def main():
         out_entities[ent["id"]]["rawCount"] = n
         raw_total += n
 
+    trust_profiles = json.loads((HERE / "trust_profiles.json").read_text())
+
     payload = {
         "generatedAt": SNAPSHOT.strftime("%Y-%m-%d"),
         "defaultEntity": default_entity,
+        "trustProfiles": trust_profiles,
         "sources": sources,
         "rawTotal": raw_total,
         "feeds": [

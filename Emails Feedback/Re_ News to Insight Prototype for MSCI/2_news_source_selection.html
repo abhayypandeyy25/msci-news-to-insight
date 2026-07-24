@@ -1,0 +1,114 @@
+<h2 class="sr-only">News source selection: recommended trusted sources ranked by credibility for your tracked companies, plus the ability to add more sources.</h2>
+
+<div style="padding:1rem 0;font-family:var(--font-sans);">
+
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+  <span style="background:var(--bg-accent);color:var(--text-accent);font-size:12px;padding:3px 10px;border-radius:20px;">Step 2 of 2</span>
+  <span style="font-size:13px;color:var(--text-secondary);">Choose the news sources to monitor</span>
+</div>
+<h3 style="font-size:18px;font-weight:500;margin:8px 0 6px;">Select your sources</h3>
+<p style="font-size:13px;color:var(--text-secondary);margin:0 0 16px;max-width:64ch;">Recommendations are ranked by trust weight for your watchlist — mostly BFSI / NBFC names, so banking-sector coverage is prioritized. Trust weight becomes the credibility factor in scoring.</p>
+
+<div style="display:flex;align-items:center;gap:6px;margin-bottom:12px;">
+  <i class="ti ti-sparkles" style="font-size:16px;color:var(--text-accent);" aria-hidden="true"></i>
+  <span style="font-size:14px;font-weight:500;">Recommended &amp; trusted for your watchlist</span>
+</div>
+
+<div id="reco-sources" style="display:flex;flex-direction:column;gap:8px;margin-bottom:22px;"></div>
+
+<div style="border-top:0.5px solid var(--border);margin:18px 0;"></div>
+
+<div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px;">
+  <span style="font-size:14px;font-weight:500;">Add more sources</span>
+  <input type="text" id="src-search" placeholder="Search sources" style="width:200px;height:32px;font-size:13px;" oninput="filterMore()">
+</div>
+<div id="more-sources" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;"></div>
+
+<div style="border-top:0.5px solid var(--border);margin:20px 0 16px;"></div>
+
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+  <div style="display:flex;gap:20px;">
+    <div><p style="font-size:12px;color:var(--text-secondary);margin:0;">Sources selected</p><p style="font-size:22px;font-weight:500;margin:2px 0 0;" id="src-count">0</p></div>
+    <div><p style="font-size:12px;color:var(--text-secondary);margin:0;">Avg trust weight</p><p style="font-size:22px;font-weight:500;margin:2px 0 0;" id="avg-trust">—</p></div>
+    <div><p style="font-size:12px;color:var(--text-secondary);margin:0;">High-trust share</p><p style="font-size:22px;font-weight:500;margin:2px 0 0;" id="high-share">—</p></div>
+  </div>
+  <button onclick="sendPrompt('The source selection looks good. What should the analyst see next after finishing this two-step configuration — the main dashboard? Suggest what that landing view should contain.')" style="font-size:14px;padding:9px 20px;border-radius:var(--radius);border:0.5px solid var(--text-accent);background:var(--bg-accent);color:var(--text-accent);cursor:pointer;">Finish setup ↗</button>
+</div>
+
+</div>
+
+<script>
+(function(){
+  function band(w){
+    if(w>=0.8)return{bg:'#E1F5EE',fg:'#0F6E56',label:'High'};
+    if(w>=0.5)return{bg:'#FAEEDA',fg:'#854F0B',label:'Medium'};
+    return{bg:'#FCEBEB',fg:'#A32D2D',label:'Low'};
+  }
+  var RECO=[
+    {n:"SEBI / RBI releases",d:"Regulatory filings",w:0.96,on:true,note:"Highest tier — legal & compliance"},
+    {n:"NSE / BSE announcements",d:"Exchange disclosures",w:0.94,on:true,note:"Orders, results, resignations"},
+    {n:"Reuters India",d:"Agency wire",w:0.86,on:true},
+    {n:"Bloomberg Quint",d:"Financial media",w:0.84,on:true},
+    {n:"The Economic Times",d:"Business daily",w:0.79,on:true},
+    {n:"Business Standard",d:"Business daily",w:0.77,on:false},
+    {n:"Moneycontrol",d:"Markets portal",w:0.71,on:false},
+    {n:"Banking-sector newsletter",d:"Niche BFSI",w:0.68,on:false,note:"Strong for BFSI, weak elsewhere"}
+  ];
+  var MORE=[
+    {n:"Mint",d:"Business daily",w:0.75},
+    {n:"The Hindu BusinessLine",d:"Business daily",w:0.74},
+    {n:"CNBC-TV18",d:"Markets TV",w:0.70},
+    {n:"Financial Express",d:"Business daily",w:0.69},
+    {n:"PTI wire",d:"Agency wire",w:0.80},
+    {n:"Company press releases",d:"Primary / self-reported",w:0.55,note:"Self-reported — treat with care"},
+    {n:"Social / X streams",d:"Social media",w:0.33,note:"Low base trust until corroborated"},
+    {n:"Analyst blogs",d:"Independent",w:0.48}
+  ];
+
+  var chosen={};
+  RECO.concat(MORE).forEach(function(s){chosen[s.n]=!!s.on;});
+
+  function pill(w){var b=band(w);return '<span style="font-size:11px;padding:2px 8px;border-radius:20px;background:'+b.bg+';color:'+b.fg+';">'+b.label+' · '+w.toFixed(2)+'</span>';}
+
+  function sourceRow(s,compact){
+    var on=chosen[s.n];
+    var row=document.createElement('button');
+    row.style.cssText='display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 13px;border-radius:12px;border:0.5px solid '+(on?'var(--text-accent)':'var(--border)')+';background:'+(on?'var(--bg-accent)':'var(--surface-2)')+';cursor:pointer;text-align:left;width:100%;';
+    var left='<div style="display:flex;align-items:center;gap:10px;min-width:0;">'+
+      '<i class="ti '+(on?'ti-circle-check':'ti-circle-plus')+'" style="font-size:19px;color:'+(on?'var(--text-accent)':'var(--text-muted)')+';flex-shrink:0;" aria-hidden="true"></i>'+
+      '<div style="min-width:0;"><div style="font-size:14px;font-weight:500;">'+s.n+'</div>'+
+      '<div style="font-size:12px;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+s.d+(s.note&&!compact?' · '+s.note:'')+'</div></div></div>';
+    row.innerHTML=left+pill(s.w);
+    row.onclick=function(){chosen[s.n]=!chosen[s.n];renderAll();};
+    return row;
+  }
+
+  function renderAll(){
+    var rb=document.getElementById('reco-sources');rb.innerHTML='';
+    RECO.forEach(function(s){rb.appendChild(sourceRow(s,false));});
+    filterMore();
+    var keys=Object.keys(chosen).filter(function(k){return chosen[k];});
+    var all=RECO.concat(MORE);
+    var ws=keys.map(function(k){var f=all.find(function(x){return x.n===k;});return f?f.w:0;});
+    document.getElementById('src-count').textContent=keys.length;
+    if(ws.length){
+      var avg=ws.reduce(function(a,b){return a+b;},0)/ws.length;
+      document.getElementById('avg-trust').textContent=avg.toFixed(2);
+      var hi=ws.filter(function(w){return w>=0.8;}).length;
+      document.getElementById('high-share').textContent=Math.round(100*hi/ws.length)+'%';
+    }else{
+      document.getElementById('avg-trust').textContent='—';
+      document.getElementById('high-share').textContent='—';
+    }
+  }
+
+  window.filterMore=function(){
+    var q=(document.getElementById('src-search').value||'').toLowerCase();
+    var mb=document.getElementById('more-sources');mb.innerHTML='';
+    MORE.filter(function(s){return s.n.toLowerCase().indexOf(q)>=0||s.d.toLowerCase().indexOf(q)>=0;})
+      .forEach(function(s){mb.appendChild(sourceRow(s,true));});
+  };
+
+  renderAll();
+})();
+</script>

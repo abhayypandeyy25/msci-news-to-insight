@@ -1,0 +1,31 @@
+{
+  "outlets": {
+    "reuters.com":            { "band": "High",   "verdict": "Reuters is a global wire service with strong editorial standards and fast, sourced reporting — among the most reliable signals for corporate and regulatory news." },
+    "business-standard.com":  { "band": "High",   "verdict": "Business Standard is trusted for Indian business and financial news, though a right-center editorial lean and limited shareholder transparency keep it a notch below top global outlets." },
+    "livemint.com":           { "band": "High",   "verdict": "Mint (HT Media) is a well-regarded Indian financial daily with solid corporate and policy coverage; opinion sections lean market-friendly." },
+    "moneycontrol.com":       { "band": "Medium", "verdict": "Moneycontrol is India's largest markets portal — fast and broad, but mixes original reporting with syndicated wires and market chatter; corroborate market-moving claims." },
+    "economictimes.indiatimes.com": { "band": "Medium", "verdict": "The Economic Times has wide corporate access and strong beat reporters, but a high story volume with variable sourcing depth; exclusives usually firm, roundups noisier." },
+    "m.economictimes.com":    { "band": "Medium", "verdict": "The Economic Times has wide corporate access and strong beat reporters, but a high story volume with variable sourcing depth; exclusives usually firm, roundups noisier." },
+    "bfsi.economictimes.indiatimes.com": { "band": "Medium", "verdict": "ET BFSI is the Economic Times' banking vertical — sector-specialist, close to industry sources, occasionally close to industry talking points." },
+    "thehindubusinessline.com": { "band": "High", "verdict": "BusinessLine (The Hindu group) is measured and well-sourced on banking and policy, with a slower news cycle than competitors — misses speed, rarely accuracy." },
+    "cnbctv18.com":           { "band": "Medium", "verdict": "CNBC-TV18 is strong on breaking market news and management interviews; television-first pacing means early reports sometimes firm up later." },
+    "ndtvprofit.com":         { "band": "Medium", "verdict": "NDTV Profit (ex-BloombergQuint) retains solid markets DNA and good regulatory coverage; rebuilding depth after ownership changes." },
+    "businesstoday.in":       { "band": "Medium", "verdict": "Business Today covers corporate India reliably at magazine pace; breaking coverage often aggregates other outlets." },
+    "financialexpress.com":   { "band": "Medium", "verdict": "Financial Express is a credible business daily (Indian Express group) with decent policy access; thinner original corporate investigations." },
+    "indianexpress.com":      { "band": "High",   "verdict": "The Indian Express is one of India's strongest investigative newsrooms — its corporate/regulatory investigations are typically deeply documented and slow to retract." },
+    "timesofindia.indiatimes.com": { "band": "Medium", "verdict": "Times of India has vast reach and quick city/crime desks (useful for fraud/FIR stories), but business coverage is syndication-heavy." },
+    "thehindu.com":           { "band": "High",   "verdict": "The Hindu maintains conservative, well-verified reporting standards; business desk is smaller but rarely wrong." },
+    "newindianexpress.com":   { "band": "Medium", "verdict": "New Indian Express is a credible regional daily; strong on southern-India ground reporting, lighter on corporate finance depth." },
+    "fortuneindia.com":       { "band": "Medium", "verdict": "Fortune India runs considered features and rankings; not a breaking-news source — treat as analysis, not first signal." },
+    "scanx.trade":            { "band": "Low",    "verdict": "ScanX is a retail-trading news aggregator — high volume, thin sourcing, largely rewritten from primary outlets. Useful for velocity, quarantined for confirmation." },
+    "marketsmojo.com":        { "band": "Low",    "verdict": "MarketsMojo is an algorithmic stock-commentary site, not a newsroom — treat its items as market chatter, never as primary confirmation." },
+    "whalesbook.com":         { "band": "Low",    "verdict": "Whalesbook is a retail social-trading app surface; unverified, engagement-driven content. Corroboration required before any score impact." }
+  },
+  "classes": {
+    "Regulator & exchange":     { "band": "High",   "verdict": "Primary-source disclosures from regulators and exchanges — the gold standard: no editorial intermediation, near-zero false-positive risk." },
+    "Agency wires":             { "band": "High",   "verdict": "Professional wire services (Reuters, PTI, Bloomberg) with verification cultures and fast corrections — high-trust breaking signal." },
+    "Business press":           { "band": "Medium", "verdict": "India's business dailies and market portals — strong corporate access and beat expertise; speed and volume mean individual items merit corroboration." },
+    "General & regional press": { "band": "Medium", "verdict": "General and regional newsrooms — valuable for on-the-ground fraud/legal stories, weaker on financial nuance; trust varies by desk." },
+    "Aggregators & other":      { "band": "Low",    "verdict": "Aggregators, trading apps, and social surfaces — high velocity, unverified. Held at the tollgate until independently confirmed." }
+  }
+}
